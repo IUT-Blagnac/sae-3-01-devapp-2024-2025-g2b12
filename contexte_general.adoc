@@ -1,5 +1,7 @@
 = Contexte général
 
+NOTE: _Extrait du fichier `README.adoc`._
+
 TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
 
 == Dépôt initial
