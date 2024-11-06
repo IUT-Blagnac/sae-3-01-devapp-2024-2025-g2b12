@@ -1,6 +1,6 @@
 = Contexte général
 
-NOTE: _Extrait du fichier `README.adoc`._
+NOTE: Extrait du fichier `README.adoc`.
 
 TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
 
