@@ -50,7 +50,7 @@ Vous trouverez le dépôt "template" qui a servi de base ici : https://github.co
 
 toc::[]
 
-== Equipe
+== *Equipe*
 
 Projet est réalisé par::
 
@@ -63,7 +63,9 @@ Projet est réalisé par::
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
 
 
-== Réalisations 
+== *Réalisations*
+
+=== Livrables
 
 |===
 2+^| *LIVRABLES*
@@ -77,6 +79,8 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 • https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
 |===
 
+=== Documentations
+
 |===
 | *DOCUMENTATIONS*
 |
@@ -88,7 +92,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 |
 |===
 
-== Gestion de projet & Qualité
+== *Gestion de projet & Qualité*
 
 Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
 Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
