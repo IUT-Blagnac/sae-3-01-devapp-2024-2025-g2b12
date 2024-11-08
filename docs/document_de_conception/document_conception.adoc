@@ -49,12 +49,13 @@ Université Toulouse II – Jean Jaurès (31)
 == *1. Architecture système*
 
 === 1.1 Architecture logicielle
+
 image::./img/architecture_logicielle.png[Architecture Logicielle]
 
 === 1.2 Logique métier
 
-
 ==== *_Diagramme des Classes Métier (DCM)_*
+
 image::./img/dcm.png[Diagramme des Classes Métier]
 |===
 ^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
@@ -62,8 +63,34 @@ image::./img/dcm.png[Diagramme des Classes Métier]
 
 == *2. Description des fonctionnalités*
 
-=== Diagramme des Cas d'Utilisation (DCU)
+=== 2.1 Diagramme des Cas d'Utilisation (DCU)
+
 image::./img/uc.png[Diagramme des Cas d'Utilisation]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+=== 2.2 Diagrammes de Séquence Système (DSS)
+
+NOTE: Les diagrammes présentés dans cette section sont organisés par utilisateur.
+
+==== *_2.2.1 Client non connecté_*
+
+image::./img/dss_client_nonconnecte.png[Exemple DSS Client non connecté]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+==== *_2.2.2 Client connecté_*
+
+image::./img/dss_client_connecte.png[Exemple DSS Client connecté]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+==== *_2.2.3 Administrateur_*
+
+image::./img/dss_administrateur.png[Exemple DSS Administrateur]
 |===
 ^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
 |===
