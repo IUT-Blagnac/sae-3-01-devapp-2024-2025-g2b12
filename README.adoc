@@ -33,7 +33,6 @@ ifdef::env-github[]
 :icongit: Git
 endif::[]
 
-// /!\ A MODIFIER !!!
 :baseURL: https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12
 
 // Tags
@@ -66,7 +65,28 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 == Réalisations 
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+|===
+2+^| *LIVRABLES*
+2+|
+| SEMAINE | LIVRABLE
+.4+| 45 | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
+| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
+| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] +
+• https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] +
+• https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
+|===
+
+|===
+| *DOCUMENTATIONS*
+|
+| SOLUTION WEB
+| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+|
+| SOLUTION IOT
+| _À venir._
+|
+|===
 
 == Gestion de projet & Qualité
 
