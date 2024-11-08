@@ -68,8 +68,8 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 === Livrables
 
 |===
-2+^| *LIVRABLES*
-2+|
+3+^| *LIVRABLES*
+3+|
 | SEMAINE | SOLUTION | LIEN
 .4+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
