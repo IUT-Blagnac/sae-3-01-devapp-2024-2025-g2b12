@@ -56,11 +56,17 @@ image::./img/architecture_logicielle.png[Architecture Logicielle]
 
 ==== *_Diagramme des Classes Métier (DCM)_*
 image::./img/dcm.png[Diagramme des Classes Métier]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec l'outil *_PlantUML_* _._
+|===
 
 == *2. Description des fonctionnalités*
 
 === Diagramme des Cas d'Utilisation (DCU)
 image::./img/uc.png[Diagramme des Cas d'Utilisation]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec l'outil *_PlantUML_* _._
+|===
 
 == *3. Sécurité*
 
