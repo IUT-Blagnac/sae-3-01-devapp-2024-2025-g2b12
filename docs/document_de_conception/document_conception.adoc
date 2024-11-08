@@ -59,6 +59,7 @@ image::./img/architecture_logicielle.png[Architecture Logicielle]
 == *2. Description des fonctionnalités*
 
 === Diagramme des Cas d'Utilisation (DCU)
+image::./img/uc.png[Diagramme des Cas d'Utilisation]
 
 == *3. Sécurité*
 
