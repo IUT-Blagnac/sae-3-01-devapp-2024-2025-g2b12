@@ -48,7 +48,11 @@ Université Toulouse II – Jean Jaurès (31)
 
 == *1. Architecture système*
 
-=== Logique métier
+=== 1.1 Architecture logicielle
+image::./img/architecture_logicielle.png[Architecture Logicielle]
+
+=== 1.2 Logique métier
+
 
 ==== *_Diagramme des Classes Métier (DCM)_*
 
