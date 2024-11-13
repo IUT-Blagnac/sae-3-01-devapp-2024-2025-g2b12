@@ -13,7 +13,7 @@ configuration.read('./configuration.ini')
 # récupération des paramètres
 serveurMQTT = configuration.get('MQTT', 'broker')
 port        = int(configuration.get('MQTT', 'port'))
-topic       = configuration.get('MQTT', 'topic')
+topic       = configuration.get('MQTT', 'topic') + configuration.get('DATA_SOURCE', 'salle_ou_panneau_solaire')
 
 # callback de réception des messages
 def get_data(mqttc, obj, msg) :
