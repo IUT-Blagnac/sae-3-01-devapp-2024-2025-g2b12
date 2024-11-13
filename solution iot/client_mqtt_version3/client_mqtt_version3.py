@@ -8,10 +8,9 @@ import paho.mqtt.client as mqtt
 import configparser
 import csv
 
-
 # configuration
 configuration = configparser.ConfigParser()
-configuration.read('solution iot/client_mqtt_version2/configuration.ini')
+configuration.read('solution iot\client_mqtt_version3\configuration.ini')
 # récupération des paramètres
 serveurMQTT = configuration.get('MQTT', 'broker')
 port        = int(configuration.get('MQTT', 'port'))
@@ -50,6 +49,11 @@ def on_message(client, userdata, message) :
         print("=========================")
         print("Dernière mise à jour :", data['lastUpdateTime'])
         print("Power (puissance) :   ", data['currentPower']['power'])
+        csvName = 'solution iot/dataSolar.csv'
+        with open(csvName, 'w', newline='') as file:
+            writer = csv.writer(file, delimiter=';')
+            writer.writerow(["Date dernière mise a jour","Puissance"])
+            writer.writerows([[data['lastUpdateTime'], data['currentPower']['power']]])
 
 # connexion et souscription
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
