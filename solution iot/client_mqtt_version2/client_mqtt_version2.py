@@ -6,7 +6,7 @@ import os
 import logging
 import paho.mqtt.client as mqtt
 import configparser
-import csv
+
 
 
 # configuration
@@ -40,11 +40,6 @@ def on_message(client, userdata, message) :
         print("Température :", data[0]['temperature'])
         print("Humidité :   ", data[0]['humidity'])
         print("Taux de CO2 :", data[0]['co2'])
-        csvName = 'solution iot/dataCapteur.csv'
-        with open(csvName, 'w', newline='') as file:
-            writer = csv.writer(file, delimiter=';')
-            writer.writerow(["Salle", "Température", "Humidité", "Taux de CO2"])
-            writer.writerows([[data[1]['room'], data[0]['temperature'], data[0]['humidity'], data[0]['co2']]])
     elif message.topic.startswith("solaredge/blagnac") :
         print("\nDONNÉES PANNEAUX SOLAIRES")
         print("=========================")
