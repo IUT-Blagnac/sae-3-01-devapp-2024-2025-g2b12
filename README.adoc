@@ -47,8 +47,7 @@ toc::[]
 
 == *Equipe*
 
-3+^| *Projet est réalisé par:*
-3+|
+*Projet est réalisé par:*
 |===
 
 | NOM | RÔLE
