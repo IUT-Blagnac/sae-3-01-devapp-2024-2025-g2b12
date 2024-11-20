@@ -1,0 +1,35 @@
+# Modèle d'issue de type "Tâche"
+# --------------------------------
+# auteur : Victor Jockin
+# date : Mercredi 20 novembre 2024
+name: Tâche
+description: Une tâche nécessaire à l'implémentation d'une User Story.
+title: "[TÂCHE]: "
+labels: ["TÂCHE"]
+body:
+  - type: dropdown
+    id: domaine
+    attributes:
+        label: Domaine
+        description: Domaine auquel la tâche est liée.
+        options:
+          - Web
+          - IoT
+    validations:
+        required: true
+  - type: dropdown
+    id: type
+    attributes:
+        label: Type de tâche
+        description: Nature du travail à réaliser.
+        options:
+          - Développement
+          - Test
+          - Documentation
+    validations:
+        required: true
+  - type: textarea
+    id: description
+    attributes:
+        label: Description de la tâche
+        description: Description de la tâche.
