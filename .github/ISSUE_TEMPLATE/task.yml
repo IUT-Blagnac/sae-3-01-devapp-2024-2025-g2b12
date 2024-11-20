@@ -31,5 +31,5 @@ body:
   - type: textarea
     id: description
     attributes:
-        label: Description de la tâche
-        placeholder: Description de la tâche.
+        label: Description
+        description: Description de la tâche.
