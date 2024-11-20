@@ -3,7 +3,7 @@
 # auteur : Victor Jockin
 # date : Mercredi 20 novembre 2024
 name: Tâche
-description: Une tâche nécessaire à l'implémentation d'une User Story.
+description: Une tâche nécessaire à l'implémentation d'une User Story
 title: "[TÂCHE]: "
 labels: ["TÂCHE"]
 body:
@@ -32,4 +32,4 @@ body:
     id: description
     attributes:
         label: Description de la tâche
-        description: Description de la tâche.
+        placeholder: Description de la tâche.
