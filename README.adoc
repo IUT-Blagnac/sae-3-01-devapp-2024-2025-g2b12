@@ -47,13 +47,17 @@ toc::[]
 
 == *Equipe*
 
-Projet est réalisé par::
+3+^| *Projet est réalisé par:*
+3+|
+|===
 
-- https://github.com/ImHereForWhat/[Mathys Laguilliez]
-- https://github.com/Hextaz[Nolhan Biblocque]
-- https://github.com/VictorJockin[Victor Jockin]
-- https://github.com/Ezeloss[Léo Guinvarc'h]
-- https://github.com/34lks66[Mucahit Lekesiz]
+| NOM | RÔLE
+|- https://github.com/ImHereForWhat/[Mathys Laguilliez] | Dev
+|- https://github.com/Hextaz[Nolhan Biblocque] | Dev
+|- https://github.com/VictorJockin[Victor Jockin] | Scrum master
+|- https://github.com/Ezeloss[Léo Guinvarc'h] | Dev
+|- https://github.com/34lks66[Mucahit Lekesiz] | Product Owner
+|===
 
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
 
