@@ -45,17 +45,26 @@ image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg["License: M
 
 toc::[]
 
+
+
+
 == *Equipe*
 
 Projet est réalisé par::
 
-- https://github.com/ImHereForWhat/[Mathys Laguilliez]
-- https://github.com/Hextaz[Nolhan Biblocque]
-- https://github.com/VictorJockin[Victor Jockin]
-- https://github.com/Ezeloss[Léo Guinvarc'h]
-- https://github.com/34lks66[Mucahit Lekesiz]
+|===
+2+^| *Equipe*
+2+|
+| Nom | Rôle |
+https://github.com/VictorJockin[*Victor Jockin*] | *Scrum Master* |
+https://github.com/34lks66[*Mucahit Lekesiz*] | *Product Owner* |
+https://github.com/Hextaz[*Nolhan Biblocque*] | *Développeur* |
+https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
+https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
+|===
 
-Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
+
+Tuteur/tutrice enseignant(e) de l'équipe:: - mailto:jean-michel.bruel@univ-tlse2.fr[*Jean-Michel Bruel*]
 
 
 == *Réalisations*
@@ -113,7 +122,6 @@ ifndef::env-github[]
 ++++
 <iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=935875429&amp;format=interactive"></iframe>
 endif::[]
-
+++++
 === retour sprint 1 / Initialisation du dépôt
 Enlevez les consignes du readme ! Mettre les rôles de chacun. Issues/ US :  Pensez à mettre les finalités, les critères d'acceptabilité et les tâches liées pour réaliser la US. Il faut relier votre  Backlog sprint à votre projet (créer une colonne en plus dans votre board où vous mettez les US à traiter dans le sprint). Idem il faut rattacher les tâches/issues au projet. doc: Pensez à présenter le contexte dans la doc de conception et à citer votre client. Il me manque : cahier de tests et doc utilistateur et tech à au moins initialiser à ce stade. Il me manque une release ou au moins une date de première release pour le Web.
-
