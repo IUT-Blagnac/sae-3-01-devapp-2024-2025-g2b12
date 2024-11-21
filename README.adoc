@@ -78,9 +78,9 @@ Vous trouverez ci-dessous les liens utiles à l'initialisation et la réalisatio
 
 |===
 | *Intitulés*| *Liens*
-|Github Classroom | https:// 
-|Cours Moodle SAE 3.01 | https:// 
-|Dépôt Template | https:// 
+|Github Classroom | https://classroom.github.com/assignment-invitations/c5ec3e74eaeb5ffc224e91915647cedc
+|Cours Moodle SAE 3.01 | https://webetud.iut-blagnac.fr/course/view.php?id=841
+|Dépôt Template initial| https:// 
 |===
 
 
