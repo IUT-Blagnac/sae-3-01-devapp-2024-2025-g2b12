@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="application.view.VisualiserDonneesController">
+    <Label fx:id="labelAfficher" text="Page Afficher" />
+    
+    <!-- TableView pour afficher des données -->
+    <TableView fx:id="tableView">
+        <!-- Colonne pour l'ID -->
+        <TableColumn fx:id="colonneId" text="ID" prefWidth="100">
+            <cellValueFactory>
+                <PropertyValueFactory property="id" />
+            </cellValueFactory>
+        </TableColumn>
+
+        <!-- Colonne pour le nom -->
+        <TableColumn fx:id="colonneNom" text="Nom" prefWidth="200">
+            <cellValueFactory>
+                <PropertyValueFactory property="nom" />
+            </cellValueFactory>
+        </TableColumn>
+
+        <!-- Colonne pour l'âge -->
+        <TableColumn fx:id="colonneAge" text="Âge" prefWidth="100">
+            <cellValueFactory>
+                <PropertyValueFactory property="age" />
+            </cellValueFactory>
+        </TableColumn>
+    </TableView>
+</VBox>
