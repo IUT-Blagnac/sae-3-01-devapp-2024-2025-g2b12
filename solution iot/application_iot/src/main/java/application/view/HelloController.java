@@ -2,6 +2,9 @@ package application.view ;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import java.io.IOException;
+
 
 public class HelloController {
     @FXML
@@ -25,8 +28,10 @@ public class HelloController {
     }
 
     @FXML
-    protected void onAfficherButtonClick() {
-        AfficherFichier.setText("LA VIE DMA MERE ON VA CHEZ QUICK WSH !!!!!");
+    protected void onAfficherButtonClick() throws IOException {
+        Stage stage = (Stage) AfficherFichier.getScene().getWindow();
+        VisualiserDonneesController VDC = new VisualiserDonneesController();
+        VDC.doAfficher(stage);
     }
 
     @FXML
