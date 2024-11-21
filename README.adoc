@@ -48,9 +48,9 @@ toc::[]
 
 
 
-== *Equipe*
+== *Equipe et Rôles*
 
-Projet est réalisé par::
+Le projet est réalisé par :
 
 |===
 2+^| *Equipe*
@@ -64,7 +64,24 @@ https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur*
 |===
 
 
-Tuteur/tutrice enseignant(e) de l'équipe:: - mailto:jean-michel.bruel@univ-tlse2.fr[*Jean-Michel Bruel*]
+Tuteur enseignant de l'équipe : mailto:jean-michel.bruel@univ-tlse2.fr[*Jean-Michel Bruel*]
+
+
+== *Contexte général*
+
+Le projet a pour objectif de développer une solution E-commerce pour l’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité. L’entreprise fondée initialement par l'organisation WOOHP (World Organization Of Human Protection) a la volonté d'élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. Cette démarche de digitalisation de l'offre via un site E-commerce s'inscrit dans cette dynamique.
+
+
+=== *Liens utiles*
+
+Vous trouverez ci-dessous les liens utiles à l'initialisation et la réalisation de ce projet :
+
+|===
+| *Intitulés*| *Liens*
+|Github Classroom | https:// 
+|Cours Moodle SAE 3.01 | https:// 
+|Dépôt Template | https:// 
+|===
 
 
 == *Réalisations*
@@ -75,15 +92,38 @@ Tuteur/tutrice enseignant(e) de l'équipe:: - mailto:jean-michel.bruel@univ-tlse
 3+^| *LIVRABLES*
 3+|
 | SEMAINE | SOLUTION | LIEN
-.4+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
+.5+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
 | IoT | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] +
 • https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] +
 • https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
+| GPO | Contrat d'équipe
+.4+| 46 | GPO | Ordre du jour réunion 
+|  | Compte-rendu de réunion
+|  | 
+|  | 
+.4+| 47 |  | 
+|  | 
+|  | 
+|  | 
+.4+| 48 |  | 
+|  | 
+|  | 
+|  | 
+.4+| 49 |  | 
+|  | 
+|  | 
+|  | 
+.4+| 50 |  | 
+|  | 
+|  | 
+|  | 
 |===
 
 === Documentations
+
+Cette section regroupe toute la documentation liée à la conception, au développement et à l’utilisation de l’application.
 
 |===
 | *DOCUMENTATIONS*
