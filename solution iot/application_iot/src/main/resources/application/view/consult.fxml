@@ -39,8 +39,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.VisualiserDonneesController">
    <bottom>
       <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
    </bottom>
@@ -50,7 +49,10 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="499.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="499.0">
+               <children>
+                  <Label fx:id="infoCsv" layoutX="103.0" layoutY="94.0" text="Info csv" />
+               </children></AnchorPane>
         </content>
       </ScrollPane>
    </center>
