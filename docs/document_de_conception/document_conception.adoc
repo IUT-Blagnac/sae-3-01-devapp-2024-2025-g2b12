@@ -46,6 +46,12 @@ Université Toulouse II – Jean Jaurès (31)
 
 == *Introduction*
 
+L’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité a pour objectif de développer une solution d'E-commerce. 
+
+En effet, l’entreprise fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a la volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. 
+
+Cette démarche de digitalisation de l’offre via un site d'E-commerce s’inscrit dans cette dynamique. 
+
 == *1. Architecture système*
 
 === 1.1 Architecture logicielle
