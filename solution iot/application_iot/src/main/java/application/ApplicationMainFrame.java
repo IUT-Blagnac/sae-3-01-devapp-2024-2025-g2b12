@@ -80,7 +80,7 @@ public class ApplicationMainFrame extends Application
      */
     public void visualiserDonnees()
     {
-        //DataVisualisationPane dataVisualisationPane = new DataVisualisationPane() ;
-        //dataVisualisationPane.doDataVisualisationPaneDialog() ;
+        DataVisualisationPane dataVisualisationPane = new DataVisualisationPane(this.amfStage) ;
+        dataVisualisationPane.doDataVisualisationPaneDialog() ;
     }
 }

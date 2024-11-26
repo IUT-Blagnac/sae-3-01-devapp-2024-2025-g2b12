@@ -7,6 +7,17 @@ import javafx.fxml.FXML ;
 import javafx.scene.control.Label ;
 import javafx.stage.Stage ;
 
+/**
+ * Contrôleur de dialogue du menu principal.
+ * 
+ * Date de dernière modification :
+ * - Mardi 18 novembre 2024 -
+ * 
+ * @author Léo Guinvarc'h
+ * @author Victor Jockin
+ * @author Mucahit Lekesiz
+ * - Équipe 2B12 -
+ */
 public class ApplicationMainFrameViewController
 {
     // déclaration des attributs
