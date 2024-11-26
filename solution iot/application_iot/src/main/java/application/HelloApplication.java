@@ -1,5 +1,6 @@
 package application ;
 
+import application.view.VisualiserDonneesController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +19,14 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+        VisualiserDonneesController controller = new VisualiserDonneesController();
+        controller.stopCsvReaderThread();
+        super.stop();
+    }
+
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
