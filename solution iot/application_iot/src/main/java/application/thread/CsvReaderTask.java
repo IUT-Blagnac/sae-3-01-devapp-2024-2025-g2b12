@@ -4,22 +4,23 @@ import application.view.DataVisualisationPaneViewController;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.opencsv.CSVParserBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import com.opencsv.CSVParserBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CsvReaderTask implements Runnable {
-    private final DataVisualisationPaneViewController controller;
+    private final DataVisualisationPaneViewController dvpViewController;
     private final char delimiter;
 
     public CsvReaderTask(DataVisualisationPaneViewController controller, char delimiter) {
-        this.controller = controller;
+        this.dvpViewController = controller;
         this.delimiter = delimiter;
     }
 
@@ -39,14 +40,17 @@ public class CsvReaderTask implements Runnable {
                 }
             }
             System.out.println(salles);
-
-
-        } catch (Exception e) {System.out.println(e) ;}/* catch (FileNotFoundException e) {
+            List<String> l = new ArrayList<>() ;
+            l.add("1") ;
+            l.add("2") ; 
+            //this.dvpViewController.ajoutLabel(l) ;
+            System.out.println(l) ;
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (CsvValidationException e) {
             throw new RuntimeException(e);
-        } */
+        } 
     }
 }

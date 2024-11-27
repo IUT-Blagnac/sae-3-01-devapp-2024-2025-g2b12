@@ -3,7 +3,6 @@ package application.controller ;
 import application.thread.CsvReaderTask ;
 import application.view.DataVisualisationPaneViewController ;
 
-import java.util.Collections;
 import java.util.concurrent.Executors ;
 import java.util.concurrent.ScheduledExecutorService ;
 import java.util.concurrent.TimeUnit ;
@@ -52,7 +51,6 @@ public class DataVisualisationPane
             this.dvpViewController = fxmlLoader.getController() ;
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
-
         }
         catch (Exception e)
         {
@@ -76,8 +74,4 @@ public class DataVisualisationPane
             scheduler.shutdown();
         }
     }
-
-
-
-
 }
