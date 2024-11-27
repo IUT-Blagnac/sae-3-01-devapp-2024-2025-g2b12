@@ -52,6 +52,7 @@ public class DataVisualisationPaneViewController
         this.stage.show() ;
     }
 
+    @FXML
     public void ajoutLabel(List<String> contents) {
         flow.getChildren().clear();
         for (String content : contents) {
@@ -64,4 +65,5 @@ public class DataVisualisationPaneViewController
     public void updateInfoCsv(String content) {
         infoCsv.setText(content);
     }
+
 }

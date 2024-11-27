@@ -3,6 +3,7 @@ package application.controller ;
 import application.thread.CsvReaderTask ;
 import application.view.DataVisualisationPaneViewController ;
 
+import java.util.Collections;
 import java.util.concurrent.Executors ;
 import java.util.concurrent.ScheduledExecutorService ;
 import java.util.concurrent.TimeUnit ;
@@ -43,7 +44,7 @@ public class DataVisualisationPane
             FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("dataVisualisationPane.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 720) ;
             this.dvpStage.setScene(scene) ;
             this.dvpStage.setTitle("Visualisation") ;
 
@@ -51,6 +52,7 @@ public class DataVisualisationPane
             this.dvpViewController = fxmlLoader.getController() ;
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
+
         }
         catch (Exception e)
         {
@@ -74,4 +76,8 @@ public class DataVisualisationPane
             scheduler.shutdown();
         }
     }
+
+
+
+
 }

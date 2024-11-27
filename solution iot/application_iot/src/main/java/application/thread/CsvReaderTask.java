@@ -10,6 +10,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class CsvReaderTask implements Runnable {
                 }
             }
             System.out.println(salles);
+
 
         } catch (Exception e) {System.out.println(e) ;}/* catch (FileNotFoundException e) {
             throw new RuntimeException(e);
