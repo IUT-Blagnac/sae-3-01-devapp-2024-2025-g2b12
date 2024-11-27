@@ -1,8 +1,8 @@
 package application.view ;
 
-import java.io.IOException;
+import java.io.IOException ;
 
-import application.ApplicationMainFrame;
+import application.ApplicationMainFrame ;
 import javafx.fxml.FXML ;
 import javafx.scene.control.Label ;
 import javafx.stage.Stage ;
