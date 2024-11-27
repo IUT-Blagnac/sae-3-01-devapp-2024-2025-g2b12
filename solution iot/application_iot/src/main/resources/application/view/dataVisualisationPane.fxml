@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -21,13 +22,22 @@
 						</children>
 					</VBox>
 				</ScrollPane>
-				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-					<VBox fx:id="vboxBlocsDeDonnees" alignment="CENTER" minWidth="600" prefWidth="600">
-						<children>
-							<Label text="colonne centre"/>
-						</children>
-					</VBox>
-				</ScrollPane>
+				<VBox alignment="CENTER" minWidth="600" prefWidth="600">
+					<children>
+						<HBox prefHeight="200">
+							<children>
+								<TitledPane prefWidth="600" text="AAA" animated="false" collapsible="false">
+								</TitledPane>
+							</children>
+						</HBox>
+						<HBox prefHeight="200">
+							<children>
+								<TitledPane prefWidth="600" text="BBB" animated="false" collapsible="false">
+								</TitledPane>
+							</children>
+						</HBox>
+					</children>
+				</VBox>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
 					<VBox alignment="CENTER" minWidth="200" prefWidth="200">
 						<children>

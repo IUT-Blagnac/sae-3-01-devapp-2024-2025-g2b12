@@ -2,6 +2,8 @@ package application.view ;
 
 import application.controller.DataVisualisationPane ;
 
+import java.util.Map ;
+
 import javafx.fxml.FXML ;
 import javafx.scene.layout.VBox ;
 import javafx.stage.Stage ;
@@ -24,7 +26,7 @@ public class DataVisualisationPaneViewController
     private DataVisualisationPane dvpDialogController ;
 
     // récupération des éléments de la vue FXML
-    @FXML private VBox vboxBlocsDeDonnees ;
+    //@FXML private VBox vboxBlocsDeDonnees ;
 
     public void setStage(Stage _stage)
     {
@@ -49,7 +51,13 @@ public class DataVisualisationPaneViewController
      */
     public void update()
     {
-        System.out.println(this.dvpDialogController.getMapData()) ;
-        this.vboxBlocsDeDonnees.getChildren().clear() ;
+        Map<String, Map<String, String>> dataMap = this.dvpDialogController.getMapData() ;
+        for (Map.Entry<String, Map<String, String>> m : dataMap.entrySet())
+        {
+            for (Map.Entry<String, String> m2 : m.getValue().entrySet())
+            {
+                System.out.println(m2) ;
+            }
+        }
     }
 }
