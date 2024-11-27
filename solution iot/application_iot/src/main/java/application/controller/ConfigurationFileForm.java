@@ -46,9 +46,6 @@ public class ConfigurationFileForm
             this.cffViewController = fxmlLoader.getController() ;
             this.cffViewController.setStage(this.cffStage) ;
             this.cffViewController.setCffDialogController(this) ;
-
-            // Afficher la fenêtre
-            this.cffViewController.displayDialog() ;
         }
         catch (Exception e)
         {

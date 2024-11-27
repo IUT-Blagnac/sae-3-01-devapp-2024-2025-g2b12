@@ -1,10 +1,8 @@
 package application.controller ;
 
-import application.view.ConfigurationFileFormViewController ;
-import application.view.DataVisualisationPaneViewController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
+import application.view.DataVisualisationPaneViewController ;
+import javafx.fxml.FXMLLoader ;
+import javafx.scene.Scene ;
 import javafx.stage.Stage ;
 
 /**
@@ -32,12 +30,10 @@ public class DataVisualisationPane
         try
         {
             // initialisation d'un nouveau stage pour le formulaire
-            this.dvpStage = new Stage() ;
-            this.dvpStage.initOwner(_stageParent) ;
-            this.dvpStage.initModality(Modality.WINDOW_MODAL) ;
+            this.dvpStage = _stageParent ;
 
             // chargement de la vue FXML du formulaire
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VisualiserDonnees-view.fxml")) ;
+            FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("VisualiserDonnees-view.fxml")) ;
 
             // initialisation de la scène
             Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
@@ -48,9 +44,6 @@ public class DataVisualisationPane
             this.dvpViewController = fxmlLoader.getController() ;
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
-
-            // Afficher la fenêtre
-            this.dvpViewController.displayDialog() ;
         }
         catch (Exception e)
         {

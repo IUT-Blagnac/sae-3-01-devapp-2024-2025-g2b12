@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="application.view.VisualiserDonneesController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="application.view.DataVisualisationPaneViewController">
     <Label fx:id="labelAfficher" text="Page Afficher" />
     
     <!-- TableView pour afficher des données -->

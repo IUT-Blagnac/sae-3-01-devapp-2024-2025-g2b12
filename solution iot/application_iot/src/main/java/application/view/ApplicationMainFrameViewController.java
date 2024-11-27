@@ -54,8 +54,6 @@ public class ApplicationMainFrameViewController
     @FXML
     protected void onCreerButtonClick()
     {
-        CreerFichier.setText("VOUS ETES OU") ;
-        // ouverture du formulaire de paramétrage d'un fichier de configuration
         this.amfDialogController.parametrerConfiguration() ;
     }
 
@@ -67,9 +65,7 @@ public class ApplicationMainFrameViewController
     @FXML
     protected void onAfficherButtonClick() throws IOException
     {
-        Stage stage = (Stage) AfficherFichier.getScene().getWindow();
-        VisualiserDonneesController VDC = new VisualiserDonneesController();
-        VDC.doAfficher(stage);
+        this.amfDialogController.visualiserDonnees() ;
     }
 
     @FXML
