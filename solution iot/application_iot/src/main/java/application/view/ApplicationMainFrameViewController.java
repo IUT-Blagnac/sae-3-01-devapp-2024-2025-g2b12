@@ -1,10 +1,7 @@
 package application.view ;
 
-import java.io.IOException ;
-
 import application.ApplicationMainFrame ;
 import javafx.fxml.FXML ;
-import javafx.scene.control.Label ;
 import javafx.stage.Stage ;
 
 /**
@@ -43,33 +40,26 @@ public class ApplicationMainFrameViewController
     }
 
     @FXML
-    private Label CreerFichier;
-    @FXML
-    private Label ChargerFichier;
-    @FXML
-    private Label AfficherFichier;
-    @FXML
-    private Label TestMQTT;
-
-    @FXML
-    protected void onCreerButtonClick()
+    protected void doConfiguration()
     {
         this.amfDialogController.parametrerConfiguration() ;
     }
 
     @FXML
-    protected void onChargerButtonClick() {
-        ChargerFichier.setText("TOUS");
-    }
-
-    @FXML
-    protected void onAfficherButtonClick() throws IOException
+    protected void doVisualiserDonnees()
     {
         this.amfDialogController.visualiserDonnees() ;
     }
 
     @FXML
-    protected void onTestMQTTButtonClick() {
-        TestMQTT.setText("Clique moi, je t\'empoisonne");
+    protected void doTesterConnexionMQTT()
+    {
+        System.out.println("- En cours de développement -") ;
+    }
+
+    @FXML
+    protected void doQuitter()
+    {
+        System.out.println("- En cours de développement -") ;
     }
 }
