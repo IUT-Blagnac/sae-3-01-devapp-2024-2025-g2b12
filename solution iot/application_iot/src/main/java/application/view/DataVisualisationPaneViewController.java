@@ -2,12 +2,6 @@ package application.view ;
 
 import application.controller.DataVisualisationPane ;
 
-import java.util.List ;
-
-import javafx.fxml.FXML ;
-import javafx.scene.control.Label ;
-import javafx.scene.control.ScrollPane ;
-import javafx.scene.layout.FlowPane ;
 import javafx.stage.Stage ;
 
 /**
@@ -27,13 +21,6 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
 
-    @FXML
-    private Label infoCsv;
-    @FXML
-    private ScrollPane scroll;
-    @FXML
-    private FlowPane flow;
-
     public void setStage(Stage _stage)
     {
         this.stage = _stage ;
@@ -52,18 +39,9 @@ public class DataVisualisationPaneViewController
         this.stage.show() ;
     }
 
-    @FXML
-    public void ajoutLabel(List<String> contents) {
-        System.out.println("- ajoutLabel") ;
-        flow.getChildren().clear();
-        for (String content : contents) {
-            Label label = new Label(content);
-            flow.getChildren().add(label);
-        }
-        scroll.setContent(flow);
-    }
-
-    public void updateInfoCsv(String content) {
-        infoCsv.setText(content);
+    public void update()
+    {
+        System.out.println("mise à jour vue") ;
+        System.out.println(this.dvpDialogController.getMapData()) ;
     }
 }

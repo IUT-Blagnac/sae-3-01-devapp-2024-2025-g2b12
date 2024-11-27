@@ -39,7 +39,7 @@ public class ApplicationMainFrame extends Application
             FXMLLoader fxmlLoader = new FXMLLoader(ApplicationMainFrame.class.getResource("view/applicationMainFrame.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600) ;
             scene.getStylesheets().add(getClass().getResource("style/style.css").toExternalForm()) ;
             this.amfStage.setScene(scene) ;
             this.amfStage.setTitle("S.A.E.") ;
