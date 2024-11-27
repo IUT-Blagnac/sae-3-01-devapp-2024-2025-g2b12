@@ -8,6 +8,7 @@ import java.util.concurrent.ScheduledExecutorService ;
 import java.util.concurrent.TimeUnit ;
 import java.util.Map ;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.stage.Stage ;
@@ -84,11 +85,11 @@ public class DataVisualisationPane
     public void setMapData(Map<String, Map<String, String>> _mapData)
     {
         this.mapData = _mapData ;
-        this.dvpViewController.update() ;
+        Platform.runLater(() -> { this.dvpViewController.update() ; }) ;
     }
 
     /**
-     * Donne le dictionnaire des données à visualiser.
+     * Accesseur : donne le dictionnaire des données visualisées.
      * @return  Le dictionnaire des données.
      */
     public Map<String, Map<String, String>> getMapData()

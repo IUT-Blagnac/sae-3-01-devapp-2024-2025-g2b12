@@ -22,7 +22,7 @@
 					</VBox>
 				</ScrollPane>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-					<VBox alignment="CENTER" minWidth="600" prefWidth="600">
+					<VBox fx:id="vboxBlocsDeDonnees" alignment="CENTER" minWidth="600" prefWidth="600">
 						<children>
 							<Label text="colonne centre"/>
 						</children>
