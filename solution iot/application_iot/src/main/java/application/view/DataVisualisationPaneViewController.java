@@ -1,12 +1,8 @@
 package application.view ;
 
 import application.controller.DataVisualisationPane ;
-import application.thread.CsvReaderTask ;
 
 import java.util.List ;
-import java.util.concurrent.Executors ;
-import java.util.concurrent.ScheduledExecutorService ;
-import java.util.concurrent.TimeUnit ;
 
 import javafx.fxml.FXML ;
 import javafx.scene.control.Label ;
@@ -31,6 +27,13 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
 
+    @FXML
+    private Label infoCsv;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private FlowPane flow;
+
     public void setStage(Stage _stage)
     {
         this.stage = _stage ;
@@ -46,20 +49,8 @@ public class DataVisualisationPaneViewController
      */
     public void displayDialog()
     {
-        System.out.println("avant lancement thread") ;
-        this.startCsvReaderThread() ;
-        System.out.println("après lancement thread") ;
         this.stage.show() ;
     }
-
-    @FXML
-    private Label infoCsv;
-    @FXML
-    private ScrollPane scroll;
-    @FXML
-    private FlowPane flow;
-
-    private ScheduledExecutorService scheduler;
 
     public void ajoutLabel(List<String> contents) {
         flow.getChildren().clear();
@@ -70,18 +61,7 @@ public class DataVisualisationPaneViewController
         scroll.setContent(flow);
     }
 
-    public void startCsvReaderThread() {
-        scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new CsvReaderTask(this, ';'), 0, 5, TimeUnit.SECONDS);
-    }
-
     public void updateInfoCsv(String content) {
         infoCsv.setText(content);
-    }
-
-    public void stopCsvReaderThread() {
-        if (scheduler != null && !scheduler.isShutdown()) {
-            scheduler.shutdown();
-        }
     }
 }

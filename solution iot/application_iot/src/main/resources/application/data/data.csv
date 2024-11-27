@@ -1,4 +1,4 @@
-Salle;Température;humidité
-b101;22;700
-b102;23;400
-b103;24;500
+Salle;Température;humidité;luminosité
+b101;22;700;400
+b102;23;400;400
+b103;24;500;400

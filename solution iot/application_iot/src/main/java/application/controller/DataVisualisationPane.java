@@ -1,6 +1,12 @@
 package application.controller ;
 
+import application.thread.CsvReaderTask ;
 import application.view.DataVisualisationPaneViewController ;
+
+import java.util.concurrent.Executors ;
+import java.util.concurrent.ScheduledExecutorService ;
+import java.util.concurrent.TimeUnit ;
+
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.stage.Stage ;
@@ -21,6 +27,7 @@ public class DataVisualisationPane
     // déclaration des attributs
     private Stage dvpStage ;
     private DataVisualisationPaneViewController dvpViewController ;
+    private ScheduledExecutorService scheduler ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -54,5 +61,17 @@ public class DataVisualisationPane
     public void doDataVisualisationPaneDialog()
     {
         this.dvpViewController.displayDialog() ;
+        this.startCsvReaderThread() ;
+    }
+
+    public void startCsvReaderThread() {
+        scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new CsvReaderTask(this.dvpViewController, ';'), 0, 5, TimeUnit.SECONDS);
+    }
+
+    public void stopCsvReaderThread() {
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
+        }
     }
 }
