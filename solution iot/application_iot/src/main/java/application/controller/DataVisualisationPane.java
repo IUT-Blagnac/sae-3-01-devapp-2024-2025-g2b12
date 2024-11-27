@@ -33,7 +33,7 @@ public class DataVisualisationPane
             this.dvpStage = _stageParent ;
 
             // chargement de la vue FXML du formulaire
-            FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("VisualiserDonnees-view.fxml")) ;
+            FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("dataVisualisationPane.fxml")) ;
 
             // initialisation de la scène
             Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
