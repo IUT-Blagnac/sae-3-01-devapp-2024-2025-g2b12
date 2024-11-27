@@ -2,18 +2,20 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
-		<HBox alignment="CENTER" prefWidth="1000" prefHeight="100">
+		<HBox alignment="CENTER" prefWidth="1000" prefHeight="50">
 			<children>
 				<Label text="Tableau de bord"/>
 			</children>
 		</HBox>
-		<HBox alignment="CENTER" prefHeight="400">
+		<HBox alignment="CENTER" prefHeight="500">
 			<children>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
 					<VBox alignment="CENTER" minWidth="200" prefWidth="200">
@@ -24,18 +26,15 @@
 				</ScrollPane>
 				<VBox alignment="CENTER" minWidth="600" prefWidth="600">
 					<children>
-						<HBox prefHeight="200">
-							<children>
-								<TitledPane prefWidth="600" text="AAA" animated="false" collapsible="false">
-								</TitledPane>
-							</children>
-						</HBox>
-						<HBox prefHeight="200">
-							<children>
-								<TitledPane prefWidth="600" text="BBB" animated="false" collapsible="false">
-								</TitledPane>
-							</children>
-						</HBox>
+						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+							<TitledPane prefWidth="600" prefHeight="200" text="AAA" animated="false" collapsible="false">
+								<TableView fx:id="tableViewDonnees" prefWidth="600.0"/>
+							</TitledPane>
+						</ScrollPane>
+						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+							<TitledPane prefWidth="600" prefHeight="300" text="BBB" animated="false" collapsible="false">
+							</TitledPane>
+						</ScrollPane>
 					</children>
 				</VBox>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
@@ -47,7 +46,7 @@
 				</ScrollPane>
 			</children>
 		</HBox>
-		<HBox alignment="CENTER" prefWidth="1000" prefHeight="100">
+		<HBox alignment="CENTER" prefWidth="1000" prefHeight="50">
 			<children>
 				<Label text="bas de page"/>
 			</children>

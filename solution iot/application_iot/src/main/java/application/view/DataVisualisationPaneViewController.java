@@ -5,7 +5,8 @@ import application.controller.DataVisualisationPane ;
 import java.util.Map ;
 
 import javafx.fxml.FXML ;
-import javafx.scene.layout.VBox ;
+import javafx.scene.control.TableColumn ;
+import javafx.scene.control.TableView ;
 import javafx.stage.Stage ;
 
 /**
@@ -25,8 +26,8 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
 
-    // récupération des éléments de la vue FXML
-    //@FXML private VBox vboxBlocsDeDonnees ;
+    // récupération des éléments graphiques de la vue FXML
+    @FXML private TableView<String> tableViewDonnees ;
 
     public void setStage(Stage _stage)
     {
@@ -51,13 +52,25 @@ public class DataVisualisationPaneViewController
      */
     public void update()
     {
+        // nettoyage de la TableView
+        this.tableViewDonnees.getItems().clear() ;
+        this.tableViewDonnees.getColumns().clear() ;
+
+        // remplissage de la TableView
         Map<String, Map<String, String>> dataMap = this.dvpDialogController.getMapData() ;
+        int i = 0 ;
         for (Map.Entry<String, Map<String, String>> m : dataMap.entrySet())
         {
             for (Map.Entry<String, String> m2 : m.getValue().entrySet())
             {
-                System.out.println(m2) ;
+                if (i == 0)
+                {
+                    // construction des en-têtes de la TableView
+                    TableColumn<String, String> colonne = new TableColumn<>(m2.getKey()) ;
+                    this.tableViewDonnees.getColumns().add(colonne) ;
+                }
             }
+            i++ ;
         }
     }
 }
