@@ -47,9 +47,8 @@ public class DataVisualisationPane
     {
         try
         {
-            // récupération des types de données affichées
+            // récupération des types de données à visualiser
             this.dataTypeList = FileReading.getHeadersFromCSVFile(Data.getDataFile()) ;
-            System.out.println(this.dataTypeList) ;
 
             // initialisation d'un nouveau stage pour le formulaire
             this.dvpStage = new Stage() ;
@@ -70,6 +69,7 @@ public class DataVisualisationPane
             this.dvpViewController = fxmlLoader.getController() ;
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
+            this.dvpViewController.initializeViewElements() ;
         }
         catch (Exception e)
         {
@@ -87,22 +87,31 @@ public class DataVisualisationPane
     }
 
     /**
+     * Accesseur : donne la liste des types de données visualisées.
+     * @return la liste des types de données
+     */
+    public List<String> getDataTypeList()
+    {
+        return this.dataTypeList ;
+    }
+
+    /**
+     * Accesseur : donne le dictionnaire des données visualisées.
+     * @return le dictionnaire des données
+     */
+    public Map<String, Map<String, String>> getDataMap()
+    {
+        return this.dataMap ;
+    }
+
+    /**
      * Met à jour les données visualisées.
-     * @param _dataMap  Les données mises à jour.
+     * @param _dataMap les données mises à jour
      */
     public void setDataMap(Map<String, Map<String, String>> _dataMap)
     {
         this.dataMap = _dataMap ;
         Platform.runLater(() -> { this.dvpViewController.update() ; }) ;
-    }
-
-    /**
-     * Accesseur : donne le dictionnaire des données visualisées.
-     * @return  Le dictionnaire des données.
-     */
-    public Map<String, Map<String, String>> getDataMap()
-    {
-        return this.dataMap ;
     }
 
     /**
