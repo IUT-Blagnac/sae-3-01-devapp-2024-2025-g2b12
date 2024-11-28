@@ -1,14 +1,17 @@
 package application.controller ;
 
+import application.data.Data ;
 import application.thread.CsvReaderTask ;
+import application.tools.FileReading ;
 import application.view.DataVisualisationPaneViewController ;
 
 import java.util.concurrent.Executors ;
 import java.util.concurrent.ScheduledExecutorService ;
 import java.util.concurrent.TimeUnit ;
+import java.util.List ;
 import java.util.Map ;
 
-import javafx.application.Platform;
+import javafx.application.Platform ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.stage.Stage ;
@@ -33,8 +36,9 @@ public class DataVisualisationPane
     // déclaration des attributs
     private Stage dvpStage ;
     private DataVisualisationPaneViewController dvpViewController ;
-    private Map<String, Map<String, String>> mapData ;
     private ScheduledExecutorService scheduler ;
+    private List<String> dataTypeList ;
+    private Map<String, Map<String, String>> dataMap ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -43,8 +47,12 @@ public class DataVisualisationPane
     {
         try
         {
+            // récupération des types de données affichées
+            this.dataTypeList = FileReading.getHeadersFromCSVFile(Data.getDataFile()) ;
+            System.out.println(this.dataTypeList) ;
+
             // initialisation d'un nouveau stage pour le formulaire
-            this.dvpStage = _stageParent ;
+            this.dvpStage = new Stage() ;
 
             // centrage de la fenêtre par rapport à la fenêtre précédente
             this.dvpStage.setX(_stageParent.getX() + (_stageParent.getWidth() - WINDOW_WIDTH) / 2) ;
@@ -80,11 +88,11 @@ public class DataVisualisationPane
 
     /**
      * Met à jour les données visualisées.
-     * @param _mapData  Les données mises à jour.
+     * @param _dataMap  Les données mises à jour.
      */
-    public void setMapData(Map<String, Map<String, String>> _mapData)
+    public void setDataMap(Map<String, Map<String, String>> _dataMap)
     {
-        this.mapData = _mapData ;
+        this.dataMap = _dataMap ;
         Platform.runLater(() -> { this.dvpViewController.update() ; }) ;
     }
 
@@ -92,25 +100,33 @@ public class DataVisualisationPane
      * Accesseur : donne le dictionnaire des données visualisées.
      * @return  Le dictionnaire des données.
      */
-    public Map<String, Map<String, String>> getMapData()
+    public Map<String, Map<String, String>> getDataMap()
     {
-        return this.mapData ;
+        return this.dataMap ;
     }
 
     /**
      * Lance le Thread lecteur de données.
      */
-    public void startCsvReaderThread() {
-        scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new CsvReaderTask(this, ';'), 0, 5, TimeUnit.SECONDS);
+    public void startCsvReaderThread()
+    {
+        scheduler = Executors.newScheduledThreadPool(1) ;
+        scheduler.scheduleAtFixedRate(
+            new CsvReaderTask(this, ';'),
+            0,
+            5,
+            TimeUnit.SECONDS
+        ) ;
     }
 
     /**
      * Arrête le Thread lecteur de données.
      */
-    public void stopCsvReaderThread() {
-        if (scheduler != null && !scheduler.isShutdown()) {
-            scheduler.shutdown();
+    public void stopCsvReaderThread()
+    {
+        if (scheduler != null && !scheduler.isShutdown())
+        {
+            scheduler.shutdown() ;
         }
     }
 }

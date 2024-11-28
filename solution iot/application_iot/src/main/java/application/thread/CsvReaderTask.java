@@ -1,6 +1,7 @@
 package application.thread;
 
 import application.controller.DataVisualisationPane;
+import application.data.Data;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -25,7 +26,7 @@ public class CsvReaderTask implements Runnable {
     @Override
     public void run() {
         Map<String, Map<String, String>> mapData = new HashMap<>();
-        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader("src/main/resources/application/data/data.csv"))
+        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(Data.getDataFile()))
                 .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).build())
                 .build()) {
             String[] values = null;
@@ -36,7 +37,7 @@ public class CsvReaderTask implements Runnable {
                     mapData.get(values[0]).put(header[i], values[i]);
                 }
             }
-            this.dvpDialogController.setMapData(mapData);
+            this.dvpDialogController.setDataMap(mapData);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

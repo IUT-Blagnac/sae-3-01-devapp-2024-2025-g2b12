@@ -28,7 +28,7 @@
 					<children>
 						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
 							<TitledPane prefWidth="600" prefHeight="200" text="AAA" animated="false" collapsible="false">
-								<TableView fx:id="tableViewDonnees" prefWidth="600.0"/>
+								<TableView fx:id="dataTableView" prefWidth="600.0"/>
 							</TitledPane>
 						</ScrollPane>
 						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
