@@ -10,11 +10,16 @@
 
 <HBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
-		<VBox alignment="CENTER" minWidth="600" prefWidth="600">
+		<VBox alignment="CENTER" minWidth="200" prefWidth="200" styleClass="side-menu-vbox">
+			<children>
+				<Label text="menu latéral"/>
+			</children>
+		</VBox>
+		<VBox alignment="CENTER" minWidth="400" prefWidth="400">
 			<children>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-					<TitledPane prefWidth="600" prefHeight="200" text="AAA" animated="false" collapsible="false">
-						<TableView fx:id="dataTableView" prefWidth="600.0"/>
+					<TitledPane prefWidth="400" prefHeight="400" text="AAA" animated="false" collapsible="false">
+						<TableView fx:id="dataTableView" prefWidth="400.0"/>
 					</TitledPane>
 				</ScrollPane>
 			</children>

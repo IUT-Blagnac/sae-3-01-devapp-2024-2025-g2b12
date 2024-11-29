@@ -6,6 +6,11 @@
     - Équipe 2B12 -
 */
 
+.side-menu-vbox
+{
+    -fx-background-color: #000;
+}
+
 .first-table-column-cell
 {
     -fx-background-color: #aaa;

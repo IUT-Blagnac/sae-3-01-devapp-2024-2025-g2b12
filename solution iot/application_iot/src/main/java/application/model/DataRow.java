@@ -45,4 +45,24 @@ public class DataRow
     {
         return this.dataMap ;
     }
+
+    /**
+     * Met à jour les données de la ligne.
+     * @param newData   les nouvelles données
+     */
+    public void updateData(Map<String, String> newData)
+    {
+        this.dataMap.putAll(newData) ;
+    }
+
+    /**
+     * Indique si deux lignes de données ont le même nom.
+     * @param other la ligne de données comparée à {this}
+     * @return  {true} si les noms des lignes de données sont identiques, {false} sinon
+     */
+    public boolean hasSameNameAs(DataRow other)
+    {
+        if (other == null) { return false ; }
+        return this.getName().equals(other.getName()) ;
+    }
 }

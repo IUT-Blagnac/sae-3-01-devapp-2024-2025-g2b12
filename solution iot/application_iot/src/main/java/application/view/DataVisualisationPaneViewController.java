@@ -3,6 +3,8 @@ package application.view ;
 import application.controller.DataVisualisationPane ;
 import application.model.DataRow ;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List ;
 import java.util.Map ;
 
@@ -52,6 +54,9 @@ public class DataVisualisationPaneViewController
      */
     public void initializeViewElements()
     {
+        // initialisation de l'ObservableList de la TableView
+        this.dataTableViewOList = FXCollections.observableArrayList() ;
+
         // initialisation de la TableView
         List<String> headersList = this.dvpDialogController.getDataTypeList() ;
         for (int i = 0 ; i < headersList.size() ; i++)
@@ -108,12 +113,24 @@ public class DataVisualisationPaneViewController
     public void update()
     {
         Map<String, Map<String, String>> dataMap = this.dvpDialogController.getDataMap() ;
-        this.dataTableViewOList = FXCollections.observableArrayList() ;
+        
+        Map<String, DataRow> existingDataRowsMap = new HashMap<>() ;
+        for (DataRow dr : this.dataTableViewOList) { existingDataRowsMap.put(dr.getName(), dr) ; }
+
         for (Map.Entry<String, Map<String, String>> m : dataMap.entrySet())
         {
-            DataRow dataRow = new DataRow(m.getKey(), m.getValue()) ;
-            this.dataTableViewOList.add(dataRow) ;
+            if (existingDataRowsMap.containsKey(m.getKey()))
+            {
+                DataRow dataRow = existingDataRowsMap.get(m.getKey()) ;
+                dataRow.updateData(m.getValue()) ;
+            }
+            else
+            {
+                DataRow dataRow = new DataRow(m.getKey(), m.getValue()) ;
+                this.dataTableViewOList.add(dataRow) ;
+            }
         }
         this.dataTableView.setItems(this.dataTableViewOList) ;
+        this.dataTableView.refresh() ;
     }
 }
