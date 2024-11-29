@@ -54,15 +54,4 @@ public class DataRow
     {
         this.dataMap.putAll(newData) ;
     }
-
-    /**
-     * Indique si deux lignes de données ont le même nom.
-     * @param other la ligne de données comparée à {this}
-     * @return  {true} si les noms des lignes de données sont identiques, {false} sinon
-     */
-    public boolean hasSameNameAs(DataRow other)
-    {
-        if (other == null) { return false ; }
-        return this.getName().equals(other.getName()) ;
-    }
 }

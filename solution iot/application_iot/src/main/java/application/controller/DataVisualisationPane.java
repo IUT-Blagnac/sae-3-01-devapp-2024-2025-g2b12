@@ -61,7 +61,7 @@ public class DataVisualisationPane
             FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("dataVisualisationPane.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600) ;
+            Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT) ;
             scene.getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
             this.dvpStage.setScene(scene) ;
             this.dvpStage.setTitle("Tableau de bord") ;

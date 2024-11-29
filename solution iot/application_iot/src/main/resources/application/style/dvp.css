@@ -6,9 +6,21 @@
     - Équipe 2B12 -
 */
 
-.side-menu-vbox
+.side-menu
 {
     -fx-background-color: #000;
+}
+
+.main-container
+{
+    -fx-background-color: #bbb;
+}
+
+.container
+{
+    -fx-background-color: #fff;
+    -fx-border-radius: 0;
+    -fx-background-radius: 15;
 }
 
 .first-table-column-cell
