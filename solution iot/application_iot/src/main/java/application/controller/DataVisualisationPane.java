@@ -62,8 +62,9 @@ public class DataVisualisationPane
 
             // initialisation de la scène
             Scene scene = new Scene(fxmlLoader.load(), 1000, 600) ;
+            scene.getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
             this.dvpStage.setScene(scene) ;
-            this.dvpStage.setTitle("Visualisation") ;
+            this.dvpStage.setTitle("Tableau de bord") ;
 
             // initialisation du contrôleur
             this.dvpViewController = fxmlLoader.getController() ;

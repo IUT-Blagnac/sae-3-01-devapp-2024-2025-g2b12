@@ -1,0 +1,16 @@
+/*
+    Feuille de style de la fenêtre de visualisation des données
+    Cf. dataVisualisationPane.fxml
+
+    auteur : Victor Jockin
+    - Équipe 2B12 -
+*/
+
+.first-table-column-cell
+{
+    -fx-background-color: #aaa;
+}
+.first-table-column-cell.selected
+{
+    -fx-background-color: #000;
+}

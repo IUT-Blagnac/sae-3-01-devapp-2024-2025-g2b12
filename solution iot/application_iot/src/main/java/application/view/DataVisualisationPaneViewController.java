@@ -10,7 +10,9 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
+import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
+import javafx.scene.control.TableRow ;
 import javafx.scene.control.TableView ;
 import javafx.stage.Stage ;
 
@@ -50,8 +52,6 @@ public class DataVisualisationPaneViewController
      */
     public void initializeViewElements()
     {
-        System.out.println("- initialisation -") ;
-
         // initialisation de la TableView
         List<String> headersList = this.dvpDialogController.getDataTypeList() ;
         for (int i = 0 ; i < headersList.size() ; i++)
@@ -60,18 +60,38 @@ public class DataVisualisationPaneViewController
             TableColumn<DataRow, String> tableColumn = new TableColumn<>(header) ;
             if (i == 0)
             {
-                tableColumn.setCellValueFactory(
-                    data -> new SimpleStringProperty(data.getValue().getName())
-                ) ;    
+                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
+                tableColumn.setCellFactory(
+                    c -> new TableCell<DataRow, String>()
+                    {
+                        @Override
+                        protected void updateItem(String item, boolean empty)
+                        {
+                            getStyleClass().clear() ;
+                            getStyleClass().add("first-table-column-cell") ;
+                            super.updateItem(item, empty) ;
+                            setText(empty ? "" : item) ;
+                            TableRow<DataRow> tableRow = getTableRow() ;
+                            if (tableRow.isSelected())
+                            {
+                                getStyleClass().add("selected") ;
+                            }
+                        }
+                    }
+                ) ;
             }
             else
             {
-                tableColumn.setCellValueFactory(
-                    data -> new SimpleStringProperty(data.getValue().getData().get(header))
-                ) ;
+                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getData().get(header))) ;
             }
             this.dataTableView.getColumns().add(tableColumn) ;
         }
+
+        // initialisation d'un écouteur d'évènements sur la TableView
+        this.dataTableView.getSelectionModel().selectedItemProperty().addListener(
+            // rafraichissement des tyles lorsqu'une ligne est sélectionnée
+            (observable, oldValue, newValue) -> { this.dataTableView.refresh() ; }
+        ) ;
     }
 
     /**
