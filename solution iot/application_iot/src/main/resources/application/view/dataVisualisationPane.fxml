@@ -8,48 +8,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
+<HBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
-		<HBox alignment="CENTER" prefWidth="1000" prefHeight="50">
-			<children>
-				<Label text="Tableau de bord"/>
-			</children>
-		</HBox>
-		<HBox alignment="CENTER" prefHeight="500">
+		<VBox alignment="CENTER" minWidth="600" prefWidth="600">
 			<children>
 				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-					<VBox alignment="CENTER" minWidth="200" prefWidth="200">
-						<children>
-							<Label text="colonne gauche"/>
-						</children>
-					</VBox>
-				</ScrollPane>
-				<VBox alignment="CENTER" minWidth="600" prefWidth="600">
-					<children>
-						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-							<TitledPane prefWidth="600" prefHeight="200" text="AAA" animated="false" collapsible="false">
-								<TableView fx:id="dataTableView" prefWidth="600.0"/>
-							</TitledPane>
-						</ScrollPane>
-						<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-							<TitledPane prefWidth="600" prefHeight="300" text="BBB" animated="false" collapsible="false">
-							</TitledPane>
-						</ScrollPane>
-					</children>
-				</VBox>
-				<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-					<VBox alignment="CENTER" minWidth="200" prefWidth="200">
-						<children>
-							<Label text="colonne droite"/>
-						</children>
-					</VBox>
+					<TitledPane prefWidth="600" prefHeight="200" text="AAA" animated="false" collapsible="false">
+						<TableView fx:id="dataTableView" prefWidth="600.0"/>
+					</TitledPane>
 				</ScrollPane>
 			</children>
-		</HBox>
-		<HBox alignment="CENTER" prefWidth="1000" prefHeight="50">
-			<children>
-				<Label text="bas de page"/>
-			</children>
-		</HBox>
+		</VBox>
 	</children>
-</VBox>
+</HBox>
