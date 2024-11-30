@@ -19,9 +19,12 @@
 		</VBox>
 		<VBox alignment="CENTER" minWidth="800" prefWidth="800" styleClass="main-content">
 			<children>
-				<HBox>
+				<HBox minWidth="760" prefWidth="760">
+					<padding>
+						<Insets left="20" right="20" top="20" bottom="20"/>
+					</padding>
 					<children>
-						<Label fx:id="windowHeaderLabel" text="Tableau de bord"/>
+						<Label text="Tableau de bord" styleClass="window-header"/>
 					</children>
 				</HBox>
 				<HBox alignment="CENTER" minWidth="800" prefWidth="800">
@@ -39,9 +42,7 @@
 											</padding>
 											<children>
 												<Label text="colonne 1"/>
-												<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-													<TableView fx:id="dataTableView" prefWidth="400.0"/>
-												</ScrollPane>
+												<TableView fx:id="dataTableView" prefWidth="400.0"/>
 											</children>
 										</VBox>
 									</children>

@@ -62,7 +62,6 @@ public class DataVisualisationPane
 
             // initialisation de la scène
             Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT) ;
-            scene.getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
             this.dvpStage.setScene(scene) ;
             this.dvpStage.setTitle("Tableau de bord") ;
 
@@ -71,6 +70,9 @@ public class DataVisualisationPane
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
             this.dvpViewController.initializeViewElements() ;
+
+            // application des styles à la scène
+            this.dvpStage.getScene().getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
         }
         catch (Exception e)
         {

@@ -1,8 +1,8 @@
-Salle;Température;humidité;luminosité
-b101;22;700;400
-b102;23;400;400
-b103;24;500;400
-b104;25;500;211
-a;b;c;d
-g;1;a;a
-1;2;3;12
+room;temperature;humidity;co2;tvoc
+b101;22;700;400;20
+b102;23;400;400;20
+b103;25;500;400;20
+b104;25;500;211;20
+b105;25;500;211;20
+abc;defg;1;12;AAA
+000;defg;1;12;ddddd

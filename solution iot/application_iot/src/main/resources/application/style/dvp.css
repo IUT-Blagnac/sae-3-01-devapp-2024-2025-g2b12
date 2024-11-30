@@ -23,6 +23,19 @@
     -fx-background-radius: 15;
 }
 
+.table-view
+{
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.table-header
+{
+    -fx-background-color: #bbb;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
 .first-table-column-cell
 {
     -fx-background-color: #aaa;
@@ -30,4 +43,11 @@
 .first-table-column-cell.selected
 {
     -fx-background-color: #000;
+}
+
+.window-header
+{
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 24px;
+    -fx-text-fill: #000;
 }

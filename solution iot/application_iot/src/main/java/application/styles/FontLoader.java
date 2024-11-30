@@ -23,7 +23,7 @@ public class FontLoader
     public static Font getWindowHeaderFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
-        double fontSize = 20 ;
+        double fontSize = 24 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
@@ -39,13 +39,24 @@ public class FontLoader
     }
 
     /**
-     * Donne la typographie (font) d'en-tête de conteneur.
+     * Donne la typographie (font) d'en-tête de tableau.
      * @return  la typographie (objet de type Font)
      */
     public static Font getTableHeaderFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
         double fontSize = 12 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) de contenu.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getContentFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 }

@@ -29,6 +29,6 @@ public class TextUtilities
     {
         Text text = new Text(pString) ;
         text.setFont(pFont) ;
-        return text.getLayoutBounds().getWidth() ;
+        return text.getLayoutBounds().getWidth() + 20 ;
     }
 }

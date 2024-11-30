@@ -1,6 +1,7 @@
 package application.view ;
 
 import application.control.DataVisualisationPane ;
+import application.data.DataUtilities;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
 
@@ -13,12 +14,9 @@ import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
 import javafx.scene.control.Button ;
-import javafx.scene.control.Label ;
-import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
-import javafx.scene.control.TableRow ;
 import javafx.scene.control.TableView ;
-import javafx.scene.paint.Color ;
+import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
 
 /**
@@ -40,7 +38,6 @@ public class DataVisualisationPaneViewController
     private ObservableList<DataRow> dataTableViewOList ;
 
     // récupération des éléments graphiques de la vue FXML
-    @FXML private Label windowHeaderLabel ;
     @FXML private TableView<DataRow> dataTableView ;
 
     public void setStage(Stage _stage)
@@ -58,9 +55,11 @@ public class DataVisualisationPaneViewController
      */
     public void initializeViewElements()
     {
-        // paramétrage des styles de l'en-tête de la fenêtre
-        this.windowHeaderLabel.setFont(FontLoader.getWindowHeaderFont()) ;
-        this.windowHeaderLabel.setTextFill(Color.web("#000")) ;
+        // préchargement des fonts utilisées
+        Font whFont = FontLoader.getWindowHeaderFont() ;
+        Font chFont = FontLoader.getContainerHeaderFont() ;
+        Font thFont = FontLoader.getTableHeaderFont() ;
+        Font cFont  = FontLoader.getContentFont() ;
 
         // initialisation de l'ObservableList de la TableView
         this.dataTableViewOList = FXCollections.observableArrayList() ;
@@ -70,42 +69,28 @@ public class DataVisualisationPaneViewController
         for (int i = 0 ; i < headersList.size() ; i++)
         {
             String header = headersList.get(i) ;
-            TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
-            tableColumn.setMinWidth(100) ;
-            Button button = new Button(header) ;
-            button.setFont(FontLoader.getTableHeaderFont()) ;
-            button.setMinWidth(100) ;
+
+            Button button = new Button(DataUtilities.getDisplayDataType(header)) ;
+            button.setMinWidth(80) ;
+            button.setFont(thFont) ;
             button.setOnAction(event -> { System.out.println(header) ; }) ;
+            button.getStyleClass().add("table-header") ;
+
+            TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
+            tableColumn.setReorderable(false) ;
+            tableColumn.setResizable(false) ;
+            tableColumn.setSortable(false) ;
+            tableColumn.setPrefWidth(button.getMinWidth()) ;
             tableColumn.setGraphic(button) ;
+
             if (i == 0)
             {
                 tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
-                tableColumn.setCellFactory(
-                    c -> new TableCell<DataRow, String>()
-                    {
-                        @Override
-                        protected void updateItem(String item, boolean empty)
-                        {
-                            getStyleClass().clear() ;
-                            getStyleClass().add("first-table-column-cell") ;
-                            super.updateItem(item, empty) ;
-                            setText(empty ? "" : item) ;
-                            TableRow<DataRow> tableRow = getTableRow() ;
-                            if (tableRow.isSelected())
-                            {
-                                getStyleClass().add("selected") ;
-                            }
-                        }
-                    }
-                ) ;
             }
             else
             {
                 tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getData().get(header))) ;
             }
-            tableColumn.setReorderable(false) ;
-            tableColumn.setResizable(false) ;
-            tableColumn.setSortable(false) ;
             this.dataTableView.getColumns().add(tableColumn) ;
         }
 
@@ -114,7 +99,7 @@ public class DataVisualisationPaneViewController
             // rafraichissement des styles lorsqu'une ligne est sélectionnée
             (observable, oldValue, newValue) -> 
             {
-                this.dataTableView.refresh() ;
+                //this.dataTableView.refresh() ;
                 System.out.println(newValue.getName()) ;
             }
         ) ;
