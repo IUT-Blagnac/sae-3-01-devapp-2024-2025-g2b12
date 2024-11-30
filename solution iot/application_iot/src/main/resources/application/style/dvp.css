@@ -35,14 +35,17 @@
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
-
-.first-table-column-cell
+.table-cell
 {
-    -fx-background-color: #aaa;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000;
 }
-.first-table-column-cell.selected
+.first-table-column
 {
-    -fx-background-color: #000;
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000;
 }
 
 .window-header

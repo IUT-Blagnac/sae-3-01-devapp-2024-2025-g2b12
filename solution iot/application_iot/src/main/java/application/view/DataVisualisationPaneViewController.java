@@ -14,6 +14,7 @@ import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
 import javafx.scene.control.Button ;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
 import javafx.scene.text.Font ;
@@ -70,12 +71,14 @@ public class DataVisualisationPaneViewController
         {
             String header = headersList.get(i) ;
 
+            // initialisation d'un bouton faisant office d'en-tête
             Button button = new Button(DataUtilities.getDisplayDataType(header)) ;
             button.setMinWidth(80) ;
             button.setFont(thFont) ;
             button.setOnAction(event -> { System.out.println(header) ; }) ;
             button.getStyleClass().add("table-header") ;
 
+            // intialisation de la colonne
             TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
             tableColumn.setReorderable(false) ;
             tableColumn.setResizable(false) ;
@@ -86,6 +89,19 @@ public class DataVisualisationPaneViewController
             if (i == 0)
             {
                 tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
+                tableColumn.setCellFactory(
+                    c -> new TableCell<DataRow, String>()
+                    {
+                        @Override
+                        protected void updateItem(String item, boolean empty)
+                        {
+                            super.updateItem(item, empty) ;
+                            setText(item) ;
+                            getStyleClass().add("first-table-column") ;
+                            System.out.println(getStyleClass()) ;
+                        }
+                    }
+                ) ;
             }
             else
             {
