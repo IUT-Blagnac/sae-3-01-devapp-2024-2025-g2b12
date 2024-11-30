@@ -7,11 +7,11 @@
 */
 
 .side-menu {
-    -fx-background-color: #000;
+    -fx-background-color: #242630;
 }
 
 .main-content {
-    -fx-background-color: #bbb;
+    -fx-background-color: #eee;
 }
 
 .container {
@@ -24,38 +24,28 @@
     -fx-border-width: 0;
     -fx-background-insets: 0;
 }
-
-.table-header {
-    -fx-background-color: #bbb;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-text-fill: #000;
-}
-
 .table-cell {
     -fx-font-family: "Poppins Light";
     -fx-font-size: 14px;
     -fx-text-fill: #000;
 }
-
-.first-table-column {
-    -fx-font-family: "Poppins Bold";
-    -fx-font-size: 14px;
-    -fx-text-fill: #000;
+.table-row-cell:odd {
+    -fx-background: #eee;
 }
-
-.table-view .table-row-cell:hover {
+.table-row-cell:even {
+    -fx-background: #fff;
+}
+.table-row-cell:hover {
     -fx-background-color: #0078d4;
     -fx-text-fill: white;
 }
-.table-view .table-row-cell:empty:hover {
+.table-row-cell:empty:hover {
     -fx-background-color: transparent;
 }
-.table-view .table-row-cell:selected {
+.table-row-cell:selected {
     -fx-background-color: #000000;
-    -fx-text-fill: white;
+    -fx-text-fill: #fff;
 }
-
 .table-view .scroll-bar .track {
     -fx-background-color: transparent;
 }
@@ -67,6 +57,38 @@
     -fx-background-radius: 10;
     -fx-min-width: 20px;
     -fx-min-height: 20px;
+}
+
+.table-header {
+    -fx-background-color: #eee;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #000;
+}
+.first-table-column {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000;
+}
+
+.side-menu-button-label {
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 18px;
+    -fx-text-fill: #fff;
+}
+.side-menu-button {
+    -fx-background-color: #242630;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 0;
+    -fx-background-radius: 5;
+}
+.side-menu-button:hover {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.side-menu-button:pressed {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
 }
 
 .window-header {
