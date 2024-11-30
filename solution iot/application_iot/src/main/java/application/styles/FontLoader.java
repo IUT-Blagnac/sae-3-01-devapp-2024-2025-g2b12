@@ -34,7 +34,7 @@ public class FontLoader
     public static Font getContainerHeaderFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
-        double fontSize = 14 ;
+        double fontSize = 18 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
@@ -45,7 +45,7 @@ public class FontLoader
     public static Font getTableHeaderFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
-        double fontSize = 12 ;
+        double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 

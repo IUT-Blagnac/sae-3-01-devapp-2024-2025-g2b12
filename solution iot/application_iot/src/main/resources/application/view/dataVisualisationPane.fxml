@@ -12,14 +12,14 @@
 
 <HBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
-		<VBox alignment="CENTER" minWidth="200" prefWidth="200" styleClass="side-menu">
+		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="side-menu">
 			<children>
 				<Button text="Configuration"/>
 			</children>
 		</VBox>
-		<VBox alignment="CENTER" minWidth="800" prefWidth="800" styleClass="main-content">
+		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="main-content">
 			<children>
-				<HBox minWidth="760" prefWidth="760">
+				<HBox VBox.vgrow="ALWAYS">
 					<padding>
 						<Insets left="20" right="20" top="20" bottom="20"/>
 					</padding>
@@ -27,35 +27,49 @@
 						<Label text="Tableau de bord" styleClass="window-header"/>
 					</children>
 				</HBox>
-				<HBox alignment="CENTER" minWidth="800" prefWidth="800">
+				<HBox alignment="CENTER" VBox.vgrow="ALWAYS">
 					<children>
-						<HBox alignment="CENTER" minWidth="760" prefWidth="760" spacing="20">
+						<HBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="20">
 							<padding>
 								<Insets left="20" right="20" top="20" bottom="20"/>
 							</padding>
 							<children>
-								<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
+								<VBox alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="container">
 									<children>
-										<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+										<VBox VBox.vgrow="ALWAYS">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
-												<Label text="colonne 1"/>
-												<TableView fx:id="dataTableView" prefWidth="400.0"/>
+												<Label text="colonne 1" VBox.vgrow="ALWAYS" styleClass="container-header"/>
+												<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+													<padding>
+														<Insets top="20"/>
+													</padding>
+													<children>
+														<TableView fx:id="dataTableView" VBox.vgrow="ALWAYS"/>
+													</children>
+												</VBox>
 											</children>
 										</VBox>
 									</children>
 								</VBox>
 								<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
 									<children>
-										<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+										<VBox minWidth="330" prefWidth="330">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
-												<Label text="colonne 2"/>
-												<Label text="aucune donnée détaillée pour le moment"/>
+												<Label text="colonne 2" styleClass="container-header"/>
+												<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+													<padding>
+														<Insets top="20"/>
+													</padding>
+													<children>
+														<Label text="aucune donnée détaillée pour le moment"/>
+													</children>
+												</VBox>
 											</children>
 										</VBox>
 									</children>

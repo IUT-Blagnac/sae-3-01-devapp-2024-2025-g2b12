@@ -56,7 +56,7 @@ public class DataVisualisationPaneViewController
      */
     public void initializeViewElements()
     {
-        // préchargement des fonts utilisées
+        // préchargement des fonts (pour utilisation dans la feuille de style dvp.css)
         Font whFont = FontLoader.getWindowHeaderFont() ;
         Font chFont = FontLoader.getContainerHeaderFont() ;
         Font thFont = FontLoader.getTableHeaderFont() ;
@@ -98,7 +98,6 @@ public class DataVisualisationPaneViewController
                             super.updateItem(item, empty) ;
                             setText(item) ;
                             getStyleClass().add("first-table-column") ;
-                            System.out.println(getStyleClass()) ;
                         }
                     }
                 ) ;
