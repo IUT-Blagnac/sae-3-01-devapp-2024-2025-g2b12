@@ -11,7 +11,7 @@ import java.io.File ;
  * @author Victor Jockin
  * - Équipe 2B12 -
  */
-public class Data
+public class DataLoader
 {
     /**
      * Donne le fichier de données.

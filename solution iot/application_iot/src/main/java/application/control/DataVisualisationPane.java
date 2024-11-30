@@ -1,6 +1,6 @@
-package application.controller ;
+package application.control ;
 
-import application.data.Data ;
+import application.data.DataLoader ;
 import application.thread.CsvReaderTask ;
 import application.tools.FileReading ;
 import application.view.DataVisualisationPaneViewController ;
@@ -48,7 +48,7 @@ public class DataVisualisationPane
         try
         {
             // récupération des types de données à visualiser
-            this.dataTypeList = FileReading.getHeadersFromCSVFile(Data.getDataFile()) ;
+            this.dataTypeList = FileReading.getHeadersFromCSVFile(DataLoader.getDataFile()) ;
 
             // initialisation d'un nouveau stage pour le formulaire
             this.dvpStage = new Stage() ;

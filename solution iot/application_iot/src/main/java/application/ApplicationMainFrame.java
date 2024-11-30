@@ -1,7 +1,7 @@
 package application ;
 
-import application.controller.ConfigurationFileForm;
-import application.controller.DataVisualisationPane;
+import application.control.ConfigurationFileForm;
+import application.control.DataVisualisationPane;
 import application.view.ApplicationMainFrameViewController ;
 
 import javafx.application.Application ;

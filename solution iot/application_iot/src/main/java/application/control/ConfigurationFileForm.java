@@ -1,4 +1,4 @@
-package application.controller ;
+package application.control ;
 
 import application.view.ConfigurationFileFormViewController ;
 

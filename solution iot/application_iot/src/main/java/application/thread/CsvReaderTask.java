@@ -1,7 +1,7 @@
 package application.thread;
 
-import application.controller.DataVisualisationPane;
-import application.data.Data;
+import application.control.DataVisualisationPane;
+import application.data.DataLoader;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -26,7 +26,7 @@ public class CsvReaderTask implements Runnable {
     @Override
     public void run() {
         Map<String, Map<String, String>> mapData = new HashMap<>();
-        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(Data.getDataFile()))
+        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(DataLoader.getDataFile()))
                 .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).build())
                 .build()) {
             String[] values = null;

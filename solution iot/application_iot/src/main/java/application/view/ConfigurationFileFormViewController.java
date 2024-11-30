@@ -1,7 +1,6 @@
 package application.view ;
 
-import application.controller.ConfigurationFileForm ;
-
+import application.control.ConfigurationFileForm;
 import javafx.stage.Stage ;
 
 /**

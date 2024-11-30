@@ -17,44 +17,53 @@
 				<Button text="Configuration"/>
 			</children>
 		</VBox>
-		<HBox alignment="CENTER" minWidth="800" prefWidth="800" styleClass="main-container">
+		<VBox alignment="CENTER" minWidth="800" prefWidth="800" styleClass="main-content">
 			<children>
-				<HBox alignment="CENTER" minWidth="760" prefWidth="760" spacing="20">
-					<padding>
-						<Insets left="20" right="20" top="20" bottom="20"/>
-					</padding>
+				<HBox>
 					<children>
-						<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
+						<Label fx:id="windowHeaderLabel" text="Tableau de bord"/>
+					</children>
+				</HBox>
+				<HBox alignment="CENTER" minWidth="800" prefWidth="800">
+					<children>
+						<HBox alignment="CENTER" minWidth="760" prefWidth="760" spacing="20">
+							<padding>
+								<Insets left="20" right="20" top="20" bottom="20"/>
+							</padding>
 							<children>
-								<VBox alignment="CENTER" minWidth="330" prefWidth="330">
-									<padding>
-										<Insets left="20" right="20" top="20" bottom="20"/>
-									</padding>
+								<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
 									<children>
-										<Label text="colonne 1"/>
-										<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-											<TableView fx:id="dataTableView" prefWidth="400.0"/>
-										</ScrollPane>
+										<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+											<padding>
+												<Insets left="20" right="20" top="20" bottom="20"/>
+											</padding>
+											<children>
+												<Label text="colonne 1"/>
+												<ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+													<TableView fx:id="dataTableView" prefWidth="400.0"/>
+												</ScrollPane>
+											</children>
+										</VBox>
+									</children>
+								</VBox>
+								<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
+									<children>
+										<VBox alignment="CENTER" minWidth="330" prefWidth="330">
+											<padding>
+												<Insets left="20" right="20" top="20" bottom="20"/>
+											</padding>
+											<children>
+												<Label text="colonne 2"/>
+												<Label text="aucune donnée détaillée pour le moment"/>
+											</children>
+										</VBox>
 									</children>
 								</VBox>
 							</children>
-						</VBox>
-						<VBox alignment="CENTER" minWidth="370" prefWidth="370" styleClass="container">
-							<children>
-								<VBox alignment="CENTER" minWidth="330" prefWidth="330">
-									<padding>
-										<Insets left="20" right="20" top="20" bottom="20"/>
-									</padding>
-									<children>
-										<Label text="colonne 2"/>
-										<Label text="aucune donnée détaillée pour le moment"/>
-									</children>
-								</VBox>
-							</children>
-						</VBox>
+						</HBox>
 					</children>
 				</HBox>
 			</children>
-		</HBox>
+		</VBox>
 	</children>
 </HBox>

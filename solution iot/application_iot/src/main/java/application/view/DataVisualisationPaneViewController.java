@@ -1,10 +1,10 @@
 package application.view ;
 
-import application.controller.DataVisualisationPane ;
+import application.control.DataVisualisationPane ;
 import application.model.DataRow ;
+import application.styles.FontLoader ;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
 
@@ -12,10 +12,13 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
+import javafx.scene.control.Button ;
+import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableRow ;
 import javafx.scene.control.TableView ;
+import javafx.scene.paint.Color ;
 import javafx.stage.Stage ;
 
 /**
@@ -37,6 +40,7 @@ public class DataVisualisationPaneViewController
     private ObservableList<DataRow> dataTableViewOList ;
 
     // récupération des éléments graphiques de la vue FXML
+    @FXML private Label windowHeaderLabel ;
     @FXML private TableView<DataRow> dataTableView ;
 
     public void setStage(Stage _stage)
@@ -54,6 +58,10 @@ public class DataVisualisationPaneViewController
      */
     public void initializeViewElements()
     {
+        // paramétrage des styles de l'en-tête de la fenêtre
+        this.windowHeaderLabel.setFont(FontLoader.getWindowHeaderFont()) ;
+        this.windowHeaderLabel.setTextFill(Color.web("#000")) ;
+
         // initialisation de l'ObservableList de la TableView
         this.dataTableViewOList = FXCollections.observableArrayList() ;
 
@@ -62,7 +70,13 @@ public class DataVisualisationPaneViewController
         for (int i = 0 ; i < headersList.size() ; i++)
         {
             String header = headersList.get(i) ;
-            TableColumn<DataRow, String> tableColumn = new TableColumn<>(header) ;
+            TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
+            tableColumn.setMinWidth(100) ;
+            Button button = new Button(header) ;
+            button.setFont(FontLoader.getTableHeaderFont()) ;
+            button.setMinWidth(100) ;
+            button.setOnAction(event -> { System.out.println(header) ; }) ;
+            tableColumn.setGraphic(button) ;
             if (i == 0)
             {
                 tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
@@ -89,13 +103,20 @@ public class DataVisualisationPaneViewController
             {
                 tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getData().get(header))) ;
             }
+            tableColumn.setReorderable(false) ;
+            tableColumn.setResizable(false) ;
+            tableColumn.setSortable(false) ;
             this.dataTableView.getColumns().add(tableColumn) ;
         }
 
-        // initialisation d'un écouteur d'évènements sur la TableView
+        // initialisation d'un écouteur d'évènements sur les lignes de la TableView
         this.dataTableView.getSelectionModel().selectedItemProperty().addListener(
-            // rafraichissement des tyles lorsqu'une ligne est sélectionnée
-            (observable, oldValue, newValue) -> { this.dataTableView.refresh() ; }
+            // rafraichissement des styles lorsqu'une ligne est sélectionnée
+            (observable, oldValue, newValue) -> 
+            {
+                this.dataTableView.refresh() ;
+                System.out.println(newValue.getName()) ;
+            }
         ) ;
     }
 
