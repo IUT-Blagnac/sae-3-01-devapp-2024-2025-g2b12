@@ -30,8 +30,10 @@ import javafx.stage.Stage ;
 public class DataVisualisationPane
 {
     // déclaration des constantes
-    private static final double WINDOW_WIDTH    = 1000 ;    // largeur de la fenêtre
-    private static final double WINDOW_HEIGHT   = 600 ;     // hauteur de la fenêtre
+    private static final double MIN_WIDTH   = 600 ;     // largeur minimale de la fenêtre
+    private static final double MIN_HEIGHT  = 400 ;     // hauteur minimale de la fenêtre
+    private static final double PREF_WIDTH  = 1000 ;    // largeur préférée de la fenêtre
+    private static final double PREF_HEIGHT = 600 ;     // hauteur préférée de la fenêtre
 
     // déclaration des attributs
     private Stage dvpStage ;
@@ -54,16 +56,18 @@ public class DataVisualisationPane
             this.dvpStage = new Stage() ;
 
             // centrage de la fenêtre par rapport à la fenêtre précédente
-            this.dvpStage.setX(_stageParent.getX() + (_stageParent.getWidth() - WINDOW_WIDTH) / 2) ;
-            this.dvpStage.setY(_stageParent.getY() + (_stageParent.getHeight() - WINDOW_HEIGHT) / 2) ;
+            this.dvpStage.setX(_stageParent.getX() + (_stageParent.getWidth() - PREF_WIDTH) / 2) ;
+            this.dvpStage.setY(_stageParent.getY() + (_stageParent.getHeight() - PREF_HEIGHT) / 2) ;
 
             // chargement de la vue FXML du formulaire
             FXMLLoader fxmlLoader = new FXMLLoader(DataVisualisationPaneViewController.class.getResource("dataVisualisationPane.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT) ;
+            Scene scene = new Scene(fxmlLoader.load(), PREF_WIDTH, PREF_HEIGHT) ;
             this.dvpStage.setScene(scene) ;
             this.dvpStage.setTitle("Tableau de bord") ;
+            this.dvpStage.setMinWidth(MIN_WIDTH) ;
+            this.dvpStage.setMinHeight(MIN_HEIGHT) ;
 
             // initialisation du contrôleur
             this.dvpViewController = fxmlLoader.getController() ;

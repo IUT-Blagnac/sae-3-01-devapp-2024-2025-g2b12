@@ -12,12 +12,12 @@
 
 <HBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
-		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="side-menu">
+		<VBox alignment="CENTER" minWidth="200" prefWidth="200" styleClass="side-menu">
 			<children>
 				<Button text="Configuration"/>
 			</children>
 		</VBox>
-		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="main-content">
+		<VBox alignment="CENTER" minWidth="400" prefWidth="700" HBox.hgrow="ALWAYS" styleClass="main-content">
 			<children>
 				<HBox VBox.vgrow="ALWAYS">
 					<padding>
