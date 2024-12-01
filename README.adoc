@@ -130,20 +130,32 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 Cette section regroupe toute la documentation du projet (de la conception, au développement jusqu'à l’utilisation de l’application). 
 
 |===
-| *DOCUMENTATIONS*
-|
-| SOLUTION WEB
-| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
-|
-| SOLUTION IOT
-| _À venir._
-|
+|SOLUTION|DOCUMENTATION
+|WEB| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+|IOT| _À venir._
+| |
+| |
 |===
 
 
 
 
 == Gestion de projet & Qualité
+
+Récapitulatif des informations mises à jour :
+
+✓ Version courante : 
+
+✓ Lien vers la doc technique : 
+
+✓ Lien vers la doc utilisateur : 
+
+✓ Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : 
+
+✓ Tests unitaires et plans de test :
+
+✓ Indicateurs de qualité du code (dette technique) : 
+
 
 === Planning Télétravail 
 Ci-dessous un récapitulatif des séances de travail effectuées en télétravail par les membres de l'équipe :
