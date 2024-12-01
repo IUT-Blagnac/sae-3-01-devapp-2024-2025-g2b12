@@ -107,7 +107,7 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/%20CR%20R%C3%A9union%2014.11.24%20-%20Semaine%2046.pdf[CR Reunion 14.11.24]
 |  | 
 |  | 
-.4+| 47 |  | 
+.4+| 47 | GPO | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2022.11%20_%20Semaine%2047%20(1).pdf[ODJ Reunion 22.11.24]
 |  | 
 |  | 
 |  | 
