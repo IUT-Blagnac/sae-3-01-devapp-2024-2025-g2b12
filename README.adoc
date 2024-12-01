@@ -102,17 +102,17 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 | IoT | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] 
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] 
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
-| GPO | Contrat d'équipe
-.4+| 46 | GPO| Ordre du jour réunion 
-|  | Compte-rendu de réunion
+| GPO | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Contrat%20d'%C3%A9quipe.pdf[Contrat d'équipe]
+.4+| 46 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2014.11%20_%20Semaine%2046.pdf[ODJ Reunion 14.11.24]
+|  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/%20CR%20R%C3%A9union%2014.11.24%20-%20Semaine%2046.pdf[CR Reunion 14.11.24]
 |  | 
 |  | 
 .4+| 47 |  | 
 |  | 
 |  | 
 |  | 
-.4+| 48 |  | 
-|  | 
+.4+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
+|  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2026.11%20_%20Semaine%2048.pdf[CR Reunion 26.11.24]
 |  | 
 |  | 
 .4+| 49 |  | 
