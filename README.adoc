@@ -53,7 +53,7 @@ toc::[]
 Le projet est réalisé par :
 
 |===
-2+^| *Equipe*
+2+^| *Equipe G2b12*
 2+|
 | Nom | Rôle |
 https://github.com/VictorJockin[*Victor Jockin*] | *Scrum Master* |
@@ -69,18 +69,22 @@ Tuteur enseignant de l'équipe : mailto:jean-michel.bruel@univ-tlse2.fr[*Jean-Mi
 
 == *Contexte général*
 
-Le projet a pour objectif de développer une solution E-commerce pour l’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité. L’entreprise fondée initialement par l'organisation WOOHP (World Organization Of Human Protection) a la volonté d'élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. Cette démarche de digitalisation de l'offre via un site E-commerce s'inscrit dans cette dynamique.
+Le projet a pour objectif de développer une solution E-commerce pour l’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité. 
+
+L’entreprise fondée initialement par l'organisation WOOHP (World Organization Of Human Protection) a la volonté d'élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. 
+
+Cette démarche de digitalisation de l'offre via un site E-commerce s'inscrit dans cette dynamique.
 
 
 === *Liens utiles*
 
-Vous trouverez ci-dessous les liens utiles à l'initialisation et la réalisation de ce projet :
+Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réalisation de ce projet dans le cadre de la SAE 3.01 :
 
 |===
 | *Intitulés*| *Liens*
 |Github Classroom | https://classroom.github.com/assignment-invitations/c5ec3e74eaeb5ffc224e91915647cedc
 |Cours Moodle SAE 3.01 | https://webetud.iut-blagnac.fr/course/view.php?id=841
-|Dépôt Template initial| https:// 
+|Dépôt Template initial| https://github.com/IUT-Blagnac/sae3-01-template
 |===
 
 
@@ -91,15 +95,15 @@ Vous trouverez ci-dessous les liens utiles à l'initialisation et la réalisatio
 |===
 3+^| *LIVRABLES*
 3+|
-| SEMAINE | SOLUTION | LIEN
-.5+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
-| Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
-| Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
-| IoT | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] +
-• https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] +
-• https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
+| SEMAINE | SOLUTION |LIEN
+.7+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+| IoT | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] 
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] 
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
 | GPO | Contrat d'équipe
-.4+| 46 | GPO | Ordre du jour réunion 
+.4+| 46 | GPO| Ordre du jour réunion 
 |  | Compte-rendu de réunion
 |  | 
 |  | 
@@ -123,7 +127,7 @@ Vous trouverez ci-dessous les liens utiles à l'initialisation et la réalisatio
 
 === Documentations
 
-Cette section regroupe toute la documentation liée à la conception, au développement et à l’utilisation de l’application.
+Cette section regroupe toute la documentation du projet (de la conception, au développement jusqu'à l’utilisation de l’application). 
 
 |===
 | *DOCUMENTATIONS*
@@ -136,7 +140,24 @@ Cette section regroupe toute la documentation liée à la conception, au dévelo
 |
 |===
 
+
+
+
 == Gestion de projet & Qualité
+
+=== Planning Télétravail 
+Ci-dessous un récapitulatif des séances de travail effectuées en télétravail par les membres de l'équipe :
+
+|===
+| *Etudiant*| *Dates*
+| Léo Guinvarc'h| ✓ 29/11 matin 
+| Victor Jockin| ✓
+| Mucahit Lekesiz| ✓
+| Nolhan Biblocque| ✓
+| Mathys Laguilliez| ✓
+|===
+
+
 === Evaluation bi-hebdomadaire
 
 ifdef::env-github[]
