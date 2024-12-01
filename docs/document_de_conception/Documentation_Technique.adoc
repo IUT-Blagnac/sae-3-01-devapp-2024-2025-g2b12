@@ -1,0 +1,31 @@
+= Documentation Technique  Woohp resell
+
+:toc:
+:toc-title: Sommaire
+
+Date: 01/12/2024
+
+---
+
+== I. Introduction
+[.text-justify]
+
+
+== II. Présentation de l'application
+[.text-justify]
+
+== III. Architecture
+[.text-justify]
+
+== IV. Présentation diagrammes
+[.text-justify]
+
+=== 1. Use Case :
+[.text-justify]
+
+=== 2. Diagramme de classes :
+[.text-justify]
+
+
+== V. Eléments de codes significatifs
+[.text-justify]
