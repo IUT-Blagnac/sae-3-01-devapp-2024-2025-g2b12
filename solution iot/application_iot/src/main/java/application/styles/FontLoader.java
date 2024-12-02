@@ -23,7 +23,7 @@ public class FontLoader
     public static Font getWindowHeaderFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
-        double fontSize = 24 ;
+        double fontSize = 28 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 

@@ -4,6 +4,7 @@ import application.control.DataVisualisationPane ;
 import application.data.DataUtilities;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
+import application.tools.GraphGenerator;
 
 import java.util.HashMap ;
 import java.util.List ;
@@ -37,6 +38,7 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
     private ObservableList<DataRow> dataTableViewOList ;
+    private Button selectedHeaderButton = null ;
 
     // récupération des éléments graphiques de la vue FXML
     @FXML private TableView<DataRow> dataTableView ;
@@ -75,8 +77,23 @@ public class DataVisualisationPaneViewController
             Button button = new Button(DataUtilities.getDisplayDataType(header)) ;
             button.setMinWidth(80) ;
             button.setFont(thFont) ;
-            button.setOnAction(event -> { System.out.println(header) ; }) ;
             button.getStyleClass().add("table-header") ;
+            button.setOnAction(
+                event -> {
+                    System.out.println(header) ;
+                    if (this.selectedHeaderButton != null) { this.selectedHeaderButton.getStyleClass().remove("selected") ; }
+                    button.getStyleClass().add("selected") ;
+                    this.selectedHeaderButton = button ;
+
+                    Map<String, String> dataMap = new HashMap<>() ;
+                    for (DataRow dataRow : this.dataTableViewOList)
+                    {
+                        dataMap.put(dataRow.getName(), dataRow.getData().get(header)) ;
+                    }
+                    System.out.println(dataMap) ;
+                    GraphGenerator.GenerateBarChart(this.stage, dataMap, header) ;
+                }
+            ) ;
 
             // intialisation de la colonne
             TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
@@ -88,7 +105,7 @@ public class DataVisualisationPaneViewController
 
             if (i == 0)
             {
-                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
+                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName().toUpperCase())) ;
                 tableColumn.setCellFactory(
                     c -> new TableCell<DataRow, String>()
                     {

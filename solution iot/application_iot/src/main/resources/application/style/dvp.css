@@ -65,6 +65,13 @@
     -fx-background-radius: 0;
     -fx-text-fill: #000;
 }
+.table-header:hover {
+    -fx-background-color: #bbb;
+}
+.table-header.selected {
+    -fx-background-color: #555;
+    -fx-text-fill: #fff;
+}
 .first-table-column {
     -fx-font-family: "Poppins Bold";
     -fx-font-size: 14px;
@@ -93,7 +100,7 @@
 
 .window-header {
     -fx-font-family: "Poppins Bold";
-    -fx-font-size: 24px;
+    -fx-font-size: 28px;
     -fx-text-fill: #000;
 }
 .container-header {
