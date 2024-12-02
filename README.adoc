@@ -63,17 +63,19 @@ https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
 https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
 |===
 
+Développement avec la méthode de conduite de projet Scrum.
 
 Tuteur enseignant de l'équipe : mailto:jean-michel.bruel@univ-tlse2.fr[*Jean-Michel Bruel*]
 
 
 == *Contexte général*
 
-Le projet a pour objectif de développer une solution E-commerce pour l’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité. 
+Le projet est à réaliser dans le cadre de la SAE 3.01 Conception et Développement d'application. Il a pour objectif de développer une solution E-commerce pour l’entreprise *Woohp resell*, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité. 
 
 L’entreprise fondée initialement par l'organisation WOOHP (World Organization Of Human Protection) a la volonté d'élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. 
 
 Cette démarche de digitalisation de l'offre via un site E-commerce s'inscrit dans cette dynamique.
+
 
 
 === *Liens utiles*
@@ -92,10 +94,12 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 
 === Livrables
 
+Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe classées au fur et à mesure de l'avancée du projet :
+
 |===
 3+^| *LIVRABLES*
 3+|
-| SEMAINE | SOLUTION |LIEN
+| *SEMAINE* | *SOLUTION* |*LIEN*
 .7+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
@@ -111,10 +115,13 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 |  | 
 |  | 
 |  | 
-.4+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
+.7+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2026.11%20_%20Semaine%2048.pdf[CR Reunion 26.11.24]
-|  | 
-|  | 
+| PHP | SEP
+|  | Charte graphique
+|BD| Diagramme Classes
+| | Dictionnaire Données
+| | Schéma Relationnel
 .4+| 49 |  | 
 |  | 
 |  | 
@@ -127,14 +134,14 @@ Vous trouverez ci-dessous les liens utilisés pour l'initialisation et la réali
 
 === Documentations
 
-Cette section regroupe toute la documentation du projet (de la conception, au développement jusqu'à l’utilisation de l’application). 
+Cette section regroupe les principales documentations du projet (de la conception, au développement jusqu'à l’utilisation de l’application). 
 
 |===
 |SOLUTION|DOCUMENTATION
 |WEB| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
 |IOT| _À venir._
-| |
-| |
 |===
 
 
@@ -142,7 +149,7 @@ Cette section regroupe toute la documentation du projet (de la conception, au d�
 
 == Gestion de projet & Qualité
 
-Récapitulatif des informations mises à jour :
+Récapitulatif des informations mises à jour - Dernière MAJ : 2/12/24
 
 ✓ Version courante : 
 
@@ -156,13 +163,14 @@ Récapitulatif des informations mises à jour :
 
 ✓ Indicateurs de qualité du code (dette technique) : 
 
+✓ Liens vers dossier Réunions (ODJ/CR) :  https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO[Dossier GPO]
 
 === Planning Télétravail 
 Ci-dessous un récapitulatif des séances de travail effectuées en télétravail par les membres de l'équipe :
 
 |===
 | *Etudiant*| *Dates*
-| Léo Guinvarc'h| ✓ 29/11 matin 
+| Léo Guinvarc'h| ✓ 29/11 matin  ✓ 2/12 apm 
 | Victor Jockin| ✓
 | Mucahit Lekesiz| ✓
 | Nolhan Biblocque| ✓
