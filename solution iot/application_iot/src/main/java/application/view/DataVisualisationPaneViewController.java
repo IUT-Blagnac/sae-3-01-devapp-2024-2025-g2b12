@@ -91,7 +91,7 @@ public class DataVisualisationPaneViewController
                         dataMap.put(dataRow.getName(), dataRow.getData().get(header)) ;
                     }
                     System.out.println(dataMap) ;
-                    GraphGenerator.GenerateBarChart(this.stage, dataMap, header) ;
+                    System.out.println(GraphGenerator.GenerateBarChart(dataMap, header)) ;
                 }
             ) ;
 
