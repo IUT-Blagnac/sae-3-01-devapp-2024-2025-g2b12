@@ -122,7 +122,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |BD| Diagramme Classes
 | | Dictionnaire Données
 | | Schéma Relationnel
-.4+| 49 |  | 
+.4+| 49 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2004.12%20-%20Semaine%2049%20(1).pdf[ODJ Reunion 4.12.24]
 |  | 
 |  | 
 |  | 
