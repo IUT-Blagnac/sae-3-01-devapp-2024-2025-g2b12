@@ -60,6 +60,7 @@ public class GraphGenerator
             }
         }
         barChart.getData().add(dataSeries) ;
+        barChart.setMaxWidth(100) ;
 
         return barChart ;
     }

@@ -19,7 +19,6 @@ import javafx.scene.control.Button ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
-import javafx.scene.layout.Priority ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
@@ -180,8 +179,6 @@ public class DataVisualisationPaneViewController
             dataMap.put(dataRow.getName(), dataRow.getData().get(pDataType)) ;
         }
         BarChart<String, Number> barChart = GraphGenerator.GenerateBarChart(dataMap, pDataType) ;
-        VBox.setVgrow(barChart, Priority.ALWAYS) ;
-        barChart.setMaxWidth(this.graphContainerVBox.getWidth() - 40) ;
         this.graphContainerVBox.getChildren().clear() ;
         this.graphContainerVBox.getChildren().add(barChart) ;
     }

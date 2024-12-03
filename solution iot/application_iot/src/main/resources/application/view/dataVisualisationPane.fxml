@@ -55,9 +55,9 @@
 		</VBox>
 		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
 			<children>
-				<HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+				<HBox HBox.hgrow="ALWAYS">
 					<padding>
-						<Insets left="20" right="20" top="20" bottom="20"/>
+						<Insets left="20" right="20" top="20"/>
 					</padding>
 					<children>
 						<Label text="Tableau de bord" styleClass="window-header"/>
@@ -70,41 +70,38 @@
 								<Insets left="20" right="20" top="20" bottom="20"/>
 							</padding>
 							<children>
-								<VBox alignment="CENTER" prefWidth="-Infinity" HBox.hgrow="ALWAYS" styleClass="container">
+								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
 									<children>
-										<VBox>
+										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
 												<Label text="Colonne 1" styleClass="container-header"/>
-												<VBox alignment="CENTER">
+												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER">
 													<padding>
 														<Insets top="20"/>
 													</padding>
 													<children>
-														<TableView prefWidth="-Infinity" fx:id="dataTableView"/>
+														<TableView fx:id="dataTableView" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
 													</children>
 												</VBox>
 											</children>
 										</VBox>
 									</children>
 								</VBox>
-								<VBox alignment="CENTER" prefWidth="-Infinity" HBox.hgrow="ALWAYS" styleClass="container">
+								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
 									<children>
-										<VBox>
+										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
 												<Label text="Colonne 2" styleClass="container-header"/>
-												<VBox alignment="CENTER">
+												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="ok">
 													<padding>
 														<Insets top="20"/>
 													</padding>
-													<children>
-														<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" alignment="CENTER"/>
-													</children>
 												</VBox>
 											</children>
 										</VBox>
