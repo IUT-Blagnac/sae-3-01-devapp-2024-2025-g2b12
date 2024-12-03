@@ -1,6 +1,8 @@
 package application.tools ;
 
 import java.util.Map ;
+
+import javafx.application.Platform ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.CategoryAxis ;
 import javafx.scene.chart.NumberAxis ;
@@ -40,6 +42,7 @@ public class GraphGenerator
         // construction du diagramme en barres
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis) ;
         barChart.setTitle(pDataType) ;
+        barChart.setLegendVisible(false) ;
 
         // série des données
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>() ;
@@ -51,8 +54,13 @@ public class GraphGenerator
             String value = entry.getValue() ;
             try
             {
+                // ajout de la barre au diagramme
                 int valeur = Integer.parseInt(value) ;
-                dataSeries.getData().add(new XYChart.Data<>(room, valeur)) ;
+                XYChart.Data<String, Number> data = new XYChart.Data<>(room, valeur) ;
+                dataSeries.getData().add(data) ;
+
+                // paramétrage de la couleur de la barre
+                Platform.runLater(() -> { data.getNode().setStyle("-fx-bar-fill: #000;") ; }) ;
             }
             catch (NumberFormatException nfe)
             {
@@ -60,7 +68,8 @@ public class GraphGenerator
             }
         }
         barChart.getData().add(dataSeries) ;
-        barChart.setMaxWidth(100) ;
+
+        barChart.setStyle("-fx-bar-gap: 1px;") ;
 
         return barChart ;
     }

@@ -109,6 +109,12 @@
     -fx-text-fill: #000;
 }
 
-.ok {
-    -fx-background-color: #000;
+.ok1 {
+    -fx-background-color: #00f;
+}
+.ok2 {
+    -fx-background-color: #0f0;
+}
+.ok3 {
+    -fx-background-color: #f00;
 }

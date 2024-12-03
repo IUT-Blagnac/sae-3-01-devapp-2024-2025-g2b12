@@ -19,6 +19,7 @@ import javafx.scene.control.Button ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
+import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
@@ -43,8 +44,8 @@ public class DataVisualisationPaneViewController
     private Button selectedHeaderButton = null ;
 
     // récupération des éléments graphiques de la vue FXML
-    @FXML private TableView<DataRow> dataTableView ;
     @FXML private VBox graphContainerVBox ;
+    @FXML private TableView<DataRow> dataTableView ;
 
     public void setStage(Stage _stage)
     {
@@ -124,9 +125,7 @@ public class DataVisualisationPaneViewController
         // initialisation d'un écouteur d'évènements sur les lignes de la TableView
         this.dataTableView.getSelectionModel().selectedItemProperty().addListener(
             // rafraichissement des styles lorsqu'une ligne est sélectionnée
-            (observable, oldValue, newValue) -> 
-            {
-                //this.dataTableView.refresh() ;
+            (observable, oldValue, newValue) -> {
                 System.out.println(newValue.getName()) ;
             }
         ) ;
@@ -179,6 +178,7 @@ public class DataVisualisationPaneViewController
             dataMap.put(dataRow.getName(), dataRow.getData().get(pDataType)) ;
         }
         BarChart<String, Number> barChart = GraphGenerator.GenerateBarChart(dataMap, pDataType) ;
+        barChart.setMaxWidth(this.graphContainerVBox.getWidth()) ;
         this.graphContainerVBox.getChildren().clear() ;
         this.graphContainerVBox.getChildren().add(barChart) ;
     }

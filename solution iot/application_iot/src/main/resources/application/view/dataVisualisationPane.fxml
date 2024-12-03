@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
+<HBox fx:id="root" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
 		<!-- menu latéral -->
 		<VBox alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="side-menu">
@@ -90,15 +90,15 @@
 										</VBox>
 									</children>
 								</VBox>
-								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok1 container">
 									<children>
-										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok2">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
 												<Label text="Colonne 2" styleClass="container-header"/>
-												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="ok">
+												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok3">
 													<padding>
 														<Insets top="20"/>
 													</padding>
