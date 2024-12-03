@@ -10,7 +10,7 @@ import csv
 
 # configuration
 configuration = configparser.ConfigParser()
-configuration.read('solution iot\client_mqtt_version3\configuration.ini')
+configuration.read('configuration.ini')
 # récupération des paramètres
 serveurMQTT = configuration.get('MQTT', 'broker')
 port        = int(configuration.get('MQTT', 'port'))
@@ -39,17 +39,18 @@ def on_message(client, userdata, message) :
         print("Température :", data[0]['temperature'])
         print("Humidité :   ", data[0]['humidity'])
         print("Taux de CO2 :", data[0]['co2'])
-        csvName = 'solution iot/dataCapteur.csv'
+        csvName = 'dataCapteur.csv'
         with open(csvName, 'w', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(["Salle", "Température", "Humidité", "Taux de CO2"])
-            writer.writerows([[data[1]['room'], data[0]['temperature'], data[0]['humidity'], data[0]['co2']]])
+            for sensor_data in data:
+                writer.writerow([sensor_data['room'], sensor_data['temperature'], sensor_data['humidity'], sensor_data['co2']])
     elif message.topic.startswith("solaredge/blagnac") :
         print("\nDONNÉES PANNEAUX SOLAIRES")
         print("=========================")
         print("Dernière mise à jour :", data['lastUpdateTime'])
         print("Power (puissance) :   ", data['currentPower']['power'])
-        csvName = 'solution iot/dataSolar.csv'
+        csvName = 'dataSolar.csv'
         with open(csvName, 'w', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(["Date dernière mise a jour","Puissance"])

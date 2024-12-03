@@ -145,7 +145,12 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 |===
 
 
+== Communication
 
+=== retour semaine 48
+
+ODJ : Préciser temps de la réunion, temps consacré à chaque rubrique et qui en est responsable. CR: Manque retour reunion client et analyse : difficultés réussites du sprint. Préciser qui est responsable de la prochaine réunion.
+note 1,7/3
 
 == Gestion de projet & Qualité
 
@@ -191,3 +196,7 @@ endif::[]
 
 === retour sprint 1 / Initialisation du dépôt
 Enlevez les consignes du readme ! Mettre les rôles de chacun. Issues/ US :  Pensez à mettre les finalités, les critères d'acceptabilité et les tâches liées pour réaliser la US. Il faut relier votre  Backlog sprint à votre projet (créer une colonne en plus dans votre board où vous mettez les US à traiter dans le sprint). Idem il faut rattacher les tâches/issues au projet. doc: Pensez à présenter le contexte dans la doc de conception et à citer votre client. Il me manque : cahier de tests et doc utilistateur et tech à au moins initialiser à ce stade. Il me manque une release ou au moins une date de première release pour le Web.
+
+=== Retour semaine 48
+
+Backlog produit : il manque les finalités (afin de) dans certaines tâches et la complexité. Backlog sprint ok. Tasks : certaines en cours ne sont pas assignées. Tests : cahier à faire ! manque nom client et projet. DOCS : idem revoir infos page de garde. Avancer les doc user et tech. Conception ok manque des commentaires. release : pas de release, pas de lien vers une version courante ni de date ...
