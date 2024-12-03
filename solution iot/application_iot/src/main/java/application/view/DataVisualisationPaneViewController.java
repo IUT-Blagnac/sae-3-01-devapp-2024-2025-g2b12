@@ -1,10 +1,10 @@
 package application.view ;
 
 import application.control.DataVisualisationPane ;
-import application.data.DataUtilities;
+import application.data.DataUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
-import application.tools.GraphGenerator;
+import application.tools.GraphGenerator ;
 
 import java.util.HashMap ;
 import java.util.List ;
@@ -14,10 +14,13 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
+import javafx.scene.chart.BarChart ;
 import javafx.scene.control.Button ;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
+import javafx.scene.layout.Priority ;
+import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
 
@@ -42,6 +45,7 @@ public class DataVisualisationPaneViewController
 
     // récupération des éléments graphiques de la vue FXML
     @FXML private TableView<DataRow> dataTableView ;
+    @FXML private VBox graphContainerVBox ;
 
     public void setStage(Stage _stage)
     {
@@ -80,18 +84,10 @@ public class DataVisualisationPaneViewController
             button.getStyleClass().add("table-header") ;
             button.setOnAction(
                 event -> {
-                    System.out.println(header) ;
                     if (this.selectedHeaderButton != null) { this.selectedHeaderButton.getStyleClass().remove("selected") ; }
                     button.getStyleClass().add("selected") ;
                     this.selectedHeaderButton = button ;
-
-                    Map<String, String> dataMap = new HashMap<>() ;
-                    for (DataRow dataRow : this.dataTableViewOList)
-                    {
-                        dataMap.put(dataRow.getName(), dataRow.getData().get(header)) ;
-                    }
-                    System.out.println(dataMap) ;
-                    System.out.println(GraphGenerator.GenerateBarChart(dataMap, header)) ;
+                    this.displayGraphByDataType(header) ;
                 }
             ) ;
 
@@ -148,7 +144,7 @@ public class DataVisualisationPaneViewController
     /**
      * Met à jour / Rafraîchit l'affichage des données.
      */
-    public void update()
+    public void updateDataDisplay()
     {
         Map<String, Map<String, String>> dataMap = this.dvpDialogController.getDataMap() ;
         
@@ -170,5 +166,23 @@ public class DataVisualisationPaneViewController
         }
         this.dataTableView.setItems(this.dataTableViewOList) ;
         this.dataTableView.refresh() ;
+    }
+
+    /**
+     * Affiche un graphique à partir d'un type de données.
+     * @param pDataType un type de données
+     */
+    public void displayGraphByDataType(String pDataType)
+    {
+        Map<String, String> dataMap = new HashMap<>() ;
+        for (DataRow dataRow : this.dataTableViewOList)
+        {
+            dataMap.put(dataRow.getName(), dataRow.getData().get(pDataType)) ;
+        }
+        BarChart<String, Number> barChart = GraphGenerator.GenerateBarChart(dataMap, pDataType) ;
+        VBox.setVgrow(barChart, Priority.ALWAYS) ;
+        barChart.setMaxWidth(this.graphContainerVBox.getWidth() - 40) ;
+        this.graphContainerVBox.getChildren().clear() ;
+        this.graphContainerVBox.getChildren().add(barChart) ;
     }
 }

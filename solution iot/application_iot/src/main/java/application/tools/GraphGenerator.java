@@ -39,7 +39,7 @@ public class GraphGenerator
 
         // construction du diagramme en barres
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis) ;
-        barChart.setTitle("Some Programming Languages") ;
+        barChart.setTitle(pDataType) ;
 
         // série des données
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>() ;
@@ -47,12 +47,12 @@ public class GraphGenerator
         // ajout des données au diagramme en barres
         for (Map.Entry<String, String> entry : pDataMap.entrySet())
         {
-            String salle = entry.getKey() ;
-            String valeurString = entry.getValue() ;
+            String room = entry.getKey() ;
+            String value = entry.getValue() ;
             try
             {
-                int valeur = Integer.parseInt(valeurString) ;
-                dataSeries.getData().add(new XYChart.Data<>(salle, valeur)) ;
+                int valeur = Integer.parseInt(value) ;
+                dataSeries.getData().add(new XYChart.Data<>(room, valeur)) ;
             }
             catch (NumberFormatException nfe)
             {

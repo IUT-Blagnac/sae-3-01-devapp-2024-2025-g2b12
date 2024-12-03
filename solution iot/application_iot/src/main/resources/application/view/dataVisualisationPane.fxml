@@ -83,7 +83,7 @@
 														<Insets top="20"/>
 													</padding>
 													<children>
-														<TableView fx:id="dataTableView"/>
+														<TableView prefWidth="-Infinity" fx:id="dataTableView"/>
 													</children>
 												</VBox>
 											</children>
@@ -103,7 +103,7 @@
 														<Insets top="20"/>
 													</padding>
 													<children>
-														<Label text="aucune donnée détaillée pour le moment"/>
+														<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" alignment="CENTER"/>
 													</children>
 												</VBox>
 											</children>

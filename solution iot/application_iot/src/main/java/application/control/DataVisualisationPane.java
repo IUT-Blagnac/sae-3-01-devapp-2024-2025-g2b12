@@ -118,7 +118,7 @@ public class DataVisualisationPane
     public void setDataMap(Map<String, Map<String, String>> _dataMap)
     {
         this.dataMap = _dataMap ;
-        Platform.runLater(() -> { this.dvpViewController.update() ; }) ;
+        Platform.runLater(() -> { this.dvpViewController.updateDataDisplay() ; }) ;
     }
 
     /**
