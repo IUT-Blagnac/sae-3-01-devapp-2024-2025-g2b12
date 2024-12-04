@@ -242,12 +242,16 @@ public class DataVisualisationPaneViewController
             alertHeader.setSpacing(10) ;
 
             Label thresholdHeader = new Label("Seuil") ;
-            thresholdHeader.setPrefHeight(40) ;
+            thresholdHeader.setPrefHeight(30) ;
             thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+
+            Label threshold = new Label("XX") ;
             
-            Label threshold             = new Label("XX") ;
-            Label measuredValueHeader   = new Label("Valeur relevée") ;
-            Label measuredValue         = new Label("XX") ;
+            Label measuredValueHeader = new Label("Valeur relevée") ;
+            measuredValueHeader.setPrefHeight(30) ;
+            measuredValueHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+
+            Label measuredValue = new Label("XX") ;
 
             VBox alertContent = new VBox() ;
             alertContent.getChildren().add(thresholdHeader) ;
