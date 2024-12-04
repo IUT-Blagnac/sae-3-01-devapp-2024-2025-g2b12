@@ -6,6 +6,7 @@ import application.model.DataRow ;
 import application.styles.FontLoader ;
 import application.tools.GraphGenerator ;
 
+import java.util.ArrayList;
 import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
 import javafx.scene.chart.BarChart ;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
@@ -236,8 +238,14 @@ public class DataVisualisationPaneViewController
      */
     public void displayEvolutionGraph(String pRoom, String pDataType)
     {
+        List<Number> Data = new ArrayList<>();
+        Data.add(12);
+        Data.add(43);
+        LineChart<String, Number> lineChart = GraphGenerator.GenerateLineChart(Data, pRoom, pDataType);
         System.out.println("- Affichage graphique d'évolution -") ;
         System.out.println(pRoom+" : "+pDataType) ;
+        lineChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
         this.graphContainerVBox.getChildren().clear() ;
+        this.graphContainerVBox.getChildren().add(lineChart);
     }
 }
