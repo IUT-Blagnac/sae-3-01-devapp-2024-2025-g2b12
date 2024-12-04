@@ -175,7 +175,7 @@ Ci-dessous un récapitulatif des séances de travail effectuées en télétravai
 
 |===
 | *Etudiant*| *Dates*
-| Léo Guinvarc'h| ✓ 29/11 matin  ✓ 2/12 apm 
+| Léo Guinvarc'h| ✓ 29/11 matin
 | Victor Jockin| ✓
 | Mucahit Lekesiz| ✓
 | Nolhan Biblocque| ✓
