@@ -20,7 +20,7 @@ import javafx.stage.Stage ;
  * Contrôleur de dialogue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Mardi 18 novembre 2024 -
+ * - Mercredi 4 décembre 2024 -
  * 
  * @author Nolhan Biblocque
  * @author Victor Jockin

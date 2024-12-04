@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="root" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
+<HBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
 		<!-- menu latéral -->
 		<VBox alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="side-menu">
@@ -53,7 +53,7 @@
 				</VBox>
 			</children>
 		</VBox>
-		<VBox fx:id="mainContentContainerVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
+		<VBox fx:id="mainContentVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
 			<children>
 				<HBox HBox.hgrow="ALWAYS">
 					<padding>
@@ -115,7 +115,7 @@
 											</padding>
 											<children>
 												<Label text="Alertes" styleClass="container-header"/>
-												<VBox fx:id="alertContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+												<VBox fx:id="alertListVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 													<padding>
 														<Insets top="20"/>
 													</padding>

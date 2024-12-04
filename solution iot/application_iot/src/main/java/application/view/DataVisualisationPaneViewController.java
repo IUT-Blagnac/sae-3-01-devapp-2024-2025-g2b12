@@ -19,7 +19,6 @@ import javafx.scene.control.Button ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
-import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
@@ -44,12 +43,12 @@ public class DataVisualisationPaneViewController
     private Button selectedHeaderButton = null ;
 
     // récupération des éléments graphiques de la vue FXML
-    @FXML private HBox root ;
-    @FXML private VBox mainContentContainerVBox ;
+    @FXML private VBox mainContentVBox ;
     @FXML private VBox dataListContainerVBox ;
     @FXML private VBox dataDetailContainerVBox ;
     @FXML private VBox alertListContainerVBox ;
     @FXML private VBox graphContainerVBox ;
+    @FXML private VBox alertListVBox ;
     @FXML private TableView<DataRow> dataTableView ;
 
     public void setStage(Stage _stage)
@@ -74,9 +73,9 @@ public class DataVisualisationPaneViewController
         Font cFont  = FontLoader.getContentFont() ;
 
         // paramétrages des tailles des conteneurs
-        this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
-        this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
-        this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.2/5.0)) ;
+        this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
+        this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
+        this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.2/5.0)) ;
 
         // initialisation de l'ObservableList de la TableView
         this.dataTableViewOList = FXCollections.observableArrayList() ;

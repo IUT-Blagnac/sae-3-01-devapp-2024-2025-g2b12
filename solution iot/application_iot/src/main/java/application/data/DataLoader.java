@@ -15,7 +15,7 @@ public class DataLoader
 {
     /**
      * Donne le fichier de données.
-     * @return le fichier de données s'il existe, null s'il n'existe pas
+     * @return le fichier de données s'il existe, null sinon
      */
     public static File getDataFile()
     {
@@ -23,6 +23,20 @@ public class DataLoader
         if (dataFile.exists())
         {
             return dataFile ;
+        }
+        return null ;
+    }
+
+    /**
+     * Donne le fichier d'alertes.
+     * @return le fichier d'alertes s'il existe, null sinon
+     */
+    public static File getAlertFile()
+    {
+        File alertFile = new File("data/alert.csv") ;
+        if (alertFile.exists())
+        {
+            return alertFile ;
         }
         return null ;
     }
