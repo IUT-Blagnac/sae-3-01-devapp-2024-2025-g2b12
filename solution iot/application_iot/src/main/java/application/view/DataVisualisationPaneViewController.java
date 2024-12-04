@@ -15,12 +15,17 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button ;
+import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
+import javafx.scene.image.Image ;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
@@ -215,10 +220,59 @@ public class DataVisualisationPaneViewController
     }
 
     /**
+     * Met à jour / Rafraîchit l'affichage des alertes relatives aux données.
+     */
+    public void updateAlertDisplay()
+    {
+        Map<String, Map<String, String>> alertMap = this.dvpDialogController.getAlertMap() ;
+
+        this.alertListVBox.getChildren().clear() ;
+
+        for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
+        {
+            ImageView alertIcon = new ImageView(new Image(DataVisualisationPaneViewController.class.getResourceAsStream("/application/image/dvp/alert-icon.png"))) ;
+            alertIcon.setFitHeight(30) ;
+            alertIcon.setPreserveRatio(true) ;
+
+            Label alertName = new Label("Alerte") ;
+            alertName.setPrefHeight(40) ;
+
+            HBox alertHeader = new HBox() ;
+            alertHeader.getChildren().add(alertIcon) ;
+            alertHeader.getChildren().add(alertName) ;
+            alertHeader.setAlignment(Pos.CENTER_LEFT) ;
+            alertHeader.setSpacing(10) ;
+
+            Label thresholdHeader = new Label("Seuil") ;
+            thresholdHeader.setPrefHeight(40) ;
+            thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+            
+            Label threshold             = new Label("XX") ;
+            Label measuredValueHeader   = new Label("Valeur relevée") ;
+            Label measuredValue         = new Label("XX") ;
+
+            VBox alertContent = new VBox() ;
+            alertContent.getChildren().add(thresholdHeader) ;
+            alertContent.getChildren().add(threshold) ;
+            alertContent.getChildren().add(measuredValueHeader) ;
+            alertContent.getChildren().add(measuredValue) ;
+
+            VBox alertContainer = new VBox() ;
+            alertContainer.getChildren().add(alertHeader) ;
+            alertContainer.getChildren().add(alertContent) ;
+
+            this.alertListVBox.getChildren().add(alertContainer) ;
+        }
+
+        System.out.println("- Mise à jour de l'affichage des alertes -") ;
+        System.out.println(alertMap) ;
+    }
+
+    /**
      * Affiche un graphique de comparaison à partir d'un type de données.
      * @param pDataType un type de données
      */
-    public void displayComparisonGraph(String pDataType)
+    private void displayComparisonGraph(String pDataType)
     {
         Map<String, String> dataMap = new HashMap<>() ;
         for (DataRow dataRow : this.dataTableViewOList)
@@ -236,7 +290,7 @@ public class DataVisualisationPaneViewController
      * @param pRoom     une salle
      * @param pDataType un type de données
      */
-    public void displayEvolutionGraph(String pRoom, String pDataType)
+    private void displayEvolutionGraph(String pRoom, String pDataType)
     {
         List<Number> Data = new ArrayList<>();
         Data.add(12);

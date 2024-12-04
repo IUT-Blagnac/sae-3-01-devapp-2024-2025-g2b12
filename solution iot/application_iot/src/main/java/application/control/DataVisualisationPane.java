@@ -41,6 +41,7 @@ public class DataVisualisationPane
     private ScheduledExecutorService scheduler ;
     private List<String> dataTypeList ;
     private Map<String, Map<String, String>> dataMap ;
+    private Map<String, Map<String, String>> alertMap ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -103,6 +104,16 @@ public class DataVisualisationPane
     }
 
     /**
+     * Met à jour les données visualisées.
+     * @param _dataMap les données mises à jour
+     */
+    public void setDataMap(Map<String, Map<String, String>> _dataMap)
+    {
+        this.dataMap = _dataMap ;
+        Platform.runLater(() -> { this.dvpViewController.updateDataDisplay() ; }) ;
+    }
+
+    /**
      * Accesseur : donne le dictionnaire des données visualisées.
      * @return le dictionnaire des données
      */
@@ -112,13 +123,22 @@ public class DataVisualisationPane
     }
 
     /**
-     * Met à jour les données visualisées.
-     * @param _dataMap les données mises à jour
+     * Met à jour les alertes relatives aux données visualisées.
+     * @param _alertMap les alertes mises à jour
      */
-    public void setDataMap(Map<String, Map<String, String>> _dataMap)
+    public void setAlertMap(Map<String, Map<String, String>> _alertMap)
     {
-        this.dataMap = _dataMap ;
-        Platform.runLater(() -> { this.dvpViewController.updateDataDisplay() ; }) ;
+        this.alertMap = _alertMap ;
+        Platform.runLater(() -> { this.dvpViewController.updateAlertDisplay() ; }) ;
+    }
+
+    /**
+     * Accesseur : donne le dictionnaire des alertes relatives aux données visualisées.
+     * @return le dictionnaire des alertes
+     */
+    public Map<String, Map<String, String>> getAlertMap()
+    {
+        return this.alertMap ;
     }
 
     /**
