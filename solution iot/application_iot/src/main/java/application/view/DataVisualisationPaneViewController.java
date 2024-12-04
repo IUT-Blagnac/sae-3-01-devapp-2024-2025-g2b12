@@ -10,7 +10,6 @@ import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
@@ -74,7 +73,7 @@ public class DataVisualisationPaneViewController
         Font thFont = FontLoader.getTableHeaderFont() ;
         Font cFont  = FontLoader.getContentFont() ;
 
-        // paramétrage des ratios pour les tailles des conteneurs
+        // paramétrages des tailles des conteneurs
         this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
         this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
         this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.2/5.0)) ;
@@ -93,14 +92,27 @@ public class DataVisualisationPaneViewController
             button.setMinWidth(80) ;
             button.setFont(thFont) ;
             button.getStyleClass().add("table-header") ;
-            button.setOnAction(
-                event -> {
-                    if (this.selectedHeaderButton != null) { this.selectedHeaderButton.getStyleClass().remove("selected") ; }
-                    button.getStyleClass().add("selected") ;
-                    this.selectedHeaderButton = button ;
-                    this.displayGraphByDataType(header) ;
-                }
-            ) ;
+            if (header.compareTo("room") == 0)
+            {
+                button.getStyleClass().add("not-clickable") ;
+            }
+            else
+            {
+                button.setOnAction(
+                    event -> {
+                        // nettoyage de la sélection de ligne dans la TableView
+                        this.dataTableView.getSelectionModel().clearSelection() ;
+
+                        // mise à jour de l'en-tête sélectionnée
+                        if (this.selectedHeaderButton != null) { this.selectedHeaderButton.getStyleClass().remove("selected") ; }
+                        button.getStyleClass().add("selected") ;
+                        this.selectedHeaderButton = button ;
+    
+                        // affichage d'un graphique de comparaison pour le type de données sélectionné
+                        this.displayComparisonGraph(header) ;
+                    }
+                ) ;    
+            }
 
             // intialisation de la colonne
             TableColumn<DataRow, String> tableColumn = new TableColumn<>() ;
@@ -135,9 +147,16 @@ public class DataVisualisationPaneViewController
 
         // initialisation d'un écouteur d'évènements sur les lignes de la TableView
         this.dataTableView.getSelectionModel().selectedItemProperty().addListener(
-            // rafraichissement des styles lorsqu'une ligne est sélectionnée
             (observable, oldValue, newValue) -> {
-                System.out.println(newValue.getName()) ;
+                // mise à jour de l'en-tête sélectionnée
+                if (this.selectedHeaderButton != null)
+                {
+                    this.selectedHeaderButton.getStyleClass().remove("selected") ;
+                    this.selectedHeaderButton = null ;
+                }
+
+                // affichage d'un graphique d'évolution pour la salle sélectionnée
+                if (newValue != null) { this.displayEvolutionGraph(newValue.getName(), null) ; }
             }
         ) ;
     }
@@ -178,10 +197,10 @@ public class DataVisualisationPaneViewController
     }
 
     /**
-     * Affiche un graphique à partir d'un type de données.
+     * Affiche un graphique de comparaison à partir d'un type de données.
      * @param pDataType un type de données
      */
-    public void displayGraphByDataType(String pDataType)
+    public void displayComparisonGraph(String pDataType)
     {
         Map<String, String> dataMap = new HashMap<>() ;
         for (DataRow dataRow : this.dataTableViewOList)
@@ -192,5 +211,17 @@ public class DataVisualisationPaneViewController
         barChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
         this.graphContainerVBox.getChildren().clear() ;
         this.graphContainerVBox.getChildren().add(barChart) ;
+    }
+
+    /**
+     * Affiche un graphique d'évolution à partir d'une salle et d'un type de données.
+     * @param pRoom     une salle
+     * @param pDataType un type de données
+     */
+    public void displayEvolutionGraph(String pRoom, String pDataType)
+    {
+        System.out.println("- Affichage graphique d'évolution -") ;
+        System.out.println(pRoom+" : "+pDataType) ;
+        this.graphContainerVBox.getChildren().clear() ;
     }
 }

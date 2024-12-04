@@ -43,7 +43,7 @@
     -fx-background-color: transparent;
 }
 .table-row-cell:selected {
-    -fx-background-color: #000000;
+    -fx-background-color: #000;
     -fx-text-fill: #fff;
 }
 .table-view .scroll-bar .track {
@@ -71,6 +71,9 @@
 .table-header.selected {
     -fx-background-color: #555;
     -fx-text-fill: #fff;
+}
+.table-header.not-clickable:hover {
+    -fx-background-color: #ddd;
 }
 .first-table-column {
     -fx-font-family: "Poppins Bold";
