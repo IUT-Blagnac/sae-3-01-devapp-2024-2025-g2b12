@@ -53,7 +53,7 @@
 				</VBox>
 			</children>
 		</VBox>
-		<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
+		<VBox fx:id="mainContentContainerVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
 			<children>
 				<HBox HBox.hgrow="ALWAYS">
 					<padding>
@@ -70,7 +70,7 @@
 								<Insets left="20" right="20" top="20" bottom="20"/>
 							</padding>
 							<children>
-								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+								<VBox fx:id="dataListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
 									<children>
 										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 											<padding>
@@ -90,15 +90,32 @@
 										</VBox>
 									</children>
 								</VBox>
-								<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok1 container">
+								<VBox fx:id="dataDetailContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
 									<children>
-										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok2">
+										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 											<padding>
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
 												<Label text="Colonne 2" styleClass="container-header"/>
-												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="ok3">
+												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+													<padding>
+														<Insets top="20"/>
+													</padding>
+												</VBox>
+											</children>
+										</VBox>
+									</children>
+								</VBox>
+								<VBox fx:id="alertListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+									<children>
+										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+											<padding>
+												<Insets left="20" right="20" top="20" bottom="20"/>
+											</padding>
+											<children>
+												<Label text="Alertes" styleClass="container-header"/>
+												<VBox fx:id="alertContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 													<padding>
 														<Insets top="20"/>
 													</padding>

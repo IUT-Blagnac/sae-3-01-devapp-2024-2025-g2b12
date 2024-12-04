@@ -10,6 +10,7 @@ import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
@@ -44,6 +45,11 @@ public class DataVisualisationPaneViewController
     private Button selectedHeaderButton = null ;
 
     // récupération des éléments graphiques de la vue FXML
+    @FXML private HBox root ;
+    @FXML private VBox mainContentContainerVBox ;
+    @FXML private VBox dataListContainerVBox ;
+    @FXML private VBox dataDetailContainerVBox ;
+    @FXML private VBox alertListContainerVBox ;
     @FXML private VBox graphContainerVBox ;
     @FXML private TableView<DataRow> dataTableView ;
 
@@ -67,6 +73,11 @@ public class DataVisualisationPaneViewController
         Font chFont = FontLoader.getContainerHeaderFont() ;
         Font thFont = FontLoader.getTableHeaderFont() ;
         Font cFont  = FontLoader.getContentFont() ;
+
+        // paramétrage des ratios pour les tailles des conteneurs
+        this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
+        this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.9/5.0)) ;
+        this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentContainerVBox.widthProperty().multiply(1.2/5.0)) ;
 
         // initialisation de l'ObservableList de la TableView
         this.dataTableViewOList = FXCollections.observableArrayList() ;
@@ -178,7 +189,7 @@ public class DataVisualisationPaneViewController
             dataMap.put(dataRow.getName(), dataRow.getData().get(pDataType)) ;
         }
         BarChart<String, Number> barChart = GraphGenerator.GenerateBarChart(dataMap, pDataType) ;
-        barChart.setMaxWidth(this.graphContainerVBox.getWidth()) ;
+        barChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
         this.graphContainerVBox.getChildren().clear() ;
         this.graphContainerVBox.getChildren().add(barChart) ;
     }
