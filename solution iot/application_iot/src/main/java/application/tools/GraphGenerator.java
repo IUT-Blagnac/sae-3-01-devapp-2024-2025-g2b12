@@ -1,12 +1,15 @@
 package application.tools ;
 
+import java.util.List;
 import java.util.Map ;
 
 import javafx.application.Platform ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.CategoryAxis ;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis ;
 import javafx.scene.chart.XYChart ;
+import javafx.scene.shape.Line;
 
 /**
  * Classe utilitaire fournissant des méthodes de génération de graphiques.
@@ -74,5 +77,31 @@ public class GraphGenerator
         barChart.setStyle("-fx-bar-gap: 1px;") ;
 
         return barChart ;
+    }
+
+    public static LineChart<String, Number> GenerateLineChart(List<Number> Data, String Salle, String TypeData){
+        CategoryAxis X = new CategoryAxis();
+        X.setLabel("Salle");
+        X.setAnimated(false);
+
+        NumberAxis Y = new NumberAxis();
+        Y.setLabel(TypeData);
+        Y.setAnimated(false);
+
+        LineChart<String, Number> LineChart = new LineChart<>(X, Y);
+        LineChart.setTitle(TypeData);
+
+        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+
+        for(Number Num : Data){
+            XYChart.Data<String, Number> data = new XYChart.Data<>(null, Num);
+            dataSeries.getData().add(data);
+
+            Platform.runLater(() -> { data.getNode().setStyle("-fx-bar-fill: #000;") ; }) ;
+        }
+        
+        LineChart.getData().add(dataSeries) ;
+
+        return LineChart;
     }
 }
