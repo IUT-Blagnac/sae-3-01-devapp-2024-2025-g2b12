@@ -34,10 +34,12 @@ public class GraphGenerator
         // axe des abscisses
         CategoryAxis xAxis = new CategoryAxis() ;
         xAxis.setLabel("Salle") ;
-    
+        xAxis.setAnimated(false) ;
+
         // axe des ordonnées
         NumberAxis yAxis = new NumberAxis() ;
         yAxis.setLabel(pDataType) ;
+        yAxis.setAnimated(false) ;
 
         // construction du diagramme en barres
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis) ;

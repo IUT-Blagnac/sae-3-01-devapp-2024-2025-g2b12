@@ -174,10 +174,11 @@ public class DataVisualisationPaneViewController
     public void updateDataDisplay()
     {
         Map<String, Map<String, String>> dataMap = this.dvpDialogController.getDataMap() ;
-        
+
         Map<String, DataRow> existingDataRowsMap = new HashMap<>() ;
         for (DataRow dr : this.dataTableViewOList) { existingDataRowsMap.put(dr.getName(), dr) ; }
 
+        // mise à jour de la TableView
         for (Map.Entry<String, Map<String, String>> m : dataMap.entrySet())
         {
             if (existingDataRowsMap.containsKey(m.getKey()))
@@ -193,6 +194,22 @@ public class DataVisualisationPaneViewController
         }
         this.dataTableView.setItems(this.dataTableViewOList) ;
         this.dataTableView.refresh() ;
+
+        // mise à jour du graphique affiché
+        if (this.selectedHeaderButton != null)
+        {
+            for (String dataType : this.dvpDialogController.getDataTypeList())
+            {
+                if (DataUtilities.getDisplayDataType(dataType).compareTo(this.selectedHeaderButton.getText()) == 0)
+                {
+                    this.displayComparisonGraph(dataType) ;
+                }
+            }
+        }
+        else if (this.dataTableView.getSelectionModel().getSelectedItem() != null)
+        {
+            this.displayEvolutionGraph(this.dataTableView.getSelectionModel().getSelectedItem().getName(), null) ;
+        }
     }
 
     /**
