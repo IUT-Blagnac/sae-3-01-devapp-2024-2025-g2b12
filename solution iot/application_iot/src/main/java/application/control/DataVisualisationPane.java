@@ -30,8 +30,8 @@ import javafx.stage.Stage ;
 public class DataVisualisationPane
 {
     // déclaration des constantes
-    private static final double MIN_WIDTH   = 600 ;     // largeur minimale de la fenêtre
-    private static final double MIN_HEIGHT  = 400 ;     // hauteur minimale de la fenêtre
+    private static final double MIN_WIDTH   = 1000 ;    // largeur minimale de la fenêtre
+    private static final double MIN_HEIGHT  = 600 ;     // hauteur minimale de la fenêtre
     private static final double PREF_WIDTH  = 1000 ;    // largeur préférée de la fenêtre
     private static final double PREF_HEIGHT = 600 ;     // hauteur préférée de la fenêtre
 
