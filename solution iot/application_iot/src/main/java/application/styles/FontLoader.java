@@ -59,4 +59,26 @@ public class FontLoader
         double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
+
+    /**
+     * Donne la typographie (font) d'en-tête de donnée unique.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getSingleDataHeaderFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) de donnée unique.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getSingleDataFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 20 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
 }

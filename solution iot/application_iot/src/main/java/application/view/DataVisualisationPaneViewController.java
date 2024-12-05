@@ -76,10 +76,12 @@ public class DataVisualisationPaneViewController
     public void initializeViewElements()
     {
         // préchargement des fonts (pour utilisation dans la feuille de style dvp.css)
-        Font whFont = FontLoader.getWindowHeaderFont() ;
-        Font chFont = FontLoader.getContainerHeaderFont() ;
-        Font thFont = FontLoader.getTableHeaderFont() ;
-        Font cFont  = FontLoader.getContentFont() ;
+        Font whFont     = FontLoader.getWindowHeaderFont() ;
+        Font chFont     = FontLoader.getContainerHeaderFont() ;
+        Font thFont     = FontLoader.getTableHeaderFont() ;
+        Font cFont      = FontLoader.getContentFont() ;
+        Font sdhFont    = FontLoader.getSingleDataHeaderFont() ;
+        Font sdFont     = FontLoader.getSingleDataFont() ;
 
         // paramétrages des tailles des conteneurs
         this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
@@ -235,6 +237,10 @@ public class DataVisualisationPaneViewController
 
         for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
         {
+            // chargement des fonts utilisées
+            Font sdhFont    = FontLoader.getSingleDataHeaderFont() ;
+            Font sdFont     = FontLoader.getSingleDataFont() ;
+
             ImageView alertIcon = new ImageView(new Image(DataVisualisationPaneViewController.class.getResourceAsStream("/application/image/dvp/alert-icon.png"))) ;
             alertIcon.setFitHeight(30) ;
             alertIcon.setPreserveRatio(true) ;
@@ -251,20 +257,34 @@ public class DataVisualisationPaneViewController
             Label thresholdHeader = new Label("Seuil") ;
             thresholdHeader.setPrefHeight(30) ;
             thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+            thresholdHeader.setFont(sdhFont) ;
 
-            Label threshold = new Label("XX") ;
-            
-            Label measuredValueHeader = new Label("Valeur relevée") ;
+            Label threshold = new Label(m.getValue().get("threshold")) ;
+            threshold.setFont(sdFont) ;
+
+            VBox thresholdContainer = new VBox() ;
+            thresholdContainer.getChildren().add(thresholdHeader) ;
+            thresholdContainer.getChildren().add(threshold) ;
+
+            Label measuredValueHeader = new Label("Relevé") ;
             measuredValueHeader.setPrefHeight(30) ;
             measuredValueHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+            measuredValueHeader.setFont(sdhFont) ;
 
-            Label measuredValue = new Label("XX") ;
+            Label measuredValue = new Label(m.getValue().get("measuredValue")) ;
+            measuredValue.setFont(sdFont) ;
 
-            VBox alertContent = new VBox() ;
-            alertContent.getChildren().add(thresholdHeader) ;
-            alertContent.getChildren().add(threshold) ;
-            alertContent.getChildren().add(measuredValueHeader) ;
-            alertContent.getChildren().add(measuredValue) ;
+            VBox measuredValueContainer = new VBox() ;
+            measuredValueContainer.getChildren().add(measuredValueHeader) ;
+            measuredValueContainer.getChildren().add(measuredValue) ;
+
+            HBox alertContent = new HBox() ;
+            alertContent.setSpacing(20) ;
+            alertContent.getChildren().add(thresholdContainer) ;
+            alertContent.getChildren().add(measuredValueContainer) ;
+
+            thresholdContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;
+            measuredValueContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;    
 
             VBox alertContainer = new VBox() ;
             alertContainer.getChildren().add(alertHeader) ;
