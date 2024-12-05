@@ -141,6 +141,7 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 |WEB| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Cahier_Tests.adoc[Cahier Tests]
 |IOT| _À venir._
 |===
 
