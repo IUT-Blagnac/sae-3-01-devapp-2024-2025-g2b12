@@ -128,6 +128,9 @@
     -fx-border-width: 0px;
     -fx-border-radius: 0px;
 }
+.scroll-pane .viewport {
+    -fx-background-color: #fff;
+}
 .scroll-pane .scroll-bar .track {
     -fx-background-color: transparent;
 }

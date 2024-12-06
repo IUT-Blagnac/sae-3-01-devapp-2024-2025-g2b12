@@ -1,7 +1,7 @@
 package application.view ;
 
 import application.control.DataVisualisationPane ;
-import application.data.DataUtilities ;
+import application.data.DataTypeUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
 import application.tools.GraphGenerator ;
@@ -100,12 +100,13 @@ public class DataVisualisationPaneViewController
             String header = headersList.get(i) ;
 
             // initialisation d'un bouton faisant office d'en-tête
-            Button button = new Button(DataUtilities.getShortDisplayDataType(header)) ;
+            Button button = new Button(DataTypeUtilities.getAbbreviation(header)+" ("+DataTypeUtilities.getUnit(header)+")") ;
             button.setMinWidth(80) ;
             button.setFont(thFont) ;
             button.getStyleClass().add("table-header") ;
             if (header.compareTo("room") == 0)
             {
+                button.setText(DataTypeUtilities.getFullTitle(header)) ;
                 button.getStyleClass().add("not-clickable") ;
             }
             else
@@ -213,7 +214,7 @@ public class DataVisualisationPaneViewController
         {
             for (String dataType : this.dvpDialogController.getDataTypeList())
             {
-                if (DataUtilities.getShortDisplayDataType(dataType).compareTo(this.selectedHeaderButton.getText()) == 0)
+                if (DataTypeUtilities.getAbbreviation(dataType).compareTo(this.selectedHeaderButton.getText()) == 0)
                 {
                     this.displayComparisonGraph(dataType) ;
                     break ;
@@ -261,7 +262,10 @@ public class DataVisualisationPaneViewController
             thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
             thresholdHeader.setFont(sdhFont) ;
 
-            Label threshold = new Label(m.getValue().get("threshold")) ;
+            Label threshold = new Label(
+                m.getValue().get("threshold")
+                +   " "+DataTypeUtilities.getUnit(m.getValue().get("dataType"))
+            ) ;
             threshold.setFont(sdFont) ;
 
             VBox thresholdContainer = new VBox() ;
@@ -273,7 +277,10 @@ public class DataVisualisationPaneViewController
             measuredValueHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
             measuredValueHeader.setFont(sdhFont) ;
 
-            Label measuredValue = new Label(m.getValue().get("measuredValue")) ;
+            Label measuredValue = new Label(
+                    m.getValue().get("measuredValue")
+                +   " "+DataTypeUtilities.getUnit(m.getValue().get("dataType"))
+            ) ;
             measuredValue.setFont(sdFont) ;
 
             VBox measuredValueContainer = new VBox() ;
