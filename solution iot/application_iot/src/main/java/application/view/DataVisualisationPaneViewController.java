@@ -6,7 +6,7 @@ import application.model.DataRow ;
 import application.styles.FontLoader ;
 import application.tools.GraphGenerator ;
 
-import java.util.ArrayList;
+import java.util.ArrayList ;
 import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
@@ -15,9 +15,10 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets ;
+import javafx.geometry.Pos ;
 import javafx.scene.chart.BarChart ;
-import javafx.scene.chart.LineChart;
+import javafx.scene.chart.LineChart ;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label ;
@@ -25,7 +26,7 @@ import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
 import javafx.scene.image.Image ;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageView ;
 import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
@@ -35,7 +36,7 @@ import javafx.stage.Stage ;
  * Contrôleur de vue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Jeudi 20 novembre 2024 -
+ * - Vendredi 6 décembre 2024 -
  * 
  * @author Nolhan Biblocque
  * @author Victor Jockin
@@ -52,6 +53,7 @@ public class DataVisualisationPaneViewController
     private String displayedDataType = null ;
 
     // récupération des éléments graphiques de la vue FXML
+    @FXML private HBox root ;
     @FXML private VBox mainContentVBox ;
     @FXML private VBox dataListContainerVBox ;
     @FXML private VBox dataDetailContainerVBox ;
@@ -289,12 +291,22 @@ public class DataVisualisationPaneViewController
             VBox alertContainer = new VBox() ;
             alertContainer.getChildren().add(alertHeader) ;
             alertContainer.getChildren().add(alertContent) ;
+            alertContainer.getStyleClass().add("alert-container") ;
+
+            VBox.setMargin(alertHeader, new Insets(20, 20, 0, 20)) ;
+            VBox.setMargin(alertContent, new Insets(0, 20, 20, 20)) ;
 
             this.alertListVBox.getChildren().add(alertContainer) ;
         }
 
         System.out.println("- Mise à jour de l'affichage des alertes -") ;
         System.out.println(alertMap) ;
+    }
+
+    @FXML
+    private void doConfiguration()
+    {
+        System.out.println("- [ Configuration ] -") ;
     }
 
     /**

@@ -13,10 +13,21 @@
 .main-content {
     -fx-background-color: #eee;
 }
+.main-content .blue-theme {
+    -fx-background-color: #1c1a3f;
+}
 
 .container {
     -fx-background-color: #fff;
     -fx-border-radius: 0;
+    -fx-background-radius: 15;
+}
+
+.alert-container {
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+    -fx-border-width: 1px; 
+    -fx-border-radius: 15;
     -fx-background-radius: 15;
 }
 
@@ -112,12 +123,20 @@
     -fx-text-fill: #000;
 }
 
-.ok1 {
-    -fx-background-color: #00f;
+.scroll-pane {
+    -fx-background-color: #fff;
+    -fx-border-width: 0px;
+    -fx-border-radius: 0px;
 }
-.ok2 {
-    -fx-background-color: #0f0;
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: transparent;
 }
-.ok3 {
-    -fx-background-color: #f00;
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: #0078d4;
+    -fx-background-radius: 10;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
 }

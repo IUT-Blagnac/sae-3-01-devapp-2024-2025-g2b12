@@ -13,18 +13,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
+<HBox fx:id="root" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.DataVisualisationPaneViewController">
 	<children>
 		<!-- menu latéral -->
 		<VBox alignment="TOP_CENTER" minWidth="240" prefWidth="240" styleClass="side-menu">
 			<children>
-				<VBox alignment="CENTER" maxWidth="Infinity" spacing="20">
+				<VBox alignment="CENTER" maxWidth="Infinity" spacing="15">
 					<padding>
 						<Insets left="10" right="10"/>
 					</padding>
 					<children>
 						<!-- bouton "Configuration" -->
-						<Button maxWidth="Infinity" minHeight="50" prefHeight="50" alignment="CENTER_LEFT" styleClass="side-menu-button">
+						<Button onAction="#doConfiguration" maxWidth="Infinity" minHeight="50" prefHeight="50" alignment="CENTER_LEFT" styleClass="side-menu-button">
 							<graphic>
 								<HBox spacing="10">
 									<padding>
@@ -115,11 +115,14 @@
 											</padding>
 											<children>
 												<Label text="Alertes" styleClass="container-header"/>
-												<VBox fx:id="alertListVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+												<ScrollPane prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" fitToWidth="true">
 													<padding>
 														<Insets top="20"/>
 													</padding>
-												</VBox>
+													<content>
+														<VBox fx:id="alertListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" spacing="20"/>
+													</content>
+												</ScrollPane>
 											</children>
 										</VBox>
 									</children>
