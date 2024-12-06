@@ -17,6 +17,7 @@ import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
 import javafx.geometry.Insets ;
 import javafx.geometry.Pos ;
+import javafx.scene.Node ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.LineChart ;
 import javafx.scene.control.Button ;
@@ -49,8 +50,8 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
     private ObservableList<DataRow> dataTableViewOList ;
-    private Button selectedHeaderButton = null ;
     private String displayedDataType = null ;
+    private Button selectedHeaderButton = null ;
 
     // récupération des éléments graphiques de la vue FXML
     @FXML private HBox root ;
@@ -101,6 +102,7 @@ public class DataVisualisationPaneViewController
 
             // initialisation d'un bouton faisant office d'en-tête
             Button button = new Button(DataTypeUtilities.getAbbreviation(header)+" ("+DataTypeUtilities.getUnit(header)+")") ;
+            button.setId(header) ;
             button.setMinWidth(80) ;
             button.setFont(thFont) ;
             button.getStyleClass().add("table-header") ;
@@ -122,9 +124,10 @@ public class DataVisualisationPaneViewController
                         this.selectedHeaderButton = button ;
     
                         // affichage d'un graphique de comparaison pour le type de données sélectionné
+                        this.displayedDataType = null ;
                         this.displayComparisonGraph(header) ;
                     }
-                ) ;    
+                ) ;
             }
 
             // intialisation de la colonne
@@ -169,7 +172,7 @@ public class DataVisualisationPaneViewController
                 }
 
                 // affichage d'un graphique d'évolution pour la salle sélectionnée
-                if (newValue != null) { this.displayEvolutionGraph(newValue.getName(), null) ; }
+                if (newValue != null) { this.displayEvolutionGraph(newValue.getName(), this.displayedDataType) ; }
             }
         ) ;
     }
@@ -212,20 +215,12 @@ public class DataVisualisationPaneViewController
         // mise à jour du graphique affiché
         if (this.selectedHeaderButton != null)
         {
-            for (String dataType : this.dvpDialogController.getDataTypeList())
-            {
-                if (DataTypeUtilities.getAbbreviation(dataType).compareTo(this.selectedHeaderButton.getText()) == 0)
-                {
-                    this.displayComparisonGraph(dataType) ;
-                    break ;
-                }
-            }
+            this.displayComparisonGraph(this.selectedHeaderButton.getId()) ;
         }
         else if (this.dataTableView.getSelectionModel().getSelectedItem() != null)
         {
-            System.out.println("-") ;
             DataRow selectedDataRow = this.dataTableView.getSelectionModel().getSelectedItem() ;
-            this.displayEvolutionGraph(selectedDataRow.getName(), selectedDataRow.getData().get(this.displayedDataType)) ;
+            this.displayEvolutionGraph(selectedDataRow.getName(), this.displayedDataType) ;
         }
     }
 
@@ -248,7 +243,10 @@ public class DataVisualisationPaneViewController
             alertIcon.setFitHeight(30) ;
             alertIcon.setPreserveRatio(true) ;
 
-            Label alertName = new Label("Alerte") ;
+            Label alertName = new Label(
+                    DataTypeUtilities.getFullTitle(m.getValue().get("dataType"))
+                +   " ["+m.getKey()+"]"
+            ) ;
             alertName.setPrefHeight(40) ;
 
             HBox alertHeader = new HBox() ;
@@ -263,7 +261,7 @@ public class DataVisualisationPaneViewController
             thresholdHeader.setFont(sdhFont) ;
 
             Label threshold = new Label(
-                m.getValue().get("threshold")
+                    m.getValue().get("threshold")
                 +   " "+DataTypeUtilities.getUnit(m.getValue().get("dataType"))
             ) ;
             threshold.setFont(sdFont) ;
@@ -340,19 +338,48 @@ public class DataVisualisationPaneViewController
      */
     private void displayEvolutionGraph(String pRoom, String pDataType)
     {
-        System.out.println(this.displayedDataType) ;
-        this.displayedDataType = pDataType ;
-        this.displayedDataType = "temperature" ;
-        ComboBox<String> dataTypeComboBox = new ComboBox<>() ;
-        List<Number> data = new ArrayList<>() ;
-        data.add(12) ;
-        data.add(43) ;
-        LineChart<String, Number> lineChart = GraphGenerator.GenerateLineChart(data, pRoom, this.displayedDataType) ;
+        if (pDataType == null)
+        {
+            this.displayedDataType = this.dvpDialogController.getDataTypeList().get(1) ;
+
+            this.graphContainerVBox.getChildren().clear() ;
+
+            ComboBox<String> dataTypeComboBox = new ComboBox<>() ;
+            List<String> dataTypeList = this.dvpDialogController.getDataTypeList() ;
+            for (int i = 1 ; i < dataTypeList.size() ; i++)
+            {
+                dataTypeComboBox.getItems().add(DataTypeUtilities.getFullTitle(dataTypeList.get(i))) ;
+            }
+            dataTypeComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;
+            dataTypeComboBox.setOnAction(event -> {
+                this.displayedDataType = DataTypeUtilities.getDataTypeByFullTitle(
+                    dataTypeComboBox.getSelectionModel().getSelectedItem()
+                ) ;
+                this.displayEvolutionGraph(pRoom, this.displayedDataType) ;
+            }) ;
+
+            this.graphContainerVBox.getChildren().add(dataTypeComboBox) ;
+        }
+        else
+        {
+            this.displayedDataType = pDataType ;
+        }
+
+        for (Node node : this.graphContainerVBox.getChildren())
+        {
+            if (node instanceof LineChart)
+            {
+                graphContainerVBox.getChildren().remove(node) ;
+                break ;
+            }
+        }
+
+        List<Number> data = new ArrayList<>() ; data.add(12) ; data.add(43) ; data.add(27) ;
+        LineChart<String, Number> lineChart = GraphGenerator.GenerateLineChart(data, pRoom, this.displayedDataType, 5.0) ;
         System.out.println("- Affichage graphique d'évolution -") ;
         System.out.println(pRoom+" : "+this.displayedDataType) ;
+        System.out.println(DataTypeUtilities.getEvolutionGraphTitle(this.displayedDataType)) ;
         lineChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
-        this.graphContainerVBox.getChildren().clear() ;
-        this.graphContainerVBox.getChildren().add(dataTypeComboBox) ;
         this.graphContainerVBox.getChildren().add(lineChart) ;
     }
 }

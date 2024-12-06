@@ -1,15 +1,14 @@
 package application.tools ;
 
-import java.util.List;
+import java.util.List ;
 import java.util.Map ;
 
 import javafx.application.Platform ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.CategoryAxis ;
-import javafx.scene.chart.LineChart;
+import javafx.scene.chart.LineChart ;
 import javafx.scene.chart.NumberAxis ;
 import javafx.scene.chart.XYChart ;
-import javafx.scene.shape.Line;
 
 /**
  * Classe utilitaire fournissant des méthodes de génération de graphiques.
@@ -52,7 +51,7 @@ public class GraphGenerator
         // série des données
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>() ;
 
-        // ajout des données au diagramme en barres
+        // ajout des données au diagramme
         for (Map.Entry<String, String> entry : pDataMap.entrySet())
         {
             String room = entry.getKey() ;
@@ -79,29 +78,40 @@ public class GraphGenerator
         return barChart ;
     }
 
-    public static LineChart<String, Number> GenerateLineChart(List<Number> Data, String Salle, String TypeData){
-        CategoryAxis X = new CategoryAxis();
-        X.setLabel("Salle");
-        X.setAnimated(false);
+    public static LineChart<String, Number> GenerateLineChart(
+        List<Number> pDataList,
+        String pRoomName,
+        String pDataType,
+        double pFrequency
+    ) {
+        // axe des abscisses
+        CategoryAxis xAxis = new CategoryAxis() ;
+        xAxis.setLabel("Salle") ;
+        xAxis.setAnimated(false) ;
 
-        NumberAxis Y = new NumberAxis();
-        Y.setLabel(TypeData);
-        Y.setAnimated(false);
+        // axe des ordonnées
+        NumberAxis yAxis = new NumberAxis() ;
+        yAxis.setLabel(pDataType) ;
+        yAxis.setAnimated(false) ;
 
-        LineChart<String, Number> LineChart = new LineChart<>(X, Y);
-        LineChart.setTitle(TypeData);
+        // construction du diagramme d'évolution
+        LineChart<String, Number> LineChart = new LineChart<>(xAxis, yAxis) ;
+        LineChart.setTitle(pDataType) ;
 
-        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+        // série des données
+        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>() ;
 
-        for(Number Num : Data){
-            XYChart.Data<String, Number> data = new XYChart.Data<>(null, Num);
-            dataSeries.getData().add(data);
-
-            Platform.runLater(() -> { data.getNode().setStyle("-fx-bar-fill: #000;") ; }) ;
+        // ajout des données au diagramme
+        double time = 0.0 ;
+        for (int i = 0 ; i < pDataList.size() ; i++)
+        {
+            // ajout du point au diagramme
+            XYChart.Data<String, Number> data = new XYChart.Data<>(String.valueOf(time), pDataList.get(i)) ;
+            dataSeries.getData().add(data) ;
+            time += pFrequency ;
         }
-        
         LineChart.getData().add(dataSeries) ;
 
-        return LineChart;
+        return LineChart ;
     }
 }
