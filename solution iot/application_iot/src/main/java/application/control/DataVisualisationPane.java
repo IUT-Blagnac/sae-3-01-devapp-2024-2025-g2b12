@@ -165,4 +165,13 @@ public class DataVisualisationPane
             scheduler.shutdown() ;
         }
     }
+
+    /**
+     * Ouvre le formulaire d'édition de la configuration.
+     */
+    public void parametrerConfiguration()
+    {
+        ConfigurationFileForm configurationFileForm = new ConfigurationFileForm(this.dvpStage) ;
+        configurationFileForm.doConfigurationFileFormDialog() ;
+    }
 }

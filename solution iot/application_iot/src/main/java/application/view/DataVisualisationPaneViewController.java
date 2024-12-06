@@ -311,7 +311,7 @@ public class DataVisualisationPaneViewController
     @FXML
     private void doConfiguration()
     {
-        System.out.println("- [ Configuration ] -") ;
+        this.dvpDialogController.parametrerConfiguration() ;
     }
 
     /**
