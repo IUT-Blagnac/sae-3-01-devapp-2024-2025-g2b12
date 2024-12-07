@@ -56,94 +56,111 @@
 		</VBox>
 		<VBox fx:id="mainContentVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="main-content">
 			<children>
-				<HBox HBox.hgrow="ALWAYS">
+				<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
 					<padding>
-						<Insets left="20" right="20" top="20"/>
+						<Insets left="20" right="20" top="20" bottom="20"/>
 					</padding>
 					<children>
-						<Label text="Tableau de bord" styleClass="window-header"/>
-					</children>
-				</HBox>
-				<HBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-					<children>
-						<HBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
-							<padding>
-								<Insets left="20" right="20" top="20" bottom="20"/>
-							</padding>
+						<HBox HBox.hgrow="ALWAYS">
 							<children>
-								<VBox fx:id="dataListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+								<Label text="Tableau de bord" styleClass="window-header"/>
+							</children>
+						</HBox>
+						<VBox fx:id="containersVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+							<children>
+								<HBox fx:id="littleContainersVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
 									<children>
-										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-											<padding>
-												<Insets left="20" right="20" top="20" bottom="20"/>
-											</padding>
+										<!-- Nb Appareil consultés -->
+										<!-- Dernière données reçues -->
+										<!-- Fréquence de réception des données -->
+										<!-- Nb Alertes -->
+										<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="single-data-container">
+										</VBox>
+										<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="single-data-container">
+										</VBox>
+										<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="single-data-container">
+										</VBox>
+										<VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="single-data-container">
+										</VBox>
+									</children>
+								</HBox>
+								<HBox fx:id="bigContainersVBox" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+									<children>
+										<VBox fx:id="dataListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
 											<children>
-												<Label text="Vue d'ensemble" styleClass="container-header"/>
-												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER">
+												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 													<padding>
-														<Insets top="20"/>
+														<Insets left="20" right="20" top="20" bottom="20"/>
 													</padding>
 													<children>
-														<TableView fx:id="dataTableView" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
+														<Label text="Vue d'ensemble" styleClass="container-header"/>
+														<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER">
+															<padding>
+																<Insets top="20"/>
+															</padding>
+															<children>
+																<TableView fx:id="dataTableView" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
+															</children>
+														</VBox>
+													</children>
+												</VBox>
+											</children>
+										</VBox>
+										<VBox fx:id="dataDetailContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+											<children>
+												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+													<padding>
+														<Insets left="20" right="20" top="20" bottom="20"/>
+													</padding>
+													<children>
+														<Label text="Détails et graphiques" styleClass="container-header"/>
+														<VBox fx:id="dataTypeListVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" visible="false" managed="false">
+															<padding>
+																<Insets top="20"/>
+															</padding>
+															<ComboBox fx:id="dataTypeListComboBox" maxWidth="220"/>
+														</VBox>
+														<VBox fx:id="graphTitleVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS">
+															<padding>
+																<Insets top="20"/>
+															</padding>
+															<Label fx:id="graphTitleLabel" maxWidth="300" wrapText="true" textAlignment="CENTER"/>
+														</VBox>
+														<VBox fx:id="graphVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+															<padding>
+																<Insets top="20"/>
+															</padding>
+														</VBox>
+													</children>
+												</VBox>
+											</children>
+										</VBox>
+										<VBox fx:id="alertListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+											<children>
+												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+													<padding>
+														<Insets left="20" right="20" top="20" bottom="20"/>
+													</padding>
+													<children>
+														<Label text="Alertes" styleClass="container-header"/>
+														<ScrollPane prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" fitToWidth="true">
+															<padding>
+																<Insets top="20"/>
+															</padding>
+															<content>
+																<VBox fx:id="alertListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" spacing="20"/>
+															</content>
+														</ScrollPane>
 													</children>
 												</VBox>
 											</children>
 										</VBox>
 									</children>
-								</VBox>
-								<VBox fx:id="dataDetailContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
-									<children>
-										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-											<padding>
-												<Insets left="20" right="20" top="20" bottom="20"/>
-											</padding>
-											<children>
-												<Label text="Détails et graphiques" styleClass="container-header"/>
-												<VBox fx:id="dataTypeListVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" visible="false" managed="false">
-													<padding>
-														<Insets top="20"/>
-													</padding>
-													<ComboBox fx:id="dataTypeListComboBox" maxWidth="220"/>
-												</VBox>
-												<VBox fx:id="graphTitleVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS">
-													<padding>
-														<Insets top="20"/>
-													</padding>
-													<Label fx:id="graphTitleLabel" maxWidth="300" wrapText="true" textAlignment="CENTER"/>
-												</VBox>
-												<VBox fx:id="graphVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-													<padding>
-														<Insets top="20"/>
-													</padding>
-												</VBox>
-											</children>
-										</VBox>
-									</children>
-								</VBox>
-								<VBox fx:id="alertListContainerVBox" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
-									<children>
-										<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-											<padding>
-												<Insets left="20" right="20" top="20" bottom="20"/>
-											</padding>
-											<children>
-												<Label text="Alertes" styleClass="container-header"/>
-												<ScrollPane prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" fitToWidth="true">
-													<padding>
-														<Insets top="20"/>
-													</padding>
-													<content>
-														<VBox fx:id="alertListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" spacing="20"/>
-													</content>
-												</ScrollPane>
-											</children>
-										</VBox>
-									</children>
-								</VBox>
+								</HBox>
 							</children>
-						</HBox>
+						</VBox>
 					</children>
-				</HBox>
+				</VBox>
 			</children>
 		</VBox>
 	</children>

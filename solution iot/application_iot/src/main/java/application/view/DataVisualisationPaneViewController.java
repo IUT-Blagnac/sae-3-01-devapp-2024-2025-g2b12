@@ -57,9 +57,12 @@ public class DataVisualisationPaneViewController
     private String displayedDataType    = null ;        // le type de données visualisé pour la salle affichée dans la vision détaillée
     private Button selectedHeaderButton = null ;        // le bouton correspondant au type de données pour toutes les salles affiché dans la vision détaillée
 
-    // récupération des éléments graphiques de la vue FXML
+    // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
     @FXML private HBox root ;
     @FXML private VBox mainContentVBox ;
+    @FXML private VBox containersVBox ;
+    @FXML private HBox littleContainersVBox ;
+    @FXML private HBox bigContainersVBox ;
     @FXML private VBox dataListContainerVBox ;
     @FXML private VBox dataDetailContainerVBox ;
     @FXML private VBox alertListContainerVBox ;
@@ -97,10 +100,15 @@ public class DataVisualisationPaneViewController
         Font sdFont     = FontLoader.getSingleDataFont() ;
         Font gtFont     = FontLoader.getGraphTitleFont() ;
 
-        // paramétrages des tailles des conteneurs
+        // paramétrage des tailles des conteneurs
+        // --------------------------------------
+        // paramétrage des largeurs des conteneurs
         this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
         this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
         this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.2/5.0)) ;
+        // paramétrage des hauteurs des conteneurs
+        this.littleContainersVBox.prefHeightProperty().bind(this.containersVBox.heightProperty().multiply(1.1/5.0)) ;
+        this.bigContainersVBox.prefHeightProperty().bind(this.containersVBox.heightProperty().multiply(3.9/5.0)) ;
 
         // initialisation de l'ObservableList de la TableView
         this.dataTableViewOList = FXCollections.observableArrayList() ;

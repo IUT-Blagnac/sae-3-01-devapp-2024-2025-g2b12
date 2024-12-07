@@ -19,6 +19,11 @@
     -fx-border-radius: 0;
     -fx-background-radius: 15;
 }
+.single-data-container {
+    -fx-background-color: #000;
+    -fx-border-radius: 0;
+    -fx-background-radius: 15;
+}
 
 .alert-container {
     -fx-background-color: #fff;

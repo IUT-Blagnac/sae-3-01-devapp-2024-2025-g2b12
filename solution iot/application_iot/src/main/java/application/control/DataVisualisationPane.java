@@ -1,6 +1,7 @@
 package application.control ;
 
 import application.data.DataLoader ;
+import application.model.Configuration ;
 import application.thread.CsvReaderTask ;
 import application.tools.DataFileReading ;
 import application.view.DataVisualisationPaneViewController ;
@@ -40,6 +41,8 @@ public class DataVisualisationPane
     private DataVisualisationPaneViewController dvpViewController ;
     private ScheduledExecutorService scheduler ;
     private List<String> dataTypeList ;
+
+    private Configuration configuration ;
     private Map<String, Map<String, String>> dataMap ;
     private Map<String, Map<String, String>> alertMap ;
 
@@ -120,6 +123,16 @@ public class DataVisualisationPane
     public Map<String, Map<String, String>> getDataMap()
     {
         return this.dataMap ;
+    }
+
+    /**
+     * Accesseur : donne le nombre de capteurs observés.
+     * @return le nombre de capteurs observés
+     */
+    public int getObservedSensorsNumber()
+    {
+        //return this.configuration.getSubjectList().size() ;
+        return 7 ; // à modifier après
     }
 
     /**
