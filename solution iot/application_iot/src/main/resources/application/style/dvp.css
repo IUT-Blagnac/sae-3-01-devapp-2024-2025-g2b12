@@ -13,9 +13,6 @@
 .main-content {
     -fx-background-color: #eee;
 }
-.main-content .blue-theme {
-    -fx-background-color: #1c1a3f;
-}
 
 .container {
     -fx-background-color: #fff;
@@ -144,10 +141,51 @@
     -fx-min-height: 20px;
 }
 
+.combo-box {
+    -fx-background-color: #242630;
+    -fx-background-radius: 5;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+.list-cell {
+    -fx-cell-size: 35px;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+.combo-box:hover {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.combo-box .arrow {
+    -fx-background-color: #fff;
+}
+.combo-box-popup {
+    -fx-background-color: #242630;
+    -fx-border-width: 0px;
+}
+.combo-box-popup .list-cell {
+    -fx-cell-size: 35px;
+    -fx-background-color: #242630;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #33353f;
+    -fx-text-fill: #fff;
+}
+.combo-box-popup .list-cell:selected {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+
 .chart-plot-background {
     -fx-background-color: transparent;
 }
-
 .chart-bar {
     -fx-bar-fill: #00ed96; 
     -fx-border-width: 0px;
@@ -155,8 +193,6 @@
 .chart-bar:hover {
     -fx-bar-fill: #63ffc4;
 }
-
-
 .chart-line-symbol {
     -fx-background-color: #444bf8;
     -fx-background-radius: 5px;

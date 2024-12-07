@@ -4,7 +4,7 @@ import java.util.List ;
 import java.util.Map ;
 
 import application.data.DataTypeUtilities ;
-import application.styles.FontLoader;
+import application.styles.FontLoader ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.CategoryAxis ;
 import javafx.scene.chart.LineChart ;
@@ -36,13 +36,11 @@ public class GraphGenerator
     ) {
         // axe des abscisses
         CategoryAxis xAxis = new CategoryAxis() ;
-        xAxis.setLabel("Salle") ;
         xAxis.setTickLabelFont(FontLoader.getGraphTickFont()) ;
         xAxis.setAnimated(false) ;
 
         // axe des ordonnées
         NumberAxis yAxis = new NumberAxis() ;
-        yAxis.setLabel(DataTypeUtilities.getFullTitle(pDataType)) ;
         yAxis.setTickLabelFont(FontLoader.getGraphTickFont()) ;
         yAxis.setAnimated(false) ;
 
@@ -95,13 +93,11 @@ public class GraphGenerator
     ) {
         // axe des abscisses
         CategoryAxis xAxis = new CategoryAxis() ;
-        xAxis.setLabel("Salle") ;
         xAxis.setTickLabelFont(FontLoader.getGraphTickFont()) ;
         xAxis.setAnimated(false) ;
 
         // axe des ordonnées
         NumberAxis yAxis = new NumberAxis() ;
-        yAxis.setLabel(DataTypeUtilities.getFullTitle(pDataType)) ;
         yAxis.setTickLabelFont(FontLoader.getGraphTickFont()) ;
         yAxis.setAnimated(false) ;
 

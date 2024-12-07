@@ -65,7 +65,7 @@ public class DataTypeUtilities
         }}) ;
         put("tvoc", new HashMap<>() {{
             put("abbreviation", "TVOC") ;
-            put("full", "Composés organiques volatils totaux") ;
+            put("full", "T.V.O.C.") ;
             put("unit", "µg/m3") ;
             put("evolutionGraphTitle", "Évolution des composés organiques volatils totaux en fonction du temps") ;
         }}) ;

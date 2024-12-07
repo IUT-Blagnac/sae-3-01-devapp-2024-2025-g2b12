@@ -100,7 +100,7 @@ public class FontLoader
     public static Font getGraphTickFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
-        double fontSize = 10 ;
+        double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 }

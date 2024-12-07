@@ -401,13 +401,13 @@ public class DataVisualisationPaneViewController
             {
                 Node bar = data.getNode() ;
                 bar.setOnMouseClicked(event -> {
+                    // récupération de la salle et du type de données à représenter
+                    this.displayedRoom = data.getXValue() ;
+                    this.displayedDataType = pDataType ;
+
                     // désélection de l'en-tête sélectionnée dans la TableView
                     this.selectedHeaderButton.getStyleClass().remove("selected") ;
                     this.selectedHeaderButton = null ;
-
-                    // récupération de la salle et du type de données à représenter
-                    this.displayedRoom = data.getXValue() ;
-                    this.displayedDataType = DataTypeUtilities.getDataTypeByFullTitle(barChart.getYAxis().getLabel()) ;
 
                     // auto-sélection du type de données dans la liste déroulante
                     this.dataTypeListComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;

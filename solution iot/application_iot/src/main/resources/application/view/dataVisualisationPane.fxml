@@ -78,7 +78,7 @@
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
-												<Label text="Colonne 1" styleClass="container-header"/>
+												<Label text="Vue d'ensemble" styleClass="container-header"/>
 												<VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER">
 													<padding>
 														<Insets top="20"/>
@@ -98,12 +98,12 @@
 												<Insets left="20" right="20" top="20" bottom="20"/>
 											</padding>
 											<children>
-												<Label text="Colonne 2" styleClass="container-header"/>
+												<Label text="Détails et graphiques" styleClass="container-header"/>
 												<VBox fx:id="dataTypeListVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" visible="false" managed="false">
 													<padding>
 														<Insets top="20"/>
 													</padding>
-													<ComboBox fx:id="dataTypeListComboBox"/>
+													<ComboBox fx:id="dataTypeListComboBox" maxWidth="220"/>
 												</VBox>
 												<VBox fx:id="graphTitleVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS">
 													<padding>
