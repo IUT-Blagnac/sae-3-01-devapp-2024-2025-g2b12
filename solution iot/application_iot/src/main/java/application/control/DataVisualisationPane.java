@@ -2,7 +2,7 @@ package application.control ;
 
 import application.data.DataLoader ;
 import application.thread.CsvReaderTask ;
-import application.tools.FileReading ;
+import application.tools.DataFileReading ;
 import application.view.DataVisualisationPaneViewController ;
 
 import java.util.concurrent.Executors ;
@@ -51,7 +51,7 @@ public class DataVisualisationPane
         try
         {
             // récupération des types de données à visualiser
-            this.dataTypeList = FileReading.getHeadersFromCSVFile(DataLoader.getDataFile()) ;
+            this.dataTypeList = DataFileReading.getHeaders(DataLoader.getAllRoomDataFile()) ;
 
             // initialisation d'un nouveau stage pour le formulaire
             this.dvpStage = new Stage() ;
@@ -74,7 +74,7 @@ public class DataVisualisationPane
             this.dvpViewController = fxmlLoader.getController() ;
             this.dvpViewController.setStage(this.dvpStage) ;
             this.dvpViewController.setDvpDialogController(this) ;
-            this.dvpViewController.initializeViewElements() ;
+            this.dvpViewController.initializeView() ;
 
             // application des styles à la scène
             this.dvpStage.getScene().getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;

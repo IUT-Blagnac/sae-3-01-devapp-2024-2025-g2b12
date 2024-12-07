@@ -6,7 +6,7 @@ import java.io.File ;
  * Classe d'accès aux données.
  * 
  * Date de dernière modification :
- * - Jeudi 20 novembre 2024 -
+ * - Samedi 7 décembre 2024 -
  * 
  * @author Victor Jockin
  * - Équipe 2B12 -
@@ -14,15 +14,15 @@ import java.io.File ;
 public class DataLoader
 {
     /**
-     * Donne le fichier de données.
+     * Donne le fichier des données de toutes les salles.
      * @return le fichier de données s'il existe, null sinon
      */
-    public static File getDataFile()
+    public static File getAllRoomDataFile()
     {
-        File dataFile = new File("data/data.csv") ;
-        if (dataFile.exists())
+        File allRoomDataFile = new File("data/data.csv") ;
+        if (allRoomDataFile.exists())
         {
-            return dataFile ;
+            return allRoomDataFile ;
         }
         return null ;
     }
@@ -37,6 +37,21 @@ public class DataLoader
         if (alertFile.exists())
         {
             return alertFile ;
+        }
+        return null ;
+    }
+
+    /**
+     * Donne le fichier des données d'une salle.
+     * @param pRoomName le nom d'une salle
+     * @return le fichier d'alertes s'il existe, null sinon
+     */
+    public static File getRoomDataFile(String pRoomName)
+    {
+        File roomDataFile = new File("data/"+pRoomName+".csv") ;
+        if (roomDataFile.exists())
+        {
+            return roomDataFile ;
         }
         return null ;
     }

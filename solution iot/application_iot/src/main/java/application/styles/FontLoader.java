@@ -81,4 +81,26 @@ public class FontLoader
         double fontSize = 20 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
+
+    /**
+     * Donne la typographie (font) de titre de graphique.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getGraphTitleFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 16 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) de marque ("tick") de graphique.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getGraphTickFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 10 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
 }

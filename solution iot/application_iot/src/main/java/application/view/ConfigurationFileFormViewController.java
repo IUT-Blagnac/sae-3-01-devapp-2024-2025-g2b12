@@ -1,7 +1,9 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm;
+import javafx.fxml.FXML;
 import javafx.stage.Stage ;
+import javafx.stage.WindowEvent;
 
 /**
  * Contrôleur de vue du formulaire de paramétrage
@@ -29,10 +31,39 @@ public class ConfigurationFileFormViewController
     }
 
     /**
+     * Initialise la vue.
+     */
+    public void initializeView()
+    {
+        this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
+    }
+
+    /**
      * Affiche la fenêtre.
      */
     public void displayDialog()
     {
         this.stage.showAndWait() ;
+    }
+
+    /**
+     * Gère la fermeture de la fenêtre.
+     * @param e un évènement de fenêtre
+     * @return null
+     */
+    private Object closeWindow(WindowEvent e)
+    {
+        this.doClose() ;
+		e.consume() ;
+		return null ;
+	}
+
+    /**
+     * Ferme la fenêtre.
+     */
+    @FXML
+    private void doClose()
+    {
+        this.stage.close() ;
     }
 }

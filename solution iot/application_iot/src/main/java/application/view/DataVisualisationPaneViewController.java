@@ -4,9 +4,9 @@ import application.control.DataVisualisationPane ;
 import application.data.DataTypeUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
+import application.tools.DataFileReading ;
 import application.tools.GraphGenerator ;
 
-import java.util.ArrayList ;
 import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
@@ -20,6 +20,7 @@ import javafx.geometry.Pos ;
 import javafx.scene.Node ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.LineChart ;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label ;
@@ -32,6 +33,7 @@ import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
+import javafx.stage.WindowEvent ;
 
 /**
  * Contrôleur de vue de la fenêtre de visualisation des données.
@@ -50,8 +52,10 @@ public class DataVisualisationPaneViewController
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
     private ObservableList<DataRow> dataTableViewOList ;
-    private String displayedDataType = null ;
-    private Button selectedHeaderButton = null ;
+
+    private String displayedRoom        = null ;        // la salle affichée dans la vision détaillée
+    private String displayedDataType    = null ;        // le type de données visualisé pour la salle affichée dans la vision détaillée
+    private Button selectedHeaderButton = null ;        // le bouton correspondant au type de données pour toutes les salles affiché dans la vision détaillée
 
     // récupération des éléments graphiques de la vue FXML
     @FXML private HBox root ;
@@ -59,7 +63,11 @@ public class DataVisualisationPaneViewController
     @FXML private VBox dataListContainerVBox ;
     @FXML private VBox dataDetailContainerVBox ;
     @FXML private VBox alertListContainerVBox ;
-    @FXML private VBox graphContainerVBox ;
+    @FXML private VBox dataTypeListVBox ;
+    @FXML private ComboBox<String> dataTypeListComboBox ;
+    @FXML private VBox graphTitleVBox ;
+    @FXML private Label graphTitleLabel ;
+    @FXML private VBox graphVBox ;
     @FXML private VBox alertListVBox ;
     @FXML private TableView<DataRow> dataTableView ;
 
@@ -74,10 +82,12 @@ public class DataVisualisationPaneViewController
     }
 
     /**
-     * Initialise le contrôleur de vue.
+     * Initialise la vue.
      */
-    public void initializeViewElements()
+    public void initializeView()
     {
+        this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
+
         // préchargement des fonts (pour utilisation dans la feuille de style dvp.css)
         Font whFont     = FontLoader.getWindowHeaderFont() ;
         Font chFont     = FontLoader.getContainerHeaderFont() ;
@@ -85,6 +95,7 @@ public class DataVisualisationPaneViewController
         Font cFont      = FontLoader.getContentFont() ;
         Font sdhFont    = FontLoader.getSingleDataHeaderFont() ;
         Font sdFont     = FontLoader.getSingleDataFont() ;
+        Font gtFont     = FontLoader.getGraphTitleFont() ;
 
         // paramétrages des tailles des conteneurs
         this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
@@ -104,7 +115,7 @@ public class DataVisualisationPaneViewController
             Button button = new Button(DataTypeUtilities.getAbbreviation(header)+" ("+DataTypeUtilities.getUnit(header)+")") ;
             button.setId(header) ;
             button.setMinWidth(80) ;
-            button.setFont(thFont) ;
+            button.setFont(FontLoader.getTableHeaderFont()) ;
             button.getStyleClass().add("table-header") ;
             if (header.compareTo("room") == 0)
             {
@@ -124,6 +135,7 @@ public class DataVisualisationPaneViewController
                         this.selectedHeaderButton = button ;
     
                         // affichage d'un graphique de comparaison pour le type de données sélectionné
+                        this.displayedRoom = null ;
                         this.displayedDataType = null ;
                         this.displayComparisonGraph(header) ;
                     }
@@ -140,7 +152,7 @@ public class DataVisualisationPaneViewController
 
             if (i == 0)
             {
-                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName().toUpperCase())) ;
+                tableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName())) ;
                 tableColumn.setCellFactory(
                     c -> new TableCell<DataRow, String>()
                     {
@@ -164,17 +176,43 @@ public class DataVisualisationPaneViewController
         // initialisation d'un écouteur d'évènements sur les lignes de la TableView
         this.dataTableView.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> {
-                // mise à jour de l'en-tête sélectionnée
-                if (this.selectedHeaderButton != null)
+                if (newValue != null)
                 {
-                    this.selectedHeaderButton.getStyleClass().remove("selected") ;
-                    this.selectedHeaderButton = null ;
-                }
+                    // mise à jour de l'en-tête sélectionnée
+                    if (this.selectedHeaderButton != null)
+                    {
+                        this.selectedHeaderButton.getStyleClass().remove("selected") ;
+                        this.selectedHeaderButton = null ;
+                    }
 
-                // affichage d'un graphique d'évolution pour la salle sélectionnée
-                if (newValue != null) { this.displayEvolutionGraph(newValue.getName(), this.displayedDataType) ; }
+                    // affichage d'un graphique d'évolution pour la salle sélectionnée
+                    this.displayedRoom = newValue.getName() ;
+                    if (newValue != null) { this.displayEvolutionGraph(newValue.getName(), this.displayedDataType) ; }
+                }
             }
         ) ;
+
+        // initialisation de la liste déroulante des types de données
+        // (quand affichage d'un graphique d'évolution)
+        this.dataTypeListComboBox.getItems().clear() ;
+        this.dataTypeListComboBox.getItems().addAll(
+            DataTypeUtilities.getAllFullTitles(
+                this.dvpDialogController.getDataTypeList().subList(1, this.dvpDialogController.getDataTypeList().size())
+            )
+        ) ;
+        this.dataTypeListComboBox.setOnAction(event -> {
+            if (    this.dataTypeListComboBox.isFocused()
+                &&  this.dataTypeListComboBox.getSelectionModel().getSelectedItem() != null
+            ) {
+                this.displayedDataType = DataTypeUtilities.getDataTypeByFullTitle(
+                    this.dataTypeListComboBox.getSelectionModel().getSelectedItem()
+                ) ;
+                this.displayEvolutionGraph(this.displayedRoom, this.displayedDataType) ;
+            }
+        }) ;
+
+        // initialisation des styles label titre de graphique
+        this.graphTitleLabel.setFont(FontLoader.getGraphTitleFont()) ;
     }
 
     /**
@@ -184,6 +222,18 @@ public class DataVisualisationPaneViewController
     {
         this.stage.show() ;
     }
+
+    /**
+     * Gère la fermeture de la fenêtre.
+     * @param e un évènement de fenêtre
+     * @return null
+     */
+    private Object closeWindow(WindowEvent e)
+    {
+        this.doClose() ;
+		e.consume() ;
+		return null ;
+	}
 
     /**
      * Met à jour / Rafraîchit l'affichage des données.
@@ -303,15 +353,24 @@ public class DataVisualisationPaneViewController
 
             this.alertListVBox.getChildren().add(alertContainer) ;
         }
-
-        System.out.println("- Mise à jour de l'affichage des alertes -") ;
-        System.out.println(alertMap) ;
     }
 
+    /**
+     * Ouvre la fenêtre de paramétrage de la configuration.
+     */
     @FXML
     private void doConfiguration()
     {
         this.dvpDialogController.parametrerConfiguration() ;
+    }
+
+    /**
+     * Ferme la fenêtre.
+     */
+    @FXML
+    private void doClose()
+    {
+        this.stage.close() ;
     }
 
     /**
@@ -320,15 +379,54 @@ public class DataVisualisationPaneViewController
      */
     private void displayComparisonGraph(String pDataType)
     {
+        this.dataTypeListVBox.setVisible(false) ;
+        this.dataTypeListVBox.setManaged(false) ;
+
+        this.graphTitleLabel.setText(DataTypeUtilities.getComparisonGraphTitle(pDataType)) ;
+
         Map<String, String> dataMap = new HashMap<>() ;
         for (DataRow dataRow : this.dataTableViewOList)
         {
             dataMap.put(dataRow.getName(), dataRow.getData().get(pDataType)) ;
         }
         BarChart<String, Number> barChart = GraphGenerator.GenerateBarChart(dataMap, pDataType) ;
-        barChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
-        this.graphContainerVBox.getChildren().clear() ;
-        this.graphContainerVBox.getChildren().add(barChart) ;
+        barChart.maxWidthProperty().bind(this.graphVBox.widthProperty()) ;
+        this.graphVBox.getChildren().clear() ;
+        this.graphVBox.getChildren().add(barChart) ;
+
+        // initialisation d'un écouteur d'évènements sur les barres du diagramme
+        for (XYChart.Series<String, Number> dataSeries : barChart.getData())
+        {
+            for (XYChart.Data<String, Number> data : dataSeries.getData())
+            {
+                Node bar = data.getNode() ;
+                bar.setOnMouseClicked(event -> {
+                    // désélection de l'en-tête sélectionnée dans la TableView
+                    this.selectedHeaderButton.getStyleClass().remove("selected") ;
+                    this.selectedHeaderButton = null ;
+
+                    // récupération de la salle et du type de données à représenter
+                    this.displayedRoom = data.getXValue() ;
+                    this.displayedDataType = DataTypeUtilities.getDataTypeByFullTitle(barChart.getYAxis().getLabel()) ;
+
+                    // auto-sélection du type de données dans la liste déroulante
+                    this.dataTypeListComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;
+
+                    // auto-sélection de la ligne de la TableView correspondant à la salle à représenter
+                    for (DataRow dataRow : this.dataTableViewOList)
+                    {
+                        if (dataRow.getName().equals(this.displayedRoom))
+                        {
+                            this.dataTableView.getSelectionModel().select(dataRow) ;
+                            break ;
+                        }
+                    }
+
+                    // affichage du graphique d'évolution
+                    this.displayEvolutionGraph(this.displayedRoom, this.displayedDataType) ;
+                }) ;
+            }
+        }
     }
 
     /**
@@ -338,48 +436,28 @@ public class DataVisualisationPaneViewController
      */
     private void displayEvolutionGraph(String pRoom, String pDataType)
     {
+        this.dataTypeListVBox.setManaged(true) ;
+        this.dataTypeListVBox.setVisible(true) ;
+
         if (pDataType == null)
         {
             this.displayedDataType = this.dvpDialogController.getDataTypeList().get(1) ;
-
-            this.graphContainerVBox.getChildren().clear() ;
-
-            ComboBox<String> dataTypeComboBox = new ComboBox<>() ;
-            List<String> dataTypeList = this.dvpDialogController.getDataTypeList() ;
-            for (int i = 1 ; i < dataTypeList.size() ; i++)
-            {
-                dataTypeComboBox.getItems().add(DataTypeUtilities.getFullTitle(dataTypeList.get(i))) ;
-            }
-            dataTypeComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;
-            dataTypeComboBox.setOnAction(event -> {
-                this.displayedDataType = DataTypeUtilities.getDataTypeByFullTitle(
-                    dataTypeComboBox.getSelectionModel().getSelectedItem()
-                ) ;
-                this.displayEvolutionGraph(pRoom, this.displayedDataType) ;
-            }) ;
-
-            this.graphContainerVBox.getChildren().add(dataTypeComboBox) ;
+            this.dataTypeListComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;
         }
         else
         {
             this.displayedDataType = pDataType ;
         }
 
-        for (Node node : this.graphContainerVBox.getChildren())
-        {
-            if (node instanceof LineChart)
-            {
-                graphContainerVBox.getChildren().remove(node) ;
-                break ;
-            }
-        }
+        this.graphTitleLabel.setText(DataTypeUtilities.getEvolutionGraphTitle(this.displayedDataType)) ;
 
-        List<Number> data = new ArrayList<>() ; data.add(12) ; data.add(43) ; data.add(27) ;
-        LineChart<String, Number> lineChart = GraphGenerator.GenerateLineChart(data, pRoom, this.displayedDataType, 5.0) ;
-        System.out.println("- Affichage graphique d'évolution -") ;
-        System.out.println(pRoom+" : "+this.displayedDataType) ;
-        System.out.println(DataTypeUtilities.getEvolutionGraphTitle(this.displayedDataType)) ;
-        lineChart.maxWidthProperty().bind(this.graphContainerVBox.widthProperty()) ;
-        this.graphContainerVBox.getChildren().add(lineChart) ;
+        this.graphVBox.getChildren().clear() ;
+        LineChart<String, Number> lineChart = GraphGenerator.GenerateLineChart(
+            DataFileReading.getHistory(pRoom, this.displayedDataType),
+            pRoom,
+            this.displayedDataType, 5.0
+        ) ;
+        lineChart.maxWidthProperty().bind(this.graphVBox.widthProperty()) ;
+        this.graphVBox.getChildren().add(lineChart) ;
     }
 }

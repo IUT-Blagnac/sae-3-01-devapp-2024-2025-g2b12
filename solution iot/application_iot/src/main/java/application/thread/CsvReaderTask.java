@@ -55,7 +55,7 @@ public class CsvReaderTask implements Runnable
     private void readDataFile()
     {
         Map<String, Map<String, String>> dataMap = new HashMap<>() ;
-        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(DataLoader.getDataFile()))
+        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(DataLoader.getAllRoomDataFile()))
                 .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).build())
                 .build()
         ) {

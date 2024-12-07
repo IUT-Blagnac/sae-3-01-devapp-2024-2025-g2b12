@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -98,7 +99,19 @@
 											</padding>
 											<children>
 												<Label text="Colonne 2" styleClass="container-header"/>
-												<VBox fx:id="graphContainerVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+												<VBox fx:id="dataTypeListVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" visible="false" managed="false">
+													<padding>
+														<Insets top="20"/>
+													</padding>
+													<ComboBox fx:id="dataTypeListComboBox"/>
+												</VBox>
+												<VBox fx:id="graphTitleVBox" prefWidth="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS">
+													<padding>
+														<Insets top="20"/>
+													</padding>
+													<Label fx:id="graphTitleLabel" maxWidth="300" wrapText="true" textAlignment="CENTER"/>
+												</VBox>
+												<VBox fx:id="graphVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 													<padding>
 														<Insets top="20"/>
 													</padding>

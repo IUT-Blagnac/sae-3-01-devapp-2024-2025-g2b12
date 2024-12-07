@@ -143,3 +143,24 @@
     -fx-min-width: 20px;
     -fx-min-height: 20px;
 }
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-bar {
+    -fx-bar-fill: #00ed96; 
+    -fx-border-width: 0px;
+}
+.chart-bar:hover {
+    -fx-bar-fill: #63ffc4;
+}
+
+
+.chart-line-symbol {
+    -fx-background-color: #444bf8;
+    -fx-background-radius: 5px;
+}
+.chart-line-symbol:hover {
+    -fx-background-color: #2cd2f6;
+}

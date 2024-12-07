@@ -1,6 +1,8 @@
 package application.data ;
 
+import java.util.ArrayList;
 import java.util.HashMap ;
+import java.util.List ;
 import java.util.Map ;
 
 /**
@@ -41,55 +43,55 @@ public class DataTypeUtilities
             put("abbreviation", "T") ;
             put("full", "Température") ;
             put("unit", "°C") ;
-            put("inEvolutionGraphTitle", "de la température") ;
+            put("evolutionGraphTitle", "Évolution de la température en fonction du temps") ;
         }}) ;
         put("humidity", new HashMap<>() {{
             put("abbreviation", "HR") ;
             put("full", "Taux d'humidité") ;
             put("unit", "%") ;
-            put("inEvolutionGraphTitle", "du taux d'humidité") ;
+            put("evolutionGraphTitle", "Évolution du taux d'humidité en fonction du temps") ;
         }}) ;
         put("activity", new HashMap<>() {{
             put("abbreviation", "Act.") ;
             put("full", "Activité") ;
             put("unit", null) ;
-            put("inEvolutionGraphTitle", "de l'activité") ;
+            put("evolutionGraphTitle", "Évolution de l'activité en fonction du temps") ;
         }}) ;
         put("co2", new HashMap<>() {{
             put("abbreviation", "CO2") ;
             put("full", "Concentration de CO2") ;
             put("unit", "ppm") ;
-            put("inEvolutionGraphTitle", "de la concentration de CO2") ;
+            put("evolutionGraphTitle", "Évolution de la concentration de CO2 en fonction du temps") ;
         }}) ;
         put("tvoc", new HashMap<>() {{
             put("abbreviation", "TVOC") ;
             put("full", "Composés organiques volatils totaux") ;
             put("unit", "µg/m3") ;
-            put("inEvolutionGraphTitle", "des composés organiques volatils totaux") ;
+            put("evolutionGraphTitle", "Évolution des composés organiques volatils totaux en fonction du temps") ;
         }}) ;
         put("illumination", new HashMap<>() {{
             put("abbreviation", "ECL") ;
             put("full", "Éclairage") ;
             put("unit", "lx") ;
-            put("inEvolutionGraphTitle", "de l'éclairage") ;
+            put("evolutionGraphTitle", "Évolution de l'éclairage en fonction du temps") ;
         }}) ;
         put("infrared", new HashMap<>() {{
             put("abbreviation", "IR") ;
             put("full", "Infrarouges") ;
             put("unit", null) ;
-            put("inEvolutionGraphTitle", "des infrarouges") ;
+            put("evolutionGraphTitle", "Évolution des infrarouges en fonction du temps") ;
         }}) ;
         put("infrared_and_visible", new HashMap<>() {{
             put("abbreviation", "IR+V") ;
             put("full", "Infrarouges et visibles") ;
             put("unit", null) ;
-            put("inEvolutionGraphTitle", "des infrarouges et visibles") ;
+            put("evolutionGraphTitle", "Évolution des infrarouges et visibles\nen fonction du temps") ;
         }}) ;
         put("pressure", new HashMap<>() {{
             put("abbreviation", "P") ;
             put("full", "Pression atmosphérique") ;
             put("unit", "Pa") ;
-            put("inEvolutionGraphTitle", "de la pression") ;
+            put("evolutionGraphTitle", "Évolution de la pression en fonction du temps") ;
         }}) ;
     }} ;
 
@@ -114,6 +116,21 @@ public class DataTypeUtilities
     }
 
     /**
+     * Donne l'intitulé complet de chaque type de données d'une liste.
+     * @param pDataTypeList une liste de types de données
+     * @return  les intitulés complets des types de données de la liste
+     */
+    public static List<String> getAllFullTitles(List<String> pDataTypeList)
+    {
+        List<String> fullTitleList = new ArrayList<>() ;
+        for (int i = 0 ; i < pDataTypeList.size() ; i++)
+        {
+            fullTitleList.add(DataTypeUtilities.getFullTitle(pDataTypeList.get(i))) ;
+        }
+        return fullTitleList ;
+    }
+
+    /**
      * Donne l'unité d'un type de données.
      * @param pDataType un type de données
      * @return  l'unité du type de données
@@ -130,9 +147,12 @@ public class DataTypeUtilities
      */
     public static String getEvolutionGraphTitle(String pDataType)
     {
-        return  "Évolution "
-            +   dataRepresentationMap.get(pDataType).get("inEvolutionGraphTitle")
-            +   " en fonction du temps" ;
+        return dataRepresentationMap.get(pDataType).get("evolutionGraphTitle") ;
+    }
+
+    public static String getComparisonGraphTitle(String pDataType)
+    {
+        return "MDR !" ;
     }
 
     /**
