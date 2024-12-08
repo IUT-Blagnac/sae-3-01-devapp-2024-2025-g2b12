@@ -29,12 +29,34 @@ seuils = {
 # configuration du logging
 logging.basicConfig(level=logging.DEBUG)
 
+def clear_csv_files():
+    # Vider le fichier global
+    data_file = 'application_iot/data/data.csv'
+    with open(data_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=';')
+        writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
+
+    # Vider le fichier d'alertes
+    alert_file = 'application_iot/data/alert.csv'
+    with open(alert_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=';')
+        writer.writerow(['room', 'dataType', 'threshold', 'measuredValue'])
+
+    # Vider les fichiers de chaque salle
+    for sujet in sujets:
+        room_file = f'application_iot/data/{sujet}.csv'
+        with open(room_file, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=';')
+            writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
+
+# Vider les fichiers CSV au démarrage
+clear_csv_files()
+
 def on_connect(client, userdata, flags, reason_code, properties=None):
     logging.info(f"Connected with result code : {reason_code}")
     # abonnement aux topics
     for sujet in sujets:
-        #topic = f"{base_topic}{sujet}/#"
-        topic = f"{base_topic}#"
+        topic = f"{base_topic}{sujet}/#"
         logging.info(f"Subscribing to topic: {topic}")
         client.subscribe(topic)
 
@@ -60,7 +82,7 @@ def on_message(client, userdata, message):
             print(f"Infrarouge et visible : {infrared_and_visible}")
 
             # Lire les données existantes de data.csv
-            data_file = 'application_iot\data\\data.csv'
+            data_file = 'application_iot/data/data.csv'
             data_dict = {}
             if os.path.isfile(data_file):
                 with open(data_file, 'r', newline='') as csvfile:
@@ -87,7 +109,7 @@ def on_message(client, userdata, message):
                     writer.writerow(row)
 
             # Mise à jour du fichier de la salle
-            room_file = f'application_iot\data\\{room}.csv'
+            room_file = f'application_iot/data/{room}.csv'
             file_exists = os.path.isfile(room_file)
             with open(room_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';')
@@ -109,7 +131,7 @@ def on_message(client, userdata, message):
                 alerts.append([room, 'infrared_and_visible', seuils['infrared_and_visible'], infrared_and_visible])
 
             if alerts:
-                with open('application_iot\data\\alert.csv', 'a', newline='') as csvfile:
+                with open('application_iot/data/alert.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile, delimiter=';')
                     for alert in alerts:
                         writer.writerow(alert)

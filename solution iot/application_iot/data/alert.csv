@@ -1,16 +1,1 @@
-Foyer-personnels;temperature;10.0;17.3
-Foyer-personnels;humidity;20.0;43
-Foyer-personnels;co2;100.0;413
-Foyer-personnels;tvoc;10.0;43
-B202;temperature;10.0;18.5
-B202;humidity;20.0;43
-B202;co2;100.0;425
-B202;tvoc;10.0;12
-Local-velo;humidity;20.0;85.5
-Local-velo;co2;100.0;439
-Local-velo;tvoc;10.0;1237
-Local-velo;infrared_and_visible;10.0;248
-C004;temperature;10.0;17.1
-C004;humidity;20.0;49
-C004;co2;100.0;413
-C004;tvoc;10.0;32
+room;dataType;threshold;measuredValue
