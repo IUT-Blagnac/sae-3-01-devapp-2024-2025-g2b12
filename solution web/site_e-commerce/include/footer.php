@@ -29,7 +29,7 @@
         <div class="col-md-3">
             Contact<br>
             <p>Contact : Whoop-Resell.PME@etu.fr</p>
-            <p>Numéro : 04 83 82 02 03</p>
+            <p>Numero : 04 83 82 02 03</p>
         </div>
     </div>
 </footer>
