@@ -1,0 +1,28 @@
+/*
+    Feuille de style du formulaire de paramétrage d'un fichier de configuration
+    Cf. configurationFileForm.fxml
+
+    auteur : Victor Jockin
+    - Équipe 2B12 -
+*/
+
+.main-content {
+    -fx-background-color: #eee;
+}
+
+.window-header {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 28px;
+    -fx-text-fill: #000;
+}
+
+.container {
+    -fx-background-color: #fff;
+    -fx-border-radius: 0;
+    -fx-background-radius: 15;
+}
+.container-header {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000;
+}

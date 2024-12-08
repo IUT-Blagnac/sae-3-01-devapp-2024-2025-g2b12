@@ -16,6 +16,33 @@ public class FontLoader
     // déclaration des constantes
     private static final String FONT_DIRECTORY_PATH = "/application/font/Poppins/" ;
 
+
+    /*
+     * FONTS BRUTES
+     */
+
+    /**
+     * Donne la typographie (font) en gras.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getBoldFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
+        double fontSize = 10 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) en semi-gras.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getSemiBoldFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
+        double fontSize = 10 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
     /**
      * Donne la typographie (font) d'en-tête de fenêtre.
      * @return  la typographie (objet de type Font)
