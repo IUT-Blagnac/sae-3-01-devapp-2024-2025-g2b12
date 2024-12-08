@@ -55,8 +55,8 @@ public class UpdateAlertDisplayTask implements Runnable
     {
         Map<String, Map<String, String>> alertMap = this.dvpDialogController.getAlertMap() ;
 
-        VBox mainContainer = new VBox() ;
-        mainContainer.setSpacing(20) ;
+        VBox alertListContainer = new VBox() ;
+        alertListContainer.setSpacing(20) ;
 
         int displayedAlertNumber = 0 ;
         for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
@@ -153,7 +153,7 @@ public class UpdateAlertDisplayTask implements Runnable
             VBox.setMargin(alertHeader, new Insets(20, 20, 0, 20)) ;
             VBox.setMargin(alertContent, new Insets(0, 20, 20, 20)) ;
 
-            mainContainer.getChildren().add(alertContainer) ;
+            alertListContainer.getChildren().add(alertContainer) ;
 
             displayedAlertNumber++ ;
 
@@ -162,7 +162,7 @@ public class UpdateAlertDisplayTask implements Runnable
 
         Platform.runLater(() -> {
             this.alertListVBox.getChildren().clear() ;
-            this.alertListVBox.getChildren().add(mainContainer) ;
+            this.alertListVBox.getChildren().add(alertListContainer) ;
         });
     }
 }
