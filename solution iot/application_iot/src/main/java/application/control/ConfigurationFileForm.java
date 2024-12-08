@@ -1,6 +1,10 @@
 package application.control ;
 
+import application.data.DataLoader ;
+import application.data.RoomEnum ;
 import application.view.ConfigurationFileFormViewController ;
+
+import java.util.List ;
 
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
@@ -21,6 +25,7 @@ public class ConfigurationFileForm
     // déclaration des attributs
     private Stage cffStage ;
     private ConfigurationFileFormViewController cffViewController ;
+    private List<RoomEnum> roomList ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -29,6 +34,9 @@ public class ConfigurationFileForm
     {
         try
         {
+            // initialisation des attributs
+            this.roomList = DataLoader.getRoomList() ;
+
             // initialisation d'un nouveau stage pour le formulaire
             this.cffStage = new Stage() ;
             this.cffStage.initOwner(_stageParent) ;
@@ -57,6 +65,18 @@ public class ConfigurationFileForm
         }
     }
 
+    /**
+     * Accesseur : donne la liste des salles existantes.
+     * @return  la liste des salles existantes
+     */
+    public List<RoomEnum> getRoomList()
+    {
+        return this.roomList ;
+    }
+
+    /**
+     * Effectue le dialogue de paramétrage d'un fichier de configuration.
+     */
     public void doConfigurationFileFormDialog()
     {
         this.cffViewController.displayDialog() ;

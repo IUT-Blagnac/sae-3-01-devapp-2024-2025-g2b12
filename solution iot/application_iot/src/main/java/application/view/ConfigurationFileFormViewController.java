@@ -2,8 +2,9 @@ package application.view ;
 
 import application.control.ConfigurationFileForm ;
 import application.styles.FontLoader ;
+
 import javafx.fxml.FXML ;
-import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
 import javafx.stage.WindowEvent ;
@@ -23,6 +24,9 @@ public class ConfigurationFileFormViewController
     private Stage stage ;
     private ConfigurationFileForm cffDialogController ;
 
+    // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    @FXML private GridPane roomListGridPane ;
+
     public void setStage(Stage _stage)
     {
         this.stage = _stage ;
@@ -41,6 +45,8 @@ public class ConfigurationFileFormViewController
         // préchargement des fonts (pour utilisation dans la feuille de style cff.css)
         Font boldFont       = FontLoader.getBoldFont() ;
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
+
+        System.out.println(this.cffDialogController.getRoomList()) ;
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
