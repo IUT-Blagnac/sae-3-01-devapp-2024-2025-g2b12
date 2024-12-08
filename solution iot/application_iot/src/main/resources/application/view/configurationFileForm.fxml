@@ -17,9 +17,9 @@
                         <Label text="Configuration" styleClass="window-header"/>
                     </children>
                 </HBox>
-                <VBox>
+                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox styleClass="container">
+                        <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                             <children>
                                 <VBox>
                                     <padding>
@@ -33,6 +33,11 @@
                         </VBox>
                     </children>
                 </VBox>
+                <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Configuration" styleClass="window-header"/>
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>

@@ -1,6 +1,8 @@
 package application.data ;
 
 import java.io.File ;
+import java.util.Arrays ;
+import java.util.List ;
 
 /**
  * Classe d'accès aux données.
@@ -54,5 +56,14 @@ public class DataLoader
             return roomDataFile ;
         }
         return null ;
+    }
+
+    /**
+     * Donne la liste des salles existantes.
+     * @return  la liste des salles
+     */
+    public static List<RoomEnum> getRoomList()
+    {
+        return Arrays.asList(RoomEnum.values()) ;
     }
 }

@@ -21,6 +21,7 @@ public class ConfigurationFileForm
     // déclaration des attributs
     private Stage cffStage ;
     private ConfigurationFileFormViewController cffViewController ;
+    private List<RoomEnum>
 
     /**
      * Constructeur : charge le formulaire.
