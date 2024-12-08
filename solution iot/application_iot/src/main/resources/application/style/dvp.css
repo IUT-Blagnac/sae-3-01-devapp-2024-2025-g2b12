@@ -49,14 +49,18 @@
     -fx-background: #fff;
 }
 .table-row-cell:hover {
-    -fx-background-color: #0078d4;
-    -fx-text-fill: white;
+    -fx-background-color: #444cf8;
+}
+.table-row-cell:hover .table-cell {
+    -fx-text-fill: #fff;
 }
 .table-row-cell:empty:hover {
     -fx-background-color: transparent;
 }
 .table-row-cell:selected {
-    -fx-background-color: #000;
+    -fx-background-color: #242630;
+}
+.table-row-cell:selected .table-cell {
     -fx-text-fill: #fff;
 }
 .table-view .scroll-bar .track {
@@ -66,10 +70,13 @@
     -fx-background-color: transparent;
 }
 .table-view .scroll-bar .thumb {
-    -fx-background-color: #0078d4;
+    -fx-background-color: #242630;
     -fx-background-radius: 10;
     -fx-min-width: 20px;
     -fx-min-height: 20px;
+}
+.table-view .scroll-bar .thumb:hover {
+    -fx-background-color: #33353f;
 }
 
 .table-header {
@@ -79,19 +86,20 @@
     -fx-text-fill: #000;
 }
 .table-header:hover {
-    -fx-background-color: #bbb;
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
 }
 .table-header.selected {
-    -fx-background-color: #555;
+    -fx-background-color: #242630;
     -fx-text-fill: #fff;
 }
 .table-header.not-clickable:hover {
     -fx-background-color: #ddd;
 }
+
 .first-table-column {
     -fx-font-family: "Poppins Bold";
     -fx-font-size: 14px;
-    -fx-text-fill: #000;
 }
 
 .side-menu-button-label {
@@ -140,10 +148,13 @@
     -fx-background-color: transparent;
 }
 .scroll-pane .scroll-bar .thumb {
-    -fx-background-color: #0078d4;
+    -fx-background-color: #242630;
     -fx-background-radius: 10;
     -fx-min-width: 20px;
     -fx-min-height: 20px;
+}
+.scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: #33353f;
 }
 
 .combo-box {
@@ -204,4 +215,10 @@
 }
 .chart-line-symbol:hover {
     -fx-background-color: #2cd2f6;
+}
+
+.no-info-label {
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000;
 }

@@ -45,6 +45,7 @@ public class DataTypeUtilities
             put("unit", "°C") ;
             put("evolutionGraphTitle", "Évolution de la température en fonction du temps") ;
             put("comparisonGraphTitle", "Températures par salle") ;
+            put("alert", "Alerte température") ;
         }}) ;
         put("humidity", new HashMap<>() {{
             put("abbreviation", "HR") ;
@@ -52,6 +53,7 @@ public class DataTypeUtilities
             put("unit", "%") ;
             put("evolutionGraphTitle", "Évolution du taux d'humidité en fonction du temps") ;
             put("comparisonGraphTitle", "Taux d'humidité par salle") ;
+            put("alert", "Alerte HR") ;
         }}) ;
         put("activity", new HashMap<>() {{
             put("abbreviation", "Act.") ;
@@ -59,6 +61,7 @@ public class DataTypeUtilities
             put("unit", null) ;
             put("evolutionGraphTitle", "Évolution de l'activité en fonction du temps") ;
             put("comparisonGraphTitle", "Activités par salle") ;
+            put("alert", "Alerte activité") ;
         }}) ;
         put("co2", new HashMap<>() {{
             put("abbreviation", "CO2") ;
@@ -66,13 +69,15 @@ public class DataTypeUtilities
             put("unit", "ppm") ;
             put("evolutionGraphTitle", "Évolution de la concentration de CO2 en fonction du temps") ;
             put("comparisonGraphTitle", "Concentrations de CO2 par salle") ;
+            put("alert", "Alerte CO2") ;
         }}) ;
         put("tvoc", new HashMap<>() {{
             put("abbreviation", "TVOC") ;
             put("full", "T.V.O.C.") ;
-            put("unit", "µg/m3") ;
+            put("unit", "µg/m³") ;
             put("evolutionGraphTitle", "Évolution des composés organiques volatils totaux en fonction du temps") ;
             put("comparisonGraphTitle", "Composés organiques volatils totaux par salle") ;
+            put("alert", "Alerte T.V.O.C.") ;
         }}) ;
         put("illumination", new HashMap<>() {{
             put("abbreviation", "ECL") ;
@@ -80,6 +85,7 @@ public class DataTypeUtilities
             put("unit", "lx") ;
             put("evolutionGraphTitle", "Évolution de l'éclairage en fonction du temps") ;
             put("comparisonGraphTitle", "Éclairages par salle") ;
+            put("alert", "Alerte éclairage") ;
         }}) ;
         put("infrared", new HashMap<>() {{
             put("abbreviation", "IR") ;
@@ -87,6 +93,7 @@ public class DataTypeUtilities
             put("unit", null) ;
             put("evolutionGraphTitle", "Évolution des infrarouges en fonction du temps") ;
             put("comparisonGraphTitle", "Infrarouges par salle") ;
+            put("alert", "Alerte I.R.") ;
         }}) ;
         put("infrared_and_visible", new HashMap<>() {{
             put("abbreviation", "IR+V") ;
@@ -94,6 +101,7 @@ public class DataTypeUtilities
             put("unit", null) ;
             put("evolutionGraphTitle", "Évolution des infrarouges et visibles en fonction du temps") ;
             put("comparisonGraphTitle", "infrarouges et visibles par salle") ;
+            put("alert", "Alerte I.R. + V.") ;
         }}) ;
         put("pressure", new HashMap<>() {{
             put("abbreviation", "P") ;
@@ -101,6 +109,7 @@ public class DataTypeUtilities
             put("unit", "Pa") ;
             put("evolutionGraphTitle", "Évolution de la pression en fonction du temps") ;
             put("comparisonGraphTitle", "Pressions par salle") ;
+            put("alert", "Alerte pression") ;
         }}) ;
     }} ;
 
@@ -167,6 +176,16 @@ public class DataTypeUtilities
     public static String getComparisonGraphTitle(String pDataType)
     {
         return DATA_REPRESENTATION_MAP.get(pDataType).get("comparisonGraphTitle") ;
+    }
+
+    /**
+     * Donne le titre pour une alerte concernant un type de données.
+     * @param pDataType un type de données
+     * @return  le titre pour une alerte
+     */
+    public static String getAlertTitle(String pDataType)
+    {
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("alert") ;
     }
 
     /**

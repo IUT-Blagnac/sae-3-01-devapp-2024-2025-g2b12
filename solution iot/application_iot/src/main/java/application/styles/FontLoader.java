@@ -6,7 +6,7 @@ import javafx.scene.text.Font ;
  * Classe d'accès aux typographiques (fonts) de l'application.
  * 
  * Date de dernière modification :
- * - Samdei 30 novembre 2024 -
+ * - Dimanche 8 décembre 2024 -
  * 
  * @author Victor Jockin
  * - Équipe 2B12 -
@@ -60,6 +60,38 @@ public class FontLoader
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
+
+    /*
+     * FONTS POUR ALERTES
+     */
+
+    /**
+     * Donne la typographie (font) de titre d'alerte.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getAlertTitleFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) de sous-titre alerte.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getAlertSubtitleFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    
+    /*
+     * FONTS POUR DONNÉE UNIQUE
+     */
+
     /**
      * Donne la typographie (font) d'en-tête de donnée unique.
      * @return  la typographie (objet de type Font)
@@ -81,6 +113,22 @@ public class FontLoader
         double fontSize = 20 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
+
+    /**
+     * Donne la typographie (font) d'unité de donnée unique.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getSingleDataUnitFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+
+    /*
+     * FONTS POUR GRAPHIQUES
+     */
 
     /**
      * Donne la typographie (font) de titre de graphique.
