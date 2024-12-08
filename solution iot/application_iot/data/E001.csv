@@ -1,0 +1,4 @@
+room;temperature;humidity;co2;tvoc;infrared_and_visible
+E001;17.1;48;424;125;12
+E001;17.1;48;423;129;10
+E001;17.1;48;427;135;8
