@@ -62,8 +62,17 @@ public class DataLoader
      * Donne la liste des salles existantes.
      * @return  la liste des salles
      */
-    public static List<RoomEnum> getRoomList()
+    public static List<Room> getRoomList()
     {
-        return Arrays.asList(RoomEnum.values()) ;
+        return Arrays.asList(Room.values()) ;
+    }
+
+    /**
+     * Donne la liste des types de données des salles
+     * @return  la liste des types de données
+     */
+    public static List<RoomDataType> getRoomDataTypeList()
+    {
+        return Arrays.asList(RoomDataType.values()) ;
     }
 }

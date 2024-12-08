@@ -43,6 +43,8 @@ public class FontLoader
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
+
+
     /**
      * Donne la typographie (font) d'en-tête de fenêtre.
      * @return  la typographie (objet de type Font)
@@ -81,6 +83,33 @@ public class FontLoader
      * @return  la typographie (objet de type Font)
      */
     public static Font getContentFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+
+    /*
+     * FONTS POUR BOUTONS
+     */
+
+    /**
+     * Donne la typographie (font) de grand bouton.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getBigButtonFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 18 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
+
+    /**
+     * Donne la typographie (font) de petit bouton.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getLittleButtonFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
         double fontSize = 14 ;

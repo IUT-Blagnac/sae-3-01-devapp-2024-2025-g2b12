@@ -1,6 +1,6 @@
 package application.data ;
 
-import java.util.ArrayList;
+import java.util.ArrayList ;
 import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
@@ -43,6 +43,7 @@ public class DataTypeUtilities
             put("abbreviation", "T") ;
             put("full", "Température") ;
             put("unit", "°C") ;
+            put("defaultThreshold", "27") ;
             put("evolutionGraphTitle", "Évolution de la température en fonction du temps") ;
             put("comparisonGraphTitle", "Températures par salle") ;
             put("alert", "Alerte température") ;
@@ -51,6 +52,7 @@ public class DataTypeUtilities
             put("abbreviation", "HR") ;
             put("full", "Taux d'humidité") ;
             put("unit", "%") ;
+            put("defaultThreshold", "80") ;
             put("evolutionGraphTitle", "Évolution du taux d'humidité en fonction du temps") ;
             put("comparisonGraphTitle", "Taux d'humidité par salle") ;
             put("alert", "Alerte HR") ;
@@ -59,6 +61,7 @@ public class DataTypeUtilities
             put("abbreviation", "Act.") ;
             put("full", "Activité") ;
             put("unit", null) ;
+            put("defaultThreshold", "100") ;
             put("evolutionGraphTitle", "Évolution de l'activité en fonction du temps") ;
             put("comparisonGraphTitle", "Activités par salle") ;
             put("alert", "Alerte activité") ;
@@ -67,6 +70,7 @@ public class DataTypeUtilities
             put("abbreviation", "CO2") ;
             put("full", "Concentration de CO2") ;
             put("unit", "ppm") ;
+            put("defaultThreshold", "1000") ;
             put("evolutionGraphTitle", "Évolution de la concentration de CO2 en fonction du temps") ;
             put("comparisonGraphTitle", "Concentrations de CO2 par salle") ;
             put("alert", "Alerte CO2") ;
@@ -75,6 +79,7 @@ public class DataTypeUtilities
             put("abbreviation", "TVOC") ;
             put("full", "T.V.O.C.") ;
             put("unit", "µg/m³") ;
+            put("defaultThreshold", "500") ;
             put("evolutionGraphTitle", "Évolution des composés organiques volatils totaux en fonction du temps") ;
             put("comparisonGraphTitle", "Composés organiques volatils totaux par salle") ;
             put("alert", "Alerte T.V.O.C.") ;
@@ -83,6 +88,7 @@ public class DataTypeUtilities
             put("abbreviation", "ECL") ;
             put("full", "Éclairage") ;
             put("unit", "lx") ;
+            put("defaultThreshold", "500") ;
             put("evolutionGraphTitle", "Évolution de l'éclairage en fonction du temps") ;
             put("comparisonGraphTitle", "Éclairages par salle") ;
             put("alert", "Alerte éclairage") ;
@@ -91,6 +97,7 @@ public class DataTypeUtilities
             put("abbreviation", "IR") ;
             put("full", "Infrarouges") ;
             put("unit", null) ;
+            put("defaultThreshold", "20") ;
             put("evolutionGraphTitle", "Évolution des infrarouges en fonction du temps") ;
             put("comparisonGraphTitle", "Infrarouges par salle") ;
             put("alert", "Alerte I.R.") ;
@@ -99,6 +106,7 @@ public class DataTypeUtilities
             put("abbreviation", "IR+V") ;
             put("full", "Infrarouges et visibles") ;
             put("unit", null) ;
+            put("defaultThreshold", "20") ;
             put("evolutionGraphTitle", "Évolution des infrarouges et visibles en fonction du temps") ;
             put("comparisonGraphTitle", "infrarouges et visibles par salle") ;
             put("alert", "Alerte I.R. + V.") ;
@@ -107,6 +115,7 @@ public class DataTypeUtilities
             put("abbreviation", "P") ;
             put("full", "Pression atmosphérique") ;
             put("unit", "Pa") ;
+            put("defaultThreshold", "121325") ;
             put("evolutionGraphTitle", "Évolution de la pression en fonction du temps") ;
             put("comparisonGraphTitle", "Pressions par salle") ;
             put("alert", "Alerte pression") ;
@@ -186,6 +195,11 @@ public class DataTypeUtilities
     public static String getAlertTitle(String pDataType)
     {
         return DATA_REPRESENTATION_MAP.get(pDataType).get("alert") ;
+    }
+
+    public static String getDefaultThreshold(String pDataType)
+    {
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("defaultThreshold") ;
     }
 
     /**

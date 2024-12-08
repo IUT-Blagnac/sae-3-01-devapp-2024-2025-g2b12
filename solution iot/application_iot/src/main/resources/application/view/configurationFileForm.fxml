@@ -1,57 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="root" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="main-content" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationFileFormViewController">
+<VBox fx:id="root" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationFileFormViewController">
     <children>
         <VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
             <padding>
-                <Insets left="20" right="20" top="20" bottom="20"/>
+                <Insets left="20" right="0" top="20" bottom="20"/>
             </padding>
             <children>
                 <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets right="20"/>
+                    </padding>
                     <children>
                         <Label text="Configuration" styleClass="window-header"/>
                     </children>
                 </HBox>
-                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
-                    <children>
-                        <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                <ScrollPane fitToWidth="true" fitToHeight="true" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+                    <content>
+                        <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20" styleClass="main-content">
                             <children>
-                                <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                        <Insets left="20" right="20" top="20" bottom="20"/>
-                                    </padding>
+                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
-                                        <Label text="Topic" styleClass="container-header"/>
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <padding>
+                                                <Insets left="20" right="20" top="20" bottom="20"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Topic" styleClass="container-header"/>
+                                            </children>
+                                        </VBox>
                                     </children>
                                 </VBox>
-                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
-                            <children>
-                                <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                        <Insets left="20" right="20" top="20" bottom="20"/>
-                                    </padding>
+                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
-                                        <Label text="Salles" styleClass="container-header"/>
-                                        <VBox fx:id="roomListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                            <GridPane fx:id="roomListGridPane" alignment="CENTER" hgap="10" vgap="10">
-
-                                            </GridPane>
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                            <padding>
+                                                <Insets left="20" right="20" top="20" bottom="20"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Salles à suivre" styleClass="container-header"/>
+                                                <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <GridPane fx:id="roomListGridPane" alignment="CENTER" hgap="10" vgap="10"/>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                    <children>
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                            <padding>
+                                                <Insets left="20" right="20" top="20" bottom="20"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Données à visualiser" styleClass="container-header"/>
+                                                <VBox fx:id="roomDataTypeListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10"/>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                    <children>
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                            <padding>
+                                                <Insets left="20" right="20" top="20" bottom="20"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Paramètres avancés" styleClass="container-header"/>
+                                                <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10">
+                                                    <children>
+                                                        <Label text="Fréquence de lecture des données"/>
+                                                        <TextField fx:id="frequencyTextField" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
                                         </VBox>
                                     </children>
                                 </VBox>
                             </children>
                         </VBox>
+                    </content>
+                </ScrollPane>
+                <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="20">
+                    <padding>
+                        <Insets right="20"/>
+                    </padding>
+                    <children>
+                        <Button fx:id="closeButton" onAction="#doClose" text="Fermer" prefWidth="300" maxWidth="Infinity" minHeight="50" prefHeight="50" styleClass="lower-menu"/>
+                        <Button fx:id="resetButton" onAction="#doReset" text="Réinitialiser" prefWidth="300" maxWidth="Infinity" minHeight="50" prefHeight="50" styleClass="lower-menu"/>
+                        <Button fx:id="saveButton" onAction="#doSave" text="Enregistrer" prefWidth="300" maxWidth="Infinity" minHeight="50" prefHeight="50" styleClass="lower-menu"/>
                     </children>
-                </VBox>
+                </HBox>
             </children>
         </VBox>
     </children>
-</HBox>
+</VBox>

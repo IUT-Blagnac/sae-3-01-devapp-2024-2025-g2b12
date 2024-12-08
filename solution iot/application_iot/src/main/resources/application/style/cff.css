@@ -6,14 +6,12 @@
     - Équipe 2B12 -
 */
 
-.main-content {
+.root {
     -fx-background-color: #242630;
 }
 
-.window-header {
-    -fx-font-family: "Poppins Bold";
-    -fx-font-size: 28px;
-    -fx-text-fill: #fff;
+.main-content {
+    -fx-background-color: #242630;
 }
 
 .container {
@@ -21,8 +19,72 @@
     -fx-border-radius: 0;
     -fx-background-radius: 15;
 }
-.container-header {
+
+.label {
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+.label.window-header {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 28px;
+    -fx-text-fill: #fff;
+}
+.label.container-header {
     -fx-font-family: "Poppins SemiBold";
     -fx-font-size: 18px;
     -fx-text-fill: #fff;
+}
+
+.button {
+    -fx-background-color: #242630;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 0;
+    -fx-background-radius: 5;
+}
+.button.lower-menu {
+    -fx-font-size: 18px;
+}
+.button:hover {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.button:pressed {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.button.selected {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.button.selected:hover {
+    -fx-background-color: #2d2bd4;
+    -fx-text-fill: #fff;
+}
+
+.scroll-pane {
+    -fx-background-color: #242630;
+}
+.scroll-pane .viewport {
+    -fx-background-color: #242630;
+}
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-pane .scroll-bar:vertical {
+    -fx-pref-width: 20px;
+}
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: transparent;
+}
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: #33353f;
+    -fx-background-radius: 10;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+}
+.scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: #33353f;
 }

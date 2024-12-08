@@ -1,7 +1,8 @@
 package application.control ;
 
 import application.data.DataLoader ;
-import application.data.RoomEnum ;
+import application.data.Room ;
+import application.data.RoomDataType ;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
@@ -22,10 +23,15 @@ import javafx.stage.Stage ;
  */
 public class ConfigurationFileForm
 {
+    // déclaration des constantes
+    public static final double DEFAULT_READING_FREQUENCY = 10 ; // fréquence de lecture des données par défaut (en secondes)
+
     // déclaration des attributs
     private Stage cffStage ;
     private ConfigurationFileFormViewController cffViewController ;
-    private List<RoomEnum> roomList ;
+
+    private List<Room> roomList ;
+    private List<RoomDataType> roomDataTypeList ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -35,7 +41,8 @@ public class ConfigurationFileForm
         try
         {
             // initialisation des attributs
-            this.roomList = DataLoader.getRoomList() ;
+            this.roomList           = DataLoader.getRoomList() ;
+            this.roomDataTypeList   = DataLoader.getRoomDataTypeList() ;
 
             // initialisation d'un nouveau stage pour le formulaire
             this.cffStage = new Stage() ;
@@ -46,7 +53,7 @@ public class ConfigurationFileForm
             FXMLLoader fxmlLoader = new FXMLLoader(ConfigurationFileFormViewController.class.getResource("configurationFileForm.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
+            Scene scene = new Scene(fxmlLoader.load(), 700, 600) ;
             this.cffStage.setScene(scene) ;
             this.cffStage.setTitle("Créer une configuration") ;
             this.cffStage.setResizable(false) ;
@@ -70,9 +77,18 @@ public class ConfigurationFileForm
      * Accesseur : donne la liste des salles existantes.
      * @return  la liste des salles existantes
      */
-    public List<RoomEnum> getRoomList()
+    public List<Room> getRoomList()
     {
         return this.roomList ;
+    }
+
+    /**
+     * Accesseur : donne la liste des types de données des salles.
+     * @return  la liste des types de données des salles
+     */
+    public List<RoomDataType> getRoomDataTypeList()
+    {
+        return this.roomDataTypeList ;
     }
 
     /**
