@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($action == 'connexion') {
         $login = $_POST['login'];
         $password = $_POST['password'];
+        $remember = isset($_POST['remember']);
 
         // Vérification des identifiants
         $sql = "SELECT * FROM CLIENT WHERE loginClient=:login OR emailClient=:login";
@@ -72,6 +73,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $row['mdpClient'])) {
                 $_SESSION['user_id'] = $row['idClient'];
                 $_SESSION['login'] = $row['loginClient'];
+
+                if ($remember) {
+                    setcookie('user_id', $row['idClient'], time() + 3600, "/");
+                    setcookie('login', $row['loginClient'], time() + 3600, "/");
+                }
+
                 header("Location: index.php");
             } else {
                 echo "Mot de passe incorrect.";
@@ -82,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($action == 'connexion_admin') {
         $login = $_POST['login'];
         $password = $_POST['password'];
+        $remember = isset($_POST['remember']);
 
         // Vérification des identifiants administrateur
         $sql = "SELECT * FROM ADMIN WHERE loginAdmin=:login OR emailAdmin=:login";
@@ -94,6 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $row['mdpAdmin'])) {
                 $_SESSION['admin_id'] = $row['idAdmin'];
                 $_SESSION['admin_login'] = $row['loginAdmin'];
+
+                if ($remember) {
+                    setcookie('admin_id', $row['idAdmin'], time() + 3600, "/");
+                    setcookie('admin_login', $row['loginAdmin'], time() + 3600, "/");
+                }
+
                 header("Location: admin/espace_administrateur.php");
             } else {
                 echo "Mot de passe incorrect.";
