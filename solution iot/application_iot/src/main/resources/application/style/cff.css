@@ -36,6 +36,13 @@
     -fx-text-fill: #fff;
 }
 
+.text-field {
+    -fx-background-color: #A8B0B2;
+    -fx-font-family: "Poppins Light";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000;
+}
+
 .button {
     -fx-background-color: #242630;
     -fx-font-family: "Poppins Light";

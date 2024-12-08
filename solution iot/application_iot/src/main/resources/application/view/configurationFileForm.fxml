@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,16 +31,34 @@
                             <children>
                                 <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
-                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                             <padding>
                                                 <Insets left="20" right="20" top="20" bottom="20"/>
                                             </padding>
                                             <children>
-                                                <Label text="Topic" styleClass="container-header"/>
+                                                <Label text="Paramètres généraux" styleClass="container-header"/>
+                                                <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                                    <children>
+                                                        <Label text="Nom de la configuration" minWidth="220" minHeight="35"/>
+                                                        <TextField fx:id="configNameTextField" minWidth="380" minHeight="35"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                                    <children>
+                                                        <Label text="Capteurs à consulter" minWidth="220" minHeight="35"/>
+                                                        <HBox minWidth="380" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10">
+                                                            <children>
+                                                                <Button fx:id="roomSensorsButton" text="Salles" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35"/>
+                                                                <Button fx:id="solarPanelSensorsButton" text="Panneaux solaires" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35"/>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </HBox>
                                             </children>
                                         </VBox>
                                     </children>
                                 </VBox>
+                                <Separator/>
                                 <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
@@ -68,6 +87,7 @@
                                         </VBox>
                                     </children>
                                 </VBox>
+                                <Separator/>
                                 <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
@@ -76,10 +96,10 @@
                                             </padding>
                                             <children>
                                                 <Label text="Paramètres avancés" styleClass="container-header"/>
-                                                <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10">
+                                                <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                                     <children>
-                                                        <Label text="Fréquence de lecture des données"/>
-                                                        <TextField fx:id="frequencyTextField" />
+                                                        <Label text="Fréquence de lecture des données" minWidth="400" minHeight="35"/>
+                                                        <TextField fx:id="frequencyTextField" minWidth="200" minHeight="35"/>
                                                     </children>
                                                 </HBox>
                                             </children>

@@ -46,6 +46,8 @@ public class ConfigurationFileFormViewController
     private List<RoomDataType> selectedRoomDataTypeList = new ArrayList<>() ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    @FXML private Button roomSensorsButton ;
+    @FXML private Button solarPanelSensorsButton ;
     @FXML private GridPane roomListGridPane ;
     @FXML private VBox roomDataTypeListVBox ;
     @FXML private TextField frequencyTextField ;
