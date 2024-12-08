@@ -1,9 +1,12 @@
 package application.view ;
 
-import application.control.ConfigurationFileForm;
-import javafx.fxml.FXML;
+import application.control.ConfigurationFileForm ;
+import application.styles.FontLoader ;
+import javafx.fxml.FXML ;
+import javafx.geometry.Pos;
+import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
-import javafx.stage.WindowEvent;
+import javafx.stage.WindowEvent ;
 
 /**
  * Contrôleur de vue du formulaire de paramétrage
@@ -35,6 +38,10 @@ public class ConfigurationFileFormViewController
      */
     public void initializeView()
     {
+        // préchargement des fonts (pour utilisation dans la feuille de style cff.css)
+        Font boldFont       = FontLoader.getBoldFont() ;
+        Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
+
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
 

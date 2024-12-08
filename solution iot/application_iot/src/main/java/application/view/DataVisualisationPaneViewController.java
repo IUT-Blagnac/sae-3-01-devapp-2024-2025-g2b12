@@ -20,9 +20,9 @@ import javafx.geometry.Pos ;
 import javafx.scene.Node ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.LineChart ;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart ;
 import javafx.scene.control.Button ;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ComboBox ;
 import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
@@ -32,7 +32,6 @@ import javafx.scene.image.ImageView ;
 import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage ;
 import javafx.stage.WindowEvent ;
 
@@ -40,11 +39,13 @@ import javafx.stage.WindowEvent ;
  * Contrôleur de vue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Vendredi 6 décembre 2024 -
+ * - Dimanche 8 décembre 2024 -
  * 
  * @author Nolhan Biblocque
+ * @author Léo Guinvarc'h
  * @author Victor Jockin
  * @author Mathys Laguilliez
+ * @author Mucahit Lekesiz
  * - Équipe 2B12 -
  */
 public class DataVisualisationPaneViewController
@@ -64,22 +65,31 @@ public class DataVisualisationPaneViewController
     @FXML private VBox containersVBox ;
     @FXML private HBox littleContainersVBox ;
     @FXML private HBox bigContainersVBox ;
-    @FXML private VBox dataListContainerVBox ;
-    @FXML private VBox dataDetailContainerVBox ;
-    @FXML private VBox alertListContainerVBox ;
+    @FXML private VBox overviewVBox ;
+    @FXML private VBox detailsAndGraphsVBox ;
+    @FXML private VBox alertVBox ;
     @FXML private VBox dataTypeListVBox ;
     @FXML private ComboBox<String> dataTypeListComboBox ;
     @FXML private VBox graphTitleVBox ;
     @FXML private Label graphTitleLabel ;
     @FXML private VBox graphVBox ;
+    @FXML private VBox noInfoVBox ;
     @FXML private VBox alertListVBox ;
     @FXML private TableView<DataRow> dataTableView ;
 
+    /**
+     * Définit le stage de la vue.
+     * @param _stage    un stage
+     */
     public void setStage(Stage _stage)
     {
         this.stage = _stage ;
     }
 
+    /**
+     * Définit le contrôleur de dialogue de la vue.
+     * @param _dvpDialogController  un contrôleur de dialogue
+     */
     public void setDvpDialogController(DataVisualisationPane _dvpDialogController)
     {
         this.dvpDialogController = _dvpDialogController ;
@@ -104,9 +114,9 @@ public class DataVisualisationPaneViewController
         // paramétrage des tailles des conteneurs
         // --------------------------------------
         // paramétrage des largeurs des conteneurs
-        this.dataListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
-        this.dataDetailContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.9/5.0)) ;
-        this.alertListContainerVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.2/5.0)) ;
+        this.overviewVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.75/5.0)) ;
+        this.detailsAndGraphsVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.75/5.0)) ;
+        this.alertVBox.prefWidthProperty().bind(this.mainContentVBox.widthProperty().multiply(1.5/5.0)) ;
         // paramétrage des hauteurs des conteneurs
         this.littleContainersVBox.prefHeightProperty().bind(this.containersVBox.heightProperty().multiply(1.1/5.0)) ;
         this.bigContainersVBox.prefHeightProperty().bind(this.containersVBox.heightProperty().multiply(3.9/5.0)) ;
@@ -222,6 +232,9 @@ public class DataVisualisationPaneViewController
 
         // initialisation des styles label titre de graphique
         this.graphTitleLabel.setFont(FontLoader.getGraphTitleFont()) ;
+
+        // initialisation des conteneurs de donnée unique
+        this.initSingleDataContainers() ;
     }
 
     /**
@@ -294,23 +307,34 @@ public class DataVisualisationPaneViewController
 
         for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
         {
+            // construction du conteneur d'alerte
+            // ----------------------------------
+
             // chargement des fonts utilisées
+            Font atFont     = FontLoader.getAlertTitleFont() ;
+            Font asFont     = FontLoader.getAlertSubtitleFont() ;
             Font sdhFont    = FontLoader.getSingleDataHeaderFont() ;
             Font sdFont     = FontLoader.getSingleDataFont() ;
+            Font sduFont    = FontLoader.getSingleDataUnitFont() ;
 
+            // intégration de l'icone d'alerte
             ImageView alertIcon = new ImageView(new Image(DataVisualisationPaneViewController.class.getResourceAsStream("/application/image/dvp/alert-icon.png"))) ;
-            alertIcon.setFitHeight(30) ;
+            alertIcon.setFitHeight(36) ;
             alertIcon.setPreserveRatio(true) ;
 
-            Label alertName = new Label(
-                    DataTypeUtilities.getFullTitle(m.getValue().get("dataType"))
-                +   " ["+m.getKey()+"]"
-            ) ;
-            alertName.setPrefHeight(40) ;
+            Label alertTitle = new Label(DataTypeUtilities.getAlertTitle(m.getValue().get("dataType"))) ;
+            alertTitle.setFont(atFont) ;
+
+            Label alertSubtitle = new Label("Salle "+m.getKey()) ;
+            alertSubtitle.setFont(asFont) ;
+
+            VBox alertMainInfo = new VBox() ;
+            alertMainInfo.getChildren().add(alertTitle) ;
+            alertMainInfo.getChildren().add(alertSubtitle) ;
 
             HBox alertHeader = new HBox() ;
             alertHeader.getChildren().add(alertIcon) ;
-            alertHeader.getChildren().add(alertName) ;
+            alertHeader.getChildren().add(alertMainInfo) ;
             alertHeader.setAlignment(Pos.CENTER_LEFT) ;
             alertHeader.setSpacing(10) ;
 
@@ -319,42 +343,57 @@ public class DataVisualisationPaneViewController
             thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
             thresholdHeader.setFont(sdhFont) ;
 
-            Label threshold = new Label(
-                    m.getValue().get("threshold")
-                +   " "+DataTypeUtilities.getUnit(m.getValue().get("dataType"))
-            ) ;
+            Label threshold = new Label(m.getValue().get("threshold")) ;
             threshold.setFont(sdFont) ;
+
+            Label thresholdUnit = new Label(DataTypeUtilities.getUnit(m.getValue().get("dataType"))) ;
+            thresholdUnit.setFont(sduFont) ;
+            thresholdUnit.setPadding(new Insets(0, 0, 2, 0)) ;
+
+            HBox thresholdValue = new HBox() ;
+            thresholdValue.getChildren().add(threshold) ;
+            thresholdValue.getChildren().add(thresholdUnit) ;
+            thresholdValue.setAlignment(Pos.BOTTOM_LEFT) ;
+            thresholdValue.setSpacing(5) ;
 
             VBox thresholdContainer = new VBox() ;
             thresholdContainer.getChildren().add(thresholdHeader) ;
-            thresholdContainer.getChildren().add(threshold) ;
+            thresholdContainer.getChildren().add(thresholdValue) ;
 
-            Label measuredValueHeader = new Label("Relevé") ;
-            measuredValueHeader.setPrefHeight(30) ;
-            measuredValueHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
-            measuredValueHeader.setFont(sdhFont) ;
+            Label measuredHeader = new Label("Relevé") ;
+            measuredHeader.setPrefHeight(30) ;
+            measuredHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
+            measuredHeader.setFont(sdhFont) ;
 
-            Label measuredValue = new Label(
-                    m.getValue().get("measuredValue")
-                +   " "+DataTypeUtilities.getUnit(m.getValue().get("dataType"))
-            ) ;
-            measuredValue.setFont(sdFont) ;
+            Label measured = new Label(m.getValue().get("measuredValue")) ;
+            measured.setFont(sdFont) ;
 
-            VBox measuredValueContainer = new VBox() ;
-            measuredValueContainer.getChildren().add(measuredValueHeader) ;
-            measuredValueContainer.getChildren().add(measuredValue) ;
+            Label measuredUnit = new Label(DataTypeUtilities.getUnit(m.getValue().get("dataType"))) ;
+            measuredUnit.setFont(sduFont) ;
+            measuredUnit.setPadding(new Insets(0, 0, 2, 0)) ;
+
+            HBox measuredValue = new HBox() ;
+            measuredValue.getChildren().add(measured) ;
+            measuredValue.getChildren().add(measuredUnit) ;
+            measuredValue.setAlignment(Pos.BOTTOM_LEFT) ;
+            measuredValue.setSpacing(5) ;
+
+            VBox measuredContainer = new VBox() ;
+            measuredContainer.getChildren().add(measuredHeader) ;
+            measuredContainer.getChildren().add(measuredValue) ;
 
             HBox alertContent = new HBox() ;
-            alertContent.setSpacing(20) ;
             alertContent.getChildren().add(thresholdContainer) ;
-            alertContent.getChildren().add(measuredValueContainer) ;
+            alertContent.getChildren().add(measuredContainer) ;
+            alertContent.setSpacing(20) ;
 
             thresholdContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;
-            measuredValueContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;    
+            measuredContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;    
 
             VBox alertContainer = new VBox() ;
             alertContainer.getChildren().add(alertHeader) ;
             alertContainer.getChildren().add(alertContent) ;
+            alertContainer.setSpacing(10) ;
             alertContainer.getStyleClass().add("alert-container") ;
 
             VBox.setMargin(alertHeader, new Insets(20, 20, 0, 20)) ;
@@ -383,6 +422,14 @@ public class DataVisualisationPaneViewController
     }
 
     /**
+     * Initialise les conteneurs de donnée unique.
+     */
+    private void initSingleDataContainers()
+    {
+        System.out.println('4') ;
+    }
+
+    /**
      * Affiche un graphique de comparaison à partir d'un type de données.
      * @param pDataType un type de données
      */
@@ -390,6 +437,15 @@ public class DataVisualisationPaneViewController
     {
         this.dataTypeListVBox.setVisible(false) ;
         this.dataTypeListVBox.setManaged(false) ;
+
+        this.noInfoVBox.setVisible(false) ;
+        this.noInfoVBox.setManaged(false) ;
+
+        this.graphTitleVBox.setManaged(true) ;
+        this.graphTitleVBox.setVisible(true) ;
+
+        this.graphVBox.setManaged(true) ;
+        this.graphVBox.setVisible(true) ;
 
         this.graphTitleLabel.setText(DataTypeUtilities.getComparisonGraphTitle(pDataType)) ;
 
@@ -447,6 +503,15 @@ public class DataVisualisationPaneViewController
     {
         this.dataTypeListVBox.setManaged(true) ;
         this.dataTypeListVBox.setVisible(true) ;
+
+        this.noInfoVBox.setVisible(false) ;
+        this.noInfoVBox.setManaged(false) ;
+
+        this.graphTitleVBox.setManaged(true) ;
+        this.graphTitleVBox.setVisible(true) ;
+
+        this.graphVBox.setManaged(true) ;
+        this.graphVBox.setVisible(true) ;
 
         if (pDataType == null)
         {

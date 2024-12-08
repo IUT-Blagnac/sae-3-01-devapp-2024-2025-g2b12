@@ -46,6 +46,10 @@ public class ConfigurationFileForm
             this.cffViewController = fxmlLoader.getController() ;
             this.cffViewController.setStage(this.cffStage) ;
             this.cffViewController.setCffDialogController(this) ;
+            this.cffViewController.initializeView() ;
+
+            // application des styles à la scène
+            this.cffStage.getScene().getStylesheets().add(getClass().getResource("/application/style/cff.css").toExternalForm()) ;
         }
         catch (Exception e)
         {

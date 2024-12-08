@@ -3,7 +3,6 @@ package application.tools ;
 import java.util.List ;
 import java.util.Map ;
 
-import application.data.DataTypeUtilities ;
 import application.styles.FontLoader ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.CategoryAxis ;
