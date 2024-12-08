@@ -59,7 +59,7 @@ public class GraphGenerator
             try
             {
                 // ajout de la barre au diagramme
-                int valeur = Integer.parseInt(value) ;
+                double valeur = Double.parseDouble(value) ;
                 XYChart.Data<String, Number> data = new XYChart.Data<>(room, valeur) ;
                 dataSeries.getData().add(data) ;
             }

@@ -49,6 +49,7 @@ public class ConfigurationFileForm
             Scene scene = new Scene(fxmlLoader.load(), 600, 400) ;
             this.cffStage.setScene(scene) ;
             this.cffStage.setTitle("Créer une configuration") ;
+            this.cffStage.setResizable(false) ;
 
             // initialisation du contrôleur
             this.cffViewController = fxmlLoader.getController() ;
