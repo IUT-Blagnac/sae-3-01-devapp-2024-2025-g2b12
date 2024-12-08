@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="root" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" styleClass="main-content" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationFileFormViewController">
+<HBox fx:id="root" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="main-content" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationFileFormViewController">
     <children>
-        <VBox>
+        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
             <padding>
                 <Insets left="20" right="20" top="20" bottom="20"/>
             </padding>
