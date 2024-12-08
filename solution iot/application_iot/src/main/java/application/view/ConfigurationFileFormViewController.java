@@ -50,6 +50,7 @@ public class ConfigurationFileFormViewController
         for (RoomEnum room : this.cffDialogController.getRoomList())
         {
             System.out.println(room.getNameForDisplay()) ;
+            System.out.println(room.getNameForTopic()) ;
         }
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
