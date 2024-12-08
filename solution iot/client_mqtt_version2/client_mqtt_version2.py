@@ -56,7 +56,8 @@ def on_connect(client, userdata, flags, reason_code, properties=None):
     logging.info(f"Connected with result code : {reason_code}")
     # abonnement aux topics
     for sujet in sujets:
-        topic = f"{base_topic}{sujet}/#"
+        #topic = f"{base_topic}{sujet}/#" retiré pour obtenir les données de toutes les salles REMETTRE POUR FINALISER
+        topic = f"{base_topic}#"
         logging.info(f"Subscribing to topic: {topic}")
         client.subscribe(topic)
 
