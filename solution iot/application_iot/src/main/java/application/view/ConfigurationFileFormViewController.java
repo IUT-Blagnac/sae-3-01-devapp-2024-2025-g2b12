@@ -83,6 +83,9 @@ public class ConfigurationFileFormViewController
         // initialisation des menus
         this.initRoomSelectionMenu() ;
         this.initRoomDataTypeSelectionMenu() ;
+        this.initAdvancedSettingsMenu() ;
+
+        // mise à jour de l'état des boutons du menu inférieur
         this.updateLowerMenuButtonStatus() ;
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
@@ -127,6 +130,7 @@ public class ConfigurationFileFormViewController
         this.selectedRoomList.clear() ;
         this.selectedRoomDataTypeList.clear() ;
 
+        // réinitialisation des composants graphiques
         this.initializeView() ;
 
         // mise à jour de l'état des boutons du menu inférieur
@@ -270,6 +274,14 @@ public class ConfigurationFileFormViewController
                 this.updateLowerMenuButtonStatus() ;
             }) ;
         }
+    }
+
+    /**
+     * Initialise le menu des paramètres avancés.
+     */
+    private void initAdvancedSettingsMenu()
+    {
+        this.frequencyTextField.setText(String.valueOf(this.cffDialogController.getDefaultReadingFrequency())) ;
     }
 
     /**

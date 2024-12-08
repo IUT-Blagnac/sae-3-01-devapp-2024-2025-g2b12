@@ -24,7 +24,7 @@ import javafx.stage.Stage ;
 public class ConfigurationFileForm
 {
     // déclaration des constantes
-    public static final double DEFAULT_READING_FREQUENCY = 10 ; // fréquence de lecture des données par défaut (en secondes)
+    private static final double DEFAULT_READING_FREQUENCY = 10 ;    // fréquence de lecture des données par défaut (en secondes)
 
     // déclaration des attributs
     private Stage cffStage ;
@@ -71,6 +71,15 @@ public class ConfigurationFileForm
         {
             e.printStackTrace() ;
         }
+    }
+
+    /**
+     * Accesseur : donne la fréquence de lecture des données par défaut (en secondes).
+     * @return  la fréquence de lecture par défaut
+     */
+    public double getDefaultReadingFrequency()
+    {
+        return DEFAULT_READING_FREQUENCY ;
     }
 
     /**

@@ -77,8 +77,8 @@ public enum Room
         {
             case Salle_conseil :        nameForDisplay = "SALLE CONS." ; break ;
             case Foyer_personnels :     nameForDisplay = "FOYER PERS." ; break ;
-            case Foyer_etudiants_1 :    nameForDisplay = "FOYER ETU.1" ; break ;
-            case Foyer_etudiants_2 :    nameForDisplay = "FOYER ETU.2" ; break ;
+            case Foyer_etudiants_1 :    nameForDisplay = "FOYER ETU. 1" ; break ;
+            case Foyer_etudiants_2 :    nameForDisplay = "FOYER ETU. 2" ; break ;
             default :
                 nameForDisplay = this.name().replace("_", " ").toUpperCase() ;
                 break ;
