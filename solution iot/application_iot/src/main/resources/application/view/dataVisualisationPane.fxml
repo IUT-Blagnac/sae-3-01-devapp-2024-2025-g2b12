@@ -124,7 +124,7 @@
 															<padding>
 																<Insets top="20"/>
 															</padding>
-															<Label fx:id="graphTitleLabel" maxWidth="300" wrapText="true" textAlignment="CENTER"/>
+															<Label fx:id="graphTitleLabel" maxWidth="300" wrapText="true" alignment="CENTER" textAlignment="CENTER"/>
 														</VBox>
 														<VBox fx:id="graphVBox" prefWidth="-Infinity" prefHeight="-Infinity" alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 															<padding>

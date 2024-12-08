@@ -17,7 +17,7 @@ import java.util.Map ;
 public class DataTypeUtilities
 {
     // déclaration des attributs (constantes)
-    private static final Map<String, Map<String, String>> dataRepresentationMap = new HashMap<>()
+    private static final Map<String, Map<String, String>> DATA_REPRESENTATION_MAP = new HashMap<>()
     {{
         put("deviceName", new HashMap<>() {{
             put("abbreviation", "App.") ;
@@ -44,54 +44,63 @@ public class DataTypeUtilities
             put("full", "Température") ;
             put("unit", "°C") ;
             put("evolutionGraphTitle", "Évolution de la température en fonction du temps") ;
+            put("comparisonGraphTitle", "Températures par salle") ;
         }}) ;
         put("humidity", new HashMap<>() {{
             put("abbreviation", "HR") ;
             put("full", "Taux d'humidité") ;
             put("unit", "%") ;
             put("evolutionGraphTitle", "Évolution du taux d'humidité en fonction du temps") ;
+            put("comparisonGraphTitle", "Taux d'humidité par salle") ;
         }}) ;
         put("activity", new HashMap<>() {{
             put("abbreviation", "Act.") ;
             put("full", "Activité") ;
             put("unit", null) ;
             put("evolutionGraphTitle", "Évolution de l'activité en fonction du temps") ;
+            put("comparisonGraphTitle", "Activités par salle") ;
         }}) ;
         put("co2", new HashMap<>() {{
             put("abbreviation", "CO2") ;
             put("full", "Concentration de CO2") ;
             put("unit", "ppm") ;
             put("evolutionGraphTitle", "Évolution de la concentration de CO2 en fonction du temps") ;
+            put("comparisonGraphTitle", "Concentrations de CO2 par salle") ;
         }}) ;
         put("tvoc", new HashMap<>() {{
             put("abbreviation", "TVOC") ;
             put("full", "T.V.O.C.") ;
             put("unit", "µg/m3") ;
             put("evolutionGraphTitle", "Évolution des composés organiques volatils totaux en fonction du temps") ;
+            put("comparisonGraphTitle", "Composés organiques volatils totaux par salle") ;
         }}) ;
         put("illumination", new HashMap<>() {{
             put("abbreviation", "ECL") ;
             put("full", "Éclairage") ;
             put("unit", "lx") ;
             put("evolutionGraphTitle", "Évolution de l'éclairage en fonction du temps") ;
+            put("comparisonGraphTitle", "Éclairages par salle") ;
         }}) ;
         put("infrared", new HashMap<>() {{
             put("abbreviation", "IR") ;
             put("full", "Infrarouges") ;
             put("unit", null) ;
             put("evolutionGraphTitle", "Évolution des infrarouges en fonction du temps") ;
+            put("comparisonGraphTitle", "Infrarouges par salle") ;
         }}) ;
         put("infrared_and_visible", new HashMap<>() {{
             put("abbreviation", "IR+V") ;
             put("full", "Infrarouges et visibles") ;
             put("unit", null) ;
-            put("evolutionGraphTitle", "Évolution des infrarouges et visibles\nen fonction du temps") ;
+            put("evolutionGraphTitle", "Évolution des infrarouges et visibles en fonction du temps") ;
+            put("comparisonGraphTitle", "infrarouges et visibles par salle") ;
         }}) ;
         put("pressure", new HashMap<>() {{
             put("abbreviation", "P") ;
             put("full", "Pression atmosphérique") ;
             put("unit", "Pa") ;
             put("evolutionGraphTitle", "Évolution de la pression en fonction du temps") ;
+            put("comparisonGraphTitle", "Pressions par salle") ;
         }}) ;
     }} ;
 
@@ -102,7 +111,7 @@ public class DataTypeUtilities
      */
     public static String getAbbreviation(String pDataType)
     {
-        return dataRepresentationMap.get(pDataType).get("abbreviation") ;
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("abbreviation") ;
     }
 
     /**
@@ -112,7 +121,7 @@ public class DataTypeUtilities
      */
     public static String getFullTitle(String pDataType)
     {
-        return dataRepresentationMap.get(pDataType).get("full") ;
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("full") ;
     }
 
     /**
@@ -137,22 +146,27 @@ public class DataTypeUtilities
      */
     public static String getUnit(String pDataType)
     {
-        return dataRepresentationMap.get(pDataType).get("unit") ;
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("unit") ;
     }
 
     /**
      * Donne le titre pour un diagramme décrivant l'évolution d'un type de données.
      * @param pDataType un type de données
-     * @return  le titre pour un diagramme d'évolution associé au type de données
+     * @return  le titre pour un diagramme d'évolution
      */
     public static String getEvolutionGraphTitle(String pDataType)
     {
-        return dataRepresentationMap.get(pDataType).get("evolutionGraphTitle") ;
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("evolutionGraphTitle") ;
     }
 
+    /**
+     * Donne le titre pour un diagramme de comparaison d'un type de données par salle.
+     * @param pDataType un type de données
+     * @return  le titre pour un diagramme de comparaison
+     */
     public static String getComparisonGraphTitle(String pDataType)
     {
-        return "MDR !" ;
+        return DATA_REPRESENTATION_MAP.get(pDataType).get("comparisonGraphTitle") ;
     }
 
     /**
@@ -162,7 +176,7 @@ public class DataTypeUtilities
      */
     public static String getDataTypeByFullTitle(String pFullTitle)
     {
-        for (Map.Entry<String, Map<String, String>> m : dataRepresentationMap.entrySet())
+        for (Map.Entry<String, Map<String, String>> m : DATA_REPRESENTATION_MAP.entrySet())
         {
             String fullTitle = m.getValue().get("full") ;
             if (fullTitle.equals(pFullTitle))
