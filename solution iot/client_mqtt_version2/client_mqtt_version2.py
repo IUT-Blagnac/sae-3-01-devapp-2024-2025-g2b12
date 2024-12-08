@@ -26,72 +26,100 @@ seuils = {
     'infrared_and_visible': float(configuration.get('SEUILS', 'infrared_and_visible'))
 }
 
-# callback de réception des messages
-def get_data(mqttc, obj, msg):
-    try:
-        pass
-    except (json.JSONDecodeError, KeyError) as e:
-        logging.error("Erreur dans les données reçues : %s", e)
+# configuration du logging
+logging.basicConfig(level=logging.DEBUG)
 
-def on_connect(client, userdata, flags, reason_code, properties):
-    print(f"Connected with result code : {reason_code}")
+def on_connect(client, userdata, flags, reason_code, properties=None):
+    logging.info(f"Connected with result code : {reason_code}")
     # abonnement aux topics
     for sujet in sujets:
-        client.subscribe(f"{base_topic}{sujet}")
+        #topic = f"{base_topic}{sujet}/#"
+        topic = f"{base_topic}#"
+        logging.info(f"Subscribing to topic: {topic}")
+        client.subscribe(topic)
 
 def on_message(client, userdata, message):
-    data = json.loads(message.payload)
-    if message.topic.startswith("AM107/byroom"):
-        room = data[1]['room']
-        temperature = data[0]['temperature']
-        humidity = data[0]['humidity']
-        co2 = data[0]['co2']
-        tvoc = data[0].get('tvoc', 0)
-        infrared_and_visible = data[0].get('infrared_and_visible', 0)
+    logging.info(f"Message received on topic: {message.topic}")
+    try:
+        data = json.loads(message.payload)
+        
+        if message.topic.startswith("AM107/by-room"):
+            room = data[1]['room']
+            temperature = data[0]['temperature']
+            humidity = data[0]['humidity']
+            co2 = data[0]['co2']
+            tvoc = data[0].get('tvoc', 0)
+            infrared_and_visible = data[0].get('infrared_and_visible', 0)
 
-        # Mise à jour du fichier global
-        with open('data.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';')
-            writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
-            writer.writerow([room, temperature, humidity, co2, tvoc, infrared_and_visible])
+            # Affichage des données dans la console
+            print(f"Salle : {room}")
+            print(f"Température : {temperature}")
+            print(f"Humidité : {humidity}")
+            print(f"Taux de CO2 : {co2}")
+            print(f"TVOC : {tvoc}")
+            print(f"Infrarouge et visible : {infrared_and_visible}")
 
-        # Mise à jour du fichier de la salle
-        room_file = f'{room}.csv'
-        file_exists = os.path.isfile(room_file)
-        with open(room_file, 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';')
-            if not file_exists:
-                writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
-            writer.writerow([room, temperature, humidity, co2, tvoc, infrared_and_visible])
+            # Lire les données existantes de data.csv
+            data_file = 'application_iot\data\\data.csv'
+            data_dict = {}
+            if os.path.isfile(data_file):
+                with open(data_file, 'r', newline='') as csvfile:
+                    reader = csv.DictReader(csvfile, delimiter=';')
+                    for row in reader:
+                        data_dict[row['room']] = row
 
-        # Vérification des seuils et mise à jour du fichier d'alertes
-        alerts = []
-        if temperature > seuils['temperature']:
-            alerts.append([room, 'temperature', seuils['temperature'], temperature])
-        if humidity > seuils['humidity']:
-            alerts.append([room, 'humidity', seuils['humidity'], humidity])
-        if co2 > seuils['co2']:
-            alerts.append([room, 'co2', seuils['co2'], co2])
-        if tvoc > seuils['tvoc']:
-            alerts.append([room, 'tvoc', seuils['tvoc'], tvoc])
-        if infrared_and_visible > seuils['infrared_and_visible']:
-            alerts.append([room, 'infrared_and_visible', seuils['infrared_and_visible'], infrared_and_visible])
+            # Mettre à jour les données de la salle concernée
+            data_dict[room] = {
+                'room': room,
+                'temperature': temperature,
+                'humidity': humidity,
+                'co2': co2,
+                'tvoc': tvoc,
+                'infrared_and_visible': infrared_and_visible
+            }
 
-        if alerts:
-            with open('alerts.csv', 'a', newline='') as csvfile:
+            # Écrire les données mises à jour dans data.csv
+            with open(data_file, 'w', newline='') as csvfile:
+                fieldnames = ['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+                writer.writeheader()
+                for row in data_dict.values():
+                    writer.writerow(row)
+
+            # Mise à jour du fichier de la salle
+            room_file = f'application_iot\data\\{room}.csv'
+            file_exists = os.path.isfile(room_file)
+            with open(room_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';')
-                for alert in alerts:
-                    writer.writerow(alert)
+                if not file_exists:
+                    writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
+                writer.writerow([room, temperature, humidity, co2, tvoc, infrared_and_visible])
 
-    elif message.topic.startswith("solaredge/blagnac"):
-        print("\nDONNÉES PANNEAUX SOLAIRES")
-        print("=========================")
-        print("Dernière mise à jour :", data['lastUpdateTime'])
-        print("Power (puissance) :   ", data['currentPower']['power'])
+            # Vérification des seuils et mise à jour du fichier d'alertes
+            alerts = []
+            if temperature > seuils['temperature']:
+                alerts.append([room, 'temperature', seuils['temperature'], temperature])
+            if humidity > seuils['humidity']:
+                alerts.append([room, 'humidity', seuils['humidity'], humidity])
+            if co2 > seuils['co2']:
+                alerts.append([room, 'co2', seuils['co2'], co2])
+            if tvoc > seuils['tvoc']:
+                alerts.append([room, 'tvoc', seuils['tvoc'], tvoc])
+            if infrared_and_visible > seuils['infrared_and_visible']:
+                alerts.append([room, 'infrared_and_visible', seuils['infrared_and_visible'], infrared_and_visible])
+
+            if alerts:
+                with open('application_iot\data\\alert.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile, delimiter=';')
+                    for alert in alerts:
+                        writer.writerow(alert)
+    except (json.JSONDecodeError, KeyError) as e:
+        logging.error(f"Erreur dans les données reçues : {e}")
 
 # connexion et souscription
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-mqttc.connect(serveurMQTT, port=port, keepalive=60) # seul paramètre 1 obligatoire
+mqttc.connect(serveurMQTT, port=port, keepalive=60)
+logging.info(f"Connecting to MQTT broker at {serveurMQTT}:{port}")
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 mqttc.loop_forever()
