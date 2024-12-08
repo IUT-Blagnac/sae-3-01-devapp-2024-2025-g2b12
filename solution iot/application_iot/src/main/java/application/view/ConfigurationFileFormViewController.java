@@ -1,6 +1,7 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm ;
+import application.data.RoomEnum ;
 import application.styles.FontLoader ;
 
 import javafx.fxml.FXML ;
@@ -46,7 +47,10 @@ public class ConfigurationFileFormViewController
         Font boldFont       = FontLoader.getBoldFont() ;
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
 
-        System.out.println(this.cffDialogController.getRoomList()) ;
+        for (RoomEnum room : this.cffDialogController.getRoomList())
+        {
+            System.out.println(room.getNameForDisplay()) ;
+        }
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
