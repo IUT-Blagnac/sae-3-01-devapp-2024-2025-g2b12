@@ -57,10 +57,8 @@ public class DataVisualisationPane
             // récupération des types de données à visualiser
             this.dataTypeList = DataFileReading.getHeaders(DataLoader.getAllRoomDataFile()) ;
 
-            // initialisation d'un nouveau stage pour le formulaire
-            this.dvpStage = new Stage() ;
-            this.dvpStage.initOwner(_stageParent) ;
-            this.dvpStage.initModality(Modality.WINDOW_MODAL) ;
+            // initialisation du stage
+            this.dvpStage = _stageParent ;
 
             // centrage de la fenêtre par rapport à la fenêtre précédente
             this.dvpStage.setX(_stageParent.getX() + (_stageParent.getWidth() - PREF_WIDTH) / 2) ;
