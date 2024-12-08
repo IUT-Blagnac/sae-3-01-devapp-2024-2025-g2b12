@@ -50,6 +50,9 @@ import javafx.stage.WindowEvent ;
  */
 public class DataVisualisationPaneViewController
 {
+    // déclaration des constantes
+    private int MAX_DISPLAYABLE_ALERTS = 10 ;   // nombre maximum d'alertes affichables (pour éviter une surcharge graphique)
+
     // déclaration des attributs
     private Stage stage ;
     private DataVisualisationPane dvpDialogController ;
@@ -305,6 +308,7 @@ public class DataVisualisationPaneViewController
 
         this.alertListVBox.getChildren().clear() ;
 
+        int displayedAlertNumber = 0 ;
         for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
         {
             // construction du conteneur d'alerte
@@ -400,6 +404,10 @@ public class DataVisualisationPaneViewController
             VBox.setMargin(alertContent, new Insets(0, 20, 20, 20)) ;
 
             this.alertListVBox.getChildren().add(alertContainer) ;
+
+            displayedAlertNumber++ ;
+
+            if (displayedAlertNumber == this.MAX_DISPLAYABLE_ALERTS) { break ; }
         }
     }
 
