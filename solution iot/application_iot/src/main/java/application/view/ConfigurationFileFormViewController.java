@@ -5,7 +5,9 @@ import application.data.RoomEnum ;
 import application.styles.FontLoader ;
 
 import javafx.fxml.FXML ;
+import javafx.scene.control.Button ;
 import javafx.scene.layout.GridPane ;
+import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
 import javafx.stage.Stage ;
 import javafx.stage.WindowEvent ;
@@ -26,6 +28,7 @@ public class ConfigurationFileFormViewController
     private ConfigurationFileForm cffDialogController ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    @FXML private VBox roomListVBox ;
     @FXML private GridPane roomListGridPane ;
 
     public void setStage(Stage _stage)
@@ -51,6 +54,10 @@ public class ConfigurationFileFormViewController
         {
             System.out.println(room.getNameForDisplay()) ;
             System.out.println(room.getNameForTopic()) ;
+
+            Button button = new Button("TEST") ;
+            button.setMinWidth(100) ;
+            this.roomListGridPane.getChildren().add(button) ;
         }
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
