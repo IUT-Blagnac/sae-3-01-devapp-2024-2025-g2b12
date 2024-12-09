@@ -24,7 +24,11 @@ import javafx.stage.Stage ;
 public class ConfigurationFileForm
 {
     // déclaration des constantes
-    private static final double DEFAULT_READING_FREQUENCY = 10 ;    // fréquence de lecture des données par défaut (en secondes)
+    // --------------------------
+    // fréquence de lecture des données (en secondes)
+    private static final int MIN_READING_FREQUENCY      = 5 ;       // fréquence minimale
+    private static final int MAX_READING_FREQUENCY      = 1000 ;    // fréquence maximale
+    private static final int DEFAULT_READING_FREQUENCY  = 10 ;      // fréquence par défaut
 
     // déclaration des attributs
     private Stage cffStage ;
@@ -74,37 +78,52 @@ public class ConfigurationFileForm
     }
 
     /**
+     * Accesseur : donne la fréquence de lecture des données minimale (en secondes).
+     * @return  la fréquence de lecture minimale
+     */
+    public int getMinReadingFrequency() { return MIN_READING_FREQUENCY ; }
+
+    /**
+     * Accesseur : donne la fréquence de lecture des données maximale (en secondes).
+     * @return  la fréquence de lecture maximale
+     */
+    public int getMaxReadingFrequency() { return MAX_READING_FREQUENCY ; }
+
+    /**
      * Accesseur : donne la fréquence de lecture des données par défaut (en secondes).
      * @return  la fréquence de lecture par défaut
      */
-    public double getDefaultReadingFrequency()
-    {
-        return DEFAULT_READING_FREQUENCY ;
-    }
+    public int getDefaultReadingFrequency() { return DEFAULT_READING_FREQUENCY ; }
 
     /**
      * Accesseur : donne la liste des salles existantes.
      * @return  la liste des salles existantes
      */
-    public List<Room> getRoomList()
-    {
-        return this.roomList ;
-    }
+    public List<Room> getRoomList() { return this.roomList ; }
 
     /**
      * Accesseur : donne la liste des types de données des salles.
      * @return  la liste des types de données des salles
      */
-    public List<RoomDataType> getRoomDataTypeList()
-    {
-        return this.roomDataTypeList ;
-    }
+    public List<RoomDataType> getRoomDataTypeList() { return this.roomDataTypeList ; }
 
     /**
      * Effectue le dialogue de paramétrage d'un fichier de configuration.
      */
-    public void doConfigurationFileFormDialog()
+    public void doConfigurationFileFormDialog() { this.cffViewController.displayDialog() ; }
+
+    /**
+     * Indique si la fréquence de lecture donnée est valide.
+     * @param pFrequency    la fréquence de lecture à traiter
+     * @return  true si la fréquence est valide, false sinon
+     */
+    public boolean isReadingFrequencyValid(int pFrequency)
     {
-        this.cffViewController.displayDialog() ;
+        if (    pFrequency < this.getMinReadingFrequency()
+            ||  pFrequency > this.getMaxReadingFrequency()
+        ) {
+            return false ;
+        }
+        return true ;
     }
 }

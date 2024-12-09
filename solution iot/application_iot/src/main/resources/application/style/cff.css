@@ -77,16 +77,13 @@
     -fx-text-fill: #fff;
 }
 
-.button.switch.left {
+.switch-container {
+    -fx-background-color: #242630;
     -fx-border-radius: 0;
-    -fx-background-radius: 5 0 0 5;
-}
-.button.switch.right {
-    -fx-border-radius: 0;
-    -fx-background-radius: 0 5 5 0;
+    -fx-background-radius: 5;
 }
 .button.switch:hover {
-    -fx-background-color: #b59000;
+    -fx-background-color: #33353f;
     -fx-text-fill: #fff;
 }
 .button.switch:pressed {
@@ -94,6 +91,8 @@
     -fx-text-fill: #fff;
 }
 .button.switch.selected {
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
     -fx-background-color: #b59000;
     -fx-text-fill: #fff;
 }

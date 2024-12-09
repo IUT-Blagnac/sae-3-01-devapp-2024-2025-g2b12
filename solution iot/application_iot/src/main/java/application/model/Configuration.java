@@ -20,7 +20,7 @@ public class Configuration
     private List<String> subjectList ;          // liste des sujets à observer
     private List<String> dataTypeList ;         // liste des types de données récupérés
     private Map<String, String> thresholdMap ;  // dictionnaire des seuils d'alerte par type de données
-    private double readingFrequency ;           // fréquence de lecture des données
+    private int readingFrequency ;              // fréquence de lecture des données
 
     /**
      * Constructeur paramétré : 6 paramètres.
@@ -37,7 +37,7 @@ public class Configuration
         List<String> _subjectList,
         List<String> _dataTypeList,
         Map<String, String> _thresholdMap,
-        double _readingFrequency
+        int _readingFrequency
     ) {
         // initialisation des attributs
         this.name               = _name ;
@@ -97,7 +97,7 @@ public class Configuration
      * Donne la fréquence de lecture des données.
      * @return  la fréquence de lecture des données
      */
-    public double getReadingFrequency()
+    public int getReadingFrequency()
     {
         return readingFrequency ;
     }

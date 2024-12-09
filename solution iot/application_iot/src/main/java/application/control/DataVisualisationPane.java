@@ -194,7 +194,8 @@ public class DataVisualisationPane
     public void startProcessPython(){
         try
         {
-            ProcessBuilder processBuilder = new ProcessBuilder("python", "data\\mqtt.py") ;
+            //ProcessBuilder processBuilder = new ProcessBuilder("python", "data\\mqtt.py") ;
+            ProcessBuilder processBuilder = new ProcessBuilder("python3", "data\\mqtt.py") ;
             processPython = processBuilder.start() ;
             System.out.println("Process Python started successfully.");
         }

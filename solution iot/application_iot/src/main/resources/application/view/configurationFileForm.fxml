@@ -45,11 +45,14 @@
                                                 </HBox>
                                                 <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                                     <children>
-                                                        <Label text="Capteurs à consulter" minWidth="220" minHeight="35"/>
-                                                        <HBox minWidth="380" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="0">
+                                                        <Label text="Capteurs à consulter" minWidth="220" minHeight="51"/>
+                                                        <HBox minWidth="380" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="8" styleClass="switch-container">
+                                                            <padding>
+                                                                <Insets left="8" right="8" top="8" bottom="8"/>
+                                                            </padding>
                                                             <children>
-                                                                <Button fx:id="roomSensorsButton" text="Salles" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
-                                                                <Button fx:id="solarPanelSensorsButton" text="Panneaux solaires" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
+                                                                <Button fx:id="roomSensorsButton" text="AM107" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
+                                                                <Button fx:id="solarPanelSensorsButton" text="SOLAREDGE" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
                                                             </children>
                                                         </HBox>
                                                     </children>
@@ -59,7 +62,7 @@
                                     </children>
                                 </VBox>
                                 <Separator/>
-                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                <VBox fx:id="roomSelectionMenuContainer" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                             <padding>
@@ -74,7 +77,7 @@
                                         </VBox>
                                     </children>
                                 </VBox>
-                                <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                <VBox fx:id="roomDataTypeSelectionMenuContainer" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                             <padding>

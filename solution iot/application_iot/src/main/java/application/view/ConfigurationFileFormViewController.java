@@ -50,22 +50,27 @@ public class ConfigurationFileFormViewController
     private SensorType selectedSensorType               = SensorType.AM107 ;
     private List<Room> selectedRoomList                 = new ArrayList<>() ;
     private List<RoomDataType> selectedRoomDataTypeList = new ArrayList<>() ;
+    private int enteredReadingFrequency ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
     // --------------------------------------------------------------------
 
-    // boutons de sélection des capteurs à consulter
+    // menu de sélection du type de capteurs
     @FXML private Button roomSensorsButton ;
     @FXML private Button solarPanelSensorsButton ;
 
-    // grille des boutons de sélection des salles
+    // menu de sélection des salles (AM107 uniquement)
+    @FXML private VBox roomSelectionMenuContainer ;
     @FXML private GridPane roomListGridPane ;
 
-    // conteneur de la liste des types de données
+    // menu de sélection des types de données (AM107 uniquement)
+    @FXML private VBox roomDataTypeSelectionMenuContainer ;
     @FXML private VBox roomDataTypeListVBox ;
+
+    // menu des paramètres avancés
     @FXML private TextField frequencyTextField ;
 
-    // boutons du menu inférieur ( =<^.^>= )
+    // menu inférieur ( =<^.^>= )
     @FXML private Button closeButton ;
     @FXML private Button resetButton ;
     @FXML private Button saveButton ;
@@ -162,7 +167,7 @@ public class ConfigurationFileFormViewController
     @FXML
     private void doSave()
     {
-        System.out.println("-  En cours de développement  -") ;
+        System.out.println("-  OK  -") ;
     }
 
     /**
@@ -175,22 +180,32 @@ public class ConfigurationFileFormViewController
         this.roomSensorsButton.getStyleClass().add("selected") ;
 
         // écouteurs d'évèneemnts sur le bouton "switch" de sélection du type de capteurs
-        this.roomSensorsButton.getStyleClass().add("left") ;
         this.roomSensorsButton.setOnAction(event -> {
             if (this.selectedSensorType != SensorType.AM107)
             {
                 this.selectedSensorType = SensorType.AM107 ;
                 this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
                 this.roomSensorsButton.getStyleClass().add("selected") ;
+
+                this.roomSelectionMenuContainer.setManaged(true) ;
+                this.roomSelectionMenuContainer.setVisible(true) ;
+
+                this.roomDataTypeSelectionMenuContainer.setManaged(true) ;
+                this.roomDataTypeSelectionMenuContainer.setVisible(true) ;
             }
         }) ;
-        this.solarPanelSensorsButton.getStyleClass().add("right") ;
         this.solarPanelSensorsButton.setOnAction(event -> {
             if (this.selectedSensorType != SensorType.SOLAREDGE)
             {
                 this.selectedSensorType = SensorType.SOLAREDGE ;
                 this.roomSensorsButton.getStyleClass().remove("selected") ;
                 this.solarPanelSensorsButton.getStyleClass().add("selected") ;
+
+                this.roomSelectionMenuContainer.setManaged(false) ;
+                this.roomSelectionMenuContainer.setVisible(false) ;
+                
+                this.roomDataTypeSelectionMenuContainer.setManaged(false) ;
+                this.roomDataTypeSelectionMenuContainer.setVisible(false) ;
             }
         }) ;
     }
@@ -331,6 +346,11 @@ public class ConfigurationFileFormViewController
     private void initAdvancedSettingsMenu()
     {
         this.frequencyTextField.setText(String.valueOf(this.cffDialogController.getDefaultReadingFrequency())) ;
+        this.frequencyTextField.focusedProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (!newValue) { this.validateFrequencyInput() ; }
+            }
+        ) ;
     }
 
     /**
@@ -346,6 +366,26 @@ public class ConfigurationFileFormViewController
         else
         {
             this.saveButton.setDisable(false) ;
+        }
+    }
+
+    /**
+     * Valide ou non la saisie de la fréquence de lecture des données.
+     */
+    private void validateFrequencyInput()
+    {
+        try
+        {
+            int frequency = (int) Double.parseDouble(this.frequencyTextField.getText()) ;
+            if (this.cffDialogController.isReadingFrequencyValid(frequency))
+            {
+                this.enteredReadingFrequency = frequency ;
+            }
+            this.frequencyTextField.setText(String.valueOf(this.enteredReadingFrequency)) ;
+        }
+        catch (NumberFormatException nfe)
+        {
+            this.frequencyTextField.setText(String.valueOf(this.enteredReadingFrequency)) ;
         }
     }
 }
