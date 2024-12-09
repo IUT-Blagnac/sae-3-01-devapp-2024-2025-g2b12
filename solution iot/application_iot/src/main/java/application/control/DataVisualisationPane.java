@@ -1,22 +1,20 @@
 package application.control ;
 
+import java.util.List ;
+import java.util.Map ;
+import java.util.concurrent.Executors ;
+import java.util.concurrent.ScheduledExecutorService ;
+import java.util.concurrent.TimeUnit ;
+
 import application.data.DataLoader ;
 import application.model.Configuration ;
 import application.thread.CsvReaderTask ;
 import application.tools.DataFileReading ;
 import application.view.DataVisualisationPaneViewController ;
-
-import java.util.concurrent.Executors ;
-import java.util.concurrent.ScheduledExecutorService ;
-import java.util.concurrent.TimeUnit ;
-import java.util.List ;
-import java.util.Map ;
-
 import javafx.application.Platform ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
-import javafx.stage.Modality;
-import javafx.stage.Stage ;
+import javafx.stage.Stage;
 
 /**
  * Contrôleur de dialogue de la fenêtre de visualisation des données.
@@ -196,12 +194,14 @@ public class DataVisualisationPane
     public void startProcessPython(){
         try
         {
-            ProcessBuilder processBuilder = new ProcessBuilder("python", "data/mqtt.py") ;
+            ProcessBuilder processBuilder = new ProcessBuilder("python", "data\\mqtt.py") ;
             processPython = processBuilder.start() ;
+            System.out.println("Process Python started successfully.");
         }
         catch (Exception e)
         {
             e.printStackTrace() ;
+            System.out.println("Failed to start Process Python.");
         }
     }
 
