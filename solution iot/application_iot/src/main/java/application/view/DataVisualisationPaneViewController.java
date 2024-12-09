@@ -4,6 +4,8 @@ import application.control.DataVisualisationPane ;
 import application.data.DataTypeUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
+import application.thread.UpdateAlertDisplayTask;
+import application.thread.UpdateDataDisplayTask;
 import application.tools.DataFileReading ;
 import application.tools.GraphGenerator ;
 
@@ -15,8 +17,6 @@ import javafx.beans.property.SimpleStringProperty ;
 import javafx.collections.FXCollections ;
 import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
-import javafx.geometry.Insets ;
-import javafx.geometry.Pos ;
 import javafx.scene.Node ;
 import javafx.scene.chart.BarChart ;
 import javafx.scene.chart.LineChart ;
@@ -27,8 +27,6 @@ import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
 import javafx.scene.control.TableView ;
-import javafx.scene.image.Image ;
-import javafx.scene.image.ImageView ;
 import javafx.scene.layout.HBox ;
 import javafx.scene.layout.VBox ;
 import javafx.scene.text.Font ;
@@ -266,27 +264,13 @@ public class DataVisualisationPaneViewController
      */
     public void updateDataDisplay()
     {
-        Map<String, Map<String, String>> dataMap = this.dvpDialogController.getDataMap() ;
-
-        Map<String, DataRow> existingDataRowsMap = new HashMap<>() ;
-        for (DataRow dr : this.dataTableViewOList) { existingDataRowsMap.put(dr.getName(), dr) ; }
-
         // mise à jour de la TableView
-        for (Map.Entry<String, Map<String, String>> m : dataMap.entrySet())
-        {
-            if (existingDataRowsMap.containsKey(m.getKey()))
-            {
-                DataRow dataRow = existingDataRowsMap.get(m.getKey()) ;
-                dataRow.updateData(m.getValue()) ;
-            }
-            else
-            {
-                DataRow dataRow = new DataRow(m.getKey(), m.getValue()) ;
-                this.dataTableViewOList.add(dataRow) ;
-            }
-        }
-        this.dataTableView.setItems(this.dataTableViewOList) ;
-        this.dataTableView.refresh() ;
+        UpdateDataDisplayTask task = new UpdateDataDisplayTask(
+            this.dvpDialogController,
+            this.dataTableViewOList,
+            this.dataTableView) ;
+        Thread thread = new Thread(task) ;
+        thread.start() ;
 
         // mise à jour du graphique affiché
         if (this.selectedHeaderButton != null)
@@ -305,111 +289,13 @@ public class DataVisualisationPaneViewController
      */
     public void updateAlertDisplay()
     {
-        Map<String, Map<String, String>> alertMap = this.dvpDialogController.getAlertMap() ;
-
-        this.alertListVBox.getChildren().clear() ;
-
-        int displayedAlertNumber = 0 ;
-        for (Map.Entry<String, Map<String, String>> m : alertMap.entrySet())
-        {
-            // construction du conteneur d'alerte
-            // ----------------------------------
-
-            // chargement des fonts utilisées
-            Font atFont     = FontLoader.getAlertTitleFont() ;
-            Font asFont     = FontLoader.getAlertSubtitleFont() ;
-            Font sdhFont    = FontLoader.getSingleDataHeaderFont() ;
-            Font sdFont     = FontLoader.getSingleDataFont() ;
-            Font sduFont    = FontLoader.getSingleDataUnitFont() ;
-
-            // intégration de l'icone d'alerte
-            ImageView alertIcon = new ImageView(new Image(DataVisualisationPaneViewController.class.getResourceAsStream("/application/image/dvp/alert-icon.png"))) ;
-            alertIcon.setFitHeight(36) ;
-            alertIcon.setPreserveRatio(true) ;
-
-            Label alertTitle = new Label(DataTypeUtilities.getAlertTitle(m.getValue().get("dataType"))) ;
-            alertTitle.setFont(atFont) ;
-
-            Label alertSubtitle = new Label("Salle "+m.getKey()) ;
-            alertSubtitle.setFont(asFont) ;
-
-            VBox alertMainInfo = new VBox() ;
-            alertMainInfo.getChildren().add(alertTitle) ;
-            alertMainInfo.getChildren().add(alertSubtitle) ;
-
-            HBox alertHeader = new HBox() ;
-            alertHeader.getChildren().add(alertIcon) ;
-            alertHeader.getChildren().add(alertMainInfo) ;
-            alertHeader.setAlignment(Pos.CENTER_LEFT) ;
-            alertHeader.setSpacing(10) ;
-
-            Label thresholdHeader = new Label("Seuil") ;
-            thresholdHeader.setPrefHeight(30) ;
-            thresholdHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
-            thresholdHeader.setFont(sdhFont) ;
-
-            Label threshold = new Label(m.getValue().get("threshold")) ;
-            threshold.setFont(sdFont) ;
-
-            Label thresholdUnit = new Label(DataTypeUtilities.getUnit(m.getValue().get("dataType"))) ;
-            thresholdUnit.setFont(sduFont) ;
-            thresholdUnit.setPadding(new Insets(0, 0, 2, 0)) ;
-
-            HBox thresholdValue = new HBox() ;
-            thresholdValue.getChildren().add(threshold) ;
-            thresholdValue.getChildren().add(thresholdUnit) ;
-            thresholdValue.setAlignment(Pos.BOTTOM_LEFT) ;
-            thresholdValue.setSpacing(5) ;
-
-            VBox thresholdContainer = new VBox() ;
-            thresholdContainer.getChildren().add(thresholdHeader) ;
-            thresholdContainer.getChildren().add(thresholdValue) ;
-
-            Label measuredHeader = new Label("Relevé") ;
-            measuredHeader.setPrefHeight(30) ;
-            measuredHeader.setAlignment(Pos.BOTTOM_RIGHT) ;
-            measuredHeader.setFont(sdhFont) ;
-
-            Label measured = new Label(m.getValue().get("measuredValue")) ;
-            measured.setFont(sdFont) ;
-
-            Label measuredUnit = new Label(DataTypeUtilities.getUnit(m.getValue().get("dataType"))) ;
-            measuredUnit.setFont(sduFont) ;
-            measuredUnit.setPadding(new Insets(0, 0, 2, 0)) ;
-
-            HBox measuredValue = new HBox() ;
-            measuredValue.getChildren().add(measured) ;
-            measuredValue.getChildren().add(measuredUnit) ;
-            measuredValue.setAlignment(Pos.BOTTOM_LEFT) ;
-            measuredValue.setSpacing(5) ;
-
-            VBox measuredContainer = new VBox() ;
-            measuredContainer.getChildren().add(measuredHeader) ;
-            measuredContainer.getChildren().add(measuredValue) ;
-
-            HBox alertContent = new HBox() ;
-            alertContent.getChildren().add(thresholdContainer) ;
-            alertContent.getChildren().add(measuredContainer) ;
-            alertContent.setSpacing(20) ;
-
-            thresholdContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;
-            measuredContainer.prefWidthProperty().bind(alertContent.widthProperty().multiply(1/2.0)) ;    
-
-            VBox alertContainer = new VBox() ;
-            alertContainer.getChildren().add(alertHeader) ;
-            alertContainer.getChildren().add(alertContent) ;
-            alertContainer.setSpacing(10) ;
-            alertContainer.getStyleClass().add("alert-container") ;
-
-            VBox.setMargin(alertHeader, new Insets(20, 20, 0, 20)) ;
-            VBox.setMargin(alertContent, new Insets(0, 20, 20, 20)) ;
-
-            this.alertListVBox.getChildren().add(alertContainer) ;
-
-            displayedAlertNumber++ ;
-
-            if (displayedAlertNumber == this.MAX_DISPLAYABLE_ALERTS) { break ; }
-        }
+        // mise à jour du conteneur d'alertes
+        UpdateAlertDisplayTask task = new UpdateAlertDisplayTask(
+            this.dvpDialogController,
+            this.alertListVBox
+        ) ;
+        Thread thread = new Thread(task) ;
+        thread.start() ;
     }
 
     /**

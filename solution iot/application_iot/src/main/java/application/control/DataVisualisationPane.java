@@ -15,6 +15,7 @@ import java.util.Map ;
 import javafx.application.Platform ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
+import javafx.stage.Modality;
 import javafx.stage.Stage ;
 
 /**
@@ -58,8 +59,8 @@ public class DataVisualisationPane
             // récupération des types de données à visualiser
             this.dataTypeList = DataFileReading.getHeaders(DataLoader.getAllRoomDataFile()) ;
 
-            // initialisation d'un nouveau stage pour le formulaire
-            this.dvpStage = new Stage() ;
+            // initialisation du stage
+            this.dvpStage = _stageParent ;
 
             // centrage de la fenêtre par rapport à la fenêtre précédente
             this.dvpStage.setX(_stageParent.getX() + (_stageParent.getWidth() - PREF_WIDTH) / 2) ;
