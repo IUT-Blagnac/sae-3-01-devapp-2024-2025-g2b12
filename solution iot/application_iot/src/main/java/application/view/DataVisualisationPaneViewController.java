@@ -253,6 +253,7 @@ public class DataVisualisationPaneViewController
      */
     private Object closeWindow(WindowEvent e)
     {
+        this.dvpDialogController.stopProcessPython();
         this.doClose() ;
 		e.consume() ;
 		return null ;
