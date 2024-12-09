@@ -2,6 +2,7 @@ package application.data ;
 
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
+import application.data.enums.SolarPanelDataType ;
 
 import java.io.File ;
 import java.util.Arrays ;
@@ -71,11 +72,20 @@ public class DataLoader
     }
 
     /**
-     * Donne la liste des types de données des salles
+     * Donne la liste des types de données des salles.
      * @return  la liste des types de données
      */
     public static List<RoomDataType> getRoomDataTypeList()
     {
         return Arrays.asList(RoomDataType.values()) ;
+    }
+
+    /**
+     * Donne la liste des types de données des panneaux solaires.
+     * @return  la liste des types de données
+     */
+    public static List<SolarPanelDataType> getSolarPanelDataTypeList()
+    {
+        return Arrays.asList(SolarPanelDataType.values()) ;
     }
 }

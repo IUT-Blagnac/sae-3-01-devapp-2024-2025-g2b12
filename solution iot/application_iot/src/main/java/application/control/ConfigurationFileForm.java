@@ -3,6 +3,7 @@ package application.control ;
 import application.data.DataLoader ;
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
+import application.data.enums.SolarPanelDataType;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
@@ -25,17 +26,25 @@ public class ConfigurationFileForm
 {
     // déclaration des constantes
     // --------------------------
+
     // fréquence de lecture des données (en secondes)
     private static final int MIN_READING_FREQUENCY      = 5 ;       // fréquence minimale
     private static final int MAX_READING_FREQUENCY      = 1000 ;    // fréquence maximale
     private static final int DEFAULT_READING_FREQUENCY  = 10 ;      // fréquence par défaut
 
     // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de dialogue
     private Stage cffStage ;
     private ConfigurationFileFormViewController cffViewController ;
 
+    // attributs relatifs aux salles (capteurs AM107)
     private List<Room> roomList ;
     private List<RoomDataType> roomDataTypeList ;
+
+    // attributs relatifs aux panneaux solaires (capteurs SOLAREDGE)
+    private List<SolarPanelDataType> solarPanelDataTypeList ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -45,8 +54,9 @@ public class ConfigurationFileForm
         try
         {
             // initialisation des attributs
-            this.roomList           = DataLoader.getRoomList() ;
-            this.roomDataTypeList   = DataLoader.getRoomDataTypeList() ;
+            this.roomList               = DataLoader.getRoomList() ;
+            this.roomDataTypeList       = DataLoader.getRoomDataTypeList() ;
+            this.solarPanelDataTypeList = DataLoader.getSolarPanelDataTypeList() ;
 
             // initialisation d'un nouveau stage pour le formulaire
             this.cffStage = new Stage() ;
@@ -106,6 +116,12 @@ public class ConfigurationFileForm
      * @return  la liste des types de données des salles
      */
     public List<RoomDataType> getRoomDataTypeList() { return this.roomDataTypeList ; }
+
+    /**
+     * Accesseur : donne la liste des types de données des panneaux solaires.
+     * @return  la liste des types de données des panneaux solaires
+     */
+    public List<SolarPanelDataType> getSolarPanelDataTypeList() { return this.solarPanelDataTypeList ; }
 
     /**
      * Effectue le dialogue de paramétrage d'un fichier de configuration.

@@ -4,6 +4,7 @@ import application.control.ConfigurationFileForm ;
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
 import application.data.enums.Sensor ;
+import application.data.enums.SolarPanelDataType ;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
@@ -47,9 +48,10 @@ public class ConfigurationFileFormViewController
     private ConfigurationFileForm cffDialogController ;
 
     // attributs relatifs à la configuration à créer
-    private Sensor selectedSensorType               = Sensor.AM107 ;
-    private List<Room> selectedRoomList                 = new ArrayList<>() ;
-    private List<RoomDataType> selectedRoomDataTypeList = new ArrayList<>() ;
+    private Sensor selectedSensorType                               = Sensor.AM107 ;
+    private List<Room> selectedRoomList                             = new ArrayList<>() ;
+    private List<RoomDataType> selectedRoomDataTypeList             = new ArrayList<>() ;
+    private List<SolarPanelDataType> selectedSolarPanelDataTypeList = new ArrayList<>() ;
     private int enteredReadingFrequency ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
@@ -60,12 +62,16 @@ public class ConfigurationFileFormViewController
     @FXML private Button solarPanelSensorsButton ;
 
     // menu de sélection des salles (AM107 uniquement)
-    @FXML private VBox roomSelectionMenuContainer ;
+    @FXML private VBox roomSelectionMenu ;
     @FXML private GridPane roomListGridPane ;
 
-    // menu de sélection des types de données (AM107 uniquement)
-    @FXML private VBox roomDataTypeSelectionMenuContainer ;
+    // menu de sélection des types de données relatifs aux salles (AM107 uniquement)
+    @FXML private VBox roomDataTypeSelectionMenu ;
     @FXML private VBox roomDataTypeListVBox ;
+
+    // menu de sélection des types de données relatifs aux panneaux solaires (SOLAREDGE uniquement)
+    @FXML private VBox solarPanelDataTypeSelectionMenu ;
+    @FXML private VBox solarPanelDataTypeListVBox ;
 
     // menu des paramètres avancés
     @FXML private TextField frequencyTextField ;
@@ -106,6 +112,7 @@ public class ConfigurationFileFormViewController
         this.initSensorTypeSelectionMenu() ;
         this.initRoomSelectionMenu() ;
         this.initRoomDataTypeSelectionMenu() ;
+        this.initSolarPanelDataTypeSelectionMenu() ;
         this.initAdvancedSettingsMenu() ;
 
         // mise à jour de l'état des boutons du menu inférieur
@@ -199,11 +206,11 @@ public class ConfigurationFileFormViewController
                 this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
                 this.roomSensorsButton.getStyleClass().add("selected") ;
 
-                this.roomSelectionMenuContainer.setManaged(true) ;
-                this.roomSelectionMenuContainer.setVisible(true) ;
+                this.roomSelectionMenu.setManaged(true) ;
+                this.roomSelectionMenu.setVisible(true) ;
 
-                this.roomDataTypeSelectionMenuContainer.setManaged(true) ;
-                this.roomDataTypeSelectionMenuContainer.setVisible(true) ;
+                this.roomDataTypeSelectionMenu.setManaged(true) ;
+                this.roomDataTypeSelectionMenu.setVisible(true) ;
 
                 this.updateLowerMenuButtonStatus() ;
             }
@@ -215,11 +222,11 @@ public class ConfigurationFileFormViewController
                 this.roomSensorsButton.getStyleClass().remove("selected") ;
                 this.solarPanelSensorsButton.getStyleClass().add("selected") ;
 
-                this.roomSelectionMenuContainer.setManaged(false) ;
-                this.roomSelectionMenuContainer.setVisible(false) ;
+                this.roomSelectionMenu.setManaged(false) ;
+                this.roomSelectionMenu.setVisible(false) ;
 
-                this.roomDataTypeSelectionMenuContainer.setManaged(false) ;
-                this.roomDataTypeSelectionMenuContainer.setVisible(false) ;
+                this.roomDataTypeSelectionMenu.setManaged(false) ;
+                this.roomDataTypeSelectionMenu.setVisible(false) ;
 
                 this.updateLowerMenuButtonStatus() ;
             }
@@ -353,6 +360,35 @@ public class ConfigurationFileFormViewController
                 }
                 this.updateLowerMenuButtonStatus() ;
             }) ;
+        }
+    }
+
+    /**
+     * Initialise le menu de sélection des types de données des panneaux solaires.
+     */
+    private void initSolarPanelDataTypeSelectionMenu()
+    {
+        this.solarPanelDataTypeListVBox.getChildren().clear() ;
+
+        for (SolarPanelDataType dataType : this.cffDialogController.getSolarPanelDataTypeList())
+        {
+            Button button = new Button(dataType.getNameForDisplay()) ;
+            button.setFont(FontLoader.getLittleButtonFont()) ;
+            button.setMinWidth(200) ;
+            button.setMinHeight(35) ;
+
+            Label descLabel = new Label(dataType.getDescription()) ;
+            descLabel.setFont(FontLoader.getContentFont()) ;
+            descLabel.setTextFill(Color.web("#fff")) ;
+            descLabel.setMinWidth(50) ;
+            descLabel.setMinHeight(35) ;
+
+            HBox dataTypeContainer = new HBox() ;
+            dataTypeContainer.setSpacing(50) ;
+            dataTypeContainer.getChildren().add(button) ;
+            dataTypeContainer.getChildren().add(descLabel) ;
+
+            this.solarPanelDataTypeListVBox.getChildren().add(dataTypeContainer) ;
         }
     }
 

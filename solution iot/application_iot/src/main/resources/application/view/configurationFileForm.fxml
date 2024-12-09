@@ -62,7 +62,7 @@
                                     </children>
                                 </VBox>
                                 <Separator/>
-                                <VBox fx:id="roomSelectionMenuContainer" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                <VBox fx:id="roomSelectionMenu" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                             <padding>
@@ -77,7 +77,7 @@
                                         </VBox>
                                     </children>
                                 </VBox>
-                                <VBox fx:id="roomDataTypeSelectionMenuContainer" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                <VBox fx:id="roomDataTypeSelectionMenu" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
                                     <children>
                                         <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
                                             <padding>
@@ -86,6 +86,19 @@
                                             <children>
                                                 <Label text="Données à visualiser" styleClass="container-header"/>
                                                 <VBox fx:id="roomDataTypeListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10"/>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="solarPanelDataTypeSelectionMenu" alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                                    <children>
+                                        <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                            <padding>
+                                                <Insets left="20" right="20" top="20" bottom="20"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Données à visualiser" styleClass="container-header"/>
+                                                <VBox fx:id="solarPanelDataTypeListVBox" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10"/>
                                             </children>
                                         </VBox>
                                     </children>

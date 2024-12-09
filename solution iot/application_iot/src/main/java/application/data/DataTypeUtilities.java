@@ -19,6 +19,8 @@ public class DataTypeUtilities
     // déclaration des attributs (constantes)
     private static final Map<String, Map<String, String>> DATA_REPRESENTATION_MAP = new HashMap<>()
     {{
+        // SALLES - CAPTEURS AM107
+        // -----------------------
         put("deviceName", new HashMap<>() {{
             put("abbreviation", "App.") ;
             put("full", "Nom d'appareil") ;
