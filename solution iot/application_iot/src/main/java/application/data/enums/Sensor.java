@@ -9,7 +9,7 @@ package application.data.enums ;
  * @author Victor Jockin
  * - Équipe 2B12 -
  */
-public enum SensorType
+public enum Sensor
 {
     // déclaration des types de capteurs
     AM107,

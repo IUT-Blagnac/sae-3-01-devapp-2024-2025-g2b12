@@ -3,7 +3,7 @@ package application.view ;
 import application.control.ConfigurationFileForm ;
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
-import application.data.enums.SensorType ;
+import application.data.enums.Sensor ;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
@@ -47,7 +47,7 @@ public class ConfigurationFileFormViewController
     private ConfigurationFileForm cffDialogController ;
 
     // attributs relatifs à la configuration à créer
-    private SensorType selectedSensorType               = SensorType.AM107 ;
+    private Sensor selectedSensorType               = Sensor.AM107 ;
     private List<Room> selectedRoomList                 = new ArrayList<>() ;
     private List<RoomDataType> selectedRoomDataTypeList = new ArrayList<>() ;
     private int enteredReadingFrequency ;
@@ -149,13 +149,26 @@ public class ConfigurationFileFormViewController
     @FXML
     private void doReset()
     {
-        // réinitialisation de la configuration
-        this.selectedSensorType = SensorType.AM107 ;
-        this.selectedRoomList.clear() ;
-        this.selectedRoomDataTypeList.clear() ;
+        switch (this.selectedSensorType)
+        {
+            case AM107 :
+                // réinitialisation de la configuration
+                this.selectedRoomList.clear() ;
+                this.selectedRoomDataTypeList.clear() ;
+                // réinitialisation des menus
+                this.initRoomSelectionMenu() ;
+                this.initRoomDataTypeSelectionMenu() ;
+                break ;
 
-        // réinitialisation des composants graphiques
-        this.initializeView() ;
+            case SOLAREDGE :
+                break ;
+
+            default :
+                break ;
+        }
+
+        // réinitialisation du menu des paramètres avancés
+        this.initAdvancedSettingsMenu() ;
 
         // mise à jour de l'état des boutons du menu inférieur
         this.updateLowerMenuButtonStatus() ;
@@ -176,14 +189,13 @@ public class ConfigurationFileFormViewController
     private void initSensorTypeSelectionMenu()
     {
         // sélection des capteurs AM107 par défaut
-        this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
         this.roomSensorsButton.getStyleClass().add("selected") ;
 
         // écouteurs d'évèneemnts sur le bouton "switch" de sélection du type de capteurs
         this.roomSensorsButton.setOnAction(event -> {
-            if (this.selectedSensorType != SensorType.AM107)
+            if (this.selectedSensorType != Sensor.AM107)
             {
-                this.selectedSensorType = SensorType.AM107 ;
+                this.selectedSensorType = Sensor.AM107 ;
                 this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
                 this.roomSensorsButton.getStyleClass().add("selected") ;
 
@@ -192,20 +204,24 @@ public class ConfigurationFileFormViewController
 
                 this.roomDataTypeSelectionMenuContainer.setManaged(true) ;
                 this.roomDataTypeSelectionMenuContainer.setVisible(true) ;
+
+                this.updateLowerMenuButtonStatus() ;
             }
         }) ;
         this.solarPanelSensorsButton.setOnAction(event -> {
-            if (this.selectedSensorType != SensorType.SOLAREDGE)
+            if (this.selectedSensorType != Sensor.SOLAREDGE)
             {
-                this.selectedSensorType = SensorType.SOLAREDGE ;
+                this.selectedSensorType = Sensor.SOLAREDGE ;
                 this.roomSensorsButton.getStyleClass().remove("selected") ;
                 this.solarPanelSensorsButton.getStyleClass().add("selected") ;
 
                 this.roomSelectionMenuContainer.setManaged(false) ;
                 this.roomSelectionMenuContainer.setVisible(false) ;
-                
+
                 this.roomDataTypeSelectionMenuContainer.setManaged(false) ;
                 this.roomDataTypeSelectionMenuContainer.setVisible(false) ;
+
+                this.updateLowerMenuButtonStatus() ;
             }
         }) ;
     }
@@ -358,8 +374,8 @@ public class ConfigurationFileFormViewController
      */
     private void updateLowerMenuButtonStatus()
     {
-        if (    this.selectedRoomList.size() == 0
-            ||  this.selectedRoomDataTypeList.size() == 0
+        if (    this.selectedSensorType == Sensor.AM107
+            && (this.selectedRoomList.size() == 0 || this.selectedRoomDataTypeList.size() == 0)
         ) {
             this.saveButton.setDisable(true) ;
         }
