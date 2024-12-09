@@ -77,16 +77,24 @@
     -fx-text-fill: #fff;
 }
 
-.button.sensors-selector:hover {
+.button.switch.left {
+    -fx-border-radius: 0;
+    -fx-background-radius: 5 0 0 5;
+}
+.button.switch.right {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0 5 5 0;
+}
+.button.switch:hover {
     -fx-background-color: #b59000;
     -fx-text-fill: #fff;
 }
-.button.sensors-selector:pressed {
-    -fx-background-color: #917100;
+.button.switch:pressed {
+    -fx-background-color: #b59000;
     -fx-text-fill: #fff;
 }
-.button.sensors-selector.selected {
-    -fx-background-color: #917100;
+.button.switch.selected {
+    -fx-background-color: #b59000;
     -fx-text-fill: #fff;
 }
 

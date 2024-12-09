@@ -145,6 +145,7 @@ public class ConfigurationFileFormViewController
     private void doReset()
     {
         // réinitialisation de la configuration
+        this.selectedSensorType = SensorType.AM107 ;
         this.selectedRoomList.clear() ;
         this.selectedRoomDataTypeList.clear() ;
 
@@ -173,7 +174,8 @@ public class ConfigurationFileFormViewController
         this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
         this.roomSensorsButton.getStyleClass().add("selected") ;
 
-        // écouteurs d'évèneemnts sur les boutons de sélection du type de capteurs
+        // écouteurs d'évèneemnts sur le bouton "switch" de sélection du type de capteurs
+        this.roomSensorsButton.getStyleClass().add("left") ;
         this.roomSensorsButton.setOnAction(event -> {
             if (this.selectedSensorType != SensorType.AM107)
             {
@@ -182,6 +184,7 @@ public class ConfigurationFileFormViewController
                 this.roomSensorsButton.getStyleClass().add("selected") ;
             }
         }) ;
+        this.solarPanelSensorsButton.getStyleClass().add("right") ;
         this.solarPanelSensorsButton.setOnAction(event -> {
             if (this.selectedSensorType != SensorType.SOLAREDGE)
             {

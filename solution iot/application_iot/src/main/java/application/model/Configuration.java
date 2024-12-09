@@ -7,7 +7,7 @@ import java.util.Map ;
  * Classe modèle représentant une configuration.
  * 
  * Date de dernière modification :
- * - Dimanche 8 décembre -
+ * - Lundi 9 décembre 2024 -
  * 
  * @author Victor Jockin
  * - Équipe 2B12 -
