@@ -212,6 +212,9 @@ public class ConfigurationFileFormViewController
                 this.roomDataTypeSelectionMenu.setManaged(true) ;
                 this.roomDataTypeSelectionMenu.setVisible(true) ;
 
+                this.solarPanelDataTypeSelectionMenu.setVisible(false) ;
+                this.solarPanelDataTypeSelectionMenu.setManaged(false) ;
+
                 this.updateLowerMenuButtonStatus() ;
             }
         }) ;
@@ -222,11 +225,14 @@ public class ConfigurationFileFormViewController
                 this.roomSensorsButton.getStyleClass().remove("selected") ;
                 this.solarPanelSensorsButton.getStyleClass().add("selected") ;
 
-                this.roomSelectionMenu.setManaged(false) ;
                 this.roomSelectionMenu.setVisible(false) ;
+                this.roomSelectionMenu.setManaged(false) ;
 
-                this.roomDataTypeSelectionMenu.setManaged(false) ;
                 this.roomDataTypeSelectionMenu.setVisible(false) ;
+                this.roomDataTypeSelectionMenu.setManaged(false) ;
+
+                this.solarPanelDataTypeSelectionMenu.setManaged(true) ;
+                this.solarPanelDataTypeSelectionMenu.setVisible(true) ;
 
                 this.updateLowerMenuButtonStatus() ;
             }
