@@ -51,23 +51,42 @@
     -fx-border-radius: 0;
     -fx-background-radius: 5;
 }
+
 .button.lower-menu {
     -fx-font-size: 18px;
 }
+
 .button:hover {
-    -fx-background-color: #444cf8;
+    -fx-background-color: #9185ff;
     -fx-text-fill: #fff;
 }
 .button:pressed {
-    -fx-background-color: #444cf8;
+    -fx-background-color: #0018b6;
     -fx-text-fill: #fff;
 }
 .button.selected {
-    -fx-background-color: #444cf8;
+    -fx-background-color: #0018b6;
     -fx-text-fill: #fff;
 }
 .button.selected:hover {
-    -fx-background-color: #2d2bd4;
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.button.selected:pressed {
+    -fx-background-color: #0018b6;
+    -fx-text-fill: #fff;
+}
+
+.button.sensors-selector:hover {
+    -fx-background-color: #b59000;
+    -fx-text-fill: #fff;
+}
+.button.sensors-selector:pressed {
+    -fx-background-color: #917100;
+    -fx-text-fill: #fff;
+}
+.button.sensors-selector.selected {
+    -fx-background-color: #917100;
     -fx-text-fill: #fff;
 }
 

@@ -1,4 +1,6 @@
-package application.data ;
+package application.data.enums ;
+
+import application.data.DataTypeUtilities ;
 
 /**
  * Classe d'énumération des types de données des salles.
@@ -11,7 +13,7 @@ package application.data ;
  */
 public enum RoomDataType
 {
-    // déclaration des types de données des salles.
+    // déclaration des types de données des salles
     TEMPERATURE,
     HUMIDITY,
     ACTIVITY,

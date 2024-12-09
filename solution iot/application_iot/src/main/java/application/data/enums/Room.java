@@ -1,4 +1,4 @@
-package application.data ;
+package application.data.enums ;
 
 /**
  * Classe d'énumération des salles existantes.
