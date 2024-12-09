@@ -1,8 +1,8 @@
 package application.control ;
 
 import application.data.DataLoader ;
-import application.data.Room ;
-import application.data.RoomDataType ;
+import application.data.enums.Room ;
+import application.data.enums.RoomDataType ;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;

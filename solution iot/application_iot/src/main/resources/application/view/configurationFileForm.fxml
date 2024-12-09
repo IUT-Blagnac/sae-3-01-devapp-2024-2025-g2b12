@@ -48,8 +48,8 @@
                                                         <Label text="Capteurs à consulter" minWidth="220" minHeight="35"/>
                                                         <HBox minWidth="380" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="10">
                                                             <children>
-                                                                <Button fx:id="roomSensorsButton" text="Salles" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35"/>
-                                                                <Button fx:id="solarPanelSensorsButton" text="Panneaux solaires" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35"/>
+                                                                <Button fx:id="roomSensorsButton" text="Salles" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="sensors-selector"/>
+                                                                <Button fx:id="solarPanelSensorsButton" text="Panneaux solaires" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="sensors-selector"/>
                                                             </children>
                                                         </HBox>
                                                     </children>

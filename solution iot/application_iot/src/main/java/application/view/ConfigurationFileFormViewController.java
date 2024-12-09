@@ -1,8 +1,9 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm ;
-import application.data.Room ;
-import application.data.RoomDataType ;
+import application.data.enums.Room ;
+import application.data.enums.RoomDataType ;
+import application.data.enums.SensorType ;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
@@ -39,18 +40,32 @@ public class ConfigurationFileFormViewController
     private static final int NUMBER_OF_COLUMNS = 5 ;    // nombre de colonnes dans le menu de sélection des salles
 
     // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de vue
     private Stage stage ;
     private ConfigurationFileForm cffDialogController ;
 
+    // attributs relatifs à la configuration à créer
+    private SensorType selectedSensorType               = SensorType.AM107 ;
     private List<Room> selectedRoomList                 = new ArrayList<>() ;
     private List<RoomDataType> selectedRoomDataTypeList = new ArrayList<>() ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    // --------------------------------------------------------------------
+
+    // boutons de sélection des capteurs à consulter
     @FXML private Button roomSensorsButton ;
     @FXML private Button solarPanelSensorsButton ;
+
+    // grille des boutons de sélection des salles
     @FXML private GridPane roomListGridPane ;
+
+    // conteneur de la liste des types de données
     @FXML private VBox roomDataTypeListVBox ;
     @FXML private TextField frequencyTextField ;
+
+    // boutons du menu inférieur ( =<^.^>= )
     @FXML private Button closeButton ;
     @FXML private Button resetButton ;
     @FXML private Button saveButton ;
@@ -83,6 +98,7 @@ public class ConfigurationFileFormViewController
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
 
         // initialisation des menus
+        this.initSensorTypeSelectionMenu() ;
         this.initRoomSelectionMenu() ;
         this.initRoomDataTypeSelectionMenu() ;
         this.initAdvancedSettingsMenu() ;
@@ -146,6 +162,34 @@ public class ConfigurationFileFormViewController
     private void doSave()
     {
         System.out.println("-  En cours de développement  -") ;
+    }
+
+    /**
+     * Initialise le menu de sélection du type de capteurs.
+     */
+    private void initSensorTypeSelectionMenu()
+    {
+        // sélection des capteurs AM107 par défaut
+        this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
+        this.roomSensorsButton.getStyleClass().add("selected") ;
+
+        // écouteurs d'évèneemnts sur les boutons de sélection du type de capteurs
+        this.roomSensorsButton.setOnAction(event -> {
+            if (this.selectedSensorType != SensorType.AM107)
+            {
+                this.selectedSensorType = SensorType.AM107 ;
+                this.solarPanelSensorsButton.getStyleClass().remove("selected") ;
+                this.roomSensorsButton.getStyleClass().add("selected") ;
+            }
+        }) ;
+        this.solarPanelSensorsButton.setOnAction(event -> {
+            if (this.selectedSensorType != SensorType.SOLAREDGE)
+            {
+                this.selectedSensorType = SensorType.SOLAREDGE ;
+                this.roomSensorsButton.getStyleClass().remove("selected") ;
+                this.solarPanelSensorsButton.getStyleClass().add("selected") ;
+            }
+        }) ;
     }
 
     /**
