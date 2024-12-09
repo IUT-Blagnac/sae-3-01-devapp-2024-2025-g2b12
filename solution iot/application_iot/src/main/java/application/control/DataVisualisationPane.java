@@ -46,6 +46,8 @@ public class DataVisualisationPane
     private Map<String, Map<String, String>> dataMap ;
     private Map<String, Map<String, String>> alertMap ;
 
+    private Process processPython ;
+
     /**
      * Constructeur : charge le formulaire.
      */
@@ -81,6 +83,8 @@ public class DataVisualisationPane
 
             // application des styles à la scène
             this.dvpStage.getScene().getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
+
+            this.startProcessPython() ;
         }
         catch (Exception e)
         {
@@ -186,5 +190,24 @@ public class DataVisualisationPane
     {
         ConfigurationFileForm configurationFileForm = new ConfigurationFileForm(this.dvpStage) ;
         configurationFileForm.doConfigurationFileFormDialog() ;
+    }
+
+    public void startProcessPython(){
+        try
+        {
+            ProcessBuilder processBuilder = new ProcessBuilder("python", "data/mqtt.py") ;
+            processPython = processBuilder.start() ;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace() ;
+        }
+    }
+
+    public void stopProcessPython(){
+        if (processPython != null)
+        {
+            processPython.destroy() ;
+        }
     }
 }
