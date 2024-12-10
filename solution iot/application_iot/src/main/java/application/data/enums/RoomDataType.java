@@ -52,11 +52,57 @@ public enum RoomDataType
     }
 
     /**
-     * Donne le nom de la salle formaté pour création d'un topic MQTT.
-     * @return  le nom de la salle formaté
+     * Donne le seuil d'alerte par défaut du type de données.
+     * @return  le seuil d'alerte par défaut
      */
     public String getDefaultThreshold()
     {
         return DataTypeUtilities.getDefaultThreshold(this.name().toLowerCase()) ;
+    }
+
+    /**
+     * Donne le seuil d'alerte minimal du type de données.
+     * @return  le seuil d'alerte minimal
+     */
+    public double getMinThreshold()
+    {
+        double minThreshold ;
+        switch (this)
+        {
+            case TEMPERATURE :          minThreshold = -50 ; break ;
+            case HUMIDITY :             minThreshold = 0 ; break ;
+            case ACTIVITY :             minThreshold = 0 ; break ;
+            case CO2 :                  minThreshold = 0 ; break ;
+            case TVOC :                 minThreshold = 0 ; break ;
+            case ILLUMINATION :         minThreshold = 0 ; break ;
+            case INFRARED :             minThreshold = 0 ; break ;
+            case INFRARED_AND_VISIBLE : minThreshold = 0 ; break ;
+            case PRESSURE :             minThreshold = 0 ; break ;
+            default :                   minThreshold = 0 ; break ;
+        }
+        return minThreshold ;
+    }
+
+    /**
+     * Donne le seuil d'alerte maximal du type de données.
+     * @return  le seuil d'alerte maximal
+     */
+    public double getMaxThreshold()
+    {
+        double maxThreshold ;
+        switch (this)
+        {
+            case TEMPERATURE :          maxThreshold = 100 ; break ;
+            case HUMIDITY :             maxThreshold = 100 ; break ;
+            case ACTIVITY :             maxThreshold = 100 ; break ;
+            case CO2 :                  maxThreshold = 5000 ; break ;
+            case TVOC :                 maxThreshold = 60000 ; break ;
+            case ILLUMINATION :         maxThreshold = 1000 ; break ;
+            case INFRARED :             maxThreshold = 100 ; break ;
+            case INFRARED_AND_VISIBLE : maxThreshold = 100 ; break ;
+            case PRESSURE :             maxThreshold = 20000 ; break ;
+            default :                   maxThreshold = 0 ; break ;
+        }
+        return maxThreshold ;
     }
 }

@@ -393,21 +393,20 @@ public class ConfigurationFileFormViewController
         {
             Button button = new Button(roomDataType.getNameForDisplay()) ;
             button.setFont(FontLoader.getLittleButtonFont()) ;
-            button.setMaxWidth(Double.MAX_VALUE) ;
-            button.setMaxHeight(Double.MAX_VALUE) ;
             button.setMinWidth(220) ;
             button.setMinHeight(35) ;
 
-            Label thresholdLabel = new Label("Seuil d'alerte :") ;
+            Label thresholdLabel = new Label("Seuil d'alerte ("+roomDataType.getMinThreshold()+"-"+roomDataType.getMaxThreshold()+") :") ;
             thresholdLabel.setFont(FontLoader.getTableHeaderFont()) ;
             thresholdLabel.setTextFill(Color.web("#fff")) ;
             thresholdLabel.setTextAlignment(TextAlignment.RIGHT) ;
+            thresholdLabel.setMinWidth(200) ;
             thresholdLabel.setMinHeight(35) ;
 
             TextField thresholdTextField = new TextField(roomDataType.getDefaultThreshold()) ;
             thresholdTextField.setPromptText("Entrez un seuil") ;
             thresholdTextField.setFont(FontLoader.getContentFont()) ;
-            thresholdTextField.setPrefWidth(120) ;
+            thresholdTextField.setPrefWidth(80) ;
             thresholdTextField.setMinHeight(35) ;
             thresholdTextField.setDisable(true) ;
 
@@ -418,7 +417,7 @@ public class ConfigurationFileFormViewController
             unitLabel.setMinHeight(35) ;
 
             HBox thresholdContainer = new HBox() ;
-            thresholdContainer.setAlignment(Pos.CENTER_RIGHT) ;
+            thresholdContainer.setAlignment(Pos.CENTER_LEFT) ;
             thresholdContainer.setSpacing(10) ;
             thresholdContainer.getChildren().add(thresholdLabel) ;
             thresholdContainer.getChildren().add(thresholdTextField) ;
@@ -448,6 +447,13 @@ public class ConfigurationFileFormViewController
                 }
                 this.updateLowerMenuButtonStatus() ;
             }) ;
+
+            // écouteur d'évènements sur le champ de saisie du seuil d'alerte
+            thresholdTextField.focusedProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (!newValue) { this.validateThresholdInput(roomDataType, thresholdTextField) ; }
+                }
+            ) ;
         }
     }
 
@@ -537,6 +543,26 @@ public class ConfigurationFileFormViewController
             this.enteredConfigurationName = name ;
         }
         this.configNameTextField.setText(this.enteredConfigurationName) ;
+    }
+
+    /**
+     * Valide ou non la saisie d'un seuil d'alerte.
+     */
+    private void validateThresholdInput(RoomDataType pRoomDataType, TextField pTextField)
+    {
+        try
+        {
+            double threshold = Double.parseDouble(pTextField.getText()) ;
+            if (this.cffDialogController.isThresholdValid(pRoomDataType, threshold))
+            {
+                this.selectedRoomDataTypeMap.put(pRoomDataType, threshold) ;
+            }
+            pTextField.setText(String.valueOf(this.selectedRoomDataTypeMap.get(pRoomDataType))) ;
+        }
+        catch (NumberFormatException nfe)
+        {
+            pTextField.setText(String.valueOf(this.selectedRoomDataTypeMap.get(pRoomDataType))) ;
+        }
     }
 
     /**

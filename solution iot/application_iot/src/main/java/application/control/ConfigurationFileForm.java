@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality ;
 import javafx.stage.Stage ;
 
@@ -167,6 +168,22 @@ public class ConfigurationFileForm
         return  pName != null
             &&  pName.matches("[a-zA-ZÀ-ÿ0-9 _-]+")
             &&  !pName.trim().isEmpty() ;
+    }
+
+    /**
+     * Indique si un seuil d'alerte pour un type de données de salle est valide.
+     * @param pRoomDataType un type de données de salle
+     * @param pThreshold    un seuil d'alerte
+     * @return  true si le seuil d'alerte est valide, false sinon
+     */
+    public boolean isThresholdValid(RoomDataType pRoomDataType, double pThreshold)
+    {
+        if (    pThreshold < pRoomDataType.getMinThreshold()
+            ||  pThreshold > pRoomDataType.getMaxThreshold()
+        ) {
+            return false ;
+        }
+        return true ;
     }
 
     /**
