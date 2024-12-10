@@ -144,7 +144,7 @@ public class ConfigurationFileForm
         String pTopicPrefix,
         List<String> pSubjectList,
         List<String> pDataTypeList,
-        Map<String, String> pThresholdMap,
+        Map<String, Double> pThresholdMap,
         int pReadingFrequency
     ) {
         Configuration configuration = Configuration.getInstance() ;

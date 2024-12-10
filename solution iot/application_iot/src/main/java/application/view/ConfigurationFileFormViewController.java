@@ -9,8 +9,9 @@ import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
 import java.util.Arrays ;
+import java.util.HashMap;
 import java.util.List ;
-import java.util.Map;
+import java.util.Map ;
 import java.util.stream.Collectors ;
 
 import javafx.fxml.FXML ;
@@ -54,7 +55,7 @@ public class ConfigurationFileFormViewController
     private String enteredConfigurationName                         = "Nouvelle Configuration" ;
     private Sensor selectedSensorType                               = Sensor.AM107 ;
     private List<Room> selectedRoomList                             = new ArrayList<>() ;
-    private List<RoomDataType> selectedRoomDataTypeList             = new ArrayList<>() ;
+    private Map<RoomDataType, Double> selectedRoomDataTypeMap       = new HashMap<>() ;
     private List<SolarPanelDataType> selectedSolarPanelDataTypeList = new ArrayList<>() ;
     private int enteredReadingFrequency ;
 
@@ -180,7 +181,7 @@ public class ConfigurationFileFormViewController
             case AM107 :
                 // réinitialisation de la configuration
                 this.selectedRoomList.clear() ;
-                this.selectedRoomDataTypeList.clear() ;
+                this.selectedRoomDataTypeMap.clear() ;
                 // réinitialisation des menus
                 this.initRoomSelectionMenu() ;
                 this.initRoomDataTypeSelectionMenu() ;
@@ -224,27 +225,26 @@ public class ConfigurationFileFormViewController
         String topicPrefix = this.selectedSensorType.getNameForTopic() ;
 
         // listes des sujets à observer est des données à récupérer
-        List<String> subjectList ;
-        List<String> dataTypeList ;
-        Map<String, String> thresholdMap ;
+        List<String> subjectList            = new ArrayList<>() ;
+        List<String> dataTypeList           = new ArrayList<>() ;
+        Map<String, Double> thresholdMap    = new HashMap<>() ;
         switch (this.selectedSensorType)
         {
             case AM107 :
-                subjectList     = this.selectedRoomList.stream().map(Room::getNameForTopic).collect(Collectors.toCollection(ArrayList::new)) ;
-                dataTypeList    = this.selectedRoomDataTypeList.stream().map(RoomDataType::getNameForDataReading).collect(Collectors.toCollection(ArrayList::new)) ;
-                thresholdMap    = null ;
+                for (Room room : this.selectedRoomList) { subjectList.add(room.getNameForTopic()) ; }
+                for (Map.Entry<RoomDataType, Double> m : this.selectedRoomDataTypeMap.entrySet())
+                {
+                    dataTypeList.add(m.getKey().getNameForDataReading()) ;
+                    thresholdMap.put(m.getKey().getNameForDataReading(), m.getValue()) ;
+                }
                 break ;
 
             case SOLAREDGE :
-                subjectList     = Arrays.asList("overview") ;
-                dataTypeList    = this.selectedSolarPanelDataTypeList.stream().map(SolarPanelDataType::getNameForDataReading).collect(Collectors.toCollection(ArrayList::new)) ;
-                thresholdMap    = null ;
+                subjectList = Arrays.asList("overview") ;
+                for (SolarPanelDataType dataType : this.selectedSolarPanelDataTypeList) { dataTypeList.add(dataType.getNameForDataReading()) ; }
                 break ;
 
             default :
-                subjectList     = null ;
-                dataTypeList    = null ;
-                thresholdMap    = null ;
                 break ;
         }
 
@@ -434,15 +434,15 @@ public class ConfigurationFileFormViewController
             this.roomDataTypeListVBox.getChildren().add(dataTypeContainer) ;
 
             button.setOnAction(event -> {
-                if (this.selectedRoomDataTypeList.contains(roomDataType))
+                if (this.selectedRoomDataTypeMap.containsKey(roomDataType))
                 {
-                    this.selectedRoomDataTypeList.remove(roomDataType) ;
+                    this.selectedRoomDataTypeMap.remove(roomDataType) ;
                     button.getStyleClass().remove("selected") ;
                     thresholdTextField.setDisable(true) ;
                 }
                 else
                 {
-                    this.selectedRoomDataTypeList.add(roomDataType) ;
+                    this.selectedRoomDataTypeMap.put(roomDataType, Double.parseDouble(thresholdTextField.getText())) ;
                     button.getStyleClass().add("selected") ;
                     thresholdTextField.setDisable(false) ;
                 }
@@ -514,7 +514,7 @@ public class ConfigurationFileFormViewController
     private void updateLowerMenuButtonStatus()
     {
         if (    this.selectedSensorType == Sensor.AM107
-            && (this.selectedRoomList.size() == 0 || this.selectedRoomDataTypeList.size() == 0)
+            && (this.selectedRoomList.size() == 0 || this.selectedRoomDataTypeMap.size() == 0)
             ||  this.selectedSensorType == Sensor.SOLAREDGE
             && (this.selectedSolarPanelDataTypeList.size() == 0)
         ) {

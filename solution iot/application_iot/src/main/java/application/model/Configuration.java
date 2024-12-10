@@ -22,7 +22,7 @@ public class Configuration
     private String topicPrefix ;                // préfixe des topics MQTT auxquels s'abonner
     private List<String> subjectList ;          // liste des sujets à observer
     private List<String> dataTypeList ;         // liste des types de données récupérés
-    private Map<String, String> thresholdMap ;  // dictionnaire des seuils d'alerte par type de données
+    private Map<String, Double> thresholdMap ;  // dictionnaire des seuils d'alerte par type de données
     private int readingFrequency ;              // fréquence de lecture des données
 
     /**
@@ -90,13 +90,13 @@ public class Configuration
      * Donne le dictionnaire des seuils d'alerte par type de données.
      * @return  le dictionnaire des seuils d'alerte par type de données
      */
-    public Map<String, String> getThresholdMap() { return thresholdMap ; }
+    public Map<String, Double> getThresholdMap() { return thresholdMap ; }
 
     /**
      * Définit le dictionnaire des seuils d'alerte par type de données.
      * @param _thresholdMap le dictionnaire des seuils d'alerte par type de données
      */
-    public void setThresholdMap(Map<String, String> _thresholdMap) { this.thresholdMap = _thresholdMap ; }
+    public void setThresholdMap(Map<String, Double> _thresholdMap) { this.thresholdMap = _thresholdMap ; }
 
     /**
      * Donne la fréquence de lecture des données.
@@ -116,7 +116,7 @@ public class Configuration
     public String toString()
     {
         return  "Configuration\n"
-            +   "-------------"
+            +   "-------------\n"
             +   this.name + "\n"
             +   this.topicPrefix + "\n"
             +   this.subjectList + "\n"
