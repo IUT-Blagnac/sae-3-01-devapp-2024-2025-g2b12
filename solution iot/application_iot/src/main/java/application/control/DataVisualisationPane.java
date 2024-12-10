@@ -1,10 +1,8 @@
 package application.control ;
 
 import application.data.DataCollector ;
-import application.data.DataLoader ;
 import application.model.Configuration ;
 import application.thread.CsvReaderTask ;
-import application.tools.DataFileReading ;
 import application.view.DataVisualisationPaneViewController ;
 
 import java.util.List ;
@@ -48,7 +46,6 @@ public class DataVisualisationPane
     private Configuration configuration = Configuration.getInstance() ;
 
     // attributs relatifs aux données
-    private List<String> dataTypeList ;
     private Map<String, Map<String, String>> dataMap ;
     private Map<String, Map<String, String>> alertMap ;
 
@@ -62,9 +59,6 @@ public class DataVisualisationPane
     {
         try
         {
-            // récupération des types de données à visualiser
-            this.dataTypeList = DataFileReading.getHeaders(DataLoader.getAllRoomDataFile()) ;
-
             // initialisation du stage
             this.dvpStage = _stageParent ;
 
@@ -110,12 +104,18 @@ public class DataVisualisationPane
     }
 
     /**
+     * Accesseur : donne la configuration actuelle.
+     * @return la configuration actuelle
+     */
+    public Configuration getConfiguration() { return this.configuration ; }
+
+    /**
      * Accesseur : donne la liste des types de données visualisées.
      * @return la liste des types de données
      */
     public List<String> getDataTypeList()
     {
-        return this.dataTypeList ;
+        return this.configuration.getDataTypeList() ;
     }
 
     /**

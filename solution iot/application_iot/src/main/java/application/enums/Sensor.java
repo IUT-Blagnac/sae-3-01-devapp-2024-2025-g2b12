@@ -24,8 +24,8 @@ public enum Sensor
         String nameForTopic ;
         switch (this)
         {
-            case AM107 :        nameForTopic = "AM107" ; break ;
-            case SOLAREDGE :    nameForTopic = "solaredge" ; break ;
+            case AM107 :        nameForTopic = "AM107/by-room/" ; break ;
+            case SOLAREDGE :    nameForTopic = "solaredge/blagnac/" ; break ;
             default :           nameForTopic = "" ; break ;
         }
         return nameForTopic ;

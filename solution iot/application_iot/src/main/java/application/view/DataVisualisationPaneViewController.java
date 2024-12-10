@@ -127,7 +127,9 @@ public class DataVisualisationPaneViewController
         this.dataTableViewOList = FXCollections.observableArrayList() ;
 
         // initialisation de la TableView
-        List<String> headersList = this.dvpDialogController.getDataTypeList() ;
+        List<String> headersList = this.dvpDialogController.getConfiguration().getDataTypeList() ;
+        headersList.add(0, "room") ;
+
         for (int i = 0 ; i < headersList.size() ; i++)
         {
             String header = headersList.get(i) ;

@@ -10,7 +10,7 @@ import logging
 
 # configuration
 configuration = configparser.ConfigParser()
-configuration.read('data\\configuration.ini')
+configuration.read('resources\\configuration.ini')
 
 # récupération des paramètres
 serveurMQTT = configuration.get('MQTT', 'broker')
@@ -25,11 +25,11 @@ sujets = [value for key, value in configuration.items('SUJET')]
 
 # récupération des seuils
 seuils = {
-    'temperature': float(configuration.get('SEUILS', 'temperature')),
-    'humidity': float(configuration.get('SEUILS', 'humidity')),
-    'co2': float(configuration.get('SEUILS', 'co2')),
-    'tvoc': float(configuration.get('SEUILS', 'tvoc')),
-    'infrared_and_visible': float(configuration.get('SEUILS', 'infrared_and_visible'))
+    'temperature': float(configuration.get('THRESHOLD', 'temperature')),
+    'humidity': float(configuration.get('THRESHOLD', 'humidity')),
+    'co2': float(configuration.get('THRESHOLD', 'co2')),
+    'tvoc': float(configuration.get('THRESHOLD', 'tvoc')),
+    'infrared_and_visible': float(configuration.get('THRESHOLD', 'infrared_and_visible'))
 }
 
 # configuration du logging
@@ -37,20 +37,20 @@ logging.basicConfig(level=logging.DEBUG)
 
 def clear_csv_files():
     # Vider le fichier global
-    data_file = 'data\\data.csv'
+    data_file = 'resources\\data\\data.csv'
     with open(data_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=';')
         writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
 
     # Vider le fichier d'alertes
-    alert_file = 'data\\alert.csv'
+    alert_file = 'resources\\data\\alert.csv'
     with open(alert_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=';')
         writer.writerow(['room', 'dataType', 'threshold', 'measuredValue'])
 
     # Vider les fichiers de chaque salle
     for sujet in sujets:
-        room_file = f'data\\{sujet}.csv'
+        room_file = f'resources\\data\\{sujet}.csv'
         with open(room_file, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=';')
             writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
@@ -89,7 +89,7 @@ def on_message(client, userdata, message):
             print(f"Infrarouge et visible : {infrared_and_visible}")
 
             # Lire les données existantes de data.csv
-            data_file = 'data\\data.csv'
+            data_file = 'resources\\data\\data.csv'
             data_dict = {}
             if os.path.isfile(data_file):
                 with open(data_file, 'r', newline='') as csvfile:
@@ -116,7 +116,7 @@ def on_message(client, userdata, message):
                     writer.writerow(row)
 
             # Mise à jour du fichier de la salle
-            room_file = f'data\\{room}.csv'
+            room_file = f'resources\\data\\{room}.csv'
             file_exists = os.path.isfile(room_file)
             with open(room_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';')
@@ -138,7 +138,7 @@ def on_message(client, userdata, message):
                 alerts.append([room, 'infrared_and_visible', seuils['infrared_and_visible'], infrared_and_visible])
 
             if alerts:
-                with open('data\\alert.csv', 'a', newline='') as csvfile:
+                with open('resources\\data\\alert.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile, delimiter=';')
                     for alert in alerts:
                         writer.writerow(alert)
