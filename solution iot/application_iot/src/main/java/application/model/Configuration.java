@@ -41,6 +41,12 @@ public class Configuration
     }
 
     /**
+     * Indique si une configuration est définie ou non.
+     * @return  true si une configuration est définie, false sinon
+     */
+    public static synchronized boolean isDefined() { return singleInstance != null ; }
+
+    /**
      * Donne le nom de la configuration.
      * @return  le nom de la configuration
      */

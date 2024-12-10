@@ -261,6 +261,9 @@ public class ConfigurationFileFormViewController
             thresholdMap,
             readingFrequency
         ) ;
+
+        // fermeture de la fenêtre
+        this.doClose() ;
     }
 
     /**

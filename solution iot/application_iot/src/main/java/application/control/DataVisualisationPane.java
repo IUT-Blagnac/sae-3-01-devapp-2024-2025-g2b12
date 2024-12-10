@@ -110,15 +110,6 @@ public class DataVisualisationPane
     public Configuration getConfiguration() { return this.configuration ; }
 
     /**
-     * Accesseur : donne la liste des types de données visualisées.
-     * @return la liste des types de données
-     */
-    public List<String> getDataTypeList()
-    {
-        return this.configuration.getDataTypeList() ;
-    }
-
-    /**
      * Met à jour les données visualisées.
      * @param _dataMap les données mises à jour
      */

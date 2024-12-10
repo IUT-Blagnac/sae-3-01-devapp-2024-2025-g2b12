@@ -1,6 +1,7 @@
 package application.view ;
 
 import application.ApplicationMainFrame ;
+import application.model.Configuration;
 import javafx.fxml.FXML ;
 import javafx.stage.Stage ;
 
@@ -48,7 +49,7 @@ public class ApplicationMainFrameViewController
     @FXML
     protected void doVisualiserDonnees()
     {
-        this.amfDialogController.visualiserDonnees() ;
+        if (Configuration.isDefined()) { this.amfDialogController.visualiserDonnees() ; }
     }
 
     @FXML
