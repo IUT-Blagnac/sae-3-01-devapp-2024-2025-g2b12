@@ -153,6 +153,10 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 ODJ : Préciser temps de la réunion, temps consacré à chaque rubrique et qui en est responsable. CR: Manque retour reunion client et analyse : difficultés réussites du sprint. Préciser qui est responsable de la prochaine réunion.
 note 1,7/3
 
+=== retour semaine 49
+ODJ : les remarques semaine 48 n'ont pas été toutes prises en compte ! CR : Très succinct !! Il manque bilan rdv client et analyse difficultés/Réussites
+1,63/3
+
 == Gestion de projet & Qualité
 
 Récapitulatif des informations mises à jour - Dernière MAJ : 2/12/24
