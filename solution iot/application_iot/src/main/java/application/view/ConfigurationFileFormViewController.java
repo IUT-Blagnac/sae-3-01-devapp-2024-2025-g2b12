@@ -115,6 +115,18 @@ public class ConfigurationFileFormViewController
         this.initSolarPanelDataTypeSelectionMenu() ;
         this.initAdvancedSettingsMenu() ;
 
+        // affichage du menu de sélection des salles
+        this.roomSelectionMenu.setManaged(true) ;
+        this.roomSelectionMenu.setVisible(true) ;
+
+        // affichage du menu de sélection des types de données relatifs aux salles
+        this.roomDataTypeSelectionMenu.setManaged(true) ;
+        this.roomDataTypeSelectionMenu.setVisible(true) ;
+
+        // dissimulation du menu de sélection des types de données relatifs aux panneaux solaires
+        this.solarPanelDataTypeSelectionMenu.setVisible(false) ;
+        this.solarPanelDataTypeSelectionMenu.setManaged(false) ;
+
         // mise à jour de l'état des boutons du menu inférieur
         this.updateLowerMenuButtonStatus() ;
 
@@ -395,6 +407,20 @@ public class ConfigurationFileFormViewController
             dataTypeContainer.getChildren().add(descLabel) ;
 
             this.solarPanelDataTypeListVBox.getChildren().add(dataTypeContainer) ;
+
+            button.setOnAction(event -> {
+                if (this.selectedSolarPanelDataTypeList.contains(dataType))
+                {
+                    this.selectedSolarPanelDataTypeList.remove(dataType) ;
+                    button.getStyleClass().remove("selected") ;
+                }
+                else
+                {
+                    this.selectedSolarPanelDataTypeList.add(dataType) ;
+                    button.getStyleClass().add("selected") ;
+                }
+                this.updateLowerMenuButtonStatus() ;
+            }) ;
         }
     }
 
@@ -418,6 +444,8 @@ public class ConfigurationFileFormViewController
     {
         if (    this.selectedSensorType == Sensor.AM107
             && (this.selectedRoomList.size() == 0 || this.selectedRoomDataTypeList.size() == 0)
+            ||  this.selectedSensorType == Sensor.SOLAREDGE
+            && (this.selectedSolarPanelDataTypeList.size() == 0)
         ) {
             this.saveButton.setDisable(true) ;
         }

@@ -29,13 +29,13 @@ public enum SolarPanelDataType
         String name ;
         switch (this)
         {
-            case LAST_UPDATE_TIME : name = "Heure de dernière mise à jour" ; break ;
-            case LIFE_TIME_DATA :   name = "Données cumulées" ; break ;
-            case LAST_YEAR_DATA :   name = "Données de la dernière année" ; break ;
-            case LAST_MONTH_DATA :  name = "Données du dernier mois" ; break ;
-            case LAST_DAY_DATA :    name = "Données du dernier jour" ; break ;
-            case CURRENT_POWER :    name = "Puissance actuelle" ; break ;
-            case MEASURED_BY :      name = "Source" ; break ;
+            case LAST_UPDATE_TIME : name = "Dernière M.A.J." ; break ;
+            case LIFE_TIME_DATA :   name = "Énergie cumulée totale" ; break ;
+            case LAST_YEAR_DATA :   name = "Énergie annuelle" ; break ;
+            case LAST_MONTH_DATA :  name = "Énergie mensuelle" ; break ;
+            case LAST_DAY_DATA :    name = "Énergie quotidienne" ; break ;
+            case CURRENT_POWER :    name = "Puissance" ; break ;
+            case MEASURED_BY :      name = "Méthode" ; break ;
             default :               name = "-" ; break ;
         }
         return name ;
@@ -43,6 +43,18 @@ public enum SolarPanelDataType
 
     public String getDescription()
     {
-        return "En cours de développement..." ;
+        String description ;
+        switch (this)
+        {
+            case LAST_UPDATE_TIME : description = "Date de dernière mise à jour" ; break ;
+            case LIFE_TIME_DATA :   description = "Énergie cumulée depuis déploiement" ; break ;
+            case LAST_YEAR_DATA :   description = "Énergie produite au cours de la dernière année" ; break ;
+            case LAST_MONTH_DATA :  description = "Énergie produite au cours du dernier mois" ; break ;
+            case LAST_DAY_DATA :    description = "Énergie produite au cours du dernier jour" ; break ;
+            case CURRENT_POWER :    description = "Puissance actuellement relevée" ; break ;
+            case MEASURED_BY :      description = "Méthode de mesure des données" ; break ;
+            default :               description = "-" ; break ;
+        }
+        return description ;
     }
 }
