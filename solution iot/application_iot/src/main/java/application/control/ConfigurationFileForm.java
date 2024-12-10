@@ -3,16 +3,15 @@ package application.control ;
 import application.data.DataLoader ;
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
-import application.data.enums.SolarPanelDataType;
-import application.model.Configuration;
+import application.data.enums.SolarPanelDataType ;
+import application.model.Configuration ;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
-import java.util.Map;
+import java.util.Map ;
 
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality ;
 import javafx.stage.Stage ;
 
@@ -29,6 +28,10 @@ public class ConfigurationFileForm
 {
     // déclaration des constantes
     // --------------------------
+
+    // dimensions de la fenêtre
+    private static final double FIXED_WINDOW_WIDTH      = 702 ;     // largeur fixe de la fenêtre
+    private static final double FIXED_WINDOW_HEIGHT     = 620 ;     // hauteur fixe de la fenêtre
 
     // fréquence de lecture des données (en secondes)
     private static final int MIN_READING_FREQUENCY      = 5 ;       // fréquence minimale
@@ -70,9 +73,9 @@ public class ConfigurationFileForm
             FXMLLoader fxmlLoader = new FXMLLoader(ConfigurationFileFormViewController.class.getResource("configurationFileForm.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 700, 600) ;
+            Scene scene = new Scene(fxmlLoader.load(), FIXED_WINDOW_WIDTH, FIXED_WINDOW_HEIGHT) ;
             this.cffStage.setScene(scene) ;
-            this.cffStage.setTitle("Créer une configuration") ;
+            this.cffStage.setTitle("Configuration") ;
             this.cffStage.setResizable(false) ;
 
             // initialisation du contrôleur

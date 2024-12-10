@@ -396,24 +396,24 @@ public class ConfigurationFileFormViewController
             button.setMinWidth(220) ;
             button.setMinHeight(35) ;
 
-            Label thresholdLabel = new Label("Seuil d'alerte ("+roomDataType.getMinThreshold()+"-"+roomDataType.getMaxThreshold()+") :") ;
+            Label thresholdLabel = new Label("Seuil d'alerte ("+(int)roomDataType.getMinThreshold()+" — "+(int)roomDataType.getMaxThreshold()+")") ;
             thresholdLabel.setFont(FontLoader.getTableHeaderFont()) ;
             thresholdLabel.setTextFill(Color.web("#fff")) ;
             thresholdLabel.setTextAlignment(TextAlignment.RIGHT) ;
-            thresholdLabel.setMinWidth(200) ;
+            thresholdLabel.setMinWidth(190) ;
             thresholdLabel.setMinHeight(35) ;
 
             TextField thresholdTextField = new TextField(roomDataType.getDefaultThreshold()) ;
             thresholdTextField.setPromptText("Entrez un seuil") ;
             thresholdTextField.setFont(FontLoader.getContentFont()) ;
-            thresholdTextField.setPrefWidth(80) ;
+            thresholdTextField.setMinWidth(90) ;
             thresholdTextField.setMinHeight(35) ;
             thresholdTextField.setDisable(true) ;
 
             Label unitLabel = new Label(roomDataType.getUnit()) ;
             unitLabel.setFont(FontLoader.getContentFont()) ;
             unitLabel.setTextFill(Color.web("#fff")) ;
-            unitLabel.setMinWidth(50) ;
+            unitLabel.setMinWidth(60) ;
             unitLabel.setMinHeight(35) ;
 
             HBox thresholdContainer = new HBox() ;
