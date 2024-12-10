@@ -129,6 +129,18 @@ public class ConfigurationFileForm
     public void doConfigurationFileFormDialog() { this.cffViewController.displayDialog() ; }
 
     /**
+     * Indique si le nom de la configuration est valide.
+     * @param pName     le nom à traiter
+     * @return  true si le nom est valide, false sinon
+     */
+    public boolean isConfigurationNameValid(String pName)
+    {
+        return  pName != null
+            &&  pName.matches("[a-zA-ZÀ-ÿ0-9 _-]+")
+            &&  !pName.trim().isEmpty() ;
+    }
+
+    /**
      * Indique si la fréquence de lecture donnée est valide.
      * @param pFrequency    la fréquence de lecture à traiter
      * @return  true si la fréquence est valide, false sinon

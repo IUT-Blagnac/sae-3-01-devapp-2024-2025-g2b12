@@ -48,6 +48,7 @@ public class ConfigurationFileFormViewController
     private ConfigurationFileForm cffDialogController ;
 
     // attributs relatifs à la configuration à créer
+    private String enteredConfigurationName                         = "Nouvelle Configuration" ;
     private Sensor selectedSensorType                               = Sensor.AM107 ;
     private List<Room> selectedRoomList                             = new ArrayList<>() ;
     private List<RoomDataType> selectedRoomDataTypeList             = new ArrayList<>() ;
@@ -56,6 +57,9 @@ public class ConfigurationFileFormViewController
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
     // --------------------------------------------------------------------
+
+    // menu des paramètres généraux
+    @FXML private TextField configNameTextField ;
 
     // menu de sélection du type de capteurs
     @FXML private Button roomSensorsButton ;
@@ -207,6 +211,16 @@ public class ConfigurationFileFormViewController
      */
     private void initSensorTypeSelectionMenu()
     {
+        // pré-remplissage du champ de saisie du nom de la configuration
+        this.configNameTextField.setText(this.enteredConfigurationName) ;
+
+        // écouteur d'évènements sur le champ de saisie du nom de la configuration
+        this.configNameTextField.focusedProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (!newValue) { this.validateConfigurationNameInput() ; }
+            }
+        ) ;
+
         // sélection des capteurs AM107 par défaut
         this.roomSensorsButton.getStyleClass().add("selected") ;
 
@@ -357,7 +371,7 @@ public class ConfigurationFileFormViewController
             HBox.setHgrow(thresholdContainer, Priority.ALWAYS) ;
 
             HBox dataTypeContainer = new HBox() ;
-            dataTypeContainer.setSpacing(50) ;
+            dataTypeContainer.setSpacing(40) ;
             dataTypeContainer.getChildren().add(button) ;
             dataTypeContainer.getChildren().add(thresholdContainer) ;
 
@@ -392,17 +406,17 @@ public class ConfigurationFileFormViewController
         {
             Button button = new Button(dataType.getNameForDisplay()) ;
             button.setFont(FontLoader.getLittleButtonFont()) ;
-            button.setMinWidth(200) ;
+            button.setMinWidth(220) ;
             button.setMinHeight(35) ;
 
             Label descLabel = new Label(dataType.getDescription()) ;
             descLabel.setFont(FontLoader.getContentFont()) ;
             descLabel.setTextFill(Color.web("#fff")) ;
-            descLabel.setMinWidth(50) ;
+            descLabel.setMinWidth(360) ;
             descLabel.setMinHeight(35) ;
 
             HBox dataTypeContainer = new HBox() ;
-            dataTypeContainer.setSpacing(50) ;
+            dataTypeContainer.setSpacing(40) ;
             dataTypeContainer.getChildren().add(button) ;
             dataTypeContainer.getChildren().add(descLabel) ;
 
@@ -429,6 +443,7 @@ public class ConfigurationFileFormViewController
      */
     private void initAdvancedSettingsMenu()
     {
+        // écouteur d'évènements sur le champ de saisie de la fréquence de lecture des données
         this.frequencyTextField.setText(String.valueOf(this.cffDialogController.getDefaultReadingFrequency())) ;
         this.frequencyTextField.focusedProperty().addListener(
             (observable, oldValue, newValue) -> {
@@ -453,6 +468,19 @@ public class ConfigurationFileFormViewController
         {
             this.saveButton.setDisable(false) ;
         }
+    }
+
+    /**
+     * Valide ou non la saisie du nom de la configuration.
+     */
+    private void validateConfigurationNameInput()
+    {
+        String name = this.configNameTextField.getText() ;
+        if (this.cffDialogController.isConfigurationNameValid(name))
+        {
+            this.enteredConfigurationName = name ;
+        }
+        this.configNameTextField.setText(this.enteredConfigurationName) ;
     }
 
     /**

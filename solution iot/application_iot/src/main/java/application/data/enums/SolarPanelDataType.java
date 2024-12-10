@@ -35,7 +35,7 @@ public enum SolarPanelDataType
             case LAST_MONTH_DATA :  name = "Énergie mensuelle" ; break ;
             case LAST_DAY_DATA :    name = "Énergie quotidienne" ; break ;
             case CURRENT_POWER :    name = "Puissance" ; break ;
-            case MEASURED_BY :      name = "Méthode" ; break ;
+            case MEASURED_BY :      name = "Méthode de mesure" ; break ;
             default :               name = "-" ; break ;
         }
         return name ;
