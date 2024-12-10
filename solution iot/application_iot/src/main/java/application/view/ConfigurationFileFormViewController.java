@@ -1,10 +1,10 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm ;
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.Sensor ;
-import application.data.enums.SolarPanelDataType ;
+import application.enums.Room;
+import application.enums.RoomDataType;
+import application.enums.Sensor;
+import application.enums.SolarPanelDataType;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
@@ -37,7 +37,8 @@ import javafx.stage.WindowEvent ;
  * Date de dernière modification :
  * - Dimanche 8 décembre 2024 -
  * 
- * @author Victor Jockin (Équipe G2B12)
+ * @author Victor Jockin
+ * - Équipe G2B12 -
  */
 public class ConfigurationFileFormViewController
 {

@@ -1,9 +1,9 @@
 package application.control ;
 
 import application.data.DataLoader ;
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.SolarPanelDataType ;
+import application.enums.Room;
+import application.enums.RoomDataType;
+import application.enums.SolarPanelDataType;
 import application.model.Configuration ;
 import application.view.ConfigurationFileFormViewController ;
 
@@ -20,9 +20,10 @@ import javafx.stage.Stage ;
  * d'un fichier de configuration.
  * 
  * Date de dernière modification :
- * - Mardi 18 novembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
- * @author Victor Jockin (Équipe G2B12)
+ * @author Victor Jockin
+ * - Équipe G2B12 -
  */
 public class ConfigurationFileForm
 {
@@ -159,6 +160,8 @@ public class ConfigurationFileForm
         configuration.setThresholdMap(pThresholdMap) ;
         configuration.setReadingFrequency(pReadingFrequency) ;
         System.out.println(configuration) ;
+
+        configuration.createFile() ;
     }
 
     /**

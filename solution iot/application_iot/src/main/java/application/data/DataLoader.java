@@ -1,12 +1,12 @@
 package application.data ;
 
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.SolarPanelDataType ;
-
 import java.io.File ;
 import java.util.Arrays ;
 import java.util.List ;
+
+import application.enums.Room ;
+import application.enums.RoomDataType ;
+import application.enums.SolarPanelDataType ;
 
 /**
  * Classe d'accès aux données.

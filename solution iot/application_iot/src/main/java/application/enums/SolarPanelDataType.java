@@ -1,4 +1,4 @@
-package application.data.enums ;
+package application.enums ;
 
 /**
  * Classe d'énumération des types de données des panneaux solaires.

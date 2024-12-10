@@ -1,4 +1,4 @@
-package application.data.enums ;
+package application.enums ;
 
 import application.data.DataTypeUtilities ;
 
