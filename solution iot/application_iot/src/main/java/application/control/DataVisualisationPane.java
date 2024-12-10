@@ -1,26 +1,28 @@
 package application.control ;
 
+import application.data.DataCollector ;
+import application.data.DataLoader ;
+import application.model.Configuration ;
+import application.thread.CsvReaderTask ;
+import application.tools.DataFileReading ;
+import application.view.DataVisualisationPaneViewController ;
+
 import java.util.List ;
 import java.util.Map ;
 import java.util.concurrent.Executors ;
 import java.util.concurrent.ScheduledExecutorService ;
 import java.util.concurrent.TimeUnit ;
 
-import application.data.DataLoader ;
-import application.model.Configuration ;
-import application.thread.CsvReaderTask ;
-import application.tools.DataFileReading ;
-import application.view.DataVisualisationPaneViewController ;
 import javafx.application.Platform ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
-import javafx.stage.Stage;
+import javafx.stage.Stage ;
 
 /**
  * Contrôleur de dialogue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Mercredi 4 décembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
  * @author Nolhan Biblocque
  * @author Victor Jockin
@@ -36,16 +38,22 @@ public class DataVisualisationPane
     private static final double PREF_HEIGHT = 600 ;     // hauteur préférée de la fenêtre
 
     // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de dialogue
     private Stage dvpStage ;
     private DataVisualisationPaneViewController dvpViewController ;
-    private ScheduledExecutorService scheduler ;
-    private List<String> dataTypeList ;
 
-    private Configuration configuration ;
+    // attributs relatifs à la configuration
+    private Configuration configuration = Configuration.getInstance() ;
+
+    // attributs relatifs aux données
+    private List<String> dataTypeList ;
     private Map<String, Map<String, String>> dataMap ;
     private Map<String, Map<String, String>> alertMap ;
 
-    private Process processPython ;
+    // attributs utilitaires
+    private ScheduledExecutorService scheduler ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -83,7 +91,8 @@ public class DataVisualisationPane
             // application des styles à la scène
             this.dvpStage.getScene().getStylesheets().add(getClass().getResource("/application/style/dvp.css").toExternalForm()) ;
 
-            this.startProcessPython() ;
+            // démarrage du processus de collecte des données
+            DataCollector.startCollectionProcess() ;
         }
         catch (Exception e)
         {
@@ -134,8 +143,7 @@ public class DataVisualisationPane
      */
     public int getObservedSensorsNumber()
     {
-        //return this.configuration.getSubjectList().size() ;
-        return 7 ; // à modifier après
+        return this.configuration.getSubjectList().size() ;
     }
 
     /**
@@ -189,27 +197,5 @@ public class DataVisualisationPane
     {
         ConfigurationFileForm configurationFileForm = new ConfigurationFileForm(this.dvpStage) ;
         configurationFileForm.doConfigurationFileFormDialog() ;
-    }
-
-    public void startProcessPython(){
-        try
-        {
-            //ProcessBuilder processBuilder = new ProcessBuilder("python", "data\\mqtt.py") ;
-            ProcessBuilder processBuilder = new ProcessBuilder("python3", "data\\mqtt.py") ;
-            processPython = processBuilder.start() ;
-            System.out.println("Process Python started successfully.");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace() ;
-            System.out.println("Failed to start Process Python.");
-        }
-    }
-
-    public void stopProcessPython(){
-        if (processPython != null)
-        {
-            processPython.destroy() ;
-        }
     }
 }

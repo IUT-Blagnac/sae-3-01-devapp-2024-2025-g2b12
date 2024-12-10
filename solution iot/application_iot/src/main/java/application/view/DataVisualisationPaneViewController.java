@@ -1,11 +1,12 @@
 package application.view ;
 
 import application.control.DataVisualisationPane ;
+import application.data.DataCollector ;
 import application.data.DataTypeUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
-import application.thread.UpdateAlertDisplayTask;
-import application.thread.UpdateDataDisplayTask;
+import application.thread.UpdateAlertDisplayTask ;
+import application.thread.UpdateDataDisplayTask ;
 import application.tools.DataFileReading ;
 import application.tools.GraphGenerator ;
 
@@ -37,7 +38,7 @@ import javafx.stage.WindowEvent ;
  * Contrôleur de vue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Dimanche 8 décembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
  * @author Nolhan Biblocque
  * @author Léo Guinvarc'h
@@ -253,7 +254,7 @@ public class DataVisualisationPaneViewController
      */
     private Object closeWindow(WindowEvent e)
     {
-        this.dvpDialogController.stopProcessPython();
+        DataCollector.stopCollectionProcess() ;
         this.doClose() ;
 		e.consume() ;
 		return null ;

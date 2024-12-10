@@ -21,6 +21,10 @@ public class ConfigurationFileWriter
     // déclaration des constantes
     private static final String CONFIGURATION_FILE_PATH = "resources/configuration.ini" ;
 
+    /**
+     * Écrit un fichier au format INI décrivant la configuration passée en paramètres.
+     * @param pConfiguration une configuration
+     */
     public static void writeConfigurationFile(Configuration pConfiguration)
     {
         // récupération du fichier de configuration (si existant)
