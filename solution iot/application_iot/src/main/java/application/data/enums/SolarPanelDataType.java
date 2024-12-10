@@ -4,7 +4,7 @@ package application.data.enums ;
  * Classe d'énumération des types de données des panneaux solaires.
  * 
  * Date de dernière modification :
- * - Lundi 9 décembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
  * @author Victor Jockin
  * - Équipe 2B12 -
@@ -41,6 +41,19 @@ public enum SolarPanelDataType
         return name ;
     }
 
+    /**
+     * Donne l'intitulé du type de données formaté pour lecture des données.
+     * @return  l'intitulé du type de donnés formaté
+     */
+    public String getNameForDataReading()
+    {
+        return this.toString().toLowerCase() ;
+    }
+
+    /**
+     * Donne la description du type de données.
+     * @return  la description du type de données
+     */
     public String getDescription()
     {
         String description ;

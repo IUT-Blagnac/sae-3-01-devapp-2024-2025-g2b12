@@ -7,13 +7,16 @@ import java.util.Map ;
  * Classe modèle représentant une configuration.
  * 
  * Date de dernière modification :
- * - Lundi 9 décembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
  * @author Victor Jockin
  * - Équipe 2B12 -
  */
 public class Configuration
 {
+    // instance unique de la configuration
+    private static Configuration singleInstance ;
+
     // déclaration des attributs
     private String name ;                       // nom de la configuration
     private String topicPrefix ;                // préfixe des topics MQTT auxquels s'abonner
@@ -23,82 +26,107 @@ public class Configuration
     private int readingFrequency ;              // fréquence de lecture des données
 
     /**
-     * Constructeur paramétré : 6 paramètres.
-     * @param _name             le nom de la configuration
-     * @param _topicPrefix      le préfixe des topics MQTT auxquels s'abonner
-     * @param _subjectList      la liste des sujets à observer
-     * @param _dataTypeList     la liste des types de données récupérés
-     * @param _thresholdMap     le dictionnaire des seuils d'alerte par type de données
-     * @param _readingFrequency la fréquence de lecture des données
+     * Donne l'unique instance de la configuration.
+     * @return  l'unique instance de la configuration
      */
-    public Configuration(
-        String _name,
-        String _topicPrefix,
-        List<String> _subjectList,
-        List<String> _dataTypeList,
-        Map<String, String> _thresholdMap,
-        int _readingFrequency
-    ) {
-        // initialisation des attributs
-        this.name               = _name ;
-        this.topicPrefix        = _topicPrefix ;
-        this.subjectList        = _subjectList ;
-        this.dataTypeList       = _dataTypeList ;
-        this.thresholdMap       = _thresholdMap ;
-        this.readingFrequency   = _readingFrequency ;
+    public static synchronized Configuration getInstance()
+    {
+        if (singleInstance == null)
+        {
+            singleInstance = new Configuration() ;
+        }
+        return singleInstance ;
     }
 
     /**
      * Donne le nom de la configuration.
      * @return  le nom de la configuration
      */
-    public String getName()
-    {
-        return this.name ;
-    }
+    public String getName() { return this.name ; }
+
+    /**
+     * Définit le nom de la configuration.
+     * @param _name le nom à donner à la configuration
+     */
+    public void setName(String _name) { this.name = _name ; }
 
     /**
      * Donne le préfixe des topics MQTT auxquels s'abonner.
      * @return  le préfixe des topics MQTT auxquels s'abonner
      */
-    public String getTopicPrefix()
-    {
-        return this.topicPrefix ;
-    }
+    public String getTopicPrefix() { return this.topicPrefix ; }
+
+    /**
+     * Définit le préfix des topics MQTT auxquels s'abonner.
+     * @param _topicPrefix le préfix des topics MQTT
+     */
+    public void setTopicPrefix(String _topicPrefix) { this.topicPrefix = _topicPrefix ; }
 
     /**
      * Donne la liste des sujets observés.
      * @return  la liste des sujets observés
      */
-    public List<String> getSubjectList()
-    {
-        return this.subjectList ;
-    }
+    public List<String> getSubjectList() { return this.subjectList ; }
+
+    /**
+     * Définit la liste des sujets à observer.
+     * @param _subjectList la liste des sujets à observer
+     */
+    public void setSubjectList(List<String> _subjectList) { this.subjectList = _subjectList ; }
 
     /**
      * Donne la liste des types de données récupérés.
      * @return  la liste des types de données récupérés
      */
-    public List<String> getDataTypeList()
-    {
-        return this.dataTypeList ;
-    }
+    public List<String> getDataTypeList() { return this.dataTypeList ; }
+
+    /**
+     * Définit la liste des types de données à récupérer.
+     * @param _dataTypeList la liste des types de données à récupérer
+     */
+    public void setDataTypeList(List<String> _dataTypeList) { this.dataTypeList = _dataTypeList ; }
 
     /**
      * Donne le dictionnaire des seuils d'alerte par type de données.
      * @return  le dictionnaire des seuils d'alerte par type de données
      */
-    public Map<String, String> getThresholdMap()
-    {
-        return thresholdMap ;
-    }
+    public Map<String, String> getThresholdMap() { return thresholdMap ; }
+
+    /**
+     * Définit le dictionnaire des seuils d'alerte par type de données.
+     * @param _thresholdMap le dictionnaire des seuils d'alerte par type de données
+     */
+    public void setThresholdMap(Map<String, String> _thresholdMap) { this.thresholdMap = _thresholdMap ; }
 
     /**
      * Donne la fréquence de lecture des données.
      * @return  la fréquence de lecture des données
      */
-    public int getReadingFrequency()
+    public int getReadingFrequency() { return readingFrequency ; }
+
+    /**
+     * Définit la fréquence de lecture des données.
+     * @param _readingFrequency la fréquence de lecture des données
+     */
+    public void setReadingFrequency(int _readingFrequency) { this.readingFrequency = _readingFrequency ; }
+
+    /**
+     * Méthode d'affichage (pour tests).
+     */
+    public String toString()
     {
-        return readingFrequency ;
+        return  "Configuration\n"
+            +   "-------------"
+            +   this.name + "\n"
+            +   this.topicPrefix + "\n"
+            +   this.subjectList + "\n"
+            +   this.dataTypeList + "\n"
+            +   this.thresholdMap + "\n"
+            +   this.readingFrequency ;
     }
+
+    /**
+     * Constructeur privé.
+     */
+    private Configuration() { }
 }

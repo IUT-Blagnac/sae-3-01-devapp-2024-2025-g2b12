@@ -34,6 +34,15 @@ public enum RoomDataType
     }
 
     /**
+     * Donne l'intitulé du type de données formaté pour lecture des données.
+     * @return  l'intitulé du type de donnés formaté
+     */
+    public String getNameForDataReading()
+    {
+        return this.toString().toLowerCase() ;
+    }
+
+    /**
      * Donne l'unité du type de données.
      * @return  l'unité du type de données
      */

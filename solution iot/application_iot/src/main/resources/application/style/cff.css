@@ -55,6 +55,14 @@
 .button.lower-menu {
     -fx-font-size: 18px;
 }
+.button.lower-menu:hover {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
+.button.lower-menu:pressed {
+    -fx-background-color: #444cf8;
+    -fx-text-fill: #fff;
+}
 
 .button:hover {
     -fx-background-color: #9185ff;

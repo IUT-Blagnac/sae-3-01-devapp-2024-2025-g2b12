@@ -8,7 +8,10 @@ import application.data.enums.SolarPanelDataType ;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
+import java.util.Arrays ;
 import java.util.List ;
+import java.util.Map;
+import java.util.stream.Collectors ;
 
 import javafx.fxml.FXML ;
 import javafx.geometry.Pos ;
@@ -184,6 +187,10 @@ public class ConfigurationFileFormViewController
                 break ;
 
             case SOLAREDGE :
+                // réinitialisation de la configuration
+                this.selectedSolarPanelDataTypeList.clear() ;
+                // réinitialisation des menus
+                this.initSolarPanelDataTypeSelectionMenu() ;
                 break ;
 
             default :
@@ -203,7 +210,56 @@ public class ConfigurationFileFormViewController
     @FXML
     private void doSave()
     {
-        System.out.println("-  OK  -") ;
+        // vérification de la validité des champs de saisie
+        this.validateConfigurationNameInput() ;
+        this.validateFrequencyInput() ;
+
+        // récupération des paramètres de la configuration
+        // -----------------------------------------------
+
+        // nom de la configuration
+        String name = this.enteredConfigurationName ;
+
+        // topic MQTT
+        String topicPrefix = this.selectedSensorType.getNameForTopic() ;
+
+        // listes des sujets à observer est des données à récupérer
+        List<String> subjectList ;
+        List<String> dataTypeList ;
+        Map<String, String> thresholdMap ;
+        switch (this.selectedSensorType)
+        {
+            case AM107 :
+                subjectList     = this.selectedRoomList.stream().map(Room::getNameForTopic).collect(Collectors.toCollection(ArrayList::new)) ;
+                dataTypeList    = this.selectedRoomDataTypeList.stream().map(RoomDataType::getNameForDataReading).collect(Collectors.toCollection(ArrayList::new)) ;
+                thresholdMap    = null ;
+                break ;
+
+            case SOLAREDGE :
+                subjectList     = Arrays.asList("overview") ;
+                dataTypeList    = this.selectedSolarPanelDataTypeList.stream().map(SolarPanelDataType::getNameForDataReading).collect(Collectors.toCollection(ArrayList::new)) ;
+                thresholdMap    = null ;
+                break ;
+
+            default :
+                subjectList     = null ;
+                dataTypeList    = null ;
+                thresholdMap    = null ;
+                break ;
+        }
+
+        // fréquence de lecture des données
+        int readingFrequency = this.enteredReadingFrequency ;
+
+        // enregistrement de la configuration
+        this.cffDialogController.enregistrerConfiguration(
+            name,
+            topicPrefix,
+            subjectList,
+            dataTypeList,
+            thresholdMap,
+            readingFrequency
+        ) ;
     }
 
     /**

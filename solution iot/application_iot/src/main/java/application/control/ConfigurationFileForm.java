@@ -4,9 +4,11 @@ import application.data.DataLoader ;
 import application.data.enums.Room ;
 import application.data.enums.RoomDataType ;
 import application.data.enums.SolarPanelDataType;
+import application.model.Configuration;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
@@ -127,6 +129,33 @@ public class ConfigurationFileForm
      * Effectue le dialogue de paramétrage d'un fichier de configuration.
      */
     public void doConfigurationFileFormDialog() { this.cffViewController.displayDialog() ; }
+
+    /**
+     * Enregistre la configuration à partir des paramètres donnés.
+     * @param pName             le nom de la configuration
+     * @param pTopicPrefix      le préfixe des topics MQTT auxquels s'abonner
+     * @param pSubjectList      la liste des sujets à observer
+     * @param pDataTypeList     la liste des types de données récupérés
+     * @param pThresholdMap     le dictionnaire des seuils d'alerte par type de données
+     * @param pReadingFrequency la fréquence de lecture des données
+     */
+    public void enregistrerConfiguration(
+        String pName,
+        String pTopicPrefix,
+        List<String> pSubjectList,
+        List<String> pDataTypeList,
+        Map<String, String> pThresholdMap,
+        int pReadingFrequency
+    ) {
+        Configuration configuration = Configuration.getInstance() ;
+        configuration.setName(pName) ;
+        configuration.setTopicPrefix(pTopicPrefix) ;
+        configuration.setSubjectList(pSubjectList) ;
+        configuration.setDataTypeList(pDataTypeList) ;
+        configuration.setThresholdMap(pThresholdMap) ;
+        configuration.setReadingFrequency(pReadingFrequency) ;
+        System.out.println(configuration) ;
+    }
 
     /**
      * Indique si le nom de la configuration est valide.
