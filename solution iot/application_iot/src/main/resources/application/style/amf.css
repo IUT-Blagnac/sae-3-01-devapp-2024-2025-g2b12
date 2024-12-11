@@ -1,0 +1,21 @@
+/*
+    Feuille de style du menu principal de l'application
+    Cf. applicationMainFrame.fxml
+
+    auteur : Victor Jockin
+    - Équipe 2B12 -
+*/
+
+.root {
+    -fx-background-color: #242630;
+}
+
+.main-content {
+    -fx-background-color: #242630;
+}
+
+.container {
+    -fx-background-color: #33353f;
+    -fx-border-radius: 0;
+    -fx-background-radius: 15;
+}

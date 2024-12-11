@@ -40,9 +40,10 @@ public class ApplicationMainFrame extends Application
 
             // initialisation de la scène
             Scene scene = new Scene(fxmlLoader.load(), 600, 600) ;
-            scene.getStylesheets().add(getClass().getResource("style/style.css").toExternalForm()) ;
+            scene.getStylesheets().add(getClass().getResource("style/amf.css").toExternalForm()) ;
             this.amfStage.setScene(scene) ;
-            this.amfStage.setTitle("S.A.E.") ;
+            this.amfStage.setTitle("Menu principal") ;
+            this.amfStage.setResizable(false) ;
 
             // initialisation du contrôleur
             ApplicationMainFrameViewController amfViewController = fxmlLoader.getController() ;

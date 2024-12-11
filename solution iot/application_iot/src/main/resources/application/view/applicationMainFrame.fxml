@@ -2,21 +2,21 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="application.view.ApplicationMainFrameViewController" prefHeight="500">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-    <ImageView fx:id="imageView" fitWidth="200" fitHeight="100" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../image/titre.png"/>
-        </image>
-    </ImageView>
-    <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-    <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-    <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-    <Button text="Quitter" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+<VBox fx:id="root" prefWidth="-Infinity" prefHeight="-Infinity" VBox.vgrow="ALWAYS" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ApplicationMainFrameViewController">
+    <children>
+        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+            <padding>
+                <Insets left="20" right="0" top="20" bottom="20"/>
+            </padding>
+            <children>
+                <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                <Button text="Quitter" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+            </children>
+        </VBox>
+    </children>
 </VBox>
