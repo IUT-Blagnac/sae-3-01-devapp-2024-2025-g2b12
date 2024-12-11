@@ -205,3 +205,4 @@ Enlevez les consignes du readme ! Mettre les rôles de chacun. Issues/ US :  Pen
 === Retour semaine 48
 
 Backlog produit : il manque les finalités (afin de) dans certaines tâches et la complexité. Backlog sprint ok. Tasks : certaines en cours ne sont pas assignées. Tests : cahier à faire ! manque nom client et projet. DOCS : idem revoir infos page de garde. Avancer les doc user et tech. Conception ok manque des commentaires. release : pas de release, pas de lien vers une version courante ni de date ...
+NOTE Appel Offre : 13,06/20
