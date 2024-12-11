@@ -32,7 +32,7 @@
 										<Insets left="5"/>
 									</padding>
 									<children>
-										<VBox alignment="CENTER">
+										<VBox alignment="CENTER" minWidth="30">
 											<padding>
 												<Insets bottom="2"/>
 											</padding>
@@ -50,6 +50,28 @@
 							</graphic>
 						</Button>
 						<Separator/>
+						<!-- bouton "Fermer" -->
+						<Button onAction="#doClose" maxWidth="Infinity" minHeight="50" prefHeight="50" alignment="CENTER_LEFT" styleClass="side-menu-button">
+							<graphic>
+								<HBox spacing="10">
+									<padding>
+										<Insets left="5"/>
+									</padding>
+									<children>
+										<VBox alignment="CENTER" minWidth="30">
+											<children>
+												<ImageView fitHeight="23" preserveRatio="true">
+													<image>
+														<Image url="@../image/dvp/close-icon.png"/>
+													</image>
+												</ImageView>
+											</children>
+										</VBox>
+										<Label text="Fermer" minHeight="40" prefHeight="40" styleClass="side-menu-button-label"/>
+									</children>
+								</HBox>
+							</graphic>
+						</Button>
 					</children>
 				</VBox>
 			</children>

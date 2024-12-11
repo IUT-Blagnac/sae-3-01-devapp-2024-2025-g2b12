@@ -1,18 +1,17 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm ;
-import application.enums.Room;
-import application.enums.RoomDataType;
-import application.enums.Sensor;
-import application.enums.SolarPanelDataType;
+import application.enums.Room ;
+import application.enums.RoomDataType ;
+import application.enums.Sensor ;
+import application.enums.SolarPanelDataType ;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
 import java.util.Arrays ;
-import java.util.HashMap;
+import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
-import java.util.stream.Collectors ;
 
 import javafx.fxml.FXML ;
 import javafx.geometry.Pos ;

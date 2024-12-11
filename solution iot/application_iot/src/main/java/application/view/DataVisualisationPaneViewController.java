@@ -24,7 +24,6 @@ import javafx.scene.chart.LineChart ;
 import javafx.scene.chart.XYChart ;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ComboBox ;
-import javafx.scene.control.Control ;
 import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
@@ -253,14 +252,13 @@ public class DataVisualisationPaneViewController
     /**
      * Gère la fermeture de la fenêtre.
      * @param e un évènement de fenêtre
-     * @return null
      */
-    private Object closeWindow(WindowEvent e)
+    private void closeWindow(WindowEvent e)
     {
         DataCollector.stopCollectionProcess() ;
+        this.dvpDialogController.stopCsvReaderThread() ;
         this.doClose() ;
 		e.consume() ;
-		return null ;
 	}
 
     /**

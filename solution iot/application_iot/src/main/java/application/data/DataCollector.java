@@ -13,7 +13,7 @@ package application.data ;
 public class DataCollector
 {
     // déclaration des constantes
-    private static final String PYTHON_PROGRAM_PATH = "resources\\mqtt.py" ;
+    private static final String PYTHON_PROGRAM_PATH = "resources/mqtt.py" ;
 
     // déclaration des attributs
     private static Process singleCollectionProcess ;    // unique instance du processus de collecte de données
@@ -36,6 +36,7 @@ public class DataCollector
     
                 // construction et démarrage du processus
                 ProcessBuilder processBuilder = new ProcessBuilder(cmd, PYTHON_PROGRAM_PATH) ;
+                processBuilder.inheritIO() ;
                 singleCollectionProcess = processBuilder.start() ;
                 System.out.println("Python process started successfully.") ; // message console
             }

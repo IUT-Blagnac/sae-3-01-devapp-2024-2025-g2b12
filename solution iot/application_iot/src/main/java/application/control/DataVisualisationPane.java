@@ -5,7 +5,6 @@ import application.model.Configuration ;
 import application.thread.CsvReaderTask ;
 import application.view.DataVisualisationPaneViewController ;
 
-import java.util.List ;
 import java.util.Map ;
 import java.util.concurrent.Executors ;
 import java.util.concurrent.ScheduledExecutorService ;
@@ -51,6 +50,7 @@ public class DataVisualisationPane
 
     // attributs utilitaires
     private ScheduledExecutorService scheduler ;
+    private CsvReaderTask csvReaderTask ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -161,9 +161,10 @@ public class DataVisualisationPane
      */
     public void startCsvReaderThread()
     {
+        this.csvReaderTask = new CsvReaderTask(this, ';') ;
         scheduler = Executors.newScheduledThreadPool(1) ;
         scheduler.scheduleAtFixedRate(
-            new CsvReaderTask(this, ';'),
+            this.csvReaderTask,
             0,
             5,
             TimeUnit.SECONDS
@@ -173,12 +174,10 @@ public class DataVisualisationPane
     /**
      * Arrête le Thread lecteur de données.
      */
-    public void stopCsvReaderThread()
+    public synchronized void stopCsvReaderThread()
     {
-        if (scheduler != null && !scheduler.isShutdown())
-        {
-            scheduler.shutdown() ;
-        }
+        if (scheduler != null && !scheduler.isShutdown()) { scheduler.shutdownNow() ; }
+        if (this.csvReaderTask != null) { this.csvReaderTask.stop() ; }
     }
 
     /**
