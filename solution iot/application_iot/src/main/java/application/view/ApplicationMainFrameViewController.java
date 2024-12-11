@@ -4,6 +4,7 @@ import application.ApplicationMainFrame ;
 import application.model.Configuration;
 import application.styles.FontLoader;
 import javafx.fxml.FXML ;
+import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.stage.Stage ;
 import javafx.stage.WindowEvent;
@@ -25,6 +26,9 @@ public class ApplicationMainFrameViewController
     private Stage stage ;
     private ApplicationMainFrame amfDialogController ;
 
+    // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    @FXML private static Button openDashboardButton ;
+
     public void setStage(Stage _stage)
     {
         this.stage = _stage ;
@@ -43,6 +47,8 @@ public class ApplicationMainFrameViewController
         // préchargement des fonts (pour utilisation dans la feuille de style cff.css)
         Font boldFont       = FontLoader.getBoldFont() ;
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
+
+        this.openDashboardButton.setDisable(true) ;
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
@@ -87,5 +93,20 @@ public class ApplicationMainFrameViewController
     protected void doClose()
     {
         this.stage.close() ;
+    }
+
+    /**
+     * Met à jour l'état des boutons du menu.
+     */
+    public static void updateButtonStatus()
+    {
+        if (Configuration.isDefined())
+        {
+            openDashboardButton.setDisable(false) ;
+        }
+        else
+        {
+            openDashboardButton.setDisable(true) ;
+        }
     }
 }

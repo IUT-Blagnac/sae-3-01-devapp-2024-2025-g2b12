@@ -1,10 +1,12 @@
 package application.control ;
 
+import application.ApplicationMainFrame;
 import application.data.DataLoader ;
 import application.enums.Room;
 import application.enums.RoomDataType;
 import application.enums.SolarPanelDataType;
 import application.model.Configuration ;
+import application.view.ApplicationMainFrameViewController;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
@@ -159,9 +161,14 @@ public class ConfigurationFileForm
         configuration.setDataTypeList(pDataTypeList) ;
         configuration.setThresholdMap(pThresholdMap) ;
         configuration.setReadingFrequency(pReadingFrequency) ;
+
+        // message console (pour vérification)
         System.out.println(configuration) ;
 
         configuration.createFile() ;
+
+        // mise à jour du menu principal
+        ApplicationMainFrameViewController.updateButtonStatus() ;
     }
 
     /**

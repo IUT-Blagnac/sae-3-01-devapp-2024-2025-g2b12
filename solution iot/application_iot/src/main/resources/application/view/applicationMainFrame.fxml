@@ -25,7 +25,7 @@
                     <children>
                         <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
                         <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                        <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                        <Button fx:id="openDashboardButton" text="Ouvrir le tableau de bord" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
                         <Button text="Fermer" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
                     </children>
                 </VBox>
