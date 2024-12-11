@@ -220,7 +220,7 @@ public class DataVisualisationPaneViewController
         this.dataTypeListComboBox.getItems().clear() ;
         this.dataTypeListComboBox.getItems().addAll(
             DataTypeUtilities.getAllFullTitles(
-                this.dvpDialogController.getConfiguration().getDataTypeList()
+                this.dvpDialogController.getConfiguration().getDataTypeList().subList(1, this.dvpDialogController.getConfiguration().getDataTypeList().size())
             )
         ) ;
         this.dataTypeListComboBox.setOnAction(event -> {
