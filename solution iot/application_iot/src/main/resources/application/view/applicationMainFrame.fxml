@@ -12,10 +12,22 @@
                 <Insets left="20" right="0" top="20" bottom="20"/>
             </padding>
             <children>
-                <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                <Button text="Quitter" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets right="20"/>
+                    </padding>
+                    <children>
+                        <Label text="Menu principal" styleClass="window-header"/>
+                    </children>
+                </HBox>
+                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20" styleClass="main-content">
+                    <children>
+                        <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                        <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                        <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                        <Button text="Fermer" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                    </children>
+                </VBox>
             </children>
         </VBox>
     </children>

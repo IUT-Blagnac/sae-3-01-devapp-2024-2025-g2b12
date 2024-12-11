@@ -74,6 +74,7 @@ public class DataVisualisationPane
             this.dvpStage.setTitle("Tableau de bord") ;
             this.dvpStage.setMinWidth(MIN_WIDTH) ;
             this.dvpStage.setMinHeight(MIN_HEIGHT) ;
+            this.dvpStage.setResizable(true) ;
 
             // initialisation du contrôleur
             this.dvpViewController = fxmlLoader.getController() ;
