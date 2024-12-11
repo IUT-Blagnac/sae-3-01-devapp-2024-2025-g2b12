@@ -1,1 +1,4 @@
 room;dataType;threshold;measuredValue
+B234;activity;100.0;409
+B234;infrared_and_visible;20.0;29
+B234;co2;1000.0;1053
