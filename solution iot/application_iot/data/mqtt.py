@@ -23,37 +23,41 @@ logging.info("MQTT script started.")
 # récupération des sujets
 sujets = [value for key, value in configuration.items('SUJET')]
 
+# récupération des types de données
+data_types = [value for key, value in configuration.items('DATA_TYPE')]
+
 # récupération des seuils
-seuils = {
-    'temperature': float(configuration.get('SEUILS', 'temperature')),
-    'humidity': float(configuration.get('SEUILS', 'humidity')),
-    'co2': float(configuration.get('SEUILS', 'co2')),
-    'tvoc': float(configuration.get('SEUILS', 'tvoc')),
-    'infrared_and_visible': float(configuration.get('SEUILS', 'infrared_and_visible'))
-}
+seuils = {key: float(value) for key, value in configuration.items('SEUILS')}
 
 # configuration du logging
 logging.basicConfig(level=logging.DEBUG)
 
 def clear_csv_files():
-    # Vider le fichier global
-    data_file = 'data\\data.csv'
-    with open(data_file, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=';')
-        writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
-
-    # Vider le fichier d'alertes
-    alert_file = 'data\\alert.csv'
-    with open(alert_file, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=';')
-        writer.writerow(['room', 'dataType', 'threshold', 'measuredValue'])
-
-    # Vider les fichiers de chaque salle
-    for sujet in sujets:
-        room_file = f'data\\{sujet}.csv'
-        with open(room_file, 'w', newline='') as csvfile:
+    try:
+        # Vider le fichier global
+        data_file = 'data\\data.csv'
+        with open(data_file, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=';')
-            writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
+            writer.writerow(['room'] + data_types)
+        logging.info(f"Cleared {data_file}")
+
+        # Vider le fichier d'alertes
+        alert_file = 'data\\alert.csv'
+        with open(alert_file, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=';')
+            writer.writerow(['room', 'dataType', 'threshold', 'measuredValue'])
+        logging.info(f"Cleared {alert_file}")
+
+        # Vider les fichiers de chaque salle
+        for sujet in sujets:
+            room_file = f'data\\{sujet}.csv'
+            with open(room_file, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=';')
+                writer.writerow(['room'] + data_types)
+            logging.info(f"Cleared {room_file}")
+
+    except Exception as e:
+        logging.error(f"Error clearing CSV files: {e}")
 
 # Vider les fichiers CSV au démarrage
 clear_csv_files()
@@ -74,19 +78,12 @@ def on_message(client, userdata, message):
         
         if message.topic.startswith("AM107/by-room"):
             room = data[1]['room']
-            temperature = data[0]['temperature']
-            humidity = data[0]['humidity']
-            co2 = data[0]['co2']
-            tvoc = data[0].get('tvoc', 0)
-            infrared_and_visible = data[0].get('infrared_and_visible', 0)
+            data_values = {data_type: data[0].get(data_type, 0) for data_type in data_types}
 
             # Affichage des données dans la console
             print(f"Salle : {room}")
-            print(f"Température : {temperature}")
-            print(f"Humidité : {humidity}")
-            print(f"Taux de CO2 : {co2}")
-            print(f"TVOC : {tvoc}")
-            print(f"Infrarouge et visible : {infrared_and_visible}")
+            for data_type, value in data_values.items():
+                print(f"{data_type} : {value}")
 
             # Lire les données existantes de data.csv
             data_file = 'data\\data.csv'
@@ -98,18 +95,12 @@ def on_message(client, userdata, message):
                         data_dict[row['room']] = row
 
             # Mettre à jour les données de la salle concernée
-            data_dict[room] = {
-                'room': room,
-                'temperature': temperature,
-                'humidity': humidity,
-                'co2': co2,
-                'tvoc': tvoc,
-                'infrared_and_visible': infrared_and_visible
-            }
+            data_dict[room] = {'room': room}
+            data_dict[room].update(data_values)
 
             # Écrire les données mises à jour dans data.csv
             with open(data_file, 'w', newline='') as csvfile:
-                fieldnames = ['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible']
+                fieldnames = ['room'] + data_types
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
                 writer.writeheader()
                 for row in data_dict.values():
@@ -121,27 +112,36 @@ def on_message(client, userdata, message):
             with open(room_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';')
                 if not file_exists:
-                    writer.writerow(['room', 'temperature', 'humidity', 'co2', 'tvoc', 'infrared_and_visible'])
-                writer.writerow([room, temperature, humidity, co2, tvoc, infrared_and_visible])
+                    writer.writerow(['room'] + data_types)
+                writer.writerow([room] + [data_values[data_type] for data_type in data_types])
 
             # Vérification des seuils et mise à jour du fichier d'alertes
             alerts = []
-            if temperature > seuils['temperature']:
-                alerts.append([room, 'temperature', seuils['temperature'], temperature])
-            if humidity > seuils['humidity']:
-                alerts.append([room, 'humidity', seuils['humidity'], humidity])
-            if co2 > seuils['co2']:
-                alerts.append([room, 'co2', seuils['co2'], co2])
-            if tvoc > seuils['tvoc']:
-                alerts.append([room, 'tvoc', seuils['tvoc'], tvoc])
-            if infrared_and_visible > seuils['infrared_and_visible']:
-                alerts.append([room, 'infrared_and_visible', seuils['infrared_and_visible'], infrared_and_visible])
+            for data_type in data_types:
+                if data_values[data_type] > seuils.get(data_type, float('inf')):
+                    alerts.append([room, data_type, seuils[data_type], data_values[data_type]])
 
             if alerts:
                 with open('data\\alert.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile, delimiter=';')
                     for alert in alerts:
                         writer.writerow(alert)
+        elif message.topic.startswith("solaredge/blagnac") :
+            data_values = {data_type: data.get(data_type, 0) for data_type in data_types}
+
+            # Affichage des données dans la console
+            print(f"Solaredge")
+            for data_type, value in data_values.items():
+                print(f"{data_type} : {value}")
+
+            # Lire les données existantes de data.csv
+            data_file = 'data\\data.csv'    
+            data_dict = {}
+            if os.path.isfile(data_file):
+                with open(data_file, 'r', newline='') as csvfile:
+                    reader = csv.DictReader(csvfile, delimiter=';')
+                    for row in reader:
+                        data_dict[row['room']] = row
     except (json.JSONDecodeError, KeyError) as e:
         logging.error(f"Erreur dans les données reçues : {e}")
 
