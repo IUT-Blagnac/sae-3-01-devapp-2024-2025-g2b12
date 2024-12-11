@@ -1,13 +1,14 @@
 package application ;
 
-import application.control.ConfigurationFileForm;
-import application.control.DataVisualisationPane;
+import application.control.ConfigurationFileForm ;
+import application.control.DataVisualisationPane ;
 import application.view.ApplicationMainFrameViewController ;
 
 import javafx.application.Application ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.stage.Stage ;
+import javafx.stage.WindowEvent ;
 
 /**
  * Contrôleur de dialogue du menu principal.
