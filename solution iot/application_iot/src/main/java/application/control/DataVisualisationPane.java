@@ -50,7 +50,6 @@ public class DataVisualisationPane
 
     // attributs utilitaires
     private ScheduledExecutorService scheduler ;
-    private CsvReaderTask csvReaderTask ;
 
     /**
      * Constructeur : charge le formulaire.
@@ -161,10 +160,9 @@ public class DataVisualisationPane
      */
     public void startCsvReaderThread()
     {
-        this.csvReaderTask = new CsvReaderTask(this, ';') ;
         scheduler = Executors.newScheduledThreadPool(1) ;
         scheduler.scheduleAtFixedRate(
-            this.csvReaderTask,
+            new CsvReaderTask(this, ';'),
             0,
             5,
             TimeUnit.SECONDS
@@ -174,10 +172,9 @@ public class DataVisualisationPane
     /**
      * Arrête le Thread lecteur de données.
      */
-    public synchronized void stopCsvReaderThread()
+    public void stopCsvReaderThread()
     {
         if (scheduler != null && !scheduler.isShutdown()) { scheduler.shutdownNow() ; }
-        if (this.csvReaderTask != null) { this.csvReaderTask.stop() ; }
     }
 
     /**

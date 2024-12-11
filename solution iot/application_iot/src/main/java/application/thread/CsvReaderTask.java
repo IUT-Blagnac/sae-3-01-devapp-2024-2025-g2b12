@@ -30,9 +30,6 @@ public class CsvReaderTask implements Runnable
     private final DataVisualisationPane dvpDialogController ;
     private final char delimiter ;
 
-    // attributs relatifs au thread
-    private boolean running ;
-
     /**
      * Constructeur par défaut : 2 paramètres.
      * @param controller    le contrôleur de dialogue à qui envoyer les donnéees lues
@@ -43,19 +40,13 @@ public class CsvReaderTask implements Runnable
         // initialisation des attributs "récupérés"
         this.dvpDialogController = controller ;
         this.delimiter = delimiter ;
-
-        // initialisation des attributs relatifs au thread
-        this.running = true ;
     }
 
     @Override
     public void run()
     {
-        if (this.running)
-        {
-            this.readDataFile() ;
-            this.readAlertFile() ;
-        }
+        this.readDataFile() ;
+        this.readAlertFile() ;
     }
 
     /**
@@ -70,7 +61,7 @@ public class CsvReaderTask implements Runnable
         ) {
             String[] header = csvReader.readNext() ;
             String[] values = null ;
-            while (this.running && (values = csvReader.readNext()) != null && !values[0].equals(""))
+            while ((values = csvReader.readNext()) != null && !values[0].equals(""))
             {
                 dataMap.put(values[0], new HashMap<String, String>()) ;
                 for (int i = 1; i < values.length; i++)
@@ -78,8 +69,6 @@ public class CsvReaderTask implements Runnable
                     dataMap.get(values[0]).put(header[i], values[i]) ;
                 }
             }
-            if (!this.running) { return ; }
-            System.out.println(this.running) ;
             this.dvpDialogController.setDataMap(dataMap) ;
         }
         catch (FileNotFoundException e) { throw new RuntimeException(e) ; }
@@ -99,7 +88,7 @@ public class CsvReaderTask implements Runnable
         ) {
             String[] header = csvReader.readNext() ;
             String[] values = null ;
-            while (this.running && (values = csvReader.readNext()) != null && !values[0].equals(""))
+            while ((values = csvReader.readNext()) != null && !values[0].equals(""))
             {
                 alertMap.put(values[0], new HashMap<String, String>()) ;
                 for (int i = 1; i < values.length; i++)
@@ -107,16 +96,10 @@ public class CsvReaderTask implements Runnable
                     alertMap.get(values[0]).put(header[i], values[i]) ;
                 }
             }
-            if (!this.running) { return ; }
             this.dvpDialogController.setAlertMap(alertMap) ;
         }
         catch (FileNotFoundException e) { throw new RuntimeException(e) ; }
         catch (IOException e) { throw new RuntimeException(e) ; }
         catch (CsvValidationException e) { throw new RuntimeException(e) ; }
     }
-
-    /**
-     * Arrête le thread.
-     */
-    public void stop() { this.running = false ; }
 }

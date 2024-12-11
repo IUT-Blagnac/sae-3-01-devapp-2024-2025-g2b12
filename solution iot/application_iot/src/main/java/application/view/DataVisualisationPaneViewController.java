@@ -255,8 +255,6 @@ public class DataVisualisationPaneViewController
      */
     private void closeWindow(WindowEvent e)
     {
-        DataCollector.stopCollectionProcess() ;
-        this.dvpDialogController.stopCsvReaderThread() ;
         this.doClose() ;
 		e.consume() ;
 	}
@@ -315,6 +313,8 @@ public class DataVisualisationPaneViewController
     @FXML
     private void doClose()
     {
+        DataCollector.stopCollectionProcess() ;
+        this.dvpDialogController.stopCsvReaderThread() ;
         this.stage.close() ;
     }
 
