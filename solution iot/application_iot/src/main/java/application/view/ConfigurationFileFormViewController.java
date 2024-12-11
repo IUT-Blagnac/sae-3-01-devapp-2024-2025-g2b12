@@ -1,10 +1,10 @@
 package application.view ;
 
 import application.control.ConfigurationFileForm ;
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.Sensor ;
-import application.data.enums.SolarPanelDataType ;
+import application.enums.Room;
+import application.enums.RoomDataType;
+import application.enums.Sensor;
+import application.enums.SolarPanelDataType;
 import application.styles.FontLoader ;
 
 import java.util.ArrayList ;
@@ -37,7 +37,8 @@ import javafx.stage.WindowEvent ;
  * Date de dernière modification :
  * - Dimanche 8 décembre 2024 -
  * 
- * @author Victor Jockin (Équipe G2B12)
+ * @author Victor Jockin
+ * - Équipe G2B12 -
  */
 public class ConfigurationFileFormViewController
 {
@@ -260,6 +261,9 @@ public class ConfigurationFileFormViewController
             thresholdMap,
             readingFrequency
         ) ;
+
+        // fermeture de la fenêtre
+        this.doClose() ;
     }
 
     /**
@@ -393,32 +397,31 @@ public class ConfigurationFileFormViewController
         {
             Button button = new Button(roomDataType.getNameForDisplay()) ;
             button.setFont(FontLoader.getLittleButtonFont()) ;
-            button.setMaxWidth(Double.MAX_VALUE) ;
-            button.setMaxHeight(Double.MAX_VALUE) ;
             button.setMinWidth(220) ;
             button.setMinHeight(35) ;
 
-            Label thresholdLabel = new Label("Seuil d'alerte :") ;
+            Label thresholdLabel = new Label("Seuil d'alerte ("+(int)roomDataType.getMinThreshold()+" — "+(int)roomDataType.getMaxThreshold()+")") ;
             thresholdLabel.setFont(FontLoader.getTableHeaderFont()) ;
             thresholdLabel.setTextFill(Color.web("#fff")) ;
             thresholdLabel.setTextAlignment(TextAlignment.RIGHT) ;
+            thresholdLabel.setMinWidth(190) ;
             thresholdLabel.setMinHeight(35) ;
 
             TextField thresholdTextField = new TextField(roomDataType.getDefaultThreshold()) ;
             thresholdTextField.setPromptText("Entrez un seuil") ;
             thresholdTextField.setFont(FontLoader.getContentFont()) ;
-            thresholdTextField.setPrefWidth(120) ;
+            thresholdTextField.setMinWidth(90) ;
             thresholdTextField.setMinHeight(35) ;
             thresholdTextField.setDisable(true) ;
 
             Label unitLabel = new Label(roomDataType.getUnit()) ;
             unitLabel.setFont(FontLoader.getContentFont()) ;
             unitLabel.setTextFill(Color.web("#fff")) ;
-            unitLabel.setMinWidth(50) ;
+            unitLabel.setMinWidth(60) ;
             unitLabel.setMinHeight(35) ;
 
             HBox thresholdContainer = new HBox() ;
-            thresholdContainer.setAlignment(Pos.CENTER_RIGHT) ;
+            thresholdContainer.setAlignment(Pos.CENTER_LEFT) ;
             thresholdContainer.setSpacing(10) ;
             thresholdContainer.getChildren().add(thresholdLabel) ;
             thresholdContainer.getChildren().add(thresholdTextField) ;
@@ -448,6 +451,13 @@ public class ConfigurationFileFormViewController
                 }
                 this.updateLowerMenuButtonStatus() ;
             }) ;
+
+            // écouteur d'évènements sur le champ de saisie du seuil d'alerte
+            thresholdTextField.focusedProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (!newValue) { this.validateThresholdInput(roomDataType, thresholdTextField) ; }
+                }
+            ) ;
         }
     }
 
@@ -537,6 +547,26 @@ public class ConfigurationFileFormViewController
             this.enteredConfigurationName = name ;
         }
         this.configNameTextField.setText(this.enteredConfigurationName) ;
+    }
+
+    /**
+     * Valide ou non la saisie d'un seuil d'alerte.
+     */
+    private void validateThresholdInput(RoomDataType pRoomDataType, TextField pTextField)
+    {
+        try
+        {
+            double threshold = Double.parseDouble(pTextField.getText()) ;
+            if (this.cffDialogController.isThresholdValid(pRoomDataType, threshold))
+            {
+                this.selectedRoomDataTypeMap.put(pRoomDataType, threshold) ;
+            }
+            pTextField.setText(String.valueOf(this.selectedRoomDataTypeMap.get(pRoomDataType))) ;
+        }
+        catch (NumberFormatException nfe)
+        {
+            pTextField.setText(String.valueOf(this.selectedRoomDataTypeMap.get(pRoomDataType))) ;
+        }
     }
 
     /**

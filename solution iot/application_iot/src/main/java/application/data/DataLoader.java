@@ -1,12 +1,12 @@
 package application.data ;
 
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.SolarPanelDataType ;
-
 import java.io.File ;
 import java.util.Arrays ;
 import java.util.List ;
+
+import application.enums.Room ;
+import application.enums.RoomDataType ;
+import application.enums.SolarPanelDataType ;
 
 /**
  * Classe d'accès aux données.
@@ -25,7 +25,7 @@ public class DataLoader
      */
     public static File getAllRoomDataFile()
     {
-        File allRoomDataFile = new File("data/data.csv") ;
+        File allRoomDataFile = new File("resources/data/data.csv") ;
         if (allRoomDataFile.exists())
         {
             return allRoomDataFile ;
@@ -39,7 +39,7 @@ public class DataLoader
      */
     public static File getAlertFile()
     {
-        File alertFile = new File("data/alert.csv") ;
+        File alertFile = new File("resources/data/alert.csv") ;
         if (alertFile.exists())
         {
             return alertFile ;
@@ -54,7 +54,7 @@ public class DataLoader
      */
     public static File getRoomDataFile(String pRoomName)
     {
-        File roomDataFile = new File("data/"+pRoomName+".csv") ;
+        File roomDataFile = new File("resources/data/"+pRoomName+".csv") ;
         if (roomDataFile.exists())
         {
             return roomDataFile ;

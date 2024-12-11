@@ -25,7 +25,7 @@
                         <Label text="Configuration" styleClass="window-header"/>
                     </children>
                 </HBox>
-                <ScrollPane fitToWidth="true" fitToHeight="true" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+                <ScrollPane fitToWidth="true" fitToHeight="true" minWidth="682" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
                     <content>
                         <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20" styleClass="main-content">
                             <children>
@@ -51,8 +51,8 @@
                                                                 <Insets left="8" right="8" top="8" bottom="8"/>
                                                             </padding>
                                                             <children>
-                                                                <Button fx:id="roomSensorsButton" text="AM107" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
-                                                                <Button fx:id="solarPanelSensorsButton" text="SOLAREDGE" prefWidth="200" maxWidth="Infinity" minHeight="35" prefHeight="35" styleClass="switch"/>
+                                                                <Button fx:id="roomSensorsButton" text="AM107" minWidth="178"  minHeight="35" prefHeight="35" styleClass="switch"/>
+                                                                <Button fx:id="solarPanelSensorsButton" text="SOLAREDGE" minWidth="178" minHeight="35" prefHeight="35" styleClass="switch"/>
                                                             </children>
                                                         </HBox>
                                                     </children>

@@ -69,6 +69,7 @@ public class CsvReaderTask implements Runnable
                     dataMap.get(values[0]).put(header[i], values[i]) ;
                 }
             }
+            System.out.println(dataMap) ;
             this.dvpDialogController.setDataMap(dataMap) ;
         }
         catch (FileNotFoundException e) { throw new RuntimeException(e) ; }
@@ -96,6 +97,7 @@ public class CsvReaderTask implements Runnable
                     alertMap.get(values[0]).put(header[i], values[i]) ;
                 }
             }
+            System.out.println(alertMap) ;
             this.dvpDialogController.setAlertMap(alertMap) ;
         }
         catch (FileNotFoundException e) { throw new RuntimeException(e) ; }

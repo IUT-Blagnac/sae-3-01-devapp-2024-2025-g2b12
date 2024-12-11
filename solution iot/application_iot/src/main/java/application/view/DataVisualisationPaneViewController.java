@@ -1,11 +1,12 @@
 package application.view ;
 
 import application.control.DataVisualisationPane ;
+import application.data.DataCollector ;
 import application.data.DataTypeUtilities ;
 import application.model.DataRow ;
 import application.styles.FontLoader ;
-import application.thread.UpdateAlertDisplayTask;
-import application.thread.UpdateDataDisplayTask;
+import application.thread.UpdateAlertDisplayTask ;
+import application.thread.UpdateDataDisplayTask ;
 import application.tools.DataFileReading ;
 import application.tools.GraphGenerator ;
 
@@ -23,6 +24,7 @@ import javafx.scene.chart.LineChart ;
 import javafx.scene.chart.XYChart ;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ComboBox ;
+import javafx.scene.control.Control ;
 import javafx.scene.control.Label ;
 import javafx.scene.control.TableCell ;
 import javafx.scene.control.TableColumn ;
@@ -37,7 +39,7 @@ import javafx.stage.WindowEvent ;
  * Contrôleur de vue de la fenêtre de visualisation des données.
  * 
  * Date de dernière modification :
- * - Dimanche 8 décembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
  * @author Nolhan Biblocque
  * @author Léo Guinvarc'h
@@ -126,7 +128,9 @@ public class DataVisualisationPaneViewController
         this.dataTableViewOList = FXCollections.observableArrayList() ;
 
         // initialisation de la TableView
-        List<String> headersList = this.dvpDialogController.getDataTypeList() ;
+        List<String> headersList = this.dvpDialogController.getConfiguration().getDataTypeList() ;
+        headersList.add(0, "room") ;
+
         for (int i = 0 ; i < headersList.size() ; i++)
         {
             String header = headersList.get(i) ;
@@ -134,7 +138,7 @@ public class DataVisualisationPaneViewController
             // initialisation d'un bouton faisant office d'en-tête
             Button button = new Button(DataTypeUtilities.getAbbreviation(header)+" ("+DataTypeUtilities.getUnit(header)+")") ;
             button.setId(header) ;
-            button.setMinWidth(80) ;
+            button.setMinWidth(100) ;
             button.setFont(FontLoader.getTableHeaderFont()) ;
             button.getStyleClass().add("table-header") ;
             if (header.compareTo("room") == 0)
@@ -217,7 +221,7 @@ public class DataVisualisationPaneViewController
         this.dataTypeListComboBox.getItems().clear() ;
         this.dataTypeListComboBox.getItems().addAll(
             DataTypeUtilities.getAllFullTitles(
-                this.dvpDialogController.getDataTypeList().subList(1, this.dvpDialogController.getDataTypeList().size())
+                this.dvpDialogController.getConfiguration().getDataTypeList()
             )
         ) ;
         this.dataTypeListComboBox.setOnAction(event -> {
@@ -253,7 +257,7 @@ public class DataVisualisationPaneViewController
      */
     private Object closeWindow(WindowEvent e)
     {
-        this.dvpDialogController.stopProcessPython();
+        DataCollector.stopCollectionProcess() ;
         this.doClose() ;
 		e.consume() ;
 		return null ;
@@ -410,7 +414,7 @@ public class DataVisualisationPaneViewController
 
         if (pDataType == null)
         {
-            this.displayedDataType = this.dvpDialogController.getDataTypeList().get(1) ;
+            this.displayedDataType = this.dvpDialogController.getConfiguration().getDataTypeList().get(1) ;
             this.dataTypeListComboBox.setValue(DataTypeUtilities.getFullTitle(this.displayedDataType)) ;
         }
         else

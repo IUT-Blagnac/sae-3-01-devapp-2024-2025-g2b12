@@ -1,14 +1,14 @@
 package application.control ;
 
 import application.data.DataLoader ;
-import application.data.enums.Room ;
-import application.data.enums.RoomDataType ;
-import application.data.enums.SolarPanelDataType;
-import application.model.Configuration;
+import application.enums.Room;
+import application.enums.RoomDataType;
+import application.enums.SolarPanelDataType;
+import application.model.Configuration ;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;
-import java.util.Map;
+import java.util.Map ;
 
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
@@ -20,14 +20,19 @@ import javafx.stage.Stage ;
  * d'un fichier de configuration.
  * 
  * Date de dernière modification :
- * - Mardi 18 novembre 2024 -
+ * - Mardi 10 décembre 2024 -
  * 
- * @author Victor Jockin (Équipe G2B12)
+ * @author Victor Jockin
+ * - Équipe G2B12 -
  */
 public class ConfigurationFileForm
 {
     // déclaration des constantes
     // --------------------------
+
+    // dimensions de la fenêtre
+    private static final double FIXED_WINDOW_WIDTH      = 702 ;     // largeur fixe de la fenêtre
+    private static final double FIXED_WINDOW_HEIGHT     = 620 ;     // hauteur fixe de la fenêtre
 
     // fréquence de lecture des données (en secondes)
     private static final int MIN_READING_FREQUENCY      = 5 ;       // fréquence minimale
@@ -69,9 +74,9 @@ public class ConfigurationFileForm
             FXMLLoader fxmlLoader = new FXMLLoader(ConfigurationFileFormViewController.class.getResource("configurationFileForm.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 700, 600) ;
+            Scene scene = new Scene(fxmlLoader.load(), FIXED_WINDOW_WIDTH, FIXED_WINDOW_HEIGHT) ;
             this.cffStage.setScene(scene) ;
-            this.cffStage.setTitle("Créer une configuration") ;
+            this.cffStage.setTitle("Configuration") ;
             this.cffStage.setResizable(false) ;
 
             // initialisation du contrôleur
@@ -155,6 +160,8 @@ public class ConfigurationFileForm
         configuration.setThresholdMap(pThresholdMap) ;
         configuration.setReadingFrequency(pReadingFrequency) ;
         System.out.println(configuration) ;
+
+        configuration.createFile() ;
     }
 
     /**
@@ -167,6 +174,22 @@ public class ConfigurationFileForm
         return  pName != null
             &&  pName.matches("[a-zA-ZÀ-ÿ0-9 _-]+")
             &&  !pName.trim().isEmpty() ;
+    }
+
+    /**
+     * Indique si un seuil d'alerte pour un type de données de salle est valide.
+     * @param pRoomDataType un type de données de salle
+     * @param pThreshold    un seuil d'alerte
+     * @return  true si le seuil d'alerte est valide, false sinon
+     */
+    public boolean isThresholdValid(RoomDataType pRoomDataType, double pThreshold)
+    {
+        if (    pThreshold < pRoomDataType.getMinThreshold()
+            ||  pThreshold > pRoomDataType.getMaxThreshold()
+        ) {
+            return false ;
+        }
+        return true ;
     }
 
     /**

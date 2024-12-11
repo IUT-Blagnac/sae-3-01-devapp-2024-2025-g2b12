@@ -3,6 +3,8 @@ package application.model ;
 import java.util.List ;
 import java.util.Map ;
 
+import application.config.ConfigurationFileWriter;
+
 /**
  * Classe modèle représentant une configuration.
  * 
@@ -37,6 +39,12 @@ public class Configuration
         }
         return singleInstance ;
     }
+
+    /**
+     * Indique si une configuration est définie ou non.
+     * @return  true si une configuration est définie, false sinon
+     */
+    public static synchronized boolean isDefined() { return singleInstance != null ; }
 
     /**
      * Donne le nom de la configuration.
@@ -109,6 +117,11 @@ public class Configuration
      * @param _readingFrequency la fréquence de lecture des données
      */
     public void setReadingFrequency(int _readingFrequency) { this.readingFrequency = _readingFrequency ; }
+
+    /**
+     * Enregistre la configuration en tant que fichier.
+     */
+    public void createFile() { ConfigurationFileWriter.writeConfigurationFile(singleInstance) ; }
 
     /**
      * Méthode d'affichage (pour tests).
