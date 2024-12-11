@@ -166,9 +166,6 @@ public class ConfigurationFileForm
         System.out.println(configuration) ;
 
         configuration.createFile() ;
-
-        // mise à jour du menu principal
-        ApplicationMainFrameViewController.updateButtonStatus() ;
     }
 
     /**

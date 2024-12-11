@@ -27,7 +27,7 @@ public class ApplicationMainFrameViewController
     private ApplicationMainFrame amfDialogController ;
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
-    @FXML private static Button openDashboardButton ;
+    @FXML private Button openDashboardButton ;
 
     public void setStage(Stage _stage)
     {
@@ -98,15 +98,15 @@ public class ApplicationMainFrameViewController
     /**
      * Met à jour l'état des boutons du menu.
      */
-    public static void updateButtonStatus()
+    public void updateButtonStatus()
     {
         if (Configuration.isDefined())
         {
-            openDashboardButton.setDisable(false) ;
+            this.openDashboardButton.setDisable(false) ;
         }
         else
         {
-            openDashboardButton.setDisable(true) ;
+            this.openDashboardButton.setDisable(true) ;
         }
     }
 }
