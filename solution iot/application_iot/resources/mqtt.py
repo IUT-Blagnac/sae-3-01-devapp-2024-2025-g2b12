@@ -7,7 +7,6 @@ import csv
 import logging
 import sys
 
-
 if os.name == 'posix' :
     # sous mac os / linux
     config_file_path =  "resources/configuration.ini"
@@ -70,47 +69,6 @@ def clear_csv_files():
 
 #clear_csv_files()
 
-def read_and_filter_csv(file_path, filter_rooms):
-    if file_path == data_files_path + 'data.csv':
-        # Vider le fichier data.csv au début
-        with open(file_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';')
-            writer.writerow(['room'] + data_types)
-        
-        # Ajouter la dernière ligne de chaque {sujet}.csv
-        for sujet in filter_rooms:
-            room_file = f'{data_files_path}{sujet}.csv'
-            if os.path.isfile(room_file):
-                with open(room_file, 'r', newline='') as csvfile:
-                    reader = csv.DictReader(csvfile, delimiter=';')
-                    rows = list(reader)
-                    if rows:
-                        with open(file_path, 'a', newline='') as data_csvfile:
-                            writer = csv.writer(data_csvfile, delimiter=';')
-                            writer.writerow(rows[-1].values())
-    
-    elif file_path == data_files_path + 'alert.csv':
-        alert1_file = data_files_path + 'alert1.csv'
-        if not os.path.isfile(alert1_file):
-            if os.path.isfile(file_path):
-                os.rename(file_path, alert1_file)
-        
-        with open(file_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';')
-            writer.writerow(['room', 'dataType', 'threshold', 'measuredValue'])
-        
-        if os.path.isfile(alert1_file):
-            with open(alert1_file, 'r', newline='') as csvfile:
-                reader = csv.DictReader(csvfile, delimiter=';')
-                for row in reader:
-                    if row['room'] in filter_rooms:
-                        with open(file_path, 'a', newline='') as alert_csvfile:
-                            writer = csv.writer(alert_csvfile, delimiter=';')
-                            writer.writerow(row.values())
-
-read_and_filter_csv(data_files_path+'data.csv', sujets)
-read_and_filter_csv(data_files_path+'alert.csv', sujets)
-
 def on_connect(client, userdata, flags, reason_code, properties=None):
     logging.info(f"Connected with result code : {reason_code}")
     # abonnement aux topics
@@ -137,12 +95,9 @@ def on_message(client, userdata, message):
             for data_type, value in data_values.items():
                 print(f"{data_type} : {value}")
 
-            # Lire et filtrer les données existantes de data.csv
-            data_file = data_files_path + 'data.csv'
-            read_and_filter_csv(data_file, sujets)
-
             # Mettre à jour les données de la salle concernée
             data_dict = {}
+            data_file = data_files_path + 'data.csv'
             if os.path.isfile(data_file):
                 with open(data_file, 'r', newline='') as csvfile:
                     reader = csv.DictReader(csvfile, delimiter=';')
@@ -168,12 +123,9 @@ def on_message(client, userdata, message):
                     writer.writerow(['room'] + data_types)
                 writer.writerow([room] + [data_values[data_type] for data_type in data_types])
 
-            # Lire et filtrer les alertes existantes de alert.csv
-            alert_file = data_files_path + 'alert.csv'
-            read_and_filter_csv(alert_file, sujets)
-
             # Vérification des seuils et mise à jour du fichier d'alertes
             alerts = []
+            alert_file = data_files_path + 'alert.csv'
             for data_type in data_types:
                 if data_values[data_type] > seuils.get(data_type, float('inf')):
                     alerts.append([room, data_type, seuils[data_type], data_values[data_type]])
