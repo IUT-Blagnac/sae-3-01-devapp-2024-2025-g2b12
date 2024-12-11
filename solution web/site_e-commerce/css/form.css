@@ -1,0 +1,55 @@
+/*
+Feuille de styles des formulaires.
+
+Voir : 
+- formulaire_connexion.php
+- creer_compte.php
+
+Date de dernière modification :
+- Mercredi 11 décembre 2024 -
+
+Auteur : Victor Jockin
+- Équipe 2B12 -
+*/
+
+/* typographies (fonts) */
+/* -------------------- */
+
+@font-face {
+    font-family: 'Satoshi Variable';
+    src:    url('../font/satoshi/Satoshi-Variable.woff2')  format('woff2'),
+            url('../font/satoshi/Satoshi-Variable.woff')   format('woff'),
+            url('../font/satoshi/Satoshi-Variable.ttf')    format('truetype') ;
+    font-weight: 300 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+:root {
+    --body-font : 'Satoshi Variable', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%; 
+    font-family: var(--body-font);
+    font-size: 14px;
+    background-color: #93d467;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.form-container {
+    padding: 20px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #fff;
+}

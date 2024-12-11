@@ -113,8 +113,9 @@ public class ConfigurationFileFormViewController
     public void initializeView()
     {
         // préchargement des fonts (pour utilisation dans la feuille de style cff.css)
-        Font boldFont       = FontLoader.getBoldFont() ;
+        Font lightFont      = FontLoader.getLightFont() ;
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
+        Font boldFont       = FontLoader.getBoldFont() ;
 
         // initialisation des menus
         this.initSensorTypeSelectionMenu() ;

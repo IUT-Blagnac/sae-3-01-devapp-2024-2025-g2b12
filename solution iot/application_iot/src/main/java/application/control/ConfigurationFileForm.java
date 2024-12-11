@@ -1,12 +1,10 @@
 package application.control ;
 
-import application.ApplicationMainFrame;
 import application.data.DataLoader ;
-import application.enums.Room;
-import application.enums.RoomDataType;
-import application.enums.SolarPanelDataType;
+import application.enums.Room ;
+import application.enums.RoomDataType ;
+import application.enums.SolarPanelDataType ;
 import application.model.Configuration ;
-import application.view.ApplicationMainFrameViewController;
 import application.view.ConfigurationFileFormViewController ;
 
 import java.util.List ;

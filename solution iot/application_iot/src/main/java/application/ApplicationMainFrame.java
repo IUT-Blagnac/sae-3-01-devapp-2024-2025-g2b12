@@ -8,7 +8,6 @@ import javafx.application.Application ;
 import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.stage.Stage ;
-import javafx.stage.WindowEvent ;
 
 /**
  * Contrôleur de dialogue du menu principal.
@@ -20,7 +19,17 @@ import javafx.stage.WindowEvent ;
  */
 public class ApplicationMainFrame extends Application
 {
+    // déclaration des constantes
+    // --------------------------
+
+    // dimensions de la fenêtre
+    private static final double FIXED_WINDOW_WIDTH      = 600 ;     // largeur fixe de la fenêtre
+    private static final double FIXED_WINDOW_HEIGHT     = 300 ;     // hauteur fixe de la fenêtre
+
     // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de dialogue
     private Stage amfStage ;
 
     /**
@@ -40,7 +49,7 @@ public class ApplicationMainFrame extends Application
             FXMLLoader fxmlLoader = new FXMLLoader(ApplicationMainFrame.class.getResource("view/applicationMainFrame.fxml")) ;
 
             // initialisation de la scène
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600) ;
+            Scene scene = new Scene(fxmlLoader.load(), FIXED_WINDOW_WIDTH, FIXED_WINDOW_HEIGHT) ;
             scene.getStylesheets().add(getClass().getResource("style/amf.css").toExternalForm()) ;
             this.amfStage.setScene(scene) ;
             this.amfStage.setTitle("Menu principal") ;

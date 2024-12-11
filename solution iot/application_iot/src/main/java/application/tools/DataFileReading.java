@@ -11,7 +11,7 @@ import com.opencsv.CSVParserBuilder ;
 import com.opencsv.CSVReader ;
 import com.opencsv.CSVReaderBuilder ;
 
-import application.data.DataLoader;
+import application.data.DataLoader ;
 
 /**
  * Classe utilitaire fournissant des méthodes de lecture de fichiers de données.

@@ -10,25 +10,42 @@
     <children>
         <VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
             <padding>
-                <Insets left="20" right="0" top="20" bottom="20"/>
+                <Insets left="20" right="20" top="20" bottom="20"/>
             </padding>
             <children>
                 <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
-                    <padding>
-                        <Insets right="20"/>
-                    </padding>
                     <children>
                         <Label text="Menu principal" styleClass="window-header"/>
                     </children>
                 </HBox>
-                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20" styleClass="main-content">
+                <VBox alignment="CENTER" styleClass="main-content">
                     <children>
-                        <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                        <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                        <Button fx:id="openDashboardButton" text="Ouvrir le tableau de bord" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-                        <Button text="Fermer" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+                        <VBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="container">
+                            <children>
+                                <VBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                    <padding>
+                                        <Insets left="20" right="20" top="20" bottom="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="Configuration" styleClass="container-header"/>
+                                        <HBox prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" spacing="20">
+                                            <children>
+                                                <Label fx:id="configLabel" minWidth="280" minHeight="35"/>
+                                                <Button fx:id="configButton" onAction="#doConfiguration" minWidth="220" minHeight="35"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
                     </children>
                 </VBox>
+                <HBox alignment="CENTER" prefWidth="-Infinity" prefHeight="-Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button text="Fermer" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="lower-menu"/>
+                        <Button fx:id="openDashboardButton" text="Tableau de bord" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="lower-menu"/>
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>

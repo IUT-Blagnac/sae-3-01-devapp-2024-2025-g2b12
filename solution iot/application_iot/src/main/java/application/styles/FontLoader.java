@@ -22,13 +22,13 @@ public class FontLoader
      */
 
     /**
-     * Donne la typographie (font) en gras.
+     * Donne la typographie (font) fine.
      * @return  la typographie (objet de type Font)
      */
-    public static Font getBoldFont()
+    public static Font getLightFont()
     {
-        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
-        double fontSize = 10 ;
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Light.ttf" ;
+        double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
@@ -39,10 +39,20 @@ public class FontLoader
     public static Font getSemiBoldFont()
     {
         String fontPath = FONT_DIRECTORY_PATH + "Poppins-SemiBold.ttf" ;
-        double fontSize = 10 ;
+        double fontSize = 14 ;
         return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
     }
 
+    /**
+     * Donne la typographie (font) en gras.
+     * @return  la typographie (objet de type Font)
+     */
+    public static Font getBoldFont()
+    {
+        String fontPath = FONT_DIRECTORY_PATH + "Poppins-Bold.ttf" ;
+        double fontSize = 14 ;
+        return Font.loadFont(FontLoader.class.getResourceAsStream(fontPath), fontSize) ;
+    }
 
 
     /**
