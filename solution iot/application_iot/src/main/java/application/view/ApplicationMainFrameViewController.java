@@ -48,7 +48,7 @@ public class ApplicationMainFrameViewController
         Font boldFont       = FontLoader.getBoldFont() ;
         Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
 
-        this.openDashboardButton.setDisable(true) ;
+        this.openDashboardButton.setDisable(false) ; // true
 
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
