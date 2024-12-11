@@ -4,6 +4,7 @@ import application.ApplicationMainFrame ;
 import application.model.Configuration;
 import javafx.fxml.FXML ;
 import javafx.stage.Stage ;
+import javafx.stage.WindowEvent;
 
 /**
  * Contrôleur de dialogue du menu principal.
@@ -33,12 +34,30 @@ public class ApplicationMainFrameViewController
     }
 
     /**
+     * Initialise la vue.
+     */
+    public void initializeView()
+    {
+        this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
+    }
+
+    /**
      * Affiche la fenêtre.
      */
     public void displayDialog()
     {
         this.stage.show() ;
     }
+
+    /**
+     * Gère la fermeture de la fenêtre.
+     * @param e un évènement de fenêtre
+     */
+    private void closeWindow(WindowEvent e)
+    {
+        this.doClose() ;
+		e.consume() ;
+	}
 
     @FXML
     protected void doConfiguration()
@@ -59,8 +78,8 @@ public class ApplicationMainFrameViewController
     }
 
     @FXML
-    protected void doQuitter()
+    protected void doClose()
     {
-        System.out.println("- En cours de développement -") ;
+        this.stage.close() ;
     }
 }

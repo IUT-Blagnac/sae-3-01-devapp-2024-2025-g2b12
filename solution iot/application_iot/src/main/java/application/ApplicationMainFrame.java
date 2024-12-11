@@ -48,6 +48,7 @@ public class ApplicationMainFrame extends Application
             ApplicationMainFrameViewController amfViewController = fxmlLoader.getController() ;
             amfViewController.setStage(this.amfStage) ;
             amfViewController.setAmfDialogController(this) ;
+            amfViewController.initializeView() ;
 
             // Afficher la fenêtre
             amfViewController.displayDialog() ;

@@ -152,13 +152,11 @@ public class ConfigurationFileFormViewController
     /**
      * Gère la fermeture de la fenêtre.
      * @param e un évènement de fenêtre
-     * @return null
      */
-    private Object closeWindow(WindowEvent e)
+    private void closeWindow(WindowEvent e)
     {
         this.doClose() ;
 		e.consume() ;
-		return null ;
 	}
 
     /**

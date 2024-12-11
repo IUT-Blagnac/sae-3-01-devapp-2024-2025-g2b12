@@ -18,5 +18,5 @@
     <Button text="Configuration" onAction="#doConfiguration" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
     <Button text="Tester la connexion" onAction="#doTesterConnexionMQTT" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
     <Button text="Visualiser" onAction="#doVisualiserDonnees" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
-    <Button text="Quitter" onAction="#doQuitter" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
+    <Button text="Quitter" onAction="#doClose" prefWidth="240" prefHeight="35" styleClass="SUPERB"/>
 </VBox>
