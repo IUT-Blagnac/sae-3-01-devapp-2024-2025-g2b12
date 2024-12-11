@@ -1,0 +1,5 @@
+room;illumination;humidity;pressure;activity;temperature;infrared;infrared_and_visible;tvoc;co2
+E004;61;51.5;998.5;318;19.7;13;54;835;1875
+E004;63;51.5;998.6;259;19.8;14;57;825;1992
+E004;57;52;998.6;394;20;14;54;888;2120
+E004;70;52.5;998.7;254;20.1;17;66;899;2216

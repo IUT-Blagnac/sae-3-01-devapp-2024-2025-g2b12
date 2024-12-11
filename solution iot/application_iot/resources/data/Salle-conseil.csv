@@ -1,0 +1,5 @@
+room;illumination;humidity;pressure;activity;temperature;infrared;infrared_and_visible;tvoc;co2
+Salle-conseil;18;36.5;997.7;0;20.4;8;24;114;508
+Salle-conseil;21;36;997.8;0;20.4;10;29;114;507
+Salle-conseil;27;36;997.8;0;20.4;11;34;114;508
+Salle-conseil;28;36;997.9;0;20.4;13;38;114;507

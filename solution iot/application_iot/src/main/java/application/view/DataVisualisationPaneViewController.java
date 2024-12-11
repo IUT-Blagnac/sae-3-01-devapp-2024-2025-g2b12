@@ -265,6 +265,7 @@ public class DataVisualisationPaneViewController
     public void updateDataDisplay()
     {
         // mise à jour de la TableView
+        System.out.println("disop") ;
         UpdateDataDisplayTask task = new UpdateDataDisplayTask(
             this.dvpDialogController,
             this.dataTableViewOList,

@@ -73,6 +73,6 @@ public class UpdateDataDisplayTask implements Runnable
         Platform.runLater(() -> {
             dataTableView.setItems(dataTableViewOList) ;
             dataTableView.refresh() ;
-        });
+        }) ;
     }
 }

@@ -1,0 +1,5 @@
+room;illumination;humidity;pressure;activity;temperature;infrared;infrared_and_visible;tvoc;co2
+B110;49;46.5;997.8;258;19.8;7;37;273;1283
+B110;49;47;997.9;279;20.1;7;37;290;1443
+B110;45;47;998;204;20.3;8;37;300;1572
+B110;47;48;998.1;258;20.6;8;38;314;1770

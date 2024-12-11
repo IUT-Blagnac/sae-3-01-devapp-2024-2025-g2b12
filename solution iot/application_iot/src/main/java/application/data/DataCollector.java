@@ -36,7 +36,7 @@ public class DataCollector
     
                 // construction et démarrage du processus
                 ProcessBuilder processBuilder = new ProcessBuilder(cmd, PYTHON_PROGRAM_PATH) ;
-                processBuilder.inheritIO() ;
+                //processBuilder.inheritIO() ;
                 singleCollectionProcess = processBuilder.start() ;
                 System.out.println("Python process started successfully.") ; // message console
             }

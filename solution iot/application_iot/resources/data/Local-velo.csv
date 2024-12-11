@@ -1,0 +1,5 @@
+room;illumination;humidity;pressure;activity;temperature;infrared;infrared_and_visible;tvoc;co2
+Local-velo;60;91;999.7;16;4.6;41;106;60000;480
+Local-velo;68;91;999.7;0;4.8;50;127;60000;484
+Local-velo;79;90.5;999.8;9;4.8;60;151;60000;480
+Local-velo;92;90;999.8;0;5;68;172;60000;482

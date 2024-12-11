@@ -2,7 +2,9 @@ package application.view ;
 
 import application.ApplicationMainFrame ;
 import application.model.Configuration;
+import application.styles.FontLoader;
 import javafx.fxml.FXML ;
+import javafx.scene.text.Font;
 import javafx.stage.Stage ;
 import javafx.stage.WindowEvent;
 
@@ -38,6 +40,10 @@ public class ApplicationMainFrameViewController
      */
     public void initializeView()
     {
+        // préchargement des fonts (pour utilisation dans la feuille de style cff.css)
+        Font boldFont       = FontLoader.getBoldFont() ;
+        Font semiBoldFont   = FontLoader.getSemiBoldFont() ;
+
         this.stage.setOnCloseRequest(e -> this.closeWindow(e)) ;
     }
 
