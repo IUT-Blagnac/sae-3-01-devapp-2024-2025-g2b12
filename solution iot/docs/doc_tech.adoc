@@ -14,10 +14,12 @@ endif::[]
 
 // page de garde
 // -------------
+
 ---
+
 // logos IUT Blagnac + UT2J
-image::./res/iut-blagnac.jpg[Logo IUT de Blagnac]
-image::./res/ut2j.jpg[Logo Université Toulouse II - Jean Jaurès]
+image::./res/iut-blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./res/ut2j.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
 [.text-center]
 *Étudiants* +
 Nolhan Biblocque +
@@ -37,13 +39,18 @@ Promotion 2024-2025 +
 *Établissement* +
 IUT de Blagnac +
 Université Toulouse II – Jean Jaurès (31)
+
 ---
 
+// contenu
 
+---
 
 // page de fin
 // -----------
+
 ---
+
 [.text-center]
 *Étudiants* +
 Nolhan Biblocque +
