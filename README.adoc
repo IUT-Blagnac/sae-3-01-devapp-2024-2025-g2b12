@@ -163,13 +163,13 @@ Récapitulatif des informations mises à jour - Dernière MAJ : 2/12/24
 
 ✓ Version courante : 
 
-✓ Lien vers la documentation technique : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
+✓ Lien vers la documentation technique : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
 
-✓ Lien vers la documentation utilisateur : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
+✓ Lien vers la documentation utilisateur : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
 
 ✓ Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : 
 
-✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/Cahier_Tests.adoc[Cahier Tests]
+✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Recette]
 
 ✓ Indicateurs de qualité du code (dette technique) : 
 
