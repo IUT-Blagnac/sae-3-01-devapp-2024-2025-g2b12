@@ -60,9 +60,11 @@ Université Toulouse II – Jean Jaurès (31)
     * Vérifier l'installation avec la commande `java -version` ou `java --version` :
 
     java -version
+    
+    java --version
 
 . *Installer Apache Maven*
-
+    * https://maven.apache.org/download.cgi[Apache Maven Project].
 . *Configurer un IDE*
 
 ==== *4.1.2 Étapes d'installation*
