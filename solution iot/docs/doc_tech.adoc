@@ -61,6 +61,8 @@ Université Toulouse II – Jean Jaurès (31)
     * Dans un terminal, vérifier l'installation avec la commande `java -version` ou `java --version`.
 . *Installer Apache Maven*
     * Télécharger *Maven* (archive ZIP) depuis le site officiel d'Apache Maven : https://maven.apache.org/download.cgi[Apache Maven Project - Downloading Apache Maven].
+        ** Pour une installation sur Linux ou Mac OS, télécharger la *_Binary tar.gz archive_*.
+        ** Pour une installation sur Windows, télécharger la *_Binary zip archive_*.
     * Ajouter le chemin vers Maven à la variable d'environnement `PATH`.
     * Dans un terminal, vérifier l'installation avec la commande `mvn -version`, `mvn --version` ou `mvn -v`.
 . *Configurer un IDE*
