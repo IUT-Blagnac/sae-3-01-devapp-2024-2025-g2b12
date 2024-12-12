@@ -81,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 header("Location: index.php");
             } else {
-                echo "Mot de passe incorrect.";
+                header("Location: connexion.php?erreur=Mot de passe incorrect&login=$login");
             }
         } else {
-            echo "Utilisateur non trouvé.";
+            header("Location: connexion.php?erreur=Utilisateur non trouvé&login=$login");
         }
     } elseif ($action == 'connexion_admin') {
         $login = $_POST['login'];
@@ -110,10 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 header("Location: admin/espace_administrateur.php");
             } else {
-                echo "Mot de passe incorrect.";
+                header("Location: connexion_admin.php?erreur=Mot de passe incorrect&login=$login");
             }
         } else {
-            echo "Administrateur non trouvé.";
+            header("Location: connexion_admin.php?erreur=Utilisateur non trouvé&login=$login");
         }
     }
 }
