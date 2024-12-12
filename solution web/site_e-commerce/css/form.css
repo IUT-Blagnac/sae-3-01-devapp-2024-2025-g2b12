@@ -120,4 +120,6 @@ body {
 }
 .input-field {
     min-height: 24px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
 }
