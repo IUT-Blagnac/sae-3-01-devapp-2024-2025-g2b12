@@ -57,13 +57,10 @@ Université Toulouse II – Jean Jaurès (31)
 . *Installer l'environnement de développement Java*
     * Télécharger le JDK 17 (ou version compatible) sur le site officiel d'Oracle : https://www.oracle.com/fr/java/technologies/downloads/[Oracle - Java Downloads].
     * Installer le JDK en suivant les instructions indiquées par l'installateur.
+    * Vérifier l'installation avec la commande :
 
-    .*Vérification de l'installation*
-    [source,sh]
-    ----
-    java --version
-    ----
-
+    java -version
+    
 . *Installer Apache Maven*
 
 . *Configurer un IDE*
