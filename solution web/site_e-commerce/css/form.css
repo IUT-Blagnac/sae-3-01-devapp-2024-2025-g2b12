@@ -90,6 +90,7 @@ body {
 
 .form-header {
     text-align: center;
+    background-color: #00f;
 }
 
 .form-title {
@@ -111,7 +112,7 @@ body {
     flex-direction: column;
     margin-bottom: 10px;
     height: auto;
-    background-color: #fff;
+    background-color: #0f0;
 }
 .input-field-label {
     font-family: var(--bold-font);
