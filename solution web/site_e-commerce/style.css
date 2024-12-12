@@ -52,9 +52,16 @@ CSS STRUCTURE:
     }
 }
 
+/* typographie très épaisse */
+@font-face {
+  font-family: 'Inter';
+  src: url('./font/inter/Inter_18pt-Regular.ttf') format('truetype') ;
+  font-style: normal;
+}
+
 /* Fonts */
 :root {
-    --body-font           : "Jost", sans-serif;
+    --body-font           : "Inter", sans-serif;
     --heading-font        : "Jost", sans-serif;
 }
 

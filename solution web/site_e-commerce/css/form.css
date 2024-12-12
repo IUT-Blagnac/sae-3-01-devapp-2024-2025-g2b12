@@ -18,30 +18,37 @@ Auteur : Victor Jockin
 
 /* typographie normale */
 @font-face {
-    font-family: 'Jost Regular';
-    src: url('../font/jost/Jost-Regular.ttf') format('truetype') ;
+    font-family: 'Inter Regular';
+    src: url('../font/inter/Inter_18pt-Regular.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* typographie médiane */
+@font-face {
+    font-family: 'Inter Medium';
+    src: url('../font/inter/Inter_18pt-Medium.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* typographie à épaisseur moyenne */
+@font-face {
+    font-family: 'Inter Semi-Bold';
+    src: url('../font/inter/Inter_18pt-SemiBold.ttf') format('truetype') ;
     font-style: normal;
 }
 
 /* typographie épaisse */
 @font-face {
-    font-family: 'Jost Bold';
-    src: url('../font/jost/Jost-Bold.ttf') format('truetype') ;
-    font-style: normal;
-}
-
-/* typographie très épaisse */
-@font-face {
-    font-family: 'Jost Black';
-    src: url('../font/jost/Jost-Black.ttf') format('truetype') ;
+    font-family: 'Inter Bold';
+    src: url('../font/inter/Inter_18pt-Bold.ttf') format('truetype') ;
     font-style: normal;
 }
 
 /* déclaration des variables désignant les fonts */
 :root {
-    --body-font :       'Jost Regular', sans-serif;
-    --bold-font :       'Jost Bold', sans-serif;
-    --black-font :      'Jost Black', sans-serif;
+    --body-font :       'Inter Regular', sans-serif;
+    --semi-bold-font :  'Inter Semi-Bold', sans-serif;
+    --bold-font :       'Inter Bold', sans-serif;
 }
 
 
@@ -90,7 +97,7 @@ body {
     padding: 0;
     line-height: normal;
     color: #212529;
-    font-family: var(--black-font);
+    font-family: var(--bold-font);
     font-size: 28px;
 }
 
@@ -109,7 +116,7 @@ body {
 .input-field-label {
     margin-bottom: 5px;
     color: #51555a;
-    font-family: var(--bold-font);
+    font-family: var(--semi-bold-font);
     font-size: 14px;
 }
 
