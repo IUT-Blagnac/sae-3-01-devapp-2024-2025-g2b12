@@ -22,8 +22,8 @@
     <?php //echo "<br/><strong>-  En cours de développement  -</strong><br/><br/>" ; ?>
     <div class="main-content">
         <div class="form-container">
-            <div class="form-title">
-                <h1>Créer un compte</h1>
+            <div class="form-header">
+                <h1 class="form-title">Créer un compte</h1>
             </div>
             <div class="form-content">
                 <form action='traitement_connexion.php' method='post'>
