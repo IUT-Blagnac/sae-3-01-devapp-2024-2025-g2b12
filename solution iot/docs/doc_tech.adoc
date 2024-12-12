@@ -12,20 +12,12 @@ ifdef::env-github[]
 :stem: latexmath
 endif::[]
 
-
 // page de garde
 // -------------
 ---
 // logos IUT Blagnac + UT2J
 image::./res/iut-blagnac.jpg[Logo IUT de Blagnac]
 image::./res/ut2j.jpg[Logo Université Toulouse II - Jean Jaurès]
-
----
-
-
-
----
-
 [.text-center]
 *Étudiants* +
 Nolhan Biblocque +
@@ -33,19 +25,41 @@ Léo Guinvarc'h +
 Victor Jockin +
 Mathys Laguilliez +
 Mucahit Lekesiz
-
 [.text-center]
-*Enseignants* +
-Jean-Michel Bruel +
-Esther Pendaries
-
+*Enseignant* +
+André Péninou
 [.text-center]
 *Formation* +
 BUT Informatique +
 2ème Année +
 Promotion 2024-2025 +
-
 [.text-center]
 *Établissement* +
-IUT de Blagnac, +
+IUT de Blagnac +
+Université Toulouse II – Jean Jaurès (31)
+---
+
+
+
+// page de fin
+// -----------
+---
+[.text-center]
+*Étudiants* +
+Nolhan Biblocque +
+Léo Guinvarc'h +
+Victor Jockin +
+Mathys Laguilliez +
+Mucahit Lekesiz
+[.text-center]
+*Enseignant* +
+André Péninou
+[.text-center]
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+[.text-center]
+*Établissement* +
+IUT de Blagnac +
 Université Toulouse II – Jean Jaurès (31)
