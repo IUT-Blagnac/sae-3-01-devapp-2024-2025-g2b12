@@ -102,7 +102,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 | *SEMAINE* | *SOLUTION* |*LIEN*
 .7+| 45 | Web | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[Backlog produit (Product backlog)]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/milestones[Backlog de sprint 1]
-| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/docs/document_de_conception/document_conception.adoc[Document de conception]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/document_conception.adoc[Document de conception]
 | IoT | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot[Clients MQTT python] 
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] 
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
