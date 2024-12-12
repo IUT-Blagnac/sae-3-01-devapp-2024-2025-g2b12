@@ -58,13 +58,12 @@ Université Toulouse II – Jean Jaurès (31)
     * Télécharger le JDK 17 (ou version compatible) sur le site officiel d'Oracle : https://www.oracle.com/fr/java/technologies/downloads/[Oracle - Java Downloads].
     * Installer le JDK en suivant les instructions indiquées par l'installateur.
 
-    Vous pouvez vérifier l'installation avec la commande suivante :
+    .*Vérification de l'installation*
+    [source,sh]
+    ----
+    java --version
+    ----
 
-.Mac OS
-[source,sh]
-----
-java --version
-----
 . *Installer Apache Maven*
 
 . *Configurer un IDE*
