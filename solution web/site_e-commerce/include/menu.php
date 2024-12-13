@@ -22,16 +22,16 @@
                   <a class="nav-link me-4" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="#company-services">Services</a>
+                  <a class="nav-link me-4" href="#company-services">Services</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#mobile-products">Products</a>
+                  <a class="nav-link me-4" href="#mobile-products">Produits</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
+                  <a class="nav-link me-4" href="#smart-watches">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#yearly-sale">Sale</a>
+                  <a class="nav-link me-4" href="#yearly-sale">Securite</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#latest-blog">Blog</a>

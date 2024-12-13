@@ -5,7 +5,7 @@
             <div class="row d-flex flex-wrap justify-content-between">
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu">
-                  <img src="images/main-logo.png" alt="logo">
+                  <img src="./image/WOOHP.png" alt="logo" width="100px">
                   <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p>
                   <div class="social-links">
                     <ul class="d-flex list-unstyled">
@@ -50,54 +50,54 @@
               </div>
               <div class="col-lg-2 col-sm-6 pb-3">
                 <div class="footer-menu text-uppercase">
-                  <h5 class="widget-title pb-2">Quick Links</h5>
+                  <h5 class="widget-title pb-2">Liens Rapide</h5>
                   <ul class="menu-list list-unstyled text-uppercase">
                     <li class="menu-item pb-2">
-                      <a href="#">Home</a>
+                      <a href="http://193.54.227.208/~R2024SAE3002/index.php">Acceuil</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">About</a>
+                      <a href="http://193.54.227.208/~R2024SAE3002/about.php">A propos</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Shop</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Shop</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Blogs</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Blogs</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Contact</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Contacte</a>
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu text-uppercase">
-                  <h5 class="widget-title pb-2">Help &amp; Info Help</h5>
+                  <h5 class="widget-title pb-2">Help &amp; Aide et Info</h5>
                   <ul class="menu-list list-unstyled">
                     <li class="menu-item pb-2">
-                      <a href="#">Track Your Order</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Suivez votre commande</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Returns Policies</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Politique de retour</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Shipping + Delivery</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Expédition + Livraison</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Contact Us</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Contactez-nous</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Faqs</a>
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Faq</a>
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu contact-item">
-                  <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
-                  <p>Do you have any queries or suggestions? <a href="mailto:">yourinfo@gmail.com</a>
+                  <h5 class="widget-title text-uppercase pb-2">Contactez-Nous</h5>
+                  <p>Vous avez des sugestions ? <a href="mailto:">Resell.Organisation@WOOHP.afg</a>
                   </p>
-                  <p>If you need support? Just give us a call. <a href="">+55 111 222 333 44</a>
+                  <p>Vous avez besoins d'informations ? Appelez-nous simplement. <br><a href="">06 65 78 07 82</a>
                   </p>
                 </div>
               </div>
@@ -117,6 +117,15 @@
     .icon-white {
         filter: invert(1);
     }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .container-fluid {
+        flex: 1;
+    }
+    
 </style>
 
 </body>
