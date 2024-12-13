@@ -69,7 +69,7 @@ Université Toulouse II – Jean Jaurès (31)
 	* Les données lues sont ensuite stockées dans des structures de données puis transmises au tableau de bord de l'application pour affichage.
 . *Interruption du programme Python par l'application Java*
 	* Lorsque le tableau de bord est fermé par l'utilisateur, le programme Python est automatiquement arrêté.
-	* *À noter :* Après arrêt du processus de collecte de données, le fichier de configuration ainsi que les fichiers de données écrits ne sont pas effacés.
+	* *À noter :* Après arrêt du processus de collecte des données, le fichier de configuration ainsi que les fichiers de données écrits sont conservés. Ils seront écrasés lors de la prochaine exécution de l'application.
 
 === 2.2 Ressources externes
 
