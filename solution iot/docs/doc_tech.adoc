@@ -100,9 +100,21 @@ Université Toulouse II – Jean Jaurès (31)
         ** Pour une installation sur Windows ou Linux, préférer l'archive `application_jar_windows.zip`.
 . *Décompresser l'archive de l'application*
     * Décompresser l'archive téléchargée dans un répertoire à l'aide d'un outil de décompression tel que *WinRAR* ou *7-Zip*.
-    * OK.
+    * L'arborescence de l'application après décompression doit ressembler à ceci :
+
+    application/
+    |-- ressources/
+    |   |-- data/
+    |   |-- configuration.ini
+    |   |-- mqtt.py
+    |-- application_iot-1.0-SNAPSHOT-shaded.jar
 
 ==== *4.2.3 Étapes de lancement*
+. *Lancer l'application dans le gestionnaire de fichiers*
+    * Lancer l'exécutable `application_iot-1.0-SNAPSHOT-shaded.jar` en double-cliquant sur celui-ci. Le menu principal de l'application devrait alors apparaître à l'écran.
+. *Lancer l'application en ligne de commande*
+    * Ouvrir un terminal et se placer dans le répertoire `application` à l'aide de la commande `cd`.
+    * Lancer ensuite l'exécutable de l'application en exécutant la commande `java -jar application_iot-1.0-SNAPSHOT-shaded.jar`. Le menu principal de l'application devrait alors apparaître à l'écran.
 
 ---
 
