@@ -15,25 +15,25 @@
     <?php
       include("include/Connect.inc.php");
 
-      // R�cup�rer les produits avec un prix inf�rieur � 50
-      $produits = $conn->query("SELECT * FROM PRODUIT WHERE prixProduit < 50");
+      // // R�cup�rer les produits avec un prix inf�rieur � 50
+      // $produits = $conn->query("SELECT * FROM PRODUIT WHERE prixProduit < 50");
 
-      // Boucle pour afficher chaque produit dans une carte stylis�e
-      while ($produit = $produits->fetch()) {
-        echo "
-          <div class='product-card'>
-            <div class='card-detail'>
-              <span>Produit ID: {$produit['idProduit']}</span>
-              <span>Nom: {$produit['nomProduit']}</span>
-              <span>Prix: {$produit['prixProduit']}�</span>
-            </div>
-            <div class='cart-concern'>
-              <svg> <!-- Ton ic�ne de panier ici --> </svg>
-              <span>Ajouter au Panier</span>
-            </div>
-          </div>
-        ";
-      }
+      // // Boucle pour afficher chaque produit dans une carte stylis�e
+      // while ($produit = $produits->fetch()) {
+      //   echo "
+      //     <div class='product-card'>
+      //       <div class='card-detail'>
+      //         <span>Produit ID: {$produit['idProduit']}</span>
+      //         <span>Nom: {$produit['nomProduit']}</span>
+      //         <span>Prix: {$produit['prixProduit']}�</span>
+      //       </div>
+      //       <div class='cart-concern'>
+      //         <svg> <!-- Ton ic�ne de panier ici --> </svg>
+      //         <span>Ajouter au Panier</span>
+      //       </div>
+      //     </div>
+      //   ";
+      // }
       echo "</BR>" ;
       echo "<center><B>Produits Innovants</B></br>" ;
       echo "<center>Découvrez notre sélection de gadgets d'espionnage</br>" ;
