@@ -63,7 +63,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_OpenCSV_*
 
-    * *Rôle :* Lecture des fichiers de données au format CSV générés par le programme python de collecte de données.
+    * *Rôle :* Lecture des fichiers de données au format CSV générés par le programme python collecteur de données.
     * *Version utilisée :* 5.5.2
     * *Site officiel de JavaFX :* https://opencsv.sourceforge.net/[OpenCSV - About / Opencsv Users Guide]
     * *Documentation officielle :* https://opencsv.sourceforge.net/#developer_documentation[OpenCSV - About / Developer Documentation]
