@@ -51,7 +51,8 @@
                         <label class='input-field-label' for='numTel'>Numéro de téléphone</label>
                         <input type='text' id='numTel' name='numTel' value='<?php echo $numTel; ?>' class="input-field" required>
                     </div>
-                    <input class='validation-button' name='action' type='submit' value="CRÉER">
+                    <!--<input type='hidden' name='action' value='creer_compte'>-->
+                    <input class='validation-button' type='submit' value="CRÉER">
                 </form>
             </div>
         </div>
