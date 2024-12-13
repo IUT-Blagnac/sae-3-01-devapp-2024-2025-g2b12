@@ -5,7 +5,13 @@
 <?php require_once('./include/header.php'); ?>
 
 <?php
+
+  echo"<br>";
+  echo"<br>";
+  echo"<br>";
+  echo"<br>";
   echo "<h2>Connexion</h2>";
+  
   echo "<form action='traitement_connexion.php' method='post'>";
       echo "<label for='login'>Login ou Email:</label>";
       echo "<input type='text' id='login' name='login' required><br><br>";

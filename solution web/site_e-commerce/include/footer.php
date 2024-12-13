@@ -1,38 +1,112 @@
-<!-- Pied de page & scripts Bootstrap -->
-<footer class="bg-dark text-white text-center py-1 mt-auto">
-    <!-- Colonnes horizontales -->
-    <div class="row">
-        <div class="col-md-3">
-            <strong>Entreprise :</strong> Woohp-Resell
+<footer id="footer" class="overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="footer-top-area">
+            <div class="row d-flex flex-wrap justify-content-between">
+              <div class="col-lg-3 col-sm-6 pb-3">
+                <div class="footer-menu">
+                  <img src="images/main-logo.png" alt="logo">
+                  <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p>
+                  <div class="social-links">
+                    <ul class="d-flex list-unstyled">
+                      <li>
+                        <a href="#">
+                          <svg class="facebook">
+                            <use xlink:href="#facebook"></use>
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <svg class="instagram">
+                            <use xlink:href="#instagram"></use>
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <svg class="twitter">
+                            <use xlink:href="#twitter"></use>
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <svg class="linkedin">
+                            <use xlink:href="#linkedin"></use>
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <svg class="youtube">
+                            <use xlink:href="#youtube"></use>
+                          </svg>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-6 pb-3">
+                <div class="footer-menu text-uppercase">
+                  <h5 class="widget-title pb-2">Quick Links</h5>
+                  <ul class="menu-list list-unstyled text-uppercase">
+                    <li class="menu-item pb-2">
+                      <a href="#">Home</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">About</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Shop</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Blogs</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Contact</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6 pb-3">
+                <div class="footer-menu text-uppercase">
+                  <h5 class="widget-title pb-2">Help &amp; Info Help</h5>
+                  <ul class="menu-list list-unstyled">
+                    <li class="menu-item pb-2">
+                      <a href="#">Track Your Order</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Returns Policies</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Shipping + Delivery</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Contact Us</a>
+                    </li>
+                    <li class="menu-item pb-2">
+                      <a href="#">Faqs</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6 pb-3">
+                <div class="footer-menu contact-item">
+                  <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
+                  <p>Do you have any queries or suggestions? <a href="mailto:">yourinfo@gmail.com</a>
+                  </p>
+                  <p>If you need support? Just give us a call. <a href="">+55 111 222 333 44</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-3">
-            Quick Links<br>
-            <a href="index.php">
-                <img src="image/Home.jpeg" class="icon-white" width="35" height="35" alt="Home Image" />
-            </a>
-            <a href="index.php">
-                <img src="image/Shop.jpeg" class="icon-white" width="40" height="40" alt="Shop Image" />
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            Help Infos<br>
-            <a href="index.php">
-                <img src="image/AboutUs.jpeg" class="icon-white" width="40" height="40" alt="AboutUs Image" />
-            </a>
-            <a href="index.php">
-                <img src="image/Faq.jpeg" class="icon-white" width="40" height="40" alt="FAQ Image" />
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            Contact<br>
-            <p>Contact : Whoop-Resell.PME@etu.fr</p>
-            <p>Numero : 04 83 82 02 03</p>
-        </div>
-    </div>
-</footer>
+      </div>
+      <hr>
+    </footer>
 
 <!-- Scripts JavaScript de Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
