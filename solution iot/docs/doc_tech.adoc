@@ -2,7 +2,7 @@
 :compat-mode!:
 :toc:
 :toc-title: Table des matières
-:toclevels: 4
+:toclevels: 3
 :icons: font
 :stem: latexmath
 
@@ -50,7 +50,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 === 2.2 Ressources externes
 
-==== 2.2.1 API utilisées
+==== *2.2.1 API utilisées*
 
 ===== *_JavaFX_*
 
@@ -68,7 +68,7 @@ Université Toulouse II – Jean Jaurès (31)
     * *Site officiel de JavaFX :* https://opencsv.sourceforge.net/[OpenCSV - About / Opencsv Users Guide]
     * *Documentation officielle :* https://opencsv.sourceforge.net/#developer_documentation[OpenCSV - About / Developer Documentation]
 
-==== 2.2.2 Plugins utilisés
+==== *2.2.2 Plugins utilisés*
 
 === 2.3 Structuration de l'application
 
