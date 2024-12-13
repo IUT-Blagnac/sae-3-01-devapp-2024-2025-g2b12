@@ -611,6 +611,10 @@ h3.cart-title {
     color: var(--primary-color);
 }
 
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 /*------------ Offcanvas -------------- */
 #header-nav .navbar-toggler:focus {
     box-shadow: none;
