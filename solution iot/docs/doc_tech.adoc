@@ -15,6 +15,7 @@ endif::[]
 // page de garde
 // -------------
 <<<
+---
 // logos IUT Blagnac + UT2J
 [.text-center]
 image::./res/iut-blagnac.jpg[Logo IUT de Blagnac, 200]
@@ -173,6 +174,7 @@ Université Toulouse II – Jean Jaurès (31)
 // page de fin
 // -----------
 <<<
+---
 [.text-center]
 *Étudiants* +
 Nolhan Biblocque +
