@@ -2,7 +2,7 @@
 :compat-mode!:
 :toc:
 :toc-title: Table des matières
-:toclevels: 4
+:toclevels: 3
 :icons: font
 :stem: latexmath
 
@@ -46,6 +46,53 @@ Université Toulouse II – Jean Jaurès (31)
 
 == *2. Architecture de l'application*
 
+=== 2.1 Architecture générale
+
+=== 2.2 Ressources externes
+
+==== *2.2.1 API utilisées*
+
+===== *_JavaFX_*
+
+    * *Rôles :*
+        ** Conception de l'IHM avec le module `javafx-fxml` (création d'interfaces utilisateur via des fichiers FXML).
+        ** Prise en charge et gestion de l'interface graphique dans l'application.
+    * *Version utilisée :* 17
+    * *Site officiel de JavaFX :* https://openjfx.io/[JavaFX - Home]
+    * *Documentation officielle :* https://www.oracle.com/java/technologies/javase/javafx-docs.html[Oracle - JavaFX Documentation]
+
+===== *_OpenCSV_*
+
+    * *Rôle :* Lecture des fichiers de données au format `CSV` générés par le programme python collecteur de données.
+    * *Version utilisée :* 5.5.2
+    * *Site officiel de JavaFX :* https://opencsv.sourceforge.net/[OpenCSV - About / Opencsv Users Guide]
+    * *Documentation officielle :* https://opencsv.sourceforge.net/#developer_documentation[OpenCSV - About / Developer Documentation]
+
+==== *2.2.2 Plugins utilisés*
+
+===== *_JavaFX Maven Plugin_*
+
+    * *Rôle :* Packaging et exécution de l'application JavaFX.
+    * *Version utilisée :* 0.0.8
+    * *Site officiel de Maven Repository :* https://mvnrepository.com/artifact/org.openjfx/javafx-maven-plugin[Maven Repository - JavaFX Maven Plugin Maven Mojo]
+    * *Lien vers le dépôt GitHub du plugin :* https://github.com/openjfx/javafx-maven-plugin[GitHub - Maven plugin for JavaFX]
+
+===== *_Apache Maven Shade Plugin_*
+
+    * *Rôle :* Création d'un exécutable au format `JAR` contenant toutes les dépendances nécessaires au fonctionnement de l'application.
+    * *Version utilisée :* 3.4.1
+    * *Site officiel d'Apache Maven :* https://maven.apache.org/plugins/maven-shade-plugin/[Apache Maven Project - Apache Maven Shade Plugin]
+
+===== *_Apache Maven Javadoc Plugin_*
+
+    * *Rôle :* Génération de la documentation du projet Java avec `Javadoc`.
+    * *Version utilisée :* 3.4.1
+    * *Site officiel d'Oracle :* https://www.oracle.com/java/technologies/javase/javadoc-tool.html[Oracle - Javadoc Tool]
+
+=== 2.3 Structuration de l'application
+
+=== 2.4 Spécifications techniques
+
 == *3. Conception et mise en oeuvre fonctionnalités*
 
 == *4. Procédures d'installation*
@@ -69,7 +116,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 ==== *4.1.2 Étapes d'installation*
 . *Cloner le dépôt du projet*
-    * Accéder au dépôt *GitHub* du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12?tab=readme-ov-file[GitHub - SAE S3.01 DevApp]
+    * Accéder au dépôt GitHub du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12?tab=readme-ov-file[GitHub - SAE S3.01 DevApp]
     * Cloner le dépôt du projet via la commande :
     
     git clone https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12.git
@@ -77,7 +124,7 @@ Université Toulouse II – Jean Jaurès (31)
     * Accéder au répertoire du projet Java situé sous `solution iot/application_iot` via la commande :
 
     cd solution\ iot/application_iot
-    
+
 . *Construire le projet avec Maven*
     * Supprimer les fichiers et ressources précédemment compilés avec la commande `mvn clean` puis compiler le projet Java via la commande `mvn install`. Il est également possible d'utiliser directement la commande `mvn clean install`.
 . *Exécuter l'application depuis Maven*
@@ -85,11 +132,41 @@ Université Toulouse II – Jean Jaurès (31)
 
 === 4.2 Installation pour utilisation
 
-==== *4.2.1 Instructions d'installation*
+==== *4.2.1 Prérequis*
+. *Installer le Java Runtime Environement (JRE)*
+    * Vérifier que Java est installé sur la machine en exécutant la commande `java -version` dans un terminal.
+    * Si Java n'est pas installé, télécharger et installer le *JRE 8* ou version ultérieure depuis le site officiel de Java : https://www.java.com/fr/[Java - Télécharger Java].
+. *Installer Python 3*
+    * Vérifier que Python en version 3 est installé sur la machine en exécutant la commande `python -version` ou `python3 -version` dans un terminal.
+    * Si Python n'est pas installé, télécharger et installer la dernière version disponible sur le site officiel de Python : https://www.python.org/downloads/[Python - Downloads].
 
-==== *4.2.2 Structure de l'application*
+==== *4.2.2 Étapes d'installation*
+. *Télécharger l'application*
+    * Télécharger l'archive de l'application (fichier ZIP) située sous le répertoire `livrables/IoT` du dépôt GitHub du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/livrables/IoT[GitHub - Livrables IoT]
+        ** Pour une installation sur Mac OS, préférer l'archive `application_jar_mac_os.zip`.
+        ** Pour une installation sur Windows ou Linux, préférer l'archive `application_jar_windows.zip`.
+. *Décompresser l'archive de l'application*
+    * Décompresser l'archive téléchargée dans un répertoire à l'aide d'un outil de décompression tel que *WinRAR* ou *7-Zip*.
+    * L'arborescence de l'application après décompression doit ressembler à ceci :
 
-==== *4.2.3 Instructions de lancement*
+    application/
+    |-- ressources/
+    |   |-- data/
+    |   |-- configuration.ini
+    |   |-- mqtt.py
+    |-- application_iot-1.0-SNAPSHOT-shaded.jar
+
+==== *4.2.3 Étapes de lancement*
+. *Lancer l'application dans le gestionnaire de fichiers*
+    * Lancer l'exécutable `application_iot-1.0-SNAPSHOT-shaded.jar` en double-cliquant sur celui-ci.
+    * _Le menu principal de l'application devrait alors apparaître à l'écran._
+. *Lancer l'application en ligne de commande*
+    * Ouvrir un terminal et se placer dans le répertoire `application` à l'aide de la commande `cd`.
+    * Lancer ensuite l'exécutable de l'application via la commande :
+    
+    java -jar application_iot-1.0-SNAPSHOT-shaded.jar
+
+    * _Le menu principal de l'application devrait alors apparaître à l'écran._
 
 ---
 
