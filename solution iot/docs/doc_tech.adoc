@@ -52,16 +52,16 @@ Université Toulouse II – Jean Jaurès (31)
 
 ==== 2.2.1 API utilisées
 
-*JavaFX*
+===== *_JavaFX_*
 
     * *Rôles :*
-        ** Conception de l'interface graphique (IHM) via le module `javafx-fxml` (création d'interfaces utilisateur en utilisant des fichiers FXML).
+        ** Conception de l'IHM via le module `javafx-fxml` (création d'interfaces utilisateur en utilisant des fichiers FXML).
         ** Prise en charge et gestion de l'interface graphique dans l'application.
     * *Version utilisée :* 17
     * *Site officiel de JavaFX :* https://openjfx.io/[JavaFX - Home]
     * *Documentation officielle :* https://www.oracle.com/java/technologies/javase/javafx-docs.html[Oracle - JavaFX Documentation]
 
-*OpenCSV*
+===== *_OpenCSV_*
 
     * *Rôle :* Lecture des fichiers de données au format CSV générés par le programme python.
     * *Version utilisée :* 5.5.2
