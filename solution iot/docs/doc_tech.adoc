@@ -87,7 +87,7 @@ Université Toulouse II – Jean Jaurès (31)
 
     * *Rôle :* Génération de la documentation du projet Java avec `Javadoc`.
     * *Version utilisée :* 3.4.1
-    * *Site officiel d'Oracle :* https://www.oracle.com/java/technologies/javase/javadoc-tool.html[Oracle - Javadoc Tool]
+    * *Site officiel d'Apache Maven :* https://maven.apache.org/plugins/maven-javadoc-plugin/[Apache Maven Project - Apache Maven Javadoc Plugin]
 
 === 2.3 Structuration de l'application
 
