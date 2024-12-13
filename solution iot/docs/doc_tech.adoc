@@ -68,7 +68,7 @@ Université Toulouse II – Jean Jaurès (31)
 	* En parallèle de l'exécution du programme Python, l'application Java lis à intervalle régulier (fréquence définie dans le fichier de configuration) les fichiers de données.
 	* Les données lues sont ensuite stockées dans des structures de données puis transmises au tableau de bord de l'application pour affichage.
 . *Interruption du programme Python par l'application Java*
-	* Lorsque le tableau de bord de l'application est fermé par l'utilisateur, le programme Python est alors automatiquement arrêté.
+	* Lorsque le tableau de bord de l'application est fermé par l'utilisateur, le programme Python est automatiquement arrêté.
 	* *À noter :* Après arrêt du processus de collecte des données, le fichier de configuration ainsi que les fichiers de données écrits sont conservés. Ils seront écrasés lors de la prochaine exécution de l'application.
 
 === 2.2 Ressources externes
