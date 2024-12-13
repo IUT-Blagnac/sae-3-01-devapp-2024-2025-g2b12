@@ -53,9 +53,19 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_Application JavaFX_*
 
+    `src`
+
 ===== *_Programme Python_*
 
+    `resources`
+    `resources/data`
+    `resources/mqtt`
+    `resources/configuration.ini`
+
 ==== *2.1.2 Intéractions entre sous-systèmes*
+. *Écriture du fichier de configuration*
+    * Après le paramétrage d'une configuration par l'utilisateur dans l'interface graphique, l'application Java crée un fichier `configuration.ini` sour le répertoire `resources` décrivant la configuration créée.
+NOTE: ok
 
 === 2.2 Ressources externes
 
