@@ -52,20 +52,20 @@ Université Toulouse II – Jean Jaurès (31)
 ==== *2.1.1 Description des sous-systèmes*
 
 ===== *_Application JavaFX_*
-
-    `src`
-
 ===== *_Programme Python_*
 
-    `resources`
-    `resources/data`
-    `resources/mqtt`
-    `resources/configuration.ini`
-
 ==== *2.1.2 Intéractions entre sous-systèmes*
-. *Écriture du fichier de configuration*
+. *Écriture du fichier de configuration par l'application Java*
     * Après le paramétrage d'une configuration par l'utilisateur dans l'interface graphique, l'application Java crée un fichier `configuration.ini` sour le répertoire `resources` décrivant la configuration créée.
-NOTE: ok
+	* *À noter :* À cette étape, si un fichier de configuration existe déjà, celui-ci est remplacé par le fichier de configuration créé. Aucun mécanisme d'historisation ou de sauvegarde des fichiers de configurations n'a été mis en place.
+. *Lancement du programme python par l'application Java*
+	* Une fois le fichier de configuration créé, l'application Java démarre le processus de collecte des données en lançant en exécution le programme python.
+. *Récupération des données par le programme python*
+	* Au lancement, le programme python lis le fichier de configuration définissant son comportement.
+	* Une fois lancé, il attend jusqu'à interruption les données envoyées par les sujets (capteurs).
+	* À chaque réception de données, celles-ci sont enregistrées dans les fichiers de données correspondants.
+. *Lecture des fichiers de données par l'application Java*
+	* En parallèle de l'exécution du programme python, l'application Java lis à intervalle régulier (fréquence définie dans le fichier de configuration) les fichiers de données.
 
 === 2.2 Ressources externes
 
