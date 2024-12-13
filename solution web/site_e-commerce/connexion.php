@@ -3,6 +3,7 @@
 
 <!-- partie body -->
 <?php require_once('./include/header.php'); ?>
+<?php require_once('./include/menu.php'); ?>
 
 <?php
 
@@ -22,6 +23,9 @@
       echo "<input type='hidden' name='action' value='connexion'>";
       echo "<input type='submit' value='Se connecter'>";
   echo "</form>"; 
-  
+
+  echo "<br>";
+  echo "<p>Vous n'avez pas de compte ? <a href='creer_compte.php'>Créer un compte</a></p>";
+
   include_once('include/footer.php');
 ?>
