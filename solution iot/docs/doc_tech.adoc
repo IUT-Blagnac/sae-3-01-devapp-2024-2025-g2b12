@@ -1,7 +1,7 @@
 = Documentation Technique
 :compat-mode!:
 :toc:
-:toc-title: Table des matières
+:toc-title: Sommaire
 :toclevels: 3
 :icons: font
 :stem: latexmath
@@ -14,11 +14,11 @@ endif::[]
 
 // page de garde
 // -------------
-
----
-
+<<<
 // logos IUT Blagnac + UT2J
+[.text-center]
 image::./res/iut-blagnac.jpg[Logo IUT de Blagnac, 200]
+[.text-center]
 image::./res/ut2j.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
 [.text-center]
 *Étudiants* +
@@ -40,10 +40,10 @@ Promotion 2024-2025 +
 IUT de Blagnac +
 Université Toulouse II – Jean Jaurès (31)
 
----
-
+<<<
 == *1. Présentation de l'application*
 
+<<<
 == *2. Architecture de l'application*
 
 === 2.1 Architecture générale
@@ -93,8 +93,10 @@ Université Toulouse II – Jean Jaurès (31)
 
 === 2.4 Spécifications techniques
 
+<<<
 == *3. Conception et mise en oeuvre fonctionnalités*
 
+<<<
 == *4. Procédures d'installation*
 
 === 4.1 Installation pour développement
@@ -168,13 +170,9 @@ Université Toulouse II – Jean Jaurès (31)
 
     * _Le menu principal de l'application devrait alors apparaître à l'écran._
 
----
-
 // page de fin
 // -----------
-
----
-
+<<<
 [.text-center]
 *Étudiants* +
 Nolhan Biblocque +
