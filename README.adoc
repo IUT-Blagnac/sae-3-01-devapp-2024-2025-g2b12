@@ -127,7 +127,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |  | 
 |  | 
 .4+| 50 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/380a4801f233bee4e34cb86d0253cb7ccc9d64af/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2011.12%20_Semaine%2050.pdf[ODJ Reunion 11.12.24]
-|  | 
+|  |   https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/828e1d70eaabfe6e7aff430ce64aaa4e62b37a2a/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2013.12%20_%20Semaine%2050.pdf[CR Reunion 13.12.24]
 |  | 
 |  | 
 |===
