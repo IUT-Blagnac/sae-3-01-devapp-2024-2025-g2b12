@@ -70,11 +70,14 @@ Université Toulouse II – Jean Jaurès (31)
 ==== *4.1.2 Étapes d'installation*
 . *Cloner le dépôt du projet*
     * Accéder au dépôt *GitHub* du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12?tab=readme-ov-file[GitHub - SAE S3.01 DevApp]
-    * Cloner le dépôt du projet via la commande suivante :
+    * Cloner le dépôt du projet via la commande :
     
-    git clone https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12.git.
+    git clone https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12.git
 
-    * Accéder au répertoire du projet Java situé sous `solution iot/application_iot` (commande `cd <RÉPERTOIRE>`).
+    * Accéder au répertoire du projet Java situé sous `solution iot/application_iot` via la commande :
+
+    cd solution\ iot/application_iot
+    
 . *Construire le projet avec Maven*
     * Supprimer les fichiers et ressources précédemment compilés avec la commande `mvn clean` puis compiler le projet Java via la commande `mvn install`. Il est également possible d'utiliser directement la commande `mvn clean install`.
 . *Exécuter l'application depuis Maven*
