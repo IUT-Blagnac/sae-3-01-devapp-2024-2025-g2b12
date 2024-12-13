@@ -55,7 +55,7 @@ Université Toulouse II – Jean Jaurès (31)
 ===== *_JavaFX_*
 
     * *Rôles :*
-        ** Conception de l'IHM via le module `javafx-fxml` (création d'interfaces utilisateur en utilisant des fichiers FXML).
+        ** Conception de l'IHM avec le module `javafx-fxml` (création d'interfaces utilisateur via des fichiers FXML).
         ** Prise en charge et gestion de l'interface graphique dans l'application.
     * *Version utilisée :* 17
     * *Site officiel de JavaFX :* https://openjfx.io/[JavaFX - Home]
@@ -63,7 +63,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_OpenCSV_*
 
-    * *Rôle :* Lecture des fichiers de données au format CSV générés par le programme python.
+    * *Rôle :* Lecture des fichiers de données au format CSV générés par le programme python de collecte de données.
     * *Version utilisée :* 5.5.2
     * *Site officiel de JavaFX :* https://opencsv.sourceforge.net/[OpenCSV - About / Opencsv Users Guide]
     * *Documentation officielle :* https://opencsv.sourceforge.net/#developer_documentation[OpenCSV - About / Developer Documentation]
