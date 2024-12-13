@@ -58,14 +58,18 @@ Université Toulouse II – Jean Jaurès (31)
 . *Écriture du fichier de configuration par l'application Java*
     * Après le paramétrage d'une configuration par l'utilisateur dans l'interface graphique, l'application Java crée un fichier `configuration.ini` sour le répertoire `resources` décrivant la configuration créée.
 	* *À noter :* À cette étape, si un fichier de configuration existe déjà, celui-ci est remplacé par le fichier de configuration créé. Aucun mécanisme d'historisation ou de sauvegarde des fichiers de configurations n'a été mis en place.
-. *Lancement du programme python par l'application Java*
-	* Une fois le fichier de configuration créé, l'application Java démarre le processus de collecte des données en lançant en exécution le programme python.
-. *Récupération des données par le programme python*
-	* Au lancement, le programme python lis le fichier de configuration définissant son comportement.
+. *Lancement du programme Python par l'application Java*
+	* Une fois le fichier de configuration créé, l'application Java démarre le processus de collecte des données en lançant en exécution le programme Python.
+. *Collecte des données par le programme Python*
+	* Au lancement, le programme Python lis le fichier de configuration définissant son comportement.
 	* Une fois lancé, il attend jusqu'à interruption les données envoyées par les sujets (capteurs).
 	* À chaque réception de données, celles-ci sont enregistrées dans les fichiers de données correspondants.
 . *Lecture des fichiers de données par l'application Java*
-	* En parallèle de l'exécution du programme python, l'application Java lis à intervalle régulier (fréquence définie dans le fichier de configuration) les fichiers de données.
+	* En parallèle de l'exécution du programme Python, l'application Java lis à intervalle régulier (fréquence définie dans le fichier de configuration) les fichiers de données.
+	* Les données lues sont ensuite stockées dans des structures de données puis transmises au tableau de bord de l'application pour affichage.
+. *Interruption du programme Python par l'application Java*
+	* Lorsque le tableau de bord est fermé par l'utilisateur, le programme Python est automatiquement arrêté.
+	* *À noter :* Après arrêt du processus de collecte de données, le fichier de configuration ainsi que les fichiers de données écrits ne sont pas effacés.
 
 === 2.2 Ressources externes
 
