@@ -53,7 +53,6 @@ Université Toulouse II – Jean Jaurès (31)
 === 4.1 Installation pour développement
 
 ==== *4.1.1 Prérequis*
-
 . *Installer l'environnement de développement Java*
     * Télécharger le *JDK 17* (ou version compatible) depuis le site officiel d'Oracle : https://www.oracle.com/fr/java/technologies/downloads/[Oracle - Java Downloads].
     * Installer le JDK en suivant les instructions indiquées par l'installateur.
@@ -66,9 +65,20 @@ Université Toulouse II – Jean Jaurès (31)
     * Ajouter le chemin vers Maven à la variable d'environnement `PATH`.
     * Dans un terminal, vérifier l'installation avec la commande `mvn -version`, `mvn --version` ou `mvn -v`.
 . *Configurer un IDE*
-    * Si nécessaire, installer des plugins de prise en charge de *Maven* et de *JavaFX* dans l'IDE utilisé pour le développement.
+    * Si nécessaire, installer des plugins de prise en charge de *Maven* et *JavaFX* dans l'IDE utilisé pour le développement.
 
 ==== *4.1.2 Étapes d'installation*
+. *Cloner le dépôt du projet*
+    * Accéder au dépôt *GitHub* du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12?tab=readme-ov-file[GitHub - SAE S3.01 DevApp]
+    * Cloner le dépôt du projet via la commande suivante :
+    
+    git clone https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12.git.
+
+    * Accéder au répertoire du projet Java situé sous `solution iot/application_iot` (commande `cd <RÉPERTOIRE>`).
+. *Construire le projet avec Maven*
+    * Supprimer les fichiers et ressources précédemment compilés avec la commande `mvn clean` puis compiler le projet Java via la commande `mvn install`. Il est également possible d'utiliser directement la commande `mvn clean install`.
+. *Exécuter l'application depuis Maven*
+    * Exécuter le projet JavaFX via la commande `mvn javafx:run`.
 
 === 4.2 Installation pour utilisation
 
