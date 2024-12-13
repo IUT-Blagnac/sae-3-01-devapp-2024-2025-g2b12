@@ -63,7 +63,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_OpenCSV_*
 
-    * *Rôle :* Lecture des fichiers de données (au format CSV) générés par le programme python collecteur de données.
+    * *Rôle :* Lecture des fichiers de données au format `CSV` générés par le programme python collecteur de données.
     * *Version utilisée :* 5.5.2
     * *Site officiel de JavaFX :* https://opencsv.sourceforge.net/[OpenCSV - About / Opencsv Users Guide]
     * *Documentation officielle :* https://opencsv.sourceforge.net/#developer_documentation[OpenCSV - About / Developer Documentation]
@@ -72,9 +72,22 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_JavaFX Maven Plugin_*
 
+    * *Rôle :* Packaging et exécution de l'application JavaFX.
+    * *Version utilisée :* 0.0.8
+    * *Site officiel de Maven Repository :* https://mvnrepository.com/artifact/org.openjfx/javafx-maven-plugin[Maven Repository - JavaFX Maven Plugin Maven Mojo]
+    * *Lien vers le dépôt GitHub du plugin :* https://github.com/openjfx/javafx-maven-plugin[GitHub - Maven plugin for JavaFX]
+
 ===== *_Apache Maven Shade Plugin_*
 
+    * *Rôle :* Création d'un exécutable au format `JAR` contenant toutes les dépendances nécessaires au fonctionnement de l'application.
+    * *Version utilisée :* 3.4.1
+    * *Site officiel d'Apache Maven :* https://maven.apache.org/plugins/maven-shade-plugin/[Apache Maven Project - Apache Maven Shade Plugin]
+
 ===== *_Apache Maven Javadoc Plugin_*
+
+    * *Rôle :* Génération de la documentation du projet Java avec `Javadoc`.
+    * *Version utilisée :* 3.4.1
+    * *Site officiel d'Oracle :* https://www.oracle.com/java/technologies/javase/javadoc-tool.html[Oracle - Javadoc Tool]
 
 === 2.3 Structuration de l'application
 
