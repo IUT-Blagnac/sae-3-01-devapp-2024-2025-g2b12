@@ -111,10 +111,15 @@ Université Toulouse II – Jean Jaurès (31)
 
 ==== *4.2.3 Étapes de lancement*
 . *Lancer l'application dans le gestionnaire de fichiers*
-    * Lancer l'exécutable `application_iot-1.0-SNAPSHOT-shaded.jar` en double-cliquant sur celui-ci. Le menu principal de l'application devrait alors apparaître à l'écran.
+    * Lancer l'exécutable `application_iot-1.0-SNAPSHOT-shaded.jar` en double-cliquant sur celui-ci.
+    * _Le menu principal de l'application devrait alors apparaître à l'écran._
 . *Lancer l'application en ligne de commande*
     * Ouvrir un terminal et se placer dans le répertoire `application` à l'aide de la commande `cd`.
-    * Lancer ensuite l'exécutable de l'application en exécutant la commande `java -jar application_iot-1.0-SNAPSHOT-shaded.jar`. Le menu principal de l'application devrait alors apparaître à l'écran.
+    * Lancer ensuite l'exécutable de l'application via la commande :
+    
+    java -jar application_iot-1.0-SNAPSHOT-shaded.jar
+
+    * _Le menu principal de l'application devrait alors apparaître à l'écran._
 
 ---
 
