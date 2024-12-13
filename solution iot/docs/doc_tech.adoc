@@ -91,7 +91,7 @@ Université Toulouse II – Jean Jaurès (31)
     * Si Java n'est pas installé, télécharger et installer le *JRE 8* ou version ultérieure depuis le site officiel de Java : https://www.java.com/fr/[Java - Télécharger Java].
 . *Installer Python 3*
     * Vérifier que Python en version 3 est installé sur la machine en exécutant la commande `python -version` ou `python3 -version` dans un terminal.
-    * Si Python 3 n'est pas installé, télécharger et installer la dernière version disponible sur le site officiel de Python : https://www.python.org/downloads/[Python - Downloads].
+    * Si Python n'est pas installé, télécharger et installer la dernière version disponible sur le site officiel de Python : https://www.python.org/downloads/[Python - Downloads].
 
 ==== *4.2.2 Étapes d'installation*
 
