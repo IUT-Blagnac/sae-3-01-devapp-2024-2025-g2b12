@@ -94,10 +94,15 @@ Université Toulouse II – Jean Jaurès (31)
     * Si Python n'est pas installé, télécharger et installer la dernière version disponible sur le site officiel de Python : https://www.python.org/downloads/[Python - Downloads].
 
 ==== *4.2.2 Étapes d'installation*
+. *Télécharger l'application*
+    * Télécharger l'archive de l'application (fichier ZIP) située sous le répertoire `livrables/IoT` du dépôt GitHub du projet : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/livrables/IoT[GitHub - Livrables IoT]
+        ** Pour une installation sur Mac OS, préférer l'archive `application_jar_mac_os.zip`.
+        ** Pour une installation sur Windows ou Linux, préférer l'archive `application_jar_windows.zip`.
+. *Décompresser l'archive de l'application*
+    * Décompresser l'archive téléchargée dans un répertoire à l'aide d'un outil de décompression tel que *WinRAR* ou *7-Zip*.
+    * OK.
 
-==== *4.2.3 Structure de l'application*
-
-==== *4.2.4 Étapes de lancement*
+==== *4.2.3 Étapes de lancement*
 
 ---
 
