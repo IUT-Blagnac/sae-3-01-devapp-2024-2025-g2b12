@@ -56,6 +56,9 @@ Université Toulouse II – Jean Jaurès (31)
 application_iot/
 ├── resources/
 │   ├── data/
+│   │   ├── data.csv
+│   │   ├── alert.csv
+│   │   └── ...
 │   ├── mqtt.py
 │   └── configuration.ini
 ├── src/
@@ -68,6 +71,12 @@ application_iot/
 ├── dependency-reduced-pom.xml
 └── pom.xml
 ----
+
+===== `resources/` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
+
+===== `scr/` : Contient le code source de l'application Java / JavaFX.
+
+===== `target/` : Contient les fichiers générés par le processus de compilation de l'application.
 
 ==== *2.1.2 Sous-systèmes de l'application*
 
