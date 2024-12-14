@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="js/modernizr.js"></script>
     <script src="bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <head>
 
