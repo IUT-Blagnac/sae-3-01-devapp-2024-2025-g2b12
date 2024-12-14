@@ -100,7 +100,11 @@ frequency={{ FRÉQUENCE }}
 
 *[3] Liste des types de données à récupérer*
 
-*[4] Liste seuils d'alerte par type de données*
+    * `dataTypeI` : I-ème type de données à récupérer pour le type de capteurs consulté.
+
+*[4] Liste seuils d'alerte par type de données (capteurs AM107 uniquement)*
+
+    * Jsp.
 
 *[5] Paramètres avancés*
 
