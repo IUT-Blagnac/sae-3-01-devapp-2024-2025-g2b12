@@ -115,13 +115,11 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |  | 
 |  | 
 |  | 
-.7+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
+.5+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2026.11%20_%20Semaine%2048.pdf[CR Reunion 26.11.24]
 | PHP | SEP
-|  | Charte graphique
-|BD| Diagramme Classes
-| | Dictionnaire Données
-| | Schéma Relationnel
+|  | Charte Graphique 
+|BD|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/7ef83d8daef03e89bd09f7e248c551055ac69a46/solution%20web/docs/document_de_conception/SAE%20S3-03%20DevApp%20BD%20Equipe%202B12.pdf[Architecture BD : Dictionnaires Données, Diagramme de Classes, Schéma relationnel]
 .4+| 49 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2004.12%20-%20Semaine%2049%20(1).pdf[ODJ Reunion 4.12.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2004.12%20_%20Semaine%2049.pdf[CR Reunion 4.12.24]
 |  | 
@@ -159,7 +157,7 @@ ODJ : les remarques semaine 48 n'ont pas été toutes prises en compte ! CR : Tr
 
 == Gestion de projet & Qualité
 
-Récapitulatif des informations mises à jour - Dernière MAJ : 2/12/24
+Récapitulatif des informations mises à jour - Dernière MAJ : 14/12/24
 
 ✓ Version courante : 
 
