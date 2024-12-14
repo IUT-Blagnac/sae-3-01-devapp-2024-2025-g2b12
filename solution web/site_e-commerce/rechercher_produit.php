@@ -51,7 +51,8 @@
                                 echo "<div class='card mb-4 shadow-sm'>";
                                 echo "<div class='card-img-top' style='height: 200px; background-color: #f0f0f0;'></div>";
                                 echo "<div class='card-body'>";
-                                echo "<p>" . htmlspecialchars($produits['nomProduit']) . "<p>";
+                                //echo "<p>" . htmlspecialchars($produits['nomProduit']) . "<p>";
+                                echo "<h5 class='card-title'>" . htmlspecialchars($produits['nomProduit']) . "</h5>";
                                 echo "<p>" . htmlspecialchars($produits['prixProduit']) . "<p>";
                                 echo "<p>" . htmlspecialchars($produits['specProduit']) . "<p>";
                                 echo "<button class='btn btn-custom' onclick='ajouterAuPanier(" . htmlspecialchars($produits['idProduit']) . ")'>Ajouter au panier</button>";
@@ -78,41 +79,39 @@
             },
             body: `idProduit=${idProduit}`
         })
-            .then(response => response.json())
-            .then(data => {
-                document.body.style.marginTop = "0px"; // Forcer la suppression de tout décalage
-                if (data.success) {
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouté au panier',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Produit ajouté au panier',
-                        showConfirmButton: false,
-                        timer: 1500
+                        icon: 'warning',
+                        title: 'Non connecté',
+                        text: data.message,
+                        showCancelButton: true,
+                        confirmButtonText: 'Se connecter',
+                        cancelButtonText: 'Annuler'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'connexion.php';
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: data.message,
                     });
                 }
-            });
-    } else {
-        if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Non connecté',
-                text: data.message,
-                showCancelButton: true,
-                confirmButtonText: 'Se connecter',
-                cancelButtonText: 'Annuler'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'connexion.php';
-                }
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Erreur',
-                text: data.message,
-            });
-        }
+            }
+        });
     }
-
 </script>
 
 <style>
@@ -157,24 +156,34 @@
 
     /* Empêche la barre grise de s'afficher */
     .swal2-container {
-        margin: 0 !important;
-        padding: 0 !important;
+        /* margin: 0 !important;
+        padding: 0 !important; */
+        z-index: 1050 !important;
     }
 
 
     /* Conteneur principal de la barre de recherche */
     .search-popup {
-        margin-top: 50px;
-        /* Barre légèrement remontée */
+        /* margin-top: 50px;
+        /* Barre légèrement remontée 
         background-color: white;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: 10px; */
+        z-index: 1000 ; 
+    }
+
+    .retour-btn {
+    z-index: 2000; /* S'assurer que le bouton Retour est au-dessus des autres éléments */
+    }
+
+    body, html {
+    overflow: visible; /* Permet de s'assurer que les éléments comme les popups sont visibles */
     }
 
     /* Formulaire de recherche */
     .search-form {
         display: flex;
-        gap: 10px;
+        gap: 10px;  
     }
 
     .search-field {

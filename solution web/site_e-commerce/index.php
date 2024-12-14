@@ -7,9 +7,40 @@
 <!-- Partie MENU -->
 <?php require_once('./include/menu.php'); ?>
 
+<!-- Partie HTML et HEAD -->
+<?php require_once('./include/head.php'); ?>
+
+<!-- Partie BODY -->
+<?php require_once('./include/header.php'); ?>
+
+<!-- Partie MENU -->
+<?php require_once('./include/menu.php'); ?>
+
+<!-- Section Billboard -->
+<section id="billboard" class="position-relative overflow-hidden bg-light-blue">
+  <div class="container">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-6">
+        <div class="banner-content">
+          <h1 class="display-2 text-uppercase text-dark pb-5">Bienvenue au WOOHP</h1>
+          <a href="index.php" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="image-holder">
+          <img src="image/WOOHP.png" alt="banner">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <div class="product-showcase">
   <main class="container" style="margin-top:8%; margin-bottom:5%;">
-    <h1><center>Produits en Vitrine</center></h1>
+    <h1>
+      <center>Produits en Vitrine</center>
+    </h1>
 
     <!-- Tableau des produits -->
     <div class="product-store">
@@ -18,7 +49,7 @@
 
       // // R�cup�rer les produits avec un prix inf�rieur � 50
       // $produits = $conn->query("SELECT * FROM PRODUIT WHERE prixProduit < 50");
-
+      
       // // Boucle pour afficher chaque produit dans une carte stylis�e
       // while ($produit = $produits->fetch()) {
       //   echo "
@@ -57,9 +88,9 @@
           echo "</div>";
         }
         echo "</div>";
-        echo"<br>";
-        echo"<br>";
-        echo"<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
         echo "<hr>";
       }
       ?>
