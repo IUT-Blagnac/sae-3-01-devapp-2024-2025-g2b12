@@ -58,31 +58,37 @@ Université Toulouse II – Jean Jaurès (31)
 ===== *_Fichier de configuration_*
 [source,ini]
 ----
-[MQTT]
+[MQTT]                              ; [1]
 broker=mqtt.iut-blagnac.fr
 port=1883
 topic={{ PRÉFIXE DU TOPIC MQTT }}
 
-[SUBJECTS] ; [4]
+[SUBJECTS]                          ; [2]
 subject1={{ SUJET 1 }}
 subject2={{ SUJET 2 }}
 ...
 
-[DATA_TYPE]
+[DATA_TYPE]                         ; [3]
 dataType1={{ TYPE DE DONNÉES 1 }}
 dataType2={{ TYPE DE DONNÉES 2 }}
 dataType3={{ TYPE DE DONNÉES 3 }}
 ...
 
-[THRESHOLD]
+[THRESHOLD]                         ; [4]
 {{ TYPE DE DONNÉES 1 }}={{ SEUIL }}
 {{ TYPE DE DONNÉES 2 }}={{ SEUIL }}
 {{ TYPE DE DONNÉES 3 }}={{ SEUIL }}
 ...
 
-[PARAMS]
+[PARAMS]                            ; [5]
 frequency={{ FRÉQUENCE }}
 ----
+*`[1]` Paramètres de connexion MQTT* +
+*`[2]` Liste des sujets à observer* +
+*`[3]` Liste des types de données à récupérer* +
+*`[4]` Liste seuils d'alerte par type de données* +
+*`[5]` Paramètres avancés*
+
 ===== *_Fichiers de données_*
 ====== Fichier de données globales
 ====== Fichier d'alertes
