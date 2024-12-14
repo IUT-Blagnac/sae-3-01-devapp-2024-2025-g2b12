@@ -89,8 +89,8 @@ frequency={{ FRÉQUENCE }}
     * `broker` : Adresse du broker MQTT (valeur fixe).
     * `port` : Port utilisé pour la connexion au broker (port standard MQTT, valeur fixe).
     * `topic` : Préfixe des topics auxquels le programme Python doit s'abonner.
-        ** Pour accès aux capteurs AM107 : `AM107/by-room/`.
-        ** Pour accès aux capteurs SOLAREDGE : `solaredge/blagnac`.
+        ** Pour accès aux capteurs AM107, le préfixe correspondant est `AM107/by-room/`.
+        ** Pour accès aux capteurs SOLAREDGE, le préfixe correspondant est `solaredge/blagnac/`.
 
 `[2]` *Liste des sujets à observer*
 
