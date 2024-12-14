@@ -72,11 +72,11 @@ application_iot/
 └── pom.xml
 ----
 
-===== `resources/` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
+`resources/` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
 
-===== `scr/` : Contient le code source de l'application Java / JavaFX.
+`scr/` : Contient le code source de l'application Java / JavaFX.
 
-===== `target/` : Contient les fichiers générés par le processus de compilation de l'application.
+`target/` : Contient les fichiers générés par le processus de compilation de l'application.
 
 ==== *2.1.2 Sous-systèmes de l'application*
 
