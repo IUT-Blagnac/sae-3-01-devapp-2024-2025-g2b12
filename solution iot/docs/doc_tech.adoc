@@ -311,7 +311,7 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
 ====== Logique métier
     * *Composante MVC associée :* Modèle (_Model_).
     * *Rôle :*
-        ** Représenter les données.
+        ** Représenter les données manipulées par l'application.
         ** Appliquer des règles de gestion sur les données.
         ** Fournir une interface permettant l'accès aux données et leur mise à jour.
         ** Notifier le Contrôleur après une mise à jour des données.
