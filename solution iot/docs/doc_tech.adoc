@@ -84,7 +84,7 @@ dataType3={{ TYPE DE DONNÉES 3 }}
 frequency={{ FRÉQUENCE }}
 ----
 
-`[1]` *Paramètres de connexion MQTT*
+*[1] Paramètres de connexion MQTT*
 
     * `broker` : Adresse du broker MQTT (valeur fixe).
     * `port` : Port utilisé pour la connexion au broker (port standard MQTT, valeur fixe).
@@ -92,13 +92,13 @@ frequency={{ FRÉQUENCE }}
         ** Pour accès aux capteurs AM107, le préfixe correspondant est `AM107/by-room/`.
         ** Pour accès aux capteurs SOLAREDGE, le préfixe correspondant est `solaredge/blagnac/`.
 
-`[2]` *Liste des sujets à observer*
+*[2] Liste des sujets à observer*
 
-`[3]` *Liste des types de données à récupérer*
+*[3] Liste des types de données à récupérer*
 
-`[4]` *Liste seuils d'alerte par type de données*
+*[4] Liste seuils d'alerte par type de données*
 
-`[5]` *Paramètres avancés*
+*[5] Paramètres avancés*
 
     * `frequency` : Fréquence de lecture des données.
 
