@@ -303,16 +303,24 @@ STRUCTURE DU FICHIER::
 L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Model-View-Controller) permettant la séparation des couches de *présentation*, de *logique métier* et de *traitement des actions utilisateur*.
 
 ====== Présentation
-    * *Composante MVC associée :* Vue / _View_.
+    * *Composante MVC associée :* Vue (_View_).
     * *Rôle :*
+        ** Afficher les données envoyées par le Contrôleur.
+        ** Permettre à l'utilisateur d'intéragir avec l'interface graphique.
 
 ====== Logique métier
-    * *Composante MVC associée :* Modèle / _Model_.
+    * *Composante MVC associée :* Modèle (_Model_).
     * *Rôle :*
+        ** Représenter les données
+        ** Appliquer les règles de gestion sur les données.
+        ** Fournir une interface permettant l'accès aux données et leur mise à jour.
+        ** Notifier le Contrôleur après une mise à jour des données.
 
 ====== Traitement des actions utilisateur
-    * *Composante MVC associée :* Contrôleur / _Controller_.
+    * *Composante MVC associée :* Contrôleur (_Controller_).
     * *Rôle :*
+        ** Effectuer des opérations sur le Modèle en fonction des actions utilisateur.
+        ** Mettre à jour la Vue pour refléter les changements dans le Modèle.
 
 ===== *_Composants en Singleton_*
 
