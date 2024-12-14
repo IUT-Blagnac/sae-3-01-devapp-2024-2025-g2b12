@@ -104,7 +104,7 @@ frequency={{ FRÉQUENCE }}
 
 *[4] Liste des seuils d'alerte par type de données (capteurs AM107 uniquement)*
 
-    * Cette section liste, pour chaque type de données indiqué dans la section `DATA_TYPE`, les seuils dont le dépassement déclenchera une alerte.
+    * Cette section indique, pour chaque type de données listé dans la section `DATA_TYPE`, le seuil dont le dépassement déclenchera une alerte.
 
 *[5] Paramètres avancés*
 
