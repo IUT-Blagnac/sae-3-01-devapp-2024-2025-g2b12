@@ -3,54 +3,31 @@ session_start();
 require_once('./include/head.php');
 require_once("./include/Connect.inc.php");
 
-// Vérifiez si un produit doit être ajouté au panier
-if (isset($_GET['ajouterAuPanier']) && isset($_GET['idProduit']) && isset($_GET['pIdCateg'])) {
-    if (!isset($_SESSION['user_id'])) {
-        // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-        header("Location: connexion.php");
-        exit();
-    }
-
-    $idProduit = $_GET['idProduit'];
-    $idClient = $_SESSION['user_id'];
-
-    // Vérifiez si le produit est déjà dans le panier
-    $checkPanier = $conn->prepare("SELECT qteEnregistree FROM ENREGISTRER WHERE idClient = :idClient AND idProduit = :idProduit");
-    $checkPanier->execute(array('idClient' => $idClient, 'idProduit' => $idProduit));
-    $result = $checkPanier->fetch(PDO::FETCH_ASSOC);
-
-    if ($result !== false) {
-        // Si le produit est déjà dans le panier, mettez à jour la quantité
-        $newQuantity = $result['qteEnregistree'] + 1;
-        $updatePanier = $conn->prepare("UPDATE ENREGISTRER SET qteEnregistree = :qteEnregistree WHERE idClient = :idClient AND idProduit = :idProduit");
-        $updatePanier->execute(array(
-            'qteEnregistree' => $newQuantity,
-            'idClient' => $idClient,
-            'idProduit' => $idProduit
-        ));
-    } else {
-        // Sinon, insérez le produit dans le panier
-        $ajoutPanier = $conn->prepare("INSERT INTO ENREGISTRER (idClient, idProduit, qteEnregistree) VALUES (:idClient, :idProduit, :qteEnregistree)");
-        $ajoutPanier->execute(array(
-            'idClient' => $idClient,
-            'idProduit' => $idProduit,
-            'qteEnregistree' => 1
-        ));
-    }
-
-    // Rediriger vers la page actuelle sans les paramètres GET pour éviter les répétitions
-    header("Location: consulter_categorie.php?pIdCateg=" . $_GET['pIdCateg']);
-    exit();
-}
-
 // Partie HTML et affichage des produits
+
 require_once('./include/header.php');
 require_once('./include/menu.php');
 ?>
 
 <div class="container-fluid flex-grow-1">
     <div class="row">
-        <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4" style="max-width: 800px; margin: 0 auto;">
+        <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4" style="max-width: 800px; margin: 0 auto; margin-top:8%; margin-bottom:5%;">
+            <style>
+                .btn-custom {
+                    background-color: rgba(136, 172, 223);
+                    color: #fff;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .btn-custom:hover {
+                    background-color: rgb(67, 83, 107);
+                    color: #fff;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                }
+            </style>
+
             <?php
             if (isset($_GET['pIdCateg'])) {
                 $idCateg = $_GET['pIdCateg'];
@@ -98,26 +75,19 @@ require_once('./include/menu.php');
                         echo "<div class='row'>";
                         foreach ($tousProduits as $produit) {
                             echo "<div class='col-md-4'>";
-                            echo "<div class='card mb-4 shadow-sm'>";
+                            echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "'>";
                             echo "<div class='card-img-top' style='height: 200px; background-color: #f0f0f0;'></div>"; // Placeholder pour l'image
                             echo "<div class='card-body'>";
                             echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
                             echo "<p class='card-text'>" . htmlspecialchars($produit['prixProduit']) . " €</p>";
                             echo "<p class='card-text'>" . htmlspecialchars($produit['specProduit']) . "</p>";
-                            echo "<form action='consulter_categorie.php' method='get'>";
-                            echo "<input type='hidden' name='pIdCateg' value='" . htmlspecialchars($idCateg) . "'>";
-                            echo "<input type='hidden' name='idProduit' value='" . htmlspecialchars($produit['idProduit']) . "'>";
-                            echo "<button type='submit' name='ajouterAuPanier' value='1' class='btn btn-primary'>Ajouter au panier</button>";
-                            echo "</form>";
+                            echo "<button class='btn btn-custom' onclick='ajouterAuPanier(" . htmlspecialchars($produit['idProduit']) . ")'>Ajouter au panier</button>";
                             echo "</div>";
                             echo "</div>";
                             echo "</div>";
                         }
                         echo "</div>";
                     }
-                    // } else {
-                    //     echo "<p>Aucun produit trouvé.</p>";
-                    // }
                 } else {
                     echo "<h1 style='text-align: center;'>Catégorie non trouvée.</h1>";
                 }
@@ -127,4 +97,48 @@ require_once('./include/menu.php');
     </div>
 </div>
 
-<?php require_once('./include/footer.php'); ?>
+<script>
+    function ajouterAuPanier(idProduit) {
+        fetch('ajouter_au_panier.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `idProduit=${idProduit}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouté au panier',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Non connecté',
+                        text: data.message,
+                        showCancelButton: true,
+                        confirmButtonText: 'Se connecter',
+                        cancelButtonText: 'Annuler'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'connexion.php';
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: data.message,
+                    });
+                }
+            }
+        });
+    }
+</script>
+
+<?php include_once('include/footer.php'); ?>

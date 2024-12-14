@@ -11,7 +11,7 @@
     <div class="row">
         <!-- partie contenu principal -->
         <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4" style="max-width: 800px; margin: 0 auto;">
-            <div class="search-popup.is-visible" style="margin-top: 20px;">
+            <div class="search-popup is-visible" style="margin-top: 20px;">
                 <!-- Bouton Retour -->
                 <a href="index.php" class="btn btn-secondary retour-btn">Retour</a>
 
@@ -21,7 +21,7 @@
                         <input type="search" id="search-form" class="search-field" placeholder="Type and press enter"
                             value="<?= isset($_POST['s']) ? htmlentities($_POST['s']) : '' ?>" name="s">
                         <button type="submit" name="Submit" class="search-submit">
-                            <svg class="search-icon">
+                            <svg class="search">
                                 <use xlink:href="#search"></use>
                             </svg>
                         </button>
@@ -78,39 +78,41 @@
             },
             body: `idProduit=${idProduit}`
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Produit ajouté au panier',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            } else {
-                if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
+            .then(response => response.json())
+            .then(data => {
+                document.body.style.marginTop = "0px"; // Forcer la suppression de tout décalage
+                if (data.success) {
                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Non connecté',
-                        text: data.message,
-                        showCancelButton: true,
-                        confirmButtonText: 'Se connecter',
-                        cancelButtonText: 'Annuler'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'connexion.php';
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erreur',
-                        text: data.message,
+                        icon: 'success',
+                        title: 'Produit ajouté au panier',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
                 }
-            }
-        });
+            });
+    } else {
+        if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Non connecté',
+                text: data.message,
+                showCancelButton: true,
+                confirmButtonText: 'Se connecter',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'connexion.php';
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: data.message,
+            });
+        }
     }
+
 </script>
 
 <style>
@@ -127,31 +129,86 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-    /* Bouton avec la loupe */
-    .search-submit {
-        position: absolute;
-        right: 10px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
+
+    /* Positionnement du bouton Retour */
+    .retour-btn {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        z-index: 1000;
     }
 
-    .search-icon {
-        width: 25px; /* Taille proportionnellement plus grande */
-        height: 25px;
-        fill: #aaa; /* Couleur initiale de la loupe */
-        transition: fill 0.3s ease;
+    .custom-swal-popup {
+        border-radius: 10px;
+        /* Arrondi des bords */
+        padding: 20px;
+        /* Assure une taille uniforme */
+        margin: 0 !important;
+    }
+
+    /* Supprime tout padding ou marge sur le body */
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        /* Empêche les défilements horizontaux */
+    }
+
+    /* Empêche la barre grise de s'afficher */
+    .swal2-container {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* Conteneur principal de la barre de recherche */
+    .search-popup {
+        margin-top: 50px;
+        /* Barre légèrement remontée */
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* Formulaire de recherche */
+    .search-form {
+        display: flex;
+        gap: 10px;
     }
 
     .search-field {
-        width: 100%;
-        padding: 15px 45px 15px 20px; /* Plus de padding pour rendre la barre plus grande */
-        font-size: 18px; /* Texte légèrement agrandi */
-        border: 2px solid #ccc;
-        border-radius: 30px; /* Coins arrondis plus doux */
-        outline: none;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-submit {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Résultats produits */
+    .results {
+        margin-top: 20px;
+        max-height: 400px;
+        /* Limite la hauteur du conteneur pour un défilement */
+        overflow-y: auto;
+        /* Active le défilement vertical */
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+
+    .product {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
     }
 </style>
