@@ -54,10 +54,21 @@ Université Toulouse II – Jean Jaurès (31)
 ===== *_Application JavaFX_*
 ===== *_Programme Python_*
 
-==== *2.1.2 Intéractions entre sous-systèmes*
+==== *2.1.2 Interactions entre sous-systèmes*
+
+[plantuml, diagramme-interactions, png]
+----
+@startuml
+actor User
+User -> Application : Launch application
+Application -> FileSystem : Overwrite files
+FileSystem --> Application : Files updated
+@enduml
+----
+
 . *Écriture du fichier de configuration par l'application Java*
     * Après le paramétrage d'une configuration par l'utilisateur dans l'interface graphique, l'application Java crée un fichier `configuration.ini` sour le répertoire `resources` décrivant la configuration créée.
-	* *À noter :* À cette étape, si un fichier de configuration existe déjà, celui-ci est remplacé par le fichier de configuration créé. Aucun mécanisme d'historisation ou de sauvegarde des fichiers de configurations n'a été mis en place.
+	* *À noter :* À cette étape, si un fichier de configuration existe déjà, celui-ci est remplacé par le fichier de configuration nouvellement créé. Aucun mécanisme d'historisation ou de sauvegarde des fichiers de configurations n'a été mis en place.
 . *Lancement du programme Python par l'application Java*
 	* Une fois le fichier de configuration créé, l'application Java démarre le processus de collecte des données en lançant en exécution le programme Python.
 . *Collecte des données par le programme Python*
