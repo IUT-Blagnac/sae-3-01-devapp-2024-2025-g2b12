@@ -119,9 +119,9 @@ frequency={{ FRÉQUENCE }}
 
 ===== *_Fichiers de données_*
 
-Le fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données reçues des capteurs. Ces fichiers sont créés par le programme Python et lus par l'application Java.
+Les fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données reçues des capteurs. Ces fichiers sont créés par le programme Python et lus par l'application Java.
 
-La première ligne de chaque fichier CSV correspond aux en-têtes décrivant la nature des données des lignes suivantes. Dans ce qui suit, cette première est ignorée lorsque le terme "ligne" est employé.
+La première ligne de chaque fichier CSV contient les en-têtes décrivant la nature des données des lignes suivantes (lignes de données).
 
 *À noter :* Dans les fichiers CSV manipulés, le séparateur de données utilisé est le point-virgule (`;`).
 
@@ -129,8 +129,8 @@ La première ligne de chaque fichier CSV correspond aux en-têtes décrivant la 
 
 Le fichier `data.csv` situé sous le répertoire `resources/data` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
     
-    * Dans le cas des capteurs AM107, une ligne du fichier correspond aux dernières données reçues pour une salle.
-    * Dans le cas des capteurs SOLAREDGE, la seule ligne présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
+    * Dans le cas des capteurs AM107, une ligne de données du fichier correspond aux dernières données reçues pour une salle.
+    * Dans le cas des capteurs SOLAREDGE, la seule ligne de données présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -142,7 +142,9 @@ STRUCTURE DU FICHIER::
 ...
 ----
 
-====== Fichier d'alertes
+====== Fichier d'alertes (capteurs AM107 uniquement)
+
+Le fichier `alert.csv` situé sous le répertoire `resources/data` correspond au fichier d'alertes. Il contient l'ensemble des alertes déclenchées par des dépassements de seuils. Une ligne de données du fichier correspond donc à une alerte pour un type de données et pour une salle.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -154,6 +156,11 @@ room;dataType;threshold;measuredValue
 ----
 
 ====== Fichiers de données par sujet
+
+Les fichiers situés sous le répertoire `resources/data` dont le nom est de la forme `[sujet].csv` où `[sujet]` désigne le nom d'un sujet correspond au fichier de données pour un sujet en particulier. Il contient l'historique des données reçues pour le sujet.
+    
+    * Dans le cas des capteurs AM107, ...
+    * Dans le cas des capteurs SOLAREDGE, ...
 
 STRUCTURE DU FICHIER::
 [source,csv]
