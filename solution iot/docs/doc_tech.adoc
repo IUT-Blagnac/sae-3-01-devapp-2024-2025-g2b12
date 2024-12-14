@@ -67,7 +67,7 @@ STRUCTURE DU FICHIER::
 [MQTT] ; [1]
 broker=mqtt.iut-blagnac.fr
 port=1883
-topic={{ PRÉFIXE DU TOPIC MQTT }}
+topic={{ PRÉFIXE DES TOPIC MQTT }}
 
 [SUBJECTS] ; [2]
 subject1={{ SUJET 1 }}
@@ -127,10 +127,12 @@ La première ligne de chaque fichier CSV contient les en-têtes décrivant la na
 
 ====== Fichier de données global
 
-Le fichier `data.csv` situé sous le répertoire `resources/data` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
+Le fichier `data.csv` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
     
     * Dans le cas des capteurs AM107, une ligne de données du fichier correspond aux dernières données reçues pour une salle.
     * Dans le cas des capteurs SOLAREDGE, la seule ligne de données présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
+
+Ce fichier est utilisé par l'application Java afin d'afficher dans le tableau de bord les données en temps réel pour chaque sujet observé.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -144,7 +146,9 @@ STRUCTURE DU FICHIER::
 
 ====== Fichier d'alertes (capteurs AM107 uniquement)
 
-Le fichier `alert.csv` situé sous le répertoire `resources/data` correspond au fichier d'alertes. Il contient l'ensemble des alertes déclenchées par des dépassements de seuils. Une ligne de données du fichier correspond donc à une alerte pour un type de données et pour une salle.
+Le fichier `alert.csv` correspond au fichier d'alertes. Il contient l'ensemble des alertes déclenchées par des dépassements de seuils. Une ligne de données du fichier correspond donc à une alerte pour un type de données et pour une salle.
+
+Ce fichier est utilisé par l'application Java afin d'afficher les alerte en temps réel dans le tableau de bord.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -157,18 +161,17 @@ room;dataType;threshold;measuredValue
 
 ====== Fichiers de données par sujet
 
-Les fichiers situés sous le répertoire `resources/data` dont le nom est de la forme `[sujet].csv` où `[sujet]` désigne le nom d'un sujet correspond au fichier de données pour un sujet en particulier. Il contient l'historique des données reçues pour le sujet.
-    
-    * Dans le cas des capteurs AM107, ...
-    * Dans le cas des capteurs SOLAREDGE, ...
+Les fichiers dont le nom est de la forme `SUJET.csv` (où `SUJET` désigne le nom d'une salle ou `overview`) correspondent chacun à un fichier de données pour un sujet en particulier. Un fichier de ce type contient l'historique des données reçues pour un sujet.
+
+Ces fichiers sont exploités par l'application Java afin de construire des graphiques décrivant l'évolution des valeurs pour un type de données.
 
 STRUCTURE DU FICHIER::
 [source,csv]
 ----
 {{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
-{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T0 }};{{ DONNÉE À L'INSTANT T0 }}
-{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T1 }};{{ DONNÉE À L'INSTANT T1 }}
-{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T2 }};{{ DONNÉE À L'INSTANT T2 }}
+{{ SUJET }};{{ DONNÉE À L'INSTANT T0 }};{{ DONNÉE À L'INSTANT T0 }}
+{{ SUJET }};{{ DONNÉE À L'INSTANT T1 }};{{ DONNÉE À L'INSTANT T1 }}
+{{ SUJET }};{{ DONNÉE À L'INSTANT T2 }};{{ DONNÉE À L'INSTANT T2 }}
 ...
 ----
 
