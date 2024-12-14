@@ -52,7 +52,12 @@ Université Toulouse II – Jean Jaurès (31)
 ==== *2.1.1 Sous-systèmes de l'application*
 
 ===== *_Application JavaFX_*
+    * *Rôle :*
+    * *Tâches réalisées :*
+    
 ===== *_Programme Python_*
+    * *Rôle :*
+    * *Tâches réalisées :*
 
 ==== *2.1.2 Fichiers utilisés*
 
@@ -138,9 +143,9 @@ STRUCTURE DU FICHIER::
 [source,csv]
 ----
 {{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
-{{ SUJET 1 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
-{{ SUJET 2 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
-{{ SUJET 3 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
+{{ SUJET 1 }};{{ DERNIÈRE VALEUR MESURÉE }};{{ DERNIÈRE VALEUR MESURÉE }}
+{{ SUJET 2 }};{{ DERNIÈRE VALEUR MESURÉE }};{{ DERNIÈRE VALEUR MESURÉE }}
+{{ SUJET 3 }};{{ DERNIÈRE VALEUR MESURÉE }};{{ DERNIÈRE VALEUR MESURÉE }}
 ...
 ----
 
