@@ -119,7 +119,7 @@ frequency={{ FRÉQUENCE }}
 
 ===== *_Fichiers de données_*
 
-Les fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données reçues des capteurs. Ces fichiers sont créés par le programme Python et lus par l'application Java.
+Les fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données des capteurs. Ces fichiers sont créés et remplis par le programme Python et lus par l'application Java.
 
 La première ligne de chaque fichier CSV contient les en-têtes décrivant la nature des données des lignes suivantes (lignes de données).
 
@@ -138,9 +138,9 @@ STRUCTURE DU FICHIER::
 [source,csv]
 ----
 {{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
-{{ SUJET 1 }};{{ DONNÉE }};{{ DONNÉE }}
-{{ SUJET 2 }};{{ DONNÉE }};{{ DONNÉE }}
-{{ SUJET 3 }};{{ DONNÉE }};{{ DONNÉE }}
+{{ SUJET 1 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
+{{ SUJET 2 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
+{{ SUJET 3 }};{{ VALEUR MESURÉE }};{{ VALEUR MESURÉE }}
 ...
 ----
 
@@ -148,7 +148,7 @@ STRUCTURE DU FICHIER::
 
 Le fichier `alert.csv` correspond au fichier d'alertes. Il contient l'ensemble des alertes déclenchées par des dépassements de seuils. Une ligne de données du fichier correspond donc à une alerte pour un type de données et pour une salle.
 
-Ce fichier est utilisé par l'application Java afin d'afficher les alerte en temps réel dans le tableau de bord.
+Ce fichier est utilisé par l'application Java afin d'afficher les alertes en temps réel dans le tableau de bord.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -169,9 +169,9 @@ STRUCTURE DU FICHIER::
 [source,csv]
 ----
 {{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
-{{ SUJET }};{{ DONNÉE À L'INSTANT T0 }};{{ DONNÉE À L'INSTANT T0 }}
-{{ SUJET }};{{ DONNÉE À L'INSTANT T1 }};{{ DONNÉE À L'INSTANT T1 }}
-{{ SUJET }};{{ DONNÉE À L'INSTANT T2 }};{{ DONNÉE À L'INSTANT T2 }}
+{{ SUJET }};{{ VALEUR MESURÉE À L'INSTANT T0 }};{{ VALEUR MESURÉE À L'INSTANT T0 }}
+{{ SUJET }};{{ VALEUR MESURÉE À L'INSTANT T1 }};{{ VALEUR MESURÉE À L'INSTANT T1 }}
+{{ SUJET }};{{ VALEUR MESURÉE À L'INSTANT T2 }};{{ VALEUR MESURÉE À L'INSTANT T2 }}
 ...
 ----
 
