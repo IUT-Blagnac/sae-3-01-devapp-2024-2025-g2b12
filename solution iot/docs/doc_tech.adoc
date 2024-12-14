@@ -76,7 +76,7 @@ application_iot/
 
 ===== *_Description des répertoires et fichiers_*
 
-`resources` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
+`resources` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java / JavaFX.
 
     * `data` : Contient les fichiers de données générés par le programme Python.
         ** `data.csv` : Le fichier de données global.
@@ -97,7 +97,7 @@ application_iot/
 
 ==== *2.1.2 Sous-systèmes de l'application*
 
-===== *_Application JavaFX_*
+===== *_Application Java / JavaFX_*
     * *Rôle :* Gestion de l'interface graphique et mise en relation des différents sous-systèmes et fichiers.
     * *Tâches réalisées :*
         ** Gestion d'une interface de paramétrage d'une configuration.
