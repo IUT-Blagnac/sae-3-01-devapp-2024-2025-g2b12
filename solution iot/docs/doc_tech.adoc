@@ -51,6 +51,8 @@ Université Toulouse II – Jean Jaurès (31)
 
 ==== *2.1.1 Arborescence*
 
+===== *_Arborescence du projet_*
+
 [source,bash]
 ----
 application_iot/
@@ -72,16 +74,18 @@ application_iot/
 └── pom.xml
 ----
 
+===== *_Description des répertoires et fichiers_*
+
 `resources` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
 
     * `data` : Contient les fichiers de données générés par le programme Python.
         ** `data.csv` : Le fichier de données global.
         ** `alert.csv` : Le fichier d'alertes.
-        ** `...` : Les autres fichiers de données chacun associé à un sujet observé.
+        ** Les autres fichiers de données chacun associé à un sujet observé.
     * `mqtt.py` : Le programme Python collecteur de données (client MQTT).
     * `configuration.ini` : Le fichier de configuration du programme Python.
 
-`scr` : Contient le code source de l'application Java / JavaFX.
+`src` : Contient le code source de l'application Java / JavaFX.
 
 `target` : Contient les fichiers générés par le processus de compilation de l'application.
 
