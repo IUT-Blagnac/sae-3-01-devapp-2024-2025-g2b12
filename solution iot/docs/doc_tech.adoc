@@ -304,10 +304,10 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
 
 DESCRIPTION DES COUCHES::
 |===
-2+| *COUCHE* 2+| *COMPOSANTE MVC* 5+| *RÔLE*
-2+| 2+| 5+|
-2+| 2+| 5+|
-2+| 2+| 5+|
+| *COUCHE* | *COMPOSANTE MVC* | *RÔLE*
+| Présentation |  |
+| Logique métier |  |
+| Traitement des actions utilisateur |  |
 |===
 
 ===== *_Composants en Singleton_*
