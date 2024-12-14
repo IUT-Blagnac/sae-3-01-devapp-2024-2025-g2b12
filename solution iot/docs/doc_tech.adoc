@@ -94,6 +94,10 @@ frequency={{ FRÉQUENCE }}
 
 *[2] Liste des sujets à observer*
 
+    * `subjectI` : I-ème sujet à observer.
+        ** Pour les capteurs AM107, le nombre de sujets à observer peut aller jusqu'au nombre total de salles disponibles, soit 53.
+        ** Pour les capteurs SOLAREDGE, le nombre de sujets à observer se limite à 1 : `overview`.
+
 *[3] Liste des types de données à récupérer*
 
 *[4] Liste seuils d'alerte par type de données*
