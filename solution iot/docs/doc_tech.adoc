@@ -58,7 +58,6 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_Fichier de configuration_*
 
-RÔLE::
 Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java. Ce fichier est lu par le programme Python à son lancement qui adapte ainsi son comportement en fonction des paramètres spécifiés.
 
 STRUCTURE DU FICHIER::
