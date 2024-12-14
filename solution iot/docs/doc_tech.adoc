@@ -72,11 +72,24 @@ application_iot/
 └── pom.xml
 ----
 
-`resources/` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
+`resources` : Contient les fichiers et programmes externes nécessaires au fonctionnement de l'application Java.
 
-`scr/` : Contient le code source de l'application Java / JavaFX.
+    * `data` : Contient les fichiers de données générés par le programme Python.
+        ** `data.csv` : Le fichier de données global.
+        ** `alert.csv` : Le fichier d'alertes.
+        ** `...` : Les autres fichiers de données chacun associé à un sujet observé.
+    * `mqtt.py` : Le programme Python collecteur de données (client MQTT).
+    * `configuration.ini` : Le fichier de configuration du programme Python.
 
-`target/` : Contient les fichiers générés par le processus de compilation de l'application.
+`scr` : Contient le code source de l'application Java / JavaFX.
+
+`target` : Contient les fichiers générés par le processus de compilation de l'application.
+
+    * `site/apidocs/index.html` : Page principale de la documentation Javadoc de l'API.
+
+`pom.xml` : Fichier gérant les dépendances et la configuration du projet Maven pour l'application Java / JavaFX.
+
+`dependency-reduced-pom.xml` : Réduction du fichier `pom.xml`.
 
 ==== *2.1.2 Sous-systèmes de l'application*
 
