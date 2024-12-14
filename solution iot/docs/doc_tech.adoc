@@ -55,7 +55,15 @@ Université Toulouse II – Jean Jaurès (31)
 ===== *_Programme Python_*
 
 ==== *2.1.2 Fichiers utilisés*
+
 ===== *_Fichier de configuration_*
+
+Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java.
+
+Ce fichier est lu par le programme Python à son lancement qui adapte ainsi son comportement en fonction des paramètres spécifiés.
+
+La structure d'un fichier de configuration est décrite ci-après :
+
 [source,ini]
 ----
 [MQTT] ; [1]
