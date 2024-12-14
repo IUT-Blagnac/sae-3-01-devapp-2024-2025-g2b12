@@ -92,7 +92,7 @@ frequency={{ FRÉQUENCE }}
         ** Pour accès aux capteurs AM107, le préfixe correspondant est `AM107/by-room/`.
         ** Pour accès aux capteurs SOLAREDGE, le préfixe correspondant est `solaredge/blagnac/`.
 
-*[ 2 ] Liste des sujets à observer*
+`[2]`  *Liste des sujets à observer*
 
 *[ 3 ] Liste des types de données à récupérer*
 
