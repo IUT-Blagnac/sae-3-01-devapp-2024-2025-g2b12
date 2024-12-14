@@ -64,7 +64,7 @@
             <div class="footer-menu contact-item text-center">
               <h5 class="widget-title text-uppercase pb-2">Contactez-Nous</h5>
               <p>Vous avez des suggestions ? <a href="mailto:">Resell.Organisation@WOOHP.afg</a></p>
-              <p>Vous avez besoin d'informations ? Appelez-nous simplement. <br><a href="">06 86 05 04 40</a></p>
+              <p>Vous avez besoin d'informations ? Appelez-nous simplement. <br><a href="">08 80 08 80 08 80</a></p>
             </div>
           </div>
         </div>

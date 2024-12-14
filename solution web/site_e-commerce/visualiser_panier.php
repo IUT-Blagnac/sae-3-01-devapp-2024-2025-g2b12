@@ -33,10 +33,7 @@ foreach ($produits as $prod) {
 
 <!-- Partie BODY -->
 <?php require_once('./include/header.php'); ?>
-
-
 <?php require_once("./include/menu.php"); ?>
-
 
 <!-- Conteneur principal -->
 <div class="container-fluid flex-grow-1 d-flex justify-content-center align-items-center">
@@ -45,11 +42,20 @@ foreach ($produits as $prod) {
         <main class="container" style="margin-top:8%; margin-bottom:5%;">
             <h2 class="text-center">Mon Panier</h2>
             <style>
+                .btn-custom {
+                    padding: 8px 15px; /* Augmenter légèrement le padding pour rendre les boutons plus grands */
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                    font-size: 0.9em; /* Augmenter légèrement la taille de la police */
+                    margin: 0 5px; /* Ajouter une marge pour espacer les boutons */
+                }
+
                 .btn-custom-light {
                     background-color: rgb(122, 122, 122);
                     color: #fff;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
                 }
 
                 .btn-custom-light:hover {
@@ -62,14 +68,22 @@ foreach ($produits as $prod) {
                 .btn-custom-dark {
                     background-color: rgb(39, 39, 39);
                     color: #fff;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-                    
                 }
 
                 .btn-custom-dark:hover {
                     background-color: rgba(136, 172, 223, 255);
                     color: #fff;
+                    transform: translateY(-1px);
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                }
+
+                .btn-danger {
+                    background-color: red;
+                    color: white;
+                }
+
+                .btn-danger:hover {
+                    background-color: darkred;
                     transform: translateY(-1px);
                     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
                 }
@@ -84,6 +98,19 @@ foreach ($produits as $prod) {
                     color: #ccc;
                     font-size: 1.5em;
                 }
+
+                .product-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 100%;
+                }
+
+                .button-container {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
             </style>
             <?php
             if (!empty($produits)) {
@@ -95,18 +122,19 @@ foreach ($produits as $prod) {
                     echo "<div class='col-md-4'>";
                     echo "<div class='product-image-placeholder'>Image</div>"; // Placeholder pour l'image
                     echo "</div>";
-                    echo "<div class='col-md-8'>";
+                    echo "<div class='col-md-8 product-container'>";
+                    echo "<div>";
                     echo "<h5 class='card-title'>" . htmlspecialchars($prod['nomProduit']) . "</h5>";
                     echo "<p class='card-text'>" . htmlspecialchars($prod['prixProduit']) . " €</p>";
                     echo "<p class='card-text'>" . htmlspecialchars($prod['specProduit']) . "</p>";
                     echo "<div class='d-flex align-items-center'>";
-                    echo "<p class='card-text mb-0'>Quantité: " . htmlspecialchars($prod['qteEnregistree']) . "  &nbsp;&nbsp; </p>";
-                    echo "<form method='post' action='update_quantity.php' class='d-flex align-items-center ml-2'>";
-                    echo "<button type='submit' name='action' value='decrease' class='btn btn-custom-dark btn-sm mr-2'>-</button>";
-                    echo "<input type='hidden' name='produit_id' value='" . htmlspecialchars($prod['idProduit']) . "'>";
-                    echo "<span class='mx-1'> </span>";
-                    echo "<button type='submit' name='action' value='increase' class='btn btn-custom-light btn-sm ml-2'>+</button>";
-                    echo "</form>";
+                    echo "<p class='card-text mb-0'>Quantité: <span class='quantity'>" . htmlspecialchars($prod['qteEnregistree']) . "</span> &nbsp;&nbsp; </p>";
+                    echo "<button class='btn btn-custom btn-custom-dark btn-sm decrease' data-id='" . htmlspecialchars($prod['idProduit']) . "'>-</button>";
+                    echo "<button class='btn btn-custom btn-custom-light btn-sm increase' data-id='" . htmlspecialchars($prod['idProduit']) . "'>+</button>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class='button-container'>";
+                    echo "<button class='btn btn-custom btn-danger btn-sm delete-button' data-produit-id='" . htmlspecialchars($prod['idProduit']) . "'>Supprimer</button>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
@@ -125,5 +153,68 @@ foreach ($produits as $prod) {
         </main>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.increase').forEach(button => {
+        button.addEventListener('click', function() {
+            updateQuantity(this.dataset.id, 'increase');
+        });
+    });
+
+    document.querySelectorAll('.decrease').forEach(button => {
+        button.addEventListener('click', function() {
+            updateQuantity(this.dataset.id, 'decrease');
+        });
+    });
+
+    function updateQuantity(produit_id, action) {
+        fetch('update_quantity.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `produit_id=${produit_id}&action=${action}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                location.reload();
+            });
+    }
+
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const produit_id = this.getAttribute('data-produit-id');
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas revenir en arrière!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('delete_article.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `produit_id=${produit_id}`
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        Swal.fire(
+                            'Supprimé!',
+                            'L\'article a été supprimé.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 <?php include_once('include/footer.php'); ?>

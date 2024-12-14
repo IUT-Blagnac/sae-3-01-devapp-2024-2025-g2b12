@@ -3,7 +3,7 @@
 
 <!-- partie body -->
 <?php require_once('./include/header.php'); ?>
-<?php require_once('./include/menu.php'); ?>
+<!-- <?php require_once('./include/menu.php'); ?>-->
 
 <?php
 

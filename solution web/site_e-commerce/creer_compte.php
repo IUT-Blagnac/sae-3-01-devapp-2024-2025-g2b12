@@ -1,5 +1,5 @@
 <!-- inclusion head de formulaire -->
-<?php require_once('./include/form/form_head.php') ; ?>
+<?php require_once('./include/form/form_head.php'); ?>
 
 <body>
     <!-- traitement de la création du compte -->
@@ -11,15 +11,13 @@
         $prenom = isset($_GET['prenom']) ? htmlspecialchars($_GET['prenom']) : '';
         $numTel = isset($_GET['numTel']) ? htmlspecialchars($_GET['numTel']) : '';
 
-        if (isset($_GET['erreur']))
-        {
+        if (isset($_GET['erreur'])) {
             echo "<p style='color:red'>" . htmlspecialchars($_GET['erreur']) . "</p>";
         }
     ?>
 
     <!-- formulaire de création de compte -->
     <!-- auteur : Victor Jockin -->
-    <?php //echo "<br/><strong>-  En cours de développement  -</strong><br/><br/>" ; ?>
     <div class="main-content">
         <div class="form-container">
             <div class="form-header">
@@ -27,6 +25,7 @@
             </div>
             <div class="form-content">
                 <form action='traitement_connexion.php' method='post'>
+                    <input type='hidden' name='action' value='creer_compte'>
                     <div class="input-container">
                         <label class='input-field-label' for='prenom'>Prénom</label>
                         <input type='text' id='prenom' name='prenom' value='<?php echo $prenom; ?>' class="input-field" required>
@@ -51,7 +50,7 @@
                         <label class='input-field-label' for='numTel'>Numéro de téléphone</label>
                         <input type='text' id='numTel' name='numTel' value='<?php echo $numTel; ?>' class="input-field" required>
                     </div>
-                    <!--<input type='hidden' name='action' value='creer_compte'>-->
+                    
                     <input class='validation-button' type='submit' value="CRÉER">
                 </form>
             </div>
