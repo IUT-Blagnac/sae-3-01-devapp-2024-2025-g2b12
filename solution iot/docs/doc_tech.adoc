@@ -119,13 +119,47 @@ frequency={{ FRÉQUENCE }}
 
 ===== *_Fichiers de données_*
 
-Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java.
+Le fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données reçues des capteurs. Ces fichiers sont créés par le programme Python et lus par l'application Java.
 
-====== Fichier de données globales
+*À noter :* Dans les fichiers CSV manipulés, le séparateur de données utilisé est le point-virgule (`;`).
+
+====== Fichier de données global
+
+Le fichier `data.csv` situé sous le répertoire `resources/data` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
+    
+    * Dans le cas des capteurs AM107, une ligne du fichier correspond aux dernières données reçues pour une salle.
+    * Dans le cas des capteurs SOLAREDGE, 
+
+STRUCTURE DU FICHIER::
+[source,csv]
+----
+{{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
+{{ SUJET 1 }};{{ DONNÉE }};{{ DONNÉE }}
+{{ SUJET 2 }};{{ DONNÉE }};{{ DONNÉE }}
+{{ SUJET 3 }};{{ DONNÉE }};{{ DONNÉE }}
+...
+----
 
 ====== Fichier d'alertes
+STRUCTURE DU FICHIER::
+[source,csv]
+----
+room;dataType;threshold;measuredValue
+{{ SALLE 1 }};{{ TYPE DE DONNÉES }};{{ SEUIL }};{{ VALEUR MESURÉE }}
+{{ SALLE 2 }};{{ TYPE DE DONNÉES }};{{ SEUIL }};{{ VALEUR MESURÉE }}
+...
+----
 
 ====== Fichiers de données par sujet
+STRUCTURE DU FICHIER::
+[source,csv]
+----
+{{ TYPE DE SUJET }};{{ TYPE DE DONNEE 1 }};{{ TYPE_DE DONNEE 2 }}
+{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T0 }};{{ DONNÉE À L'INSTANT T0 }}
+{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T1 }};{{ DONNÉE À L'INSTANT T1 }}
+{{ SUJET 1 }};{{ DONNÉE À L'INSTANT T2 }};{{ DONNÉE À L'INSTANT T2 }}
+...
+----
 
 ==== *2.1.3 Interactions entre sous-systèmes et fichiers*
 . *Écriture du fichier de configuration par l'application Java*
