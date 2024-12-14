@@ -132,7 +132,10 @@ Le fichier `data.csv` correspond au fichier de données global. Il contient les 
     * Dans le cas des capteurs AM107, une ligne de données du fichier correspond aux dernières données reçues pour une salle.
     * Dans le cas des capteurs SOLAREDGE, la seule ligne de données présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
 
-Ce fichier est utilisé par l'application Java afin d'afficher dans le tableau de bord les données en temps réel pour chaque sujet observé.
+Ce fichier est utilisé par l'application Java pour :
+
+    * Afficher dans le tableau de bord les données en temps réel pour chaque sujet observé.
+    * Générer des diagrammes de comparaison des sujets sur un type de données.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -161,7 +164,10 @@ room;dataType;threshold;measuredValue
 
 ====== Fichiers de données par sujet
 
-Les fichiers dont le nom est de la forme `SUJET.csv` (où `SUJET` désigne le nom d'une salle ou `overview`) correspondent chacun à un fichier de données pour un sujet en particulier. Un fichier de ce type contient l'historique des données reçues pour un sujet.
+Les fichiers dont le nom est de la forme `SUJET.csv` correspondent chacun à un fichier de données pour un sujet en particulier. Un fichier de ce type contient l'historique des données reçues pour un sujet.
+
+    * Dans le cas des capteurs AM107, autant de fichiers sont créés que de sujets sont observés. Les noms de ces fichiers correspondent aux noms des salles observées (exemple : `B101.csv`).
+    * Dans le cas des capteurs SOLAREDGE, un seul fichier nommé `overview` est créé.
 
 Ces fichiers sont exploités par l'application Java afin de construire des graphiques décrivant l'évolution des valeurs pour un type de données.
 
