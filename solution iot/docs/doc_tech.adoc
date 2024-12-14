@@ -132,10 +132,7 @@ Le fichier `data.csv` correspond au fichier de données global. Il contient les 
     * Dans le cas des capteurs AM107, une ligne de données du fichier correspond aux dernières données reçues pour une salle.
     * Dans le cas des capteurs SOLAREDGE, la seule ligne de données présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
 
-Ce fichier est utilisé par l'application Java pour :
-
-    * Afficher dans le tableau de bord les données en temps réel pour chaque sujet observé.
-    * Générer des diagrammes de comparaison des sujets sur un type de données.
+Ce fichier est utilisé par l'application Java afin d'afficher dans le tableau de bord les données en temps réel pour chaque sujet observé ainsi que pour générer des diagrammes de comparaison des sujets sur un type de données.
 
 STRUCTURE DU FICHIER::
 [source,csv]
