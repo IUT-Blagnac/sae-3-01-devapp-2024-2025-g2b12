@@ -107,14 +107,9 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version1[Clients MQTT autonaume] 
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/tree/master/solution%20iot/client_mqtt_version2[Clients MQTT avec fichier de configuration]
 | GPO | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Contrat%20d'%C3%A9quipe.pdf[Contrat d'équipe]
-.4+| 46 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2014.11%20_%20Semaine%2046.pdf[ODJ Reunion 14.11.24]
+.2+| 46 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2014.11%20_%20Semaine%2046.pdf[ODJ Reunion 14.11.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/%20CR%20R%C3%A9union%2014.11.24%20-%20Semaine%2046.pdf[CR Reunion 14.11.24]
-|  | 
-|  | 
-.4+| 47 | GPO | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2022.11%20_%20Semaine%2047%20(1).pdf[ODJ Reunion 22.11.24]
-|  | 
-|  | 
-|  | 
+.1+| 47 | GPO | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2022.11%20_%20Semaine%2047%20(1).pdf[ODJ Reunion 22.11.24]
 .5+| 48 |GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2026.11%20_%20Semaine%2048.pdf[ODJ Reunion_26.11.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2026.11%20_%20Semaine%2048.pdf[CR Reunion 26.11.24]
 | PHP | SEP
@@ -122,9 +117,9 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |BD|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/7ef83d8daef03e89bd09f7e248c551055ac69a46/solution%20web/docs/document_de_conception/SAE%20S3-03%20DevApp%20BD%20Equipe%202B12.pdf[Architecture BD : Dictionnaires Données, Diagramme de Classes, Schéma relationnel]
 .4+| 49 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2004.12%20-%20Semaine%2049%20(1).pdf[ODJ Reunion 4.12.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2004.12%20_%20Semaine%2049.pdf[CR Reunion 4.12.24]
-|  | 
-|  | 
-.4+| 50 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/380a4801f233bee4e34cb86d0253cb7ccc9d64af/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2011.12%20_Semaine%2050.pdf[ODJ Reunion 11.12.24]
+| BD | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/076a36d1b998670f0c4326e1d757a2dd9640f820/CR%20script%20SQL%20sem%2049.pdf[Script SQL]
+| SYSTÈME | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/076a36d1b998670f0c4326e1d757a2dd9640f820/Architecture%20Syst%C3%A8me.pdf[Architecture Système]
+.4+| 50 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/380a4801f233bee4e34cb86d0253cb7ccc9d64af/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2011.12%20_Semaine%2050.pdf[ODJ Reunion 13.12.24]
 |  |   https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/828e1d70eaabfe6e7aff430ce64aaa4e62b37a2a/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2013.12%20_%20Semaine%2050.pdf[CR Reunion 13.12.24]
 | SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Système]
 |  | 
