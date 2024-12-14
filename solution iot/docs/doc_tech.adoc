@@ -121,6 +121,8 @@ frequency={{ FRÉQUENCE }}
 
 Le fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données reçues des capteurs. Ces fichiers sont créés par le programme Python et lus par l'application Java.
 
+La première ligne de chaque fichier CSV correspond aux en-têtes décrivant la nature des données des lignes suivantes. Dans ce qui suit, cette première est ignorée lorsque le terme "ligne" est employé.
+
 *À noter :* Dans les fichiers CSV manipulés, le séparateur de données utilisé est le point-virgule (`;`).
 
 ====== Fichier de données global
@@ -128,7 +130,7 @@ Le fichiers de données situés sous le répertoire `resources/data` sont des fi
 Le fichier `data.csv` situé sous le répertoire `resources/data` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
     
     * Dans le cas des capteurs AM107, une ligne du fichier correspond aux dernières données reçues pour une salle.
-    * Dans le cas des capteurs SOLAREDGE, 
+    * Dans le cas des capteurs SOLAREDGE, la seule ligne présente dans le fichier correspond aux dernières données reçues pour le panneau solaire.
 
 STRUCTURE DU FICHIER::
 [source,csv]
@@ -141,6 +143,7 @@ STRUCTURE DU FICHIER::
 ----
 
 ====== Fichier d'alertes
+
 STRUCTURE DU FICHIER::
 [source,csv]
 ----
@@ -151,6 +154,7 @@ room;dataType;threshold;measuredValue
 ----
 
 ====== Fichiers de données par sujet
+
 STRUCTURE DU FICHIER::
 [source,csv]
 ----
