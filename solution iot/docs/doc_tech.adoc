@@ -104,7 +104,8 @@ frequency={{ FRÉQUENCE }}
 
 *[5] Paramètres avancés*
 
-    * `frequency` : Fréquence de lecture des données. À noter que la fréquence définie n'a actuellement aucun impact sur le comportement du programme Python car non traitée.
+    * `frequency` : Fréquence de lecture des données.
+        ** *À noter* La valeur définie pour ce paramètre n'a actuellement aucun impact sur le comportement du programme Python car non traitée. La fréquence de lecture est cependant prise en compte par le processus de lecture des données de l'application Java.
 
 ===== *_Fichiers de données_*
 ====== Fichier de données globales
