@@ -49,23 +49,19 @@ Université Toulouse II – Jean Jaurès (31)
 
 === 2.1 Architecture générale
 
-==== *2.1.1 Description des sous-systèmes*
+==== *2.1.1 Sous-systèmes de l'application*
 
 ===== *_Application JavaFX_*
 ===== *_Programme Python_*
 
-==== *2.1.2 Interactions entre sous-systèmes*
+==== *2.1.2 Fichiers utilisés*
+===== *_Fichier de configuration_*
+===== *_Fichiers de données_*
+====== Fichier de données globales
+====== Fichier d'alertes
+====== Fichiers de données par sujet
 
-[plantuml, diagramme-interactions, png]
-----
-@startuml
-actor User
-User -> Application : Launch application
-Application -> FileSystem : Overwrite files
-FileSystem --> Application : Files updated
-@enduml
-----
-
+==== *2.1.3 Interactions entre sous-systèmes et fichiers*
 . *Écriture du fichier de configuration par l'application Java*
     * Après le paramétrage d'une configuration par l'utilisateur dans l'interface graphique, l'application Java crée un fichier `configuration.ini` sour le répertoire `resources` décrivant la configuration créée.
 	* *À noter :* À cette étape, si un fichier de configuration existe déjà, celui-ci est remplacé par le fichier de configuration nouvellement créé. Aucun mécanisme d'historisation ou de sauvegarde des fichiers de configurations n'a été mis en place.
