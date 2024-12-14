@@ -74,9 +74,10 @@ require_once('./include/menu.php');
                     if (!empty($tousProduits)) {
                         echo "<div class='row'>";
                         foreach ($tousProduits as $produit) {
+                            $imagePath = "image/produits/prod" . htmlspecialchars($produit['idProduit']) . ".png";
                             echo "<div class='col-md-4'>";
                             echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "'>";
-                            echo "<div class='card-img-top' style='height: 200px; background-color: #f0f0f0;'></div>"; // Placeholder pour l'image
+                            echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\"); background-size: cover; background-position: center;'></div>";
                             echo "<div class='card-body'>";
                             echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
                             echo "<p class='card-text'>" . htmlspecialchars($produit['prixProduit']) . " €</p>";
