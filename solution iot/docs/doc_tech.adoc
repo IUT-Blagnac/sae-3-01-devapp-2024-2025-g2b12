@@ -58,11 +58,10 @@ Université Toulouse II – Jean Jaurès (31)
 
 ===== *_Fichier de configuration_*
 
-Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java.
+RÔLE::
+Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java. Ce fichier est lu par le programme Python à son lancement qui adapte ainsi son comportement en fonction des paramètres spécifiés.
 
-Ce fichier est lu par le programme Python à son lancement qui adapte ainsi son comportement en fonction des paramètres spécifiés.
-
-La structure d'un fichier de configuration est décrite ci-après :
+Structure du fichier::
 
 [source,ini]
 ----
@@ -120,8 +119,13 @@ frequency={{ FRÉQUENCE }}
         ** *À noter :* La valeur pour ce paramètre n'a actuellement aucun impact sur le comportement du programme Python car non traitée. La fréquence définie lors du paramétrage de la configuration est cependant prise en compte par le processus de lecture des données de l'application Java.
 
 ===== *_Fichiers de données_*
+
+Le fichier de configuration `configuration.ini` situé sous le répertoire `resources` contient les paramètres de la configuration créée par l'utilisateur au travers de l'interface de l'application Java.
+
 ====== Fichier de données globales
+
 ====== Fichier d'alertes
+
 ====== Fichiers de données par sujet
 
 ==== *2.1.3 Interactions entre sous-systèmes et fichiers*
