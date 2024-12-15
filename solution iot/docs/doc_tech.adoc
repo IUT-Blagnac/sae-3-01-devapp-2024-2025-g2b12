@@ -506,6 +506,39 @@ S'applique uniquement aux paramètres de fonctions et de méthodes.
 
 ==== *2.4.2 Conventions de commentaire*
 
+===== *Format de commentaire d'en-tête de classe*
+
+Modèle de commentaire::
+[source,java]
+----
+/**
+ * [ TYPE DE CLASSE + RÔLE ]
+ * 
+ * Date de dernière modification :
+ * - [ DATE ] -
+ * 
+ * @author [ DÉVELOPPEUR ]
+ * ...
+ * - [ NOM DE L'ÉQUIPE DE DÉVELOPPEMENT ] -
+ */
+----
+
+Exemple : `ConfigurationFileForm`::
+[source,java]
+----
+/**
+ * Contrôleur de dialogue du formulaire de paramétrage
+ * d'un fichier de configuration.
+ * 
+ * Date de dernière modification :
+ * - Mardi 10 décembre 2024 -
+ * 
+ * @author Victor Jockin
+ * - Équipe G2B12 -
+ */
+----
+
+
 ==== *2.4.3 Structures récurrentes de classes*
 
 Dans cette section, on suppose avoir l'arborescence suivante :
