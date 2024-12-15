@@ -417,7 +417,7 @@ application
 
 ==== *2.4.1 Conventions de nommage*
 
-NOTE: L'anglais est utilisé pour tous les noms de classes, de variables, de packages, de vues et de fichiers.
+NOTE: L'anglais est utilisé pour tous les noms de classes, de variables, de packages et de vues.
 
 ===== *_Nommage des classes_*
 
@@ -455,9 +455,47 @@ NOTE: Les classes d'énumération, pouvant avoir des noms identiques à ceux de 
 
 ===== *_Nommage des variables_*
 
+Les noms de variables Java sont formatés en Lower Camel Case.
+
 ====== Variables éphémères
 
+S'applique aux variables de type indice ou aux compteurs de boucles.
+
+* *Règle :* Nom "court".
+* *Exemples :*
+    ** Compteur de boucle `for` → `i`.
+    ** Entrée couremment traité dans une boucle de type `for-each` parcourant le contenu de dictionnaire → `m`.
+
+*Remarque :* Les noms de ces variables peuvent être plus explicites si besoin.
+
+[[variables-recurrentes]]
 ====== Variables récurrentes
+
+S'applique aux variables et aux collections utilisées à plusieurs endroits dans une classe.
+
+* *Règle :* Nom explicite.
+* *Exemples :*
+    ** Chaîne de caractères décrivant le préfixe d'un topic MQTT → `topicPrefix`.
+    ** Liste de types de données → `dataTypeList`.
+
+====== Variables de composants graphiques
+
+S'applique uniquement à une variable d'un contrôleur de vue correspondant à un élément graphique de la vue associée.
+
+* *Règle :* Rôle du composant graphique + Éventuellement type du composant.
+* *Exemples :*
+    ** Composant graphique de type Bouton (`Button`) → `button`.
+    ** Conteneur de graphiques de type `VBox` → `graphContainerVBox` ou `graphContainer`.
+
+====== Paramètres
+
+S'applique uniquement aux paramètres de fonctions et de méthodes.
+
+* *Règle :* `p` + Nom explicite en Upper Camel Case.
+* *Exemples :*
+    ** Chaîne de caractères décrivant le préfixe d'un topic MQTT → `pTopicPrefix` (Cf. <<variables-recurrentes,Variables récurrentes>>).
+    ** Liste de types de données → `pDataTypeList` (Cf. <<variables-recurrentes,Variables récurrentes>>).
+    ** Composant graphique de type Bouton (`Button`) → `pButton` (Cf. <<variables-de-composants-graphiques,Variables de composants graphiques>>).
 
 ===== *_Nommage des packages_*
 * *Règle :* Nom court décrivant le type des classes contenues par la package en Lower Camel Case.
@@ -466,6 +504,7 @@ NOTE: Les classes d'énumération, pouvant avoir des noms identiques à ceux de 
 ===== *_Nommage des vues FXML_*
 * *Règle :* Nom de la vue en Lower Camel Case.
 * *Exemple :* Vue du formulaire de paramétrage de la configuration → `configurationFileForm.fxml`.
+
 
 ==== *2.4.2 Conventions de commentaire*
 
