@@ -1,0 +1,18 @@
+@startuml
+header SAE S3.01 DevApp - 2024/2025
+left to right direction
+actor Utilisateur as U
+usecase (Créer une configuration) as CC
+usecase (Visualiser les données des capteurs) as VDC
+usecase (Visualiser les données pour un sujet) as VDS
+usecase (Visualiser les alertes) as VA
+usecase (Afficher un graphique de comparaison) as AGC
+usecase (Afficher un graphique d'évolution) as AGE
+U --> CC
+CC ..> VDC
+VDC ..> VA
+VDC ..> AGC
+VDC ..> VDS
+VDS ..> AGE
+footer Victor Jockin - Équipe 2B12
+@enduml

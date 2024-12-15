@@ -44,6 +44,12 @@ Université Toulouse II – Jean Jaurès (31)
 <<<
 == *1. Présentation de l'application*
 
+=== 1.2 Cas d'utilisation général
+
+==== *1.2.1 Diagramme des Cas d'Utilisation*
+
+image::./res/diagrammes/duc.svg[Diagramme des Cas d'Utilisation]
+
 <<<
 == *2. Architecture de l'application*
 
