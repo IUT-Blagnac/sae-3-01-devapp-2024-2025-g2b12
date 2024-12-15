@@ -326,8 +326,9 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
 
 ====== Configuration
 
+La classe modèle représentant la configuration paramétrée par l'utilisateur (`Configuration.java`) est implémentée en _Singleton_ en ce que l'application permet actuellement de définir une seule configuration à la fois. En d'autres termes, une nouvelle configuration écrase automatiquement la configuration précédente.
 
-
+Une implémentation selon le patron _Singleton_ permet ainsi à cette classe de fournir une méthode donnant accès à l'unique instance de la configuration.
 
 ==== *2.3.2 Packages*
 
