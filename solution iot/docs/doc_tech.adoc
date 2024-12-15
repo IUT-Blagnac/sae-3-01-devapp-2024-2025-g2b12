@@ -184,6 +184,7 @@ La première ligne de chaque fichier CSV contient les en-têtes décrivant la na
 
 *À noter :* Dans les fichiers CSV manipulés, le séparateur de données utilisé est le point-virgule (`;`).
 
+[[fichier-de-donnees-global]]
 ====== Fichier de données global
 
 Le fichier `data.csv` correspond au fichier de données global. Il contient les dernières données reçues pour chaque sujet.
@@ -203,6 +204,7 @@ STRUCTURE DU FICHIER::
 ...
 ----
 
+[[fichier-d-alertes]]
 ====== Fichier d'alertes (capteurs AM107 uniquement)
 
 Le fichier `alert.csv` correspond au fichier d'alertes. Il contient l'ensemble des alertes déclenchées par des dépassements de seuils. Une ligne de données du fichier correspond donc à une alerte pour un type de données et pour une salle.
@@ -358,7 +360,7 @@ application
 
 `application` : Package "racine" de l'application.
 
-    * `ApplicationMainFrame` : contrôleur de dialogue de la fenêtre principale de l'application (menu principal).
+    * `ApplicationMainFrame` : Contrôleur de dialogue du menu principal (fenêtre principale de l'application).
     * `Main` : Classe principale de l'application.
 
 `application.config` : Package des classes  manipulant le fichier de configuration.
@@ -391,11 +393,11 @@ application
 
 `application.styles` : Package des classes de stylisation de l'interface graphique.
 
-    * `FontLoader` : Classe d'accès aux typographiques (fonts) utilisées dans l'interface graphique de l'application.
+    * `FontLoader` : Classe d'accès aux typographiques (fonts) utilisées dans l'interface graphique.
 
 `application.thread` : Package des threads.
 
-    * `CsvReaderTask` : Thread chargé de lire les fichiers de données CSV (fichiers `data.csv` et `alert.csv`)
+    * `CsvReaderTask` : Thread chargé de lire les fichiers de données `data.csv` (Cf. <<fichier-de-donnees-global,Fichier de données global>>) et `alert.csv` (Cf. <<fichier-d-alertes,Fichier d'alertes>>).
     * `UpdateAlertDisplayTask` : Thread chargé de la mise à jour de l'affichage des alertes dans le tableau de bord.
     * `UpdateDataDisplayTask` : Thread chargé de la mise à jour de l'affichage des données dans le tableau de bord.
 
@@ -403,13 +405,13 @@ application
 
     * `DataFileReading` : Classe utilitaire fournissant des méthodes de lecture de fichiers de données.
     * `GraphGenerator` : Classe utilitaire fournissant des méthodes de génération de graphiques.
-    * `TextUtilities` : Classe utilitaire fournissant des méthodes relatives à des éléments textuels (*NON UTILISÉE*).
+    * `TextUtilities` : Classe utilitaire fournissant des méthodes relatives à des éléments textuels (NON UTILISÉE).
 
 `application.view` : Package des contrôleurs de vue (Cf. <<architecture-mvc,Architecture MVC>>).
 
     * `ApplicationMainFrameViewController` : Contrôleur de vue du menu principal.
     * `ConfigurationFileFormViewController` : Contrôleur de vue du formulaire de paramétrage de la configuration.
-    * `DataVisualisationPaneViewController` : Contrôleur de vue du tableau de bord (fenêtre de visualisation des données).
+    * `DataVisualisationPaneViewController` : Contrôleur de vue du tableau de bord.
 
 === 2.4 Spécifications techniques
 
