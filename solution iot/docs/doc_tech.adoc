@@ -415,7 +415,11 @@ application
 
 === 2.4 Spécifications techniques
 
-==== *2.4.1 Structures récurrentes de classes*
+==== *2.4.1 Conventions de nommage*
+
+==== *2.4.2 Conventions de commentaire*
+
+==== *2.4.3 Structures récurrentes de classes*
 
 ===== *_Contrôleurs de dialogue_*
 
@@ -603,15 +607,13 @@ public class ExampleViewController
 }
 ----
 
-==== *2.4.2 Intéractions MVC*
+==== *2.4.4 Intéractions MVC*
 
-==== *2.4.3 Threads utilisés*
+==== *2.4.5 Threads utilisés*
 
 ===== *_Thread de récupération des données_*
 
 ===== *_Threads de mise à jour de l'affichage_*
-
-==== *2.4.4 Conventions de commentaire*
 
 <<<
 == *3. Conception et mise en oeuvre des fonctionnalités*
