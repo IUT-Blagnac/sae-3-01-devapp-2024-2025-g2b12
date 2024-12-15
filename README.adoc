@@ -134,7 +134,7 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 |WEB| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/document_conception.adoc[Document de conception]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
-| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Recette]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
 |IOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/2ee8233fd24e4ebbce792844094cbf96eb9ffbd2/solution%20iot/docs/doc_tech.adoc[Documentation technique]
 |===
 
@@ -162,7 +162,7 @@ Récapitulatif des informations mises à jour - Dernière MAJ : 14/12/24
 
 ✓ Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : 
 
-✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Recette]
+✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
 
 ✓ Indicateurs de qualité du code (dette technique) : 
 
@@ -173,7 +173,7 @@ Ci-dessous un récapitulatif des séances de travail effectuées en télétravai
 
 |===
 | *Etudiant*| *Dates*
-| Léo Guinvarc'h| ✓ 29/11 matin
+| Léo Guinvarc'h| ✓ 29/11 matin, 18/12 matin 
 | Victor Jockin| ✓
 | Mucahit Lekesiz| ✓
 | Nolhan Biblocque| ✓
