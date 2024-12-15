@@ -175,6 +175,7 @@ frequency={{ FRÉQUENCE }}
     * `frequency` : Fréquence de lecture des données.
         ** *À noter :* La valeur pour ce paramètre n'a actuellement aucun impact sur le comportement du programme Python car non traitée. La fréquence définie lors du paramétrage de la configuration est cependant prise en compte par le processus de lecture des données de l'application Java.
 
+[[fichiers-de-donnees]]
 ===== *_Fichiers de données_*
 
 Les fichiers de données situés sous le répertoire `resources/data` sont des fichiers CSV permettant de stocker les données des capteurs. Ces fichiers sont créés et remplis par le programme Python et lus par l'application Java.
@@ -298,6 +299,7 @@ STRUCTURE DU FICHIER::
 
 ==== *2.3.1 Patterns mis en oeuvre*
 
+[[architecture-mvc]]
 ===== *_Architecture MVC_*
 
 L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Model-View-Controller) permettant la séparation des couches de *présentation*, de *logique métier* et de *traitement des actions utilisateur*.
@@ -326,13 +328,88 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
 
 ====== Configuration
 
-La classe modèle représentant la configuration paramétrée par l'utilisateur (`Configuration.java`) est implémentée en _Singleton_ en ce que l'application permet actuellement de définir une seule configuration à la fois. En d'autres termes, une nouvelle configuration écrase automatiquement la configuration précédente.
+La classe modèle représentant la configuration paramétrée par l'utilisateur (`Configuration.java`) est implémentée en _Singleton_ en ce que l'application permet actuellement de définir une seule configuration à la fois. En d'autres termes, lorsqu'une nouvelle configuration est définie, celle-ci écrase automatiquement la configuration précédente.
 
 Une implémentation selon le patron _Singleton_ permet ainsi à cette classe de fournir une méthode donnant accès à l'unique instance de la configuration.
 
 NOTE: Cette implémentation serait susceptible d'évoluer si un mécanisme d'historisation ou de sauvegarde des différentes configurations déifnies par l'utilisateur était mis en place.
 
 ==== *2.3.2 Packages*
+
+===== *_Arborescence des packages_*
+
+Les packages de l'application Java sont situés sous le répertoire `src/main/java`.
+
+[source,bash]
+----
+application
+├── config
+├── control
+├── data
+├── enums
+├── model
+├── styles
+├── thread
+├── tools
+└── view
+----
+
+===== *_Description des packages et de leur contenu_*
+
+`application` : Package "racine" de l'application.
+
+    * `ApplicationMainFrame` : contrôleur de dialogue de la fenêtre principale de l'application (menu principal).
+    * `Main` : Classe principale de l'application.
+
+`application.config` : Package des classes  manipulant le fichier de configuration.
+
+    * `ConfigurationFileWriter` : Classe permettant d'écrire un fichier de configuration.
+
+`application.control` : Package des contrôleurs de dialogue (Cf. <<architecture-mvc,Architecture MVC>>).
+
+    * `ConfirmationFileForm` : Contrôleur de dialogue du formulaire de paramétrage de la configuration.
+    * `DataVisualisationPane` : Contrôleur de dialogue du tableau de bord (fenêtre de visualisation des données).
+    * *À noter :* La classe `ApplicationMainFrame` située dans le package `application` pourrait être déplacée dans ce package en ce qu'il s'agit d'un contrôleur de dialogue.
+
+`application.data` : Package des classes relatives aux données.
+
+    * `DataCollector` : Classe de gestion du processus de collecte des données.
+    * `DataLoader` : Classe d'accès aux fichiers de données.
+    * `DataTypeUtilities` : Classe utilitaire fournissant des méthodes relatives aux types données (ex : formatage de noms).
+
+`application.enums` : Package des énumérations.
+
+    * `Room` : Classe d'énumération des salles existantes.
+    * `RoomDataType` : Classe d'énumération des types de données des salles.
+    * `Sensor` : Classe d'énumération des types de capteurs (`AM107` / `SOLAREDGE`).
+    * `SolarPanelDataType` : Classe d'énumération des types de données des panneaux solaires.
+
+`application.model` : Package des classes modèles (Cf. <<architecture-mvc,Architecture MVC>>).
+
+    * `Configuration` : Classe modèle représentant une configuration.
+    * `DataRow` : Classe modèle représentant une ligne de données (Cf. <<fichiers-de-donnees,Fichiers de données>>).
+
+`application.styles` : Package des classes de stylisation de l'interface graphique.
+
+    * `FontLoader` : Classe d'accès aux typographiques (fonts) utilisées dans l'interface graphique de l'application.
+
+`application.thread` : Package des threads.
+
+    * `CsvReaderTask` : Thread chargé de lire les fichiers de données CSV (fichiers `data.csv` et `alert.csv`)
+    * `UpdateAlertDisplayTask` : Thread chargé de la mise à jour de l'affichage des alertes dans le tableau de bord.
+    * `UpdateDataDisplayTask` : Thread chargé de la mise à jour de l'affichage des données dans le tableau de bord.
+
+`application.tools` : Package des classes utilitaires.
+
+    * `DataFileReading` : Classe utilitaire fournissant des méthodes de lecture de fichiers de données.
+    * `GraphGenerator` : Classe utilitaire fournissant des méthodes de génération de graphiques.
+    * `TextUtilities` : Classe utilitaire fournissant des méthodes relatives à des éléments textuels (*NON UTILISÉE*).
+
+`application.view` : Package des contrôleurs de vue (Cf. <<architecture-mvc,Architecture MVC>>).
+
+    * `ApplicationMainFrameViewController` : Contrôleur de vue du menu principal.
+    * `ConfigurationFileFormViewController` : Contrôleur de vue du formulaire de paramétrage de la configuration.
+    * `DataVisualisationPaneViewController` : Contrôleur de vue du tableau de bord (fenêtre de visualisation des données).
 
 === 2.4 Spécifications techniques
 
