@@ -324,6 +324,9 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
 
 ===== *_Composants en Singleton_*
 
+====== Configuration
+
+
 
 
 ==== *2.3.2 Packages*
