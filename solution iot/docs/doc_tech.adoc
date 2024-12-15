@@ -803,6 +803,8 @@ public class ExampleViewController
 
 ==== *2.4.4 Intéractions MVC*
 
+
+
 ==== *2.4.5 Threads utilisés*
 
 ===== *_Thread de récupération des données_*
@@ -811,6 +813,10 @@ public class ExampleViewController
 
 <<<
 == *3. Conception et mise en oeuvre des fonctionnalités*
+
+=== 3.1 Diagramme de Séquence Système
+
+image::./res/diagrammes/dss.svg[Diagramme de Séquence Système, 600]
 
 <<<
 == *4. Procédures d'installation*

@@ -1,0 +1,17 @@
+@startuml
+header SAE S3.01 DevApp - 2024/2025
+actor Utilisateur   as u
+participant Système as s
+u ->  s : Création d'une configuration
+u <-- s : Enregistrement de la configuration
+u ->  s : Ouverture du tableau de bord
+u <-- s : Affichage des données des capteurs
+group Actions indépendantes
+    u ->  s : Sélection d'un sujet et d'un type de données
+    u <-- s : Affichage d'un graphique d'évolution
+    u ->  s : Sélection d'un type de données
+    u <-- s : Affichage d'un diagramme de comparaison
+end
+hide footbox
+footer Victor Jockin - Équipe 2B12
+@enduml
