@@ -824,6 +824,29 @@ public class ExampleViewController
 
 image::./res/diagrammes/dss.svg[Diagramme de Séquence Système, 450]
 
+=== 3.2 Implémentation des fonctionnalités
+
+==== *3.2.1 Lancement de l'application*
+
+===== *_Diagramme de Séquence_*
+image::./res/diagrammes/ds321.svg[Diagramme de Séquence - Lancement de l'application, 720]
+
+==== *3.2.2 Création d'une configuration*
+
+===== *_Diagramme de Séquence_*
+
+==== *3.2.3 Visualisation des données*
+
+===== *_Diagramme de Séquence_*
+
+==== *3.2.4 Affichage d'un graphique de comparaison*
+
+===== *_Diagramme de Séquence_*
+
+==== *3.2.5 Affichage d'un graphique d'évolution*
+
+===== *_Diagramme de Séquence_*
+
 <<<
 == *4. Procédures d'installation*
 
