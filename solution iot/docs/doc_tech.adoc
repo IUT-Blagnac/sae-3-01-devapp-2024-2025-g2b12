@@ -506,9 +506,9 @@ S'applique uniquement aux paramètres de fonctions et de méthodes.
 
 ==== *2.4.2 Conventions de commentaire*
 
-===== *Format de commentaire d'en-tête de classe*
+===== *Commentaire d'en-tête de classe*
 
-Modèle de commentaire::
+====== Modèle
 [source,java]
 ----
 /**
@@ -523,7 +523,7 @@ Modèle de commentaire::
  */
 ----
 
-Exemple : `ConfigurationFileForm`::
+====== Exemple : `ConfigurationFileForm`
 [source,java]
 ----
 /**
@@ -538,6 +538,31 @@ Exemple : `ConfigurationFileForm`::
  */
 ----
 
+===== *Commentaire d'en-tête de méthode*
+
+====== Modèle
+[source,java]
+----
+/**
+ * [ RÔLE DE LA MÉTHODE ]
+ * @param pParam1    [ DESCRIPTION DU PARAMÈTRE ]
+ * @param pParam2    [ DESCRIPTION DU PARAMÈTRE ]
+ * ...
+ * @return  [ DESCRIPTION DE LA VALEUR RETOURNÉE ]
+ * @throws EXCEPTION [ CONDITION DE LEVÉE DE L'EXCEPTION ]
+ */
+----
+
+====== Exemple : `ConfigurationFileForm.isThresholdValid(RoomDataType, double)`
+[source,java]
+----
+/**
+ * Indique si un seuil d'alerte pour un type de données de salle est valide.
+ * @param pRoomDataType un type de données de salle
+ * @param pThreshold    un seuil d'alerte
+ * @return  true si le seuil d'alerte est valide, false sinon
+ */
+----
 
 ==== *2.4.3 Structures récurrentes de classes*
 
