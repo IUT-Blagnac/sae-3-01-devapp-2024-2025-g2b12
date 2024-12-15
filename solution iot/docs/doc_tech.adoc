@@ -417,11 +417,7 @@ application
 
 ==== *2.4.1 Conventions de nommage*
 
-NOTE: L'anglais est utilisé pour tous les noms de classes, de packages, de vues, de fichiers et de variables.
-
-===== *_Nommage des vues FXML_*
-* *Règle :* Nom de la vue en Lower Camel Case.
-* *Exemple :* Vue du formulaire de paramétrage de la configuration → `configurationFileForm.fxml`.
+NOTE: L'anglais est utilisé pour tous les noms de classes, de variables, de packages, de vues et de fichiers.
 
 ===== *_Nommage des classes_*
 
@@ -439,7 +435,37 @@ Les noms de classes Java sont formatés en Upper Camel Case.
 * *Règle :* Objet manipulé + `Utilities`.
 * *Exemple :* Classe utilitaire fournissant des méthodes relatives aux types données → `DataTypeUtilities`.
 
+====== Classes modèle
+* *Règle :* Nom de l'objet représenté.
+* *Exemple :* Classe modèle représentant une configuration → `Configuration`.
+
+====== Classes d'énumération
+* *Règle :* Nom du type d'objet énuméré.
+* *Exemple :* d'énumération des salles → `Room`.
+
+NOTE: Les classes d'énumération, pouvant avoir des noms identiques à ceux de classes modèles, ont été placées dans un package `enums` dédié afin d'éviter toute confusion.
+
+====== Threads
+* *Règle :* Nom de la tâche réaliée par le thread + `Task`.
+* *Exemple :* Thread chargé de la mise à jours de l'affichage des données dans le tableau de bord → `UpdateDataDisplayTask`.
+
+====== Classes avec méthodes statiques
+* *Règle :* Objet concerné + Verbe d'action.
+* *Exemple :* Classe d'accès aux données → `DataLoader`.
+
 ===== *_Nommage des variables_*
+
+====== Variables éphémères
+
+====== Variables récurrentes
+
+===== *_Nommage des packages_*
+* *Règle :* Nom court décrivant le type des classes contenues par la package en Lower Camel Case.
+* *Exemple :* Package des classes utilitaires → `tools`.
+
+===== *_Nommage des vues FXML_*
+* *Règle :* Nom de la vue en Lower Camel Case.
+* *Exemple :* Vue du formulaire de paramétrage de la configuration → `configurationFileForm.fxml`.
 
 ==== *2.4.2 Conventions de commentaire*
 
