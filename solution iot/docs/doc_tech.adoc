@@ -845,6 +845,11 @@ image::./res/diagrammes/ds322-2.svg[Diagramme de Séquence - Enregistrement d'un
 
 ==== *3.2.3 Visualisation des données*
 
+===== *_Ouverture du tableau de bord_*
+
+====== Diagramme de Séquence
+image::./res/diagrammes/ds323-1.svg[Diagramme de Séquence - Ouverture du tableau de bord, 1250]
+
 ==== *3.2.4 Affichage d'un graphique de comparaison*
 
 ==== *3.2.5 Affichage d'un graphique d'évolution*

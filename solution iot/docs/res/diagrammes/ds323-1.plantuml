@@ -1,0 +1,34 @@
+@startuml
+header SAE S3.01 DevApp - 2024/2025
+actor Utilisateur as u
+participant "amfvc:ApplicationMainFrameViewController" as amfvc
+participant "amf:ApplicationMainFrame" as amf
+participant "config:Configuration" as config
+participant "dvp:DataVisualisationPane" as dvp
+participant FXMLLoader as fl #lightgrey
+participant "dvpvc:DataVisualisationPaneViewController" as dvpvc
+participant "DataCollector" as dc
+participant "CsvReaderTask" as csvrt
+u -> amfvc : doVisualiserDonnees()
+amfvc -> config : isDefined()
+amfvc <-- config : isDefined
+alt isDefined == true
+    amfvc -> amf : amf.visualiserDonnees()
+    amf -> dvp : new DataVisualisationPane(amf.amfStage)
+    dvp -> fl : getController()
+    dvp <-- fl : dvpvc
+    dvp -> dvpvc : dvpvc.setStage(amf.amfStage)
+    dvp -> dvpvc : dvpvc.setAmfDialogController(amf)
+    dvp -> dvpvc : dvpvc.initializeView()
+    dvpvc -> dc : startCollectionProcess()
+    amf <-- dvp : dvp
+    amf -> dvp : dvp.doDataVisualisationPaneDialog()
+    dvp -> dvpvc : dvpvc.displayDialog()
+    group startCsvReaderThread()
+        dvp -> csvrt : new CsvReaderTask(dvp, ';')
+    end
+    u <-- dvpvc : Ouverture du tableau de bord
+end
+hide footbox
+footer Victor Jockin - Équipe 2B12
+@enduml
