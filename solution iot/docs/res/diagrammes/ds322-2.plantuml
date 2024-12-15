@@ -6,8 +6,9 @@ participant "amf:ApplicationMainFrame" as amf
 participant "cff:ConfigurationFileForm" as cff
 participant FXMLLoader as fl #lightgrey
 participant "cffvc:ConfigurationFileFormViewController" as cffvc
+participant "config:Configuration" as config
 u -> amfvc : doConfiguration()
-amfvc -> amf : amfvc.parametrerConfiguration()
+amfvc -> amf : amf.parametrerConfiguration()
 amf -> cff : new ConfigurationFileForm(amf.amfStage)
 cff -> fl : getController()
 cff <-- fl : cffvc
@@ -17,6 +18,17 @@ cff -> cffvc : cffvc.initializeView()
 amf <-- cff : cff
 amf -> cff : cff.doConfigurationFileFormDialog()
 cff -> cffvc : cffvc.displayDialog()
+u <-- cffvc : Ouverture du formulaire de paramétrage de la configuration
+u -> cffvc : doSave()
+cff <- cffvc : enregistrerConfiguration()
+cff -> config : getInstance()
+cff <-- config : config
+cff -> config : config.setName()
+cff -> config : config.setTopicPrefix()
+cff -> config : config.setSubjectList()
+cff -> config : config.setDataTypeList()
+cff -> config : config.setThresholdMap()
+cff -> config : config.setReadingFrequency()
 hide footbox
 footer Victor Jockin - Équipe 2B12
 @enduml

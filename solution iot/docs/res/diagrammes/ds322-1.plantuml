@@ -1,0 +1,23 @@
+@startuml
+header SAE S3.01 DevApp - 2024/2025
+actor Utilisateur as u
+participant "amfvc:ApplicationMainFrameViewController" as amfvc
+participant "amf:ApplicationMainFrame" as amf
+participant "cff:ConfigurationFileForm" as cff
+participant FXMLLoader as fl #lightgrey
+participant "cffvc:ConfigurationFileFormViewController" as cffvc
+u -> amfvc : doConfiguration()
+amfvc -> amf : amf.parametrerConfiguration()
+amf -> cff : new ConfigurationFileForm(amf.amfStage)
+cff -> fl : getController()
+cff <-- fl : cffvc
+cff -> cffvc : cffvc.setStage(amf.amfStage)
+cff -> cffvc : cffvc.setAmfDialogController(amf)
+cff -> cffvc : cffvc.initializeView()
+amf <-- cff : cff
+amf -> cff : cff.doConfigurationFileFormDialog()
+cff -> cffvc : cffvc.displayDialog()
+u <-- cffvc : Ouverture du formulaire de paramétrage de la configuration
+hide footbox
+footer Victor Jockin - Équipe 2B12
+@enduml
