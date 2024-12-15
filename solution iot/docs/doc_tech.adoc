@@ -417,6 +417,93 @@ application
 
 ==== *2.4.1 Structures récurrentes de classes*
 
+===== *_Contrôleurs de dialogue_*
+
+[source,java]
+----
+public class Example
+{
+    // déclaration des constantes
+    // --------------------------
+
+    private static final double MIN_WINDOW_WIDTH    = ... ;     // largeur minimale de la fenêtre
+    private static final double MIN_WINDOW_HEIGHT   = ... ;     // hauteur minimale de la fenêtre
+    ...
+
+
+    // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de dialogue
+    private Stage eStage ;
+    private ExampleViewController eViewController ;
+
+    // attributs relatifs au Modèle
+    ...
+
+    /**
+     * Constructeur : charge la fenêtre d'exemple.
+     */
+    public Example(Stage _parentStage)
+    {
+        try
+        {
+            // initialisation des attributs relatifs au Modèle
+            ...
+
+            // initialisation d'un nouveau stage pour la fenêtre d'exemple
+            this.eStage = new Stage() ;
+            this.eStage.initOwner(_parentStage) ;
+            this.eStage.initModality(Modality.WINDOW_MODAL) ;
+
+            // chargement de la vue FXML de la fenêtre d'exemple
+            FXMLLoader fxmlLoader = new FXMLLoader(ExampleViewController.class.getResource("example.fxml")) ;
+
+            // initialisation de la scène
+            Scene scene = new Scene(fxmlLoader.load(), MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT) ;
+            this.eStage.setScene(scene) ;
+            this.eStage.setTitle("Exemple") ;
+
+            // initialisation du contrôleur de vue
+            this.eViewController = fxmlLoader.getController() ;
+            this.eViewController.setStage(this.eStage) ;
+            this.eViewController.setCffDialogController(this) ;
+            this.eViewController.initializeView() ;
+
+            // application des styles à la scène
+            this.eStage.getScene().getStylesheets().add(getClass().getResource("/application/style/e.css").toExternalForm()) ;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace() ;
+        }
+    }
+
+
+    // accesseurs
+    // ----------
+
+    ...
+
+
+    // méthodes publiques de gestion du dialogue
+    // -----------------------------------------
+
+    /**
+     * Effectue le dialogue d'exemple.
+     */
+    public void doExampleDialog() { this.eViewController.displayDialog() ; }
+
+    ...
+
+
+    // méthodes privées
+    // ----------------
+
+    ...
+}
+----
+
 ===== *_Contrôleurs de vue_*
 
 [source,java]
@@ -426,7 +513,7 @@ public class ExampleViewController
     // déclaration des constantes
     // --------------------------
 
-    private static final ... ;
+    ...
 
 
     // déclaration des attributs
@@ -437,17 +524,18 @@ public class ExampleViewController
     private Example eDialogController ;
 
     // attributs relatifs au Modèle
-    private ... ;
+    ...
 
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
     // --------------------------------------------------------------------
 
     @FXML private ... ;
+    ...
 
 
     // méthodes d'initialisation du contrôleur de vue
-    // ---------------------------------------------
+    // ----------------------------------------------
 
     /**
      * Définit le stage de la vue.
@@ -462,7 +550,7 @@ public class ExampleViewController
      * Définit le contrôleur de dialogue de la vue.
      * @param _eDialogController  un contrôleur de dialogue
      */
-    public void setCffDialogController(Example _eDialogController)
+    public void setEDialogController(Example _eDialogController)
     {
         this.eDialogController = _eDialogController ;
     }
@@ -495,8 +583,8 @@ public class ExampleViewController
     }
 
 
-    // méthodes d'actions
-    // ------------------
+    // méthodes de traitement des actions utilisateur
+    // ----------------------------------------------
 
     /**
      * Ferme la fenêtre.
@@ -514,10 +602,6 @@ public class ExampleViewController
     ...
 }
 ----
-
-
-
-===== *_Contrôleurs de dialogue_*
 
 ==== *2.4.2 Intéractions MVC*
 
