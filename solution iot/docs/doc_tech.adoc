@@ -397,7 +397,7 @@ application
 
 `application.thread` : Package des threads.
 
-    * `CsvReaderTask` : Thread chargé de lire les fichiers de données `data.csv` (Cf. <<fichier-de-donnees-global,Fichier de données global>>) et `alert.csv` (Cf. <<fichier-d-alertes,Fichier d'alertes>>).
+    * `CsvReaderTask` : Thread chargé de lire le <<fichier-de-donnees-global,fichier de données global>> (`data.csv`) et le <<fichier-d-alertes,fichier d'alertes>> (`alert.csv`).
     * `UpdateAlertDisplayTask` : Thread chargé de la mise à jour de l'affichage des alertes dans le tableau de bord.
     * `UpdateDataDisplayTask` : Thread chargé de la mise à jour de l'affichage des données dans le tableau de bord.
 
