@@ -425,7 +425,7 @@ public class ExampleViewController
 {
     // déclaration des constantes
     // --------------------------
-    
+
     private static final ... ;
 
 
@@ -442,7 +442,12 @@ public class ExampleViewController
 
     // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
     // --------------------------------------------------------------------
+
     @FXML private ... ;
+
+
+    // méthodes d'initialisation du contrôleur de vue
+    // ---------------------------------------------
 
     /**
      * Définit le stage de la vue.
@@ -486,8 +491,8 @@ public class ExampleViewController
     private void closeWindow(WindowEvent e)
     {
         this.doClose() ;
-		e.consume() ;
-	}
+        e.consume() ;
+    }
 
 
     // méthodes d'actions
