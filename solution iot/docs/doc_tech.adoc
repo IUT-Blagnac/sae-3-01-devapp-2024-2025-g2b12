@@ -1,13 +1,27 @@
+= Documentation Technique
+:compat-mode!:
+:toc:
+:toc-title: Sommaire
+:toclevels: 4
+:icons: font
+:stem: latexmath
+
+// paramères relatif à GitHub
+ifdef::env-github[]
+:note-caption: :information_source:
+:stem: latexmath
+endif::[]
+
 // page de garde
+// -------------
+<<<
+---
 // logos IUT Blagnac + UT2J
 [.text-center]
 image::./res/iut-blagnac.jpg[Logo IUT de Blagnac, 200]
 [.text-center]
 image::./res/ut2j.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
 [.text-center]
-// -------------
-<<<
----
 *Étudiants* +
 Nolhan Biblocque +
 Léo Guinvarc'h +
@@ -26,26 +40,6 @@ Promotion 2024-2025 +
 *Établissement* +
 IUT de Blagnac +
 Université Toulouse II – Jean Jaurès (31)
-
-// -------------
-<<<
----
-
-
-= Documentation Technique
-:compat-mode!:
-:toc:
-:toc-title: Sommaire
-:toclevels: 4
-:icons: font
-:stem: latexmath
-
-// paramères relatif à GitHub
-ifdef::env-github[]
-:note-caption: :information_source:
-:stem: latexmath
-endif::[]
-
 
 == *1. Présentation de l'application*
 
@@ -826,7 +820,6 @@ public class ExampleViewController
 == *3. Conception et mise en oeuvre des fonctionnalités*
 
 === 3.1 Diagramme de Séquence Système
-
 image::./res/diagrammes/dss.svg[Diagramme de Séquence Système, 450]
 
 === 3.2 Implémentation des fonctionnalités

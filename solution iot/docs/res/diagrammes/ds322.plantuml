@@ -1,21 +1,22 @@
 @startuml
 header SAE S3.01 DevApp - 2024/2025
 actor Utilisateur as u
-participant "Main" as m
-participant "amf:ApplicationMainFrame" as amf
-participant FXMLLoader as fl #lightgrey
 participant "amfvc:ApplicationMainFrameViewController" as amfvc
-u -> m : Lancement de l'application
-m -> amf : runApp()
-group amf.start()
-    amf -> fl : getController()
-    amf <-- fl : amfvc
-    amf -> amfvc : amfvc.setStage(amf.amfStage)
-    amf -> amfvc : amfvc.setAmfDialogController(amf)
-    amf -> amfvc : amfvc.initializeView()
-    amf -> amfvc : amfvc.displayDialog()
-end
-u <-- amfvc : Ouverture du menu principal
+participant "amf:ApplicationMainFrame" as amf
+participant "cff:ConfigurationFileForm" as cff
+participant FXMLLoader as fl #lightgrey
+participant "cffvc:ConfigurationFileFormViewController" as cffvc
+u -> amfvc : doConfiguration()
+amfvc -> amf : amfvc.parametrerConfiguration()
+amf -> cff : new ConfigurationFileForm(amf.amfStage)
+cff -> fl : getController()
+cff <-- fl : cffvc
+cff -> cffvc : cffvc.setStage(amf.amfStage)
+cff -> cffvc : cffvc.setAmfDialogController(amf)
+cff -> cffvc : cffvc.initializeView()
+amf <-- cff : cff
+amf -> cff : cff.doConfigurationFileFormDialog()
+cff -> cffvc : cffvc.displayDialog()
 hide footbox
 footer Victor Jockin - Équipe 2B12
 @enduml
