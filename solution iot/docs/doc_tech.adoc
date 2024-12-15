@@ -838,6 +838,11 @@ image::./res/diagrammes/ds321.svg[Diagramme de Séquence - Ouverture du menu pri
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds322-1.svg[Diagramme de Séquence - Ouverture du formulaire de paramétrage de la configuration, 900]
 
+===== *_Enregistrement d'une configuration_*
+
+====== Diagramme de Séquence
+image::./res/diagrammes/ds322-2.svg[Diagramme de Séquence - Enregistrement d'une configuration, 900]
+
 ==== *3.2.3 Visualisation des données*
 
 ==== *3.2.4 Affichage d'un graphique de comparaison*
