@@ -824,14 +824,14 @@ image::./res/diagrammes/dss.svg[Diagramme de Séquence Système, 450]
 
 === 3.2 Implémentation des fonctionnalités
 
-==== *3.2.1 Lancement de l'application*
+==== *3.2.1 Menu principal*
 
 ===== *_Ouverture du menu principal_*
 
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds321.svg[Diagramme de Séquence - Ouverture du menu principal, 720]
 
-==== *3.2.2 Création d'une configuration*
+==== *3.2.2 Formulaire de paramétrage de la configuration*
 
 ===== *_Ouverture du formulaire de paramétrage de la configuration_*
 
@@ -843,16 +843,18 @@ image::./res/diagrammes/ds322-1.svg[Diagramme de Séquence - Ouverture du formul
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds322-2.svg[Diagramme de Séquence - Enregistrement d'une configuration, 900]
 
-==== *3.2.3 Visualisation des données*
+==== *3.2.3 Tableau de bord*
 
 ===== *_Ouverture du tableau de bord_*
 
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds323-1.svg[Diagramme de Séquence - Ouverture du tableau de bord, 1250]
 
-==== *3.2.4 Affichage d'un graphique de comparaison*
+===== *_Mise à jour automatique des données affichées_*
 
-==== *3.2.5 Affichage d'un graphique d'évolution*
+===== *_Affichage d'un graphique de comparaison_*
+
+===== *_Affichage d'un graphique d'évolution_*
 
 <<<
 == *4. Procédures d'installation*
