@@ -417,6 +417,30 @@ application
 
 ==== *2.4.1 Conventions de nommage*
 
+NOTE: L'anglais est utilisé pour tous les noms de classes, de packages, de vues, de fichiers et de variables.
+
+===== *_Nommage des vues FXML_*
+* *Règle :* Nom de la vue en Lower Camel Case.
+* *Exemple :* Vue du formulaire de paramétrage de la configuration → `configurationFileForm.fxml`.
+
+===== *_Nommage des classes_*
+
+Les noms de classes Java sont formatés en Upper Camel Case.
+
+====== Contrôleurs de dialogue
+* *Règle :* Nom de la vue FXML en Upper Camel Case.
+* *Exemple :* Contrôleur de dialogue associé à la vue `configurationFileForm.fxml` → `ConfigurationFileForm`.
+
+====== Contrôleurs de vue
+* *Règle :* Nom de la vue FXML en Upper Camel Case + `ViewController`.
+* *Exemple :* Contrôleur de la vue `configurationFileForm.fxml` → `ConfigurationFileFormViewController`.
+
+====== Classes utilitaires
+* *Règle :* Objet manipulé + `Utilities`.
+* *Exemple :* Classe utilitaire fournissant des méthodes relatives aux types données → `DataTypeUtilities`.
+
+===== *_Nommage des variables_*
+
 ==== *2.4.2 Conventions de commentaire*
 
 ==== *2.4.3 Structures récurrentes de classes*
@@ -445,9 +469,9 @@ src/
 └── ...
 ----
 
-. `Example.java` : Contrôleur de dialogue d'exemple.
-. `ExampleViewController.java` : Contrôleur de vue d'exemple.
-. `example.fxml` : Vue FXML d'exemple.
+. Contrôleur de dialogue d'exemple.
+. Contrôleur de vue d'exemple.
+. Vue FXML d'exemple.
 
 ===== *_Contrôleurs de dialogue_*
 
