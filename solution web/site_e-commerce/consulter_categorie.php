@@ -26,6 +26,30 @@ require_once('./include/menu.php');
                     transform: translateY(-2px);
                     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
                 }
+
+                .product-title {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                }
+
+                .card {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+                }
+
+                .card:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+                    background-color: rgba(136, 172, 223, 0.1);
+                }
+
+                .card-body {
+                    transition: background-color 0.3s ease;
+                }
+
+                .card-body:hover {
+                    background-color: rgba(136, 172, 223, 0.2);
+                }
+                
             </style>
 
             <?php
@@ -71,19 +95,33 @@ require_once('./include/menu.php');
                     // Fusionner les résultats
                     $tousProduits = array_merge($prodPrincipaux, $prodSousCateg);
 
-                    if (!empty($tousProduits)) {
+                    // Regrouper les produits par nom
+                    $produitsParNom = [];
+                    foreach ($tousProduits as $produit) {
+                        $produitsParNom[$produit['nomProduit']][] = $produit;
+                    }
+
+                    if (!empty($produitsParNom)) {
                         echo "<div class='row'>";
-                        foreach ($tousProduits as $produit) {
-                            $imagePath = "image/produits/prod" . htmlspecialchars($produit['idProduit']) . ".png";
-                            echo "<div class='col-md-4'>";
-                            echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "'>";
-                            echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\"); background-size: cover; background-position: center;'></div>";
-                            echo "<div class='card-body'>";
-                            echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
-                            echo "<p class='card-text'>" . htmlspecialchars($produit['prixProduit']) . " €</p>";
-                            echo "<p class='card-text'>" . htmlspecialchars($produit['specProduit']) . "</p>";
-                            echo "<button class='btn btn-custom' onclick='ajouterAuPanier(" . htmlspecialchars($produit['idProduit']) . ")'>Ajouter au panier</button>";
-                            echo "</div>";
+                        foreach ($produitsParNom as $nomProduit => $variantes) {
+                            echo "<div class='col-md-12'>";
+                            echo "<h3 class='product-title'>" . htmlspecialchars($nomProduit) . "</h3>";
+                            echo "<div class='row'>";
+                            foreach ($variantes as $produit) {
+                                $imagePath = "image/produits/prod" . htmlspecialchars($produit['idProduit']) . ".png";
+                                echo "<div class='col-md-4'>";
+                                echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produit['idProduit']) . "'>";
+                                echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "'>";
+                                echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\"); background-size: cover; background-position: center;'></div>";
+                                echo "<div class='card-body'>";
+                                echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
+                                echo "<p class='card-text'>" . htmlspecialchars($produit['prixProduit']) . " €</p>";
+                                echo "<p class='card-text'>" . htmlspecialchars($produit['specProduit']) . "</p>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</a>";
+                                echo "</div>";
+                            }
                             echo "</div>";
                             echo "</div>";
                         }
