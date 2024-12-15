@@ -330,6 +330,8 @@ La classe modèle représentant la configuration paramétrée par l'utilisateur 
 
 Une implémentation selon le patron _Singleton_ permet ainsi à cette classe de fournir une méthode donnant accès à l'unique instance de la configuration.
 
+NOTE: Cette implémentation serait susceptible d'évoluer si un mécanisme d'historisation ou de sauvegarde des différentes configurations déifnies par l'utilisateur était mis en place.
+
 ==== *2.3.2 Packages*
 
 === 2.4 Spécifications techniques
