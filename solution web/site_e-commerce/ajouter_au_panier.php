@@ -7,8 +7,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-if (isset($_POST['idProduit'])) {
+if (isset($_POST['idProduit']) && isset($_POST['quantity'])) {
     $idProduit = $_POST['idProduit'];
+    $quantity = $_POST['quantity'];
     $idClient = $_SESSION['user_id'];
 
     // Vérifiez si le produit est déjà dans le panier
@@ -18,7 +19,7 @@ if (isset($_POST['idProduit'])) {
 
     if ($result !== false) {
         // Si le produit est déjà dans le panier, mettez à jour la quantité
-        $newQuantity = $result['qteEnregistree'] + 1;
+        $newQuantity = $result['qteEnregistree'] + $quantity;
         $updatePanier = $conn->prepare("UPDATE ENREGISTRER SET qteEnregistree = :qteEnregistree WHERE idClient = :idClient AND idProduit = :idProduit");
         $updatePanier->execute(array(
             'qteEnregistree' => $newQuantity,
@@ -31,7 +32,7 @@ if (isset($_POST['idProduit'])) {
         $ajoutPanier->execute(array(
             'idClient' => $idClient,
             'idProduit' => $idProduit,
-            'qteEnregistree' => 1
+            'qteEnregistree' => $quantity
         ));
     }
 

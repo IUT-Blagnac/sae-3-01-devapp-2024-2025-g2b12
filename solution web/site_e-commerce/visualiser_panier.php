@@ -99,6 +99,17 @@ foreach ($produits as $prod) {
                     font-size: 1.5em;
                 }
 
+                .product-image-placeholder::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 5px; /* Largeur de la barre */
+                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(200, 200, 200, 0.75), rgba(0, 0, 0, 0));
+                    /* Couleurs plus claires */
+                }
+
                 .product-container {
                     display: flex;
                     flex-direction: column;
@@ -118,9 +129,12 @@ foreach ($produits as $prod) {
                 echo "<div class='card mb-4 shadow-sm'>";
                 echo "<div class='card-body'>";
                 foreach ($produits as $prod) {
+                    $imagePath = "image/produits/prod" . htmlspecialchars($prod['idProduit']) . ".png"; // Chemin de l'image
                     echo "<div class='row mb-3'>";
                     echo "<div class='col-md-4'>";
-                    echo "<div class='product-image-placeholder'>Image</div>"; // Placeholder pour l'image
+                    echo "<div class='product-image-placeholder'>";
+                    echo "<img src='" . $imagePath . "' alt='Image du produit' style='width: 100%; height: 100%; object-fit: cover;'>";
+                    echo "</div>";
                     echo "</div>";
                     echo "<div class='col-md-8 product-container'>";
                     echo "<div>";
