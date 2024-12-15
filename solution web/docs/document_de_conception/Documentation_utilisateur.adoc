@@ -1,4 +1,5 @@
-image::../docs/document_de_conception/img/logo_iut.png[]
+
+
 
 
 *IUT DE BLAGNAC*
@@ -12,6 +13,39 @@ _BUT2 Informatique - Année Universitaire 2024 / 2025_
 
 
 '''
+
+// PAGE DE GARDE
+
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
+
+---
+
+*Étudiants* +
+Nolhan Biblocque +
+Léo Guinvarc'h +
+Victor Jockin +
+Mathys Laguilliez +
+Mucahit Lekesiz
+
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---
+
+
+
 
 = DOCUMENTATION UTILISATEUR SITE E-COMMERCE *WOOHP RESELL*
 

@@ -1,4 +1,3 @@
-image::../docs/document_de_conception/img/logo_iut.png[]
 
 *IUT DE BLAGNAC*
 
@@ -17,6 +16,41 @@ _BUT2 Informatique - Année Universitaire 2024 / 2025_
 
 '''
 
+// PAGE DE GARDE
+
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
+
+---
+
+== Équipe projet G2b12
+
+
+|===
+2+|
+| Nom | Rôle |
+https://github.com/VictorJockin[*Victor Jockin*] | *Scrum Master* |
+https://github.com/34lks66[*Mucahit Lekesiz*] | *Product Owner* |
+https://github.com/Hextaz[*Nolhan Biblocque*] | *Développeur* |
+https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
+https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
+|===
+
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---
 
 
 
@@ -39,18 +73,7 @@ _BUT2 Informatique - Année Universitaire 2024 / 2025_
   - <<_2._Diagramme_de_classes, 2. Diagramme de classes>>
 - <<_VIII._Éléments_de_code_significatifs, VIII. Éléments de code significatifs>>
 
-== Équipe projet G2b12
 
-
-|===
-2+|
-| Nom | Rôle |
-https://github.com/VictorJockin[*Victor Jockin*] | *Scrum Master* |
-https://github.com/34lks66[*Mucahit Lekesiz*] | *Product Owner* |
-https://github.com/Hextaz[*Nolhan Biblocque*] | *Développeur* |
-https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
-https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
-|===
 
 == I. Introduction
 [.text-justify]

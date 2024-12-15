@@ -1,6 +1,3 @@
-image::../docs/document_de_conception/img/logo_iut.png[]
-
-
 *IUT DE BLAGNAC*
 
 *UNIVERSITE TOULOUSE II*
@@ -9,18 +6,15 @@ image::../docs/document_de_conception/img/logo_iut.png[]
 
 _BUT2 Informatique - Année Universitaire 2024 / 2025_
 
-
 '''
 
+// PAGE DE GARDE
 
-= *CAHIER DE TESTS SITE E-COMMERCE WOOHP RESELL*
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
 
-
-:Entreprise: Whoop Resell
-:Equipe: G2b12
-:docdate: {docdate}
-
-
+---
 
 == Équipe projet G2b12
 
@@ -35,10 +29,27 @@ https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
 https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
 |===
 
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---
+
+= *CAHIER DE TESTS SITE E-COMMERCE WOOHP RESELL*
 
 
-Date: {docdate}
-
+:Entreprise: Whoop Resell
+:Equipe: G2b12
+:docdate: {docdate}
 
 
 :toc:
