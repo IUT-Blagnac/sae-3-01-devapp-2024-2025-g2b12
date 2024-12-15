@@ -415,6 +415,115 @@ application
 
 === 2.4 Spécifications techniques
 
+==== *2.4.1 Structures récurrentes de classes*
+
+===== *_Contrôleurs de vue_*
+
+[source,java]
+----
+public class ExampleViewController
+{
+    // déclaration des constantes
+    // --------------------------
+    
+    private static final ... ;
+
+
+    // déclaration des attributs
+    // -------------------------
+
+    // attributs relatifs au contrôleur de vue
+    private Stage stage ;
+    private Example eDialogController ;
+
+    // attributs relatifs au Modèle
+    private ... ;
+
+
+    // éléments graphiques de la vue FXML (ordonnés par ordre d'apparition)
+    // --------------------------------------------------------------------
+    @FXML private ... ;
+
+    /**
+     * Définit le stage de la vue.
+     * @param _stage    un stage
+     */
+    public void setStage(Stage _stage)
+    {
+        this.stage = _stage ;
+    }
+
+    /**
+     * Définit le contrôleur de dialogue de la vue.
+     * @param _eDialogController  un contrôleur de dialogue
+     */
+    public void setCffDialogController(Example _eDialogController)
+    {
+        this.eDialogController = _eDialogController ;
+    }
+
+    /**
+     * Initialise la vue.
+     */
+    public void initializeView()
+    {
+        // initialisation des éléments graphiques de la vue
+        ...
+    }
+
+    /**
+     * Affiche la fenêtre.
+     */
+    public void displayDialog()
+    {
+        this.stage.showAndWait() ;
+    }
+
+    /**
+     * Gère la fermeture de la fenêtre.
+     * @param e un évènement de fenêtre
+     */
+    private void closeWindow(WindowEvent e)
+    {
+        this.doClose() ;
+		e.consume() ;
+	}
+
+
+    // méthodes d'actions
+    // ------------------
+
+    /**
+     * Ferme la fenêtre.
+     */
+    @FXML
+    private void doClose()
+    {
+        this.stage.close() ;
+    }
+
+
+    // méthodes privées
+    // ----------------
+
+    ...
+}
+----
+
+
+
+===== *_Contrôleurs de dialogue_*
+
+==== *2.4.2 Intéractions MVC*
+
+==== *2.4.3 Threads utilisés*
+
+===== *_Thread de récupération des données_*
+
+===== *_Threads de mise à jour de l'affichage_*
+
+==== *2.4.4 Conventions de commentaire*
+
 <<<
 == *3. Conception et mise en oeuvre des fonctionnalités*
 
