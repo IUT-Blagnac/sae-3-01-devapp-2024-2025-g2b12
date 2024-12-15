@@ -464,7 +464,7 @@ S'applique aux variables de type indice ou aux compteurs de boucles.
 * *Règle :* Nom "court".
 * *Exemples :*
     ** Compteur de boucle `for` → `i`.
-    ** Entrée couremment traité dans une boucle de type `for-each` parcourant le contenu de dictionnaire → `m`.
+    ** Entrée couremment traité dans une boucle de type `for-each` parcourant le contenu d'un dictionnaire → `m`.
 
 *Remarque :* Les noms de ces variables peuvent être plus explicites si besoin.
 
@@ -493,9 +493,8 @@ S'applique uniquement aux paramètres de fonctions et de méthodes.
 
 * *Règle :* `p` + Nom explicite en Upper Camel Case.
 * *Exemples :*
-    ** Chaîne de caractères décrivant le préfixe d'un topic MQTT → `pTopicPrefix` (Cf. <<variables-recurrentes,Variables récurrentes>>).
-    ** Liste de types de données → `pDataTypeList` (Cf. <<variables-recurrentes,Variables récurrentes>>).
-    ** Composant graphique de type Bouton (`Button`) → `pButton` (Cf. <<variables-de-composants-graphiques,Variables de composants graphiques>>).
+    ** Liste de types de données passée en paramètre d'une fonction / méthode → `pDataTypeList` (Cf. <<variables-recurrentes,Variables récurrentes>>).
+    ** Composant graphique de type Bouton (`Button`) passé en paramètre d'une fonction / méthode → `pButton` (Cf. <<variables-de-composants-graphiques,Variables de composants graphiques>>).
 
 ===== *_Nommage des packages_*
 * *Règle :* Nom court décrivant le type des classes contenues par la package en Lower Camel Case.
@@ -503,8 +502,7 @@ S'applique uniquement aux paramètres de fonctions et de méthodes.
 
 ===== *_Nommage des vues FXML_*
 * *Règle :* Nom de la vue en Lower Camel Case.
-* *Exemple :* Vue du formulaire de paramétrage de la configuration → `configurationFileForm.fxml`.
-
+* *Exemple :* Vue du formulaire de paramétrage du fichier de configuration → `configurationFileForm.fxml`.
 
 ==== *2.4.2 Conventions de commentaire*
 
