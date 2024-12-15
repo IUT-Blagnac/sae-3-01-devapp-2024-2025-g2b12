@@ -421,10 +421,44 @@ application
 
 ==== *2.4.3 Structures récurrentes de classes*
 
+Dans cette section, on suppose avoir l'arborescence suivante :
+
+[source,bash]
+----
+src/
+├── main/
+│   ├── java/
+│   │   └── application/
+│   │       ├── control/
+│   │       │   ├── Example.java  [1]
+│   │       │   └── ...
+│   │       ├── view/
+│   │       │   ├── ExampleViewController.java  [2]
+│   │       │   └── ...
+│   │       └── ...
+│   └── resources/
+│       └── application/
+│           ├── view/
+│           │   ├── example.fxml  [3]
+│           │   └── ...
+│           └── ...
+└── ...
+----
+
+. `Example.java` : Contrôleur de dialogue d'exemple.
+. `ExampleViewController.java` : Contrôleur de vue d'exemple.
+. `example.fxml` : Vue FXML d'exemple.
+
 ===== *_Contrôleurs de dialogue_*
 
 [source,java]
 ----
+package application.control ;
+
+import application.view.ExampleViewController ;
+
+...
+
 public class Example
 {
     // déclaration des constantes
@@ -444,6 +478,7 @@ public class Example
 
     // attributs relatifs au Modèle
     ...
+
 
     /**
      * Constructeur : charge la fenêtre d'exemple.
@@ -512,6 +547,12 @@ public class Example
 
 [source,java]
 ----
+package application.view ;
+
+import application.control.Example ;
+
+...
+
 public class ExampleViewController
 {
     // déclaration des constantes
