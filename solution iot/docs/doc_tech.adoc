@@ -43,18 +43,20 @@ Université Toulouse II – Jean Jaurès (31)
 
 == *1. Présentation de l'application*
 
+=== 1.1 Objectif et fonctionnement
+
 L'application développée a pour objectif de fournir un outil centralisé de visualisation et d'analyse des données issues de capteurs connectés. Elle repose sur une architecture modulaire combinant Java/JavaFX et Python.
 
 * JavaFX assure l'aspect "interface utilisateur" (IHM).
 * Java assure le traitement des actions utilisateurs et plus généralement le fonctionnement interne de l'application.
 * Python assure le processus de collecte des données des capteurs.
 
-=== 1.2 Cas d'utilisation général
+=== 1.2 Fonctionnalités principales
 
 ==== *1.2.1 Diagramme des Cas d'Utilisation*
-
 image::./res/diagrammes/duc.svg[Diagramme des Cas d'Utilisation]
 
+==== *1.2.2 Description des fonctionnalités*
 <<<
 == *2. Architecture de l'application*
 
