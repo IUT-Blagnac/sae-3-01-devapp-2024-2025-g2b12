@@ -194,6 +194,7 @@ frequency={{ FRÉQUENCE }}
     * `frequency` : Fréquence de lecture des données.
         ** *À noter :* La valeur pour ce paramètre n'a actuellement aucun impact sur le comportement du programme Python car non traitée. La fréquence définie lors du paramétrage de la configuration est cependant prise en compte par le processus de lecture des données de l'application Java.
 
+<<<
 [[fichiers-de-donnees]]
 ===== *_Fichiers de données_*
 
@@ -345,6 +346,7 @@ L'application Java repose sur une architecture MVC (Modèle-Vue-Contrôleur / Mo
         ** Effectuer des opérations sur le Modèle en fonction des actions utilisateur.
         ** Mettre à jour la Vue afin de refléter les changements dans le Modèle.
 
+<<<
 ===== *_Composants en Singleton_*
 
 ====== Configuration
@@ -543,7 +545,7 @@ NOTE: Les commentaires des classes Java sont entièrement rédigés en français
  * - [ NOM DE L'ÉQUIPE DE DÉVELOPPEMENT ] -
  */
 ----
-
+<<<
 ====== Exemple
 
 Classe : `ConfigurationFileForm`
@@ -590,7 +592,7 @@ Méthode : `ConfigurationFileForm.isThresholdValid(RoomDataType, double)`
  * @return  true si le seuil d'alerte est valide, false sinon
  */
 ----
-
+<<<
 ==== *2.4.3 Structures récurrentes de classes*
 
 Dans cette section, on suppose avoir l'arborescence suivante :
@@ -898,6 +900,7 @@ Les threads `UpdateDataDisplayTask` et `UpdateAlertDisplayTask` sont appelés à
 === 3.1 Diagramme de Séquence Système
 image::./res/diagrammes/dss.svg[Diagramme de Séquence Système, 450]
 
+<<<
 === 3.2 Implémentation des fonctionnalités
 
 ==== *3.2.1 Menu principal*
@@ -914,6 +917,7 @@ image::./res/diagrammes/ds321.svg[Diagramme de Séquence - Ouverture du menu pri
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds322-1.svg[Diagramme de Séquence - Ouverture du formulaire de paramétrage de la configuration, 900]
 
+<<<
 ===== *_Enregistrement d'une configuration_*
 
 ====== Diagramme de Séquence
@@ -926,6 +930,7 @@ image::./res/diagrammes/ds322-2.svg[Diagramme de Séquence - Enregistrement d'un
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds323-1.svg[Diagramme de Séquence - Ouverture du tableau de bord, 1250]
 
+<<<
 ===== *_Mise à jour automatique des données affichées_*
 
 ====== Diagramme de Séquence
@@ -936,6 +941,7 @@ image::./res/diagrammes/ds323-2.svg[Diagramme de Séquence - Mise à jour automa
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds323-3.svg[Diagramme de Séquence - Affichage d'un graphique de comparaison, 450]
 
+<<<
 ===== *_Affichage d'un graphique d'évolution_*
 
 ====== Diagramme de Séquence
