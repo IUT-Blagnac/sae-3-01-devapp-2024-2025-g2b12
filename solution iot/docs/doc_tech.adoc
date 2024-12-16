@@ -41,6 +41,7 @@ Promotion 2024-2025 +
 IUT de Blagnac +
 Université Toulouse II – Jean Jaurès (31)
 
+<<<
 == *1. Présentation de l'application*
 
 === 1.1 Objectif et fonctionnement
@@ -57,6 +58,11 @@ L'application développée a pour objectif de fournir un outil centralisé de vi
 image::./res/diagrammes/duc.svg[Diagramme des Cas d'Utilisation]
 
 ==== *1.2.2 Description des fonctionnalités*
+* *Création d'une configuration :* Paramétrage des capteurs à consulter, des sujets à observer, des types de données à récupérer et des seuils d'alerte.
+* *Visualisation des données des capteurs :* Affichage des relevés en temps réel dans un tableau de bord.
+* *Visualisation des alertes :* Signalement dans le tableau de bord des dépassements de seuils d'alerte définis.
+* *Analyse des données :* Représentation des données sous forme de graphiques d'évolution ou de comparaison.
+
 <<<
 == *2. Architecture de l'application*
 
@@ -814,15 +820,77 @@ public class ExampleViewController
 }
 ----
 
-==== *2.4.4 Intéractions MVC*
-
-
-
-==== *2.4.5 Threads utilisés*
+==== *2.4.4 Threads utilisés*
 
 ===== *_Thread de récupération des données_*
 
+Le thread `CsvReaderTask` lis, à intervalle de temps régulier (cf. fréquence définie dans la configuration), le fichier de données global (`data.csv`) et le fichier d'alertes (`alert.csv`). Il notifie ensuite le contrôleur de dialogue du tableau de bord `DataVisualisationPane` que les données ont été actualisées.
+
+====== Méthode de lecture du fichier de données global
+[source,java]
+----
+/**
+ * Lis le fichier de données.
+ */
+private void readDataFile()
+{
+    Map<String, Map<String, String>> dataMap = new HashMap<>() ;
+    try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(DataLoader.getAllRoomDataFile()))
+            .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).build())
+            .build()
+    ) {
+        String[] header = csvReader.readNext() ;
+        String[] values = null ;
+        while ((values = csvReader.readNext()) != null && !values[0].equals(""))
+        {
+            dataMap.put(values[0], new HashMap<String, String>()) ;
+            for (int i = 1; i < values.length; i++)
+            {
+                dataMap.get(values[0]).put(header[i], values[i]) ;
+            }
+        }
+        this.dvpDialogController.setDataMap(dataMap) ; // LE CONTRÔLEUR DE DIALOGUE EST NOTIFIÉ DE LA MISE À JOUR
+    }
+    catch (FileNotFoundException e) { throw new RuntimeException(e) ; }
+    catch (IOException e) { throw new RuntimeException(e) ; }
+    catch (CsvValidationException e) { throw new RuntimeException(e) ; }
+}
+----
+
+====== Méthode de lecture du fichier d'alertes
+[source,java]
+----
+/**
+ * Lis le fichier d'alertes.
+ */
+private void readAlertFile()
+{
+    Map<String, Map<String, String>> alertMap = new HashMap<>() ;
+    try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(DataLoader.getAlertFile()))
+            .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).build())
+            .build()
+    ) {
+        String[] header = csvReader.readNext() ;
+        String[] values = null ;
+        while ((values = csvReader.readNext()) != null && !values[0].equals(""))
+        {
+            alertMap.put(values[0], new HashMap<String, String>()) ;
+            for (int i = 1; i < values.length; i++)
+            {
+                alertMap.get(values[0]).put(header[i], values[i]) ;
+            }
+        }
+        this.dvpDialogController.setAlertMap(alertMap) ; // LE CONTRÔLEUR DE DIALOGUE EST NOTIFIÉ DE LA MISE À JOUR
+    }
+    catch (FileNotFoundException e) { throw new RuntimeException(e) ; }
+    catch (IOException e) { throw new RuntimeException(e) ; }
+    catch (CsvValidationException e) { throw new RuntimeException(e) ; }
+}
+----
+
 ===== *_Threads de mise à jour de l'affichage_*
+
+Les threads `UpdateDataDisplayTask` et `UpdateAlertDisplayTask` sont appelés à chaque notification d'actualisation des données de la part du thread de récupération des données (`CsvReaderTask`). Ils sont respectivement chargés de la mise à jour de l'affichage des données et des alertes dans le tableau de bord.
 
 <<<
 == *3. Conception et mise en oeuvre des fonctionnalités*
