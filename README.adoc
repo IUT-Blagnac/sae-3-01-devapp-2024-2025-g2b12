@@ -120,8 +120,9 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 | BD | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/076a36d1b998670f0c4326e1d757a2dd9640f820/CR%20script%20SQL%20sem%2049.pdf[Script SQL]
 | SYSTÈME | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/076a36d1b998670f0c4326e1d757a2dd9640f820/Architecture%20Syst%C3%A8me.pdf[Architecture Système]
 .4+| 50 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/380a4801f233bee4e34cb86d0253cb7ccc9d64af/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2011.12%20_Semaine%2050.pdf[ODJ Reunion 13.12.24]
-|  |   https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/828e1d70eaabfe6e7aff430ce64aaa4e62b37a2a/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2013.12%20_%20Semaine%2050.pdf[CR Reunion 13.12.24]
-| SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Système]
+|  |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/828e1d70eaabfe6e7aff430ce64aaa4e62b37a2a/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2013.12%20_%20Semaine%2050.pdf[CR Reunion 13.12.24]
+|SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Système]
+|iOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/2ee8233fd24e4ebbce792844094cbf96eb9ffbd2/solution%20iot/docs/doc_tech.adoc[IoT Documentation Technique]
 |  | 
 |===
 
@@ -136,6 +137,7 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
 |IOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/2ee8233fd24e4ebbce792844094cbf96eb9ffbd2/solution%20iot/docs/doc_tech.adoc[Documentation technique]
+|SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Partie Système]
 |===
 
 
