@@ -833,7 +833,7 @@ image::./res/diagrammes/ds321.svg[Diagramme de Séquence - Ouverture du menu pri
 
 ==== *3.2.2 Formulaire de paramétrage de la configuration*
 
-===== *_Ouverture du formulaire de paramétrage de la configuration_*
+===== *_Ouverture du formulaire_*
 
 ====== Diagramme de Séquence
 image::./res/diagrammes/ds322-1.svg[Diagramme de Séquence - Ouverture du formulaire de paramétrage de la configuration, 900]
@@ -852,9 +852,18 @@ image::./res/diagrammes/ds323-1.svg[Diagramme de Séquence - Ouverture du tablea
 
 ===== *_Mise à jour automatique des données affichées_*
 
+====== Diagramme de Séquence
+image::./res/diagrammes/ds323-2.svg[Diagramme de Séquence - Mise à jour automatique des données affichées, 900]
+
 ===== *_Affichage d'un graphique de comparaison_*
 
+====== Diagramme de Séquence
+image::./res/diagrammes/ds323-3.svg[Diagramme de Séquence - Affichage d'un graphique de comparaison, 450]
+
 ===== *_Affichage d'un graphique d'évolution_*
+
+====== Diagramme de Séquence
+image::./res/diagrammes/ds323-4.svg[Diagramme de Séquence - Affichage d'un graphique d'évolution, 450]
 
 <<<
 == *4. Procédures d'installation*
