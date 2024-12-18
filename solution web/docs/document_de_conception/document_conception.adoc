@@ -1,0 +1,140 @@
+= Document de conception
+:compat-mode!:
+:toc:
+:toc-title: Table des matières
+:toclevels: 4
+:icons: font
+:stem: latexmath
+
+// paramères relatif à GitHub
+ifdef::env-github[]
+:note-caption: :information_source:
+:stem: latexmath
+endif::[]
+
+---
+
+// PAGE DE GARDE
+
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
+
+---
+
+*Étudiants* +
+Nolhan Biblocque +
+Léo Guinvarc'h +
+Victor Jockin +
+Mathys Laguilliez +
+Mucahit Lekesiz
+
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---
+
+== *Introduction*
+
+L’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité a pour objectif de développer une solution d'E-commerce. 
+
+En effet, l’entreprise fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a la volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. 
+
+Cette démarche de digitalisation de l’offre via un site d'E-commerce s’inscrit dans cette dynamique. 
+
+== *1. Architecture système*
+
+=== 1.1 Architecture logicielle
+
+image::./img/architecture_logicielle.png[Architecture Logicielle]
+
+=== 1.2 Logique métier (Diagramme des Classes Métier (DCM))
+
+image::./img/dcm.png[Diagramme des Classes Métier]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+== *2. Description des fonctionnalités*
+
+=== 2.1 Diagramme des Cas d'Utilisation (DCU)
+
+image::./img/uc.png[Diagramme des Cas d'Utilisation]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+=== 2.2 Diagrammes de Séquence Système (DSS)
+
+NOTE: Les diagrammes présentés dans cette section sont organisés par utilisateur.
+
+==== *_2.2.1 Client non connecté_*
+
+image::./img/dss_client_nonconnecte.png[Exemple DSS Client non connecté]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+==== *_2.2.2 Client connecté_*
+
+image::./img/dss_client_connecte.png[Exemple DSS Client connecté]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+==== *_2.2.3 Administrateur_*
+
+image::./img/dss_administrateur.png[Exemple DSS Administrateur]
+|===
+^| _Diagramme réalisé sous *Visual Studio Code* avec *PlantUML*._
+|===
+
+== *3. Sécurité*
+
+== *4. Plan de déploiement*
+
+== *5. Calendrier et gestion de projet*
+
+== *Annexes*
+
+=== Notes er références
+
+---
+
+// PAGE DE FIN
+
+[.text-center]
+*Étudiants* +
+Nolhan Biblocque +
+Léo Guinvarc'h +
+Victor Jockin +
+Mathys Laguilliez +
+Mucahit Lekesiz
+
+[.text-center]
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+[.text-center]
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+[.text-center]
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---

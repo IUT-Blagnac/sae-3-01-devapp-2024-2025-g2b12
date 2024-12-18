@@ -1,0 +1,142 @@
+
+*IUT DE BLAGNAC*
+
+
+
+*UNIVERSITE TOULOUSE II*
+
+
+
+*SAE 3.01*
+
+
+
+_BUT2 Informatique - Année Universitaire 2024 / 2025_
+
+
+'''
+
+// PAGE DE GARDE
+
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
+
+---
+
+== Équipe projet G2b12
+
+
+|===
+2+|
+| Nom | Rôle |
+https://github.com/VictorJockin[*Victor Jockin*] | *Scrum Master* |
+https://github.com/34lks66[*Mucahit Lekesiz*] | *Product Owner* |
+https://github.com/Hextaz[*Nolhan Biblocque*] | *Développeur* |
+https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
+https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
+|===
+
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendaries
+
+*Formation* +
+BUT Informatique +
+2ème Année +
+Promotion 2024-2025 +
+
+*Établissement* +
+IUT de Blagnac, +
+Université Toulouse II – Jean Jaurès (31)
+
+---
+
+
+
+= DOCUMENTATION TECHNIQUE SITE E-COMMERCE *WOOHP RESELL*
+
+
+:Entreprise: Whoop Resell
+:Equipe: G2b12
+:docdate: {docdate}
+
+== Sommaire
+- <<_I._Introduction, I. Introduction>>
+- <<_II._Présentation_de_l_application, II. Présentation de l'application>>
+- <<_III._Architecture_du_site, III. Architecture du site>>
+- <<_IV._Technologies_utilisées, IV. Technologies utilisées>>
+- <<_V._Structure_des_répertoires, V. Structure des répertoires>>
+- <<_VI._Fonctionnalités_principales, VI. Fonctionnalités principales>>
+- <<_VII._Présentation_des_diagrammes, VII. Présentation des diagrammes>>
+  - <<_1._Cas_d_utilisation, 1. Cas d’utilisation>>
+  - <<_2._Diagramme_de_classes, 2. Diagramme de classes>>
+- <<_VIII._Éléments_de_code_significatifs, VIII. Éléments de code significatifs>>
+
+
+
+== I. Introduction
+[.text-justify]
+L’entreprise *Woohp Resell*, fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a entrepris une démarche de digitalisation via la création d’un site d’E-commerce. Cette PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité a la volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. .
+Cette documentation présente l'architecture, les technologies utilisées, les fonctionnalités du site, la présentation des diagrammes et des éléments de code significatifs.
+
+
+== II. Présentation de l'application
+[.text-justify]
+Whoop Resell propose une interface intuitive permettant aux utilisateurs d’explorer une large gamme de produits, de les ajouter à leur panier, et de passer des commandes en toute sécurité.
+
+== III. Architecture du site
+[.text-justify]
+Le diagramme d'architecture ci-dessous présente les principaux composants du système et leur interaction :
+
+
+
+== IV. Technologies utilisées
+[.text-justify]
+- **Frontend** : 
+- **Backend** : 
+- **Base de données** : 
+- **Paiement** : 
+- **Tests** : 
+- **Authentification** : 
+- **Serveur** : 
+
+== V. Structure des répertoires
+[.text-justify]
+La structure du projet est la suivante :
+
+
+== VI. Fonctionnalités principales
+[.text-justify]
+- Gestion des utilisateurs : inscription, connexion, et profil.
+- Catalogue de produits : navigation et recherche.
+- Panier et commande : ajout au panier, validation de commande.
+- Paiement sécurisé : 
+- Interface administrateur : gestion des produits et des commandes.
+
+== VII. Présentation des diagrammes
+
+=== 1. Cas d’utilisation
+[.text-justify]
+Le diagramme suivant illustre les cas d'utilisation principaux de l'application : 
+
+
+=== 2. Diagramme de classes
+[.text-justify]
+Le diagramme de classes ci-dessous montre les relations entre les classes principales de l'application :
+
+== VIII. Éléments de code significatifs
+
+=== Exemple de gestion du panier
+[.text-justify]
+Voici un extrait de code qui montre comment les produits sont ajoutés au panier d'un utilisateur :
+
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,11 @@
 <?php require_once('./include/header.php'); ?>
 
 <?php require_once('./include/menu.php'); ?>
+<<<<<<< HEAD
 <main class="container" style=" margin-top:8%; margin-bottom:5%;">
+=======
+<main>
+>>>>>>> e2c70232b6778d2e987d5d8b422c68f30bc347fa
     </BR>
     </BR>
     <section class="about-us py-5">

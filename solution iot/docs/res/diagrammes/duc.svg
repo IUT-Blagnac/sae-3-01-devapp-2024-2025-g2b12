@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="278px" preserveAspectRatio="none" style="width:1348px;height:278px;background:#FFFFFF;" version="1.1" viewBox="0 0 1348 278" width="1348px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="155" x="1179.5625" y="0"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="155" x="1179.5625" y="9.2822">SAE S3.01 DevApp - 2024/2025</text><!--MD5=[ee0fec323975fbe97ba28321ad4c4bf3]
+entity U--><g id="elem_U"><ellipse cx="40" cy="105.6406" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M40,113.6406 L40,140.6406 M27,121.6406 L53,121.6406 M40,140.6406 L27,155.6406 M40,140.6406 L53,155.6406 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="6" y="170.1357">Utilisateur</text></g><g id="elem_CC"><ellipse cx="233.5203" cy="134.9447" fill="#F1F1F1" rx="99.5203" ry="22.3041" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="163" x="152.0203" y="137.7914">Créer une configuration</text></g><g id="elem_VDC"><ellipse cx="533.1894" cy="135.0785" fill="#F1F1F1" rx="140.1894" ry="30.4379" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="250" x="408.1894" y="137.9252">Visualiser les données des capteurs</text></g><g id="elem_VDS"><ellipse cx="879.1669" cy="49.174" fill="#F1F1F1" rx="140.6669" ry="30.5334" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="753.6669" y="52.0207">Visualiser les données pour un sujet</text></g><g id="elem_VA"><ellipse cx="879.2318" cy="135.387" fill="#F1F1F1" rx="89.2318" ry="20.2464" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="809.2318" y="138.2337">Visualiser les alertes</text></g><g id="elem_AGC"><ellipse cx="878.9298" cy="222.2266" fill="#F1F1F1" rx="145.9298" ry="31.586" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="747.9298" y="225.0733">Afficher un graphique de comparaison</text></g><g id="elem_AGE"><ellipse cx="1213.7813" cy="49.2969" fill="#F1F1F1" rx="128.7813" ry="28.1563" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="226" x="1100.7813" y="52.1436">Afficher un graphique d'évolution</text></g><!--MD5=[dc357175b8bc9268db92f754a68cae0f]
+link U to CC--><g id="link_U_CC"><path d="M74.36,135.1406 C89.77,135.1406 109,135.1406 128.69,135.1406 " fill="none" id="U-to-CC" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="133.7,135.1406,124.7,131.1406,128.7,135.1406,124.7,139.1406,133.7,135.1406" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e1cea817fd8a51e5f740425c0284d356]
+link CC to VDC--><g id="link_CC_VDC"><path d="M333.15,135.1406 C350.62,135.1406 369.13,135.1406 387.56,135.1406 " fill="none" id="CC-to-VDC" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="392.75,135.1406,383.75,131.1406,387.75,135.1406,383.75,139.1406,392.75,135.1406" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[138b69e8072521a81d0f32fd1dbcec97]
+link VDC to VA--><g id="link_VDC_VA"><path d="M673.42,135.1406 C710.88,135.1406 750.47,135.1406 784.75,135.1406 " fill="none" id="VDC-to-VA" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="789.76,135.1406,780.76,131.1406,784.76,135.1406,780.76,139.1406,789.76,135.1406" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6a0364881ccbcb12caae1fc7a2026bac]
+link VDC to AGC--><g id="link_VDC_AGC"><path d="M625.28,158.2306 C672.53,170.1706 730.28,184.7806 778.64,197.0106 " fill="none" id="VDC-to-AGC" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="783.59,198.2606,775.8499,192.1704,778.7435,197.0311,773.8827,199.9247,783.59,198.2606" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c95cb4f1c10b2b16a8588d6622c787fd]
+link VDC to VDS--><g id="link_VDC_VDS"><path d="M625.73,112.2106 C673.74,100.2006 732.51,85.5106 781.24,73.3306 " fill="none" id="VDC-to-VDS" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="786.22,72.0806,776.5174,70.3896,781.3701,73.2967,778.4631,78.1494,786.22,72.0806" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[333efcb013eacde5fb9f4e1bf5de0fd2]
+link VDS to AGE--><g id="link_VDS_AGE"><path d="M1019.77,49.1406 C1039.71,49.1406 1060.17,49.1406 1079.97,49.1406 " fill="none" id="VDS-to-AGE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1084.99,49.1406,1075.99,45.1406,1079.99,49.1406,1075.99,53.1406,1084.99,49.1406" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="129" x="602.7813" y="258.8125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="129" x="602.7813" y="268.0948">Victor Jockin - Équipe 2B12</text><!--MD5=[b66bd5768f7a3dc43124bfe154f966c0]
+@startuml
+header SAE S3.01 DevApp - 2024/2025
+left to right direction
+actor Utilisateur as U
+usecase (Créer une configuration) as CC
+usecase (Visualiser les données des capteurs) as VDC
+usecase (Visualiser les données pour un sujet) as VDS
+usecase (Visualiser les alertes) as VA
+usecase (Afficher un graphique de comparaison) as AGC
+usecase (Afficher un graphique d'évolution) as AGE
+U - -> CC
+CC ..> VDC
+VDC ..> VA
+VDC ..> AGC
+VDC ..> VDS
+VDS ..> AGE
+footer Victor Jockin - Équipe 2B12
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

@@ -135,6 +135,7 @@ if (isset($_GET['idProduit'])) {
                 background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
                 margin: 20px 0;
             }
+<<<<<<< HEAD
 
             .product-specs {
                 margin-top: 20px;
@@ -146,6 +147,8 @@ if (isset($_GET['idProduit'])) {
                 margin-bottom: 10px;
                 font-size: 1.5em;
             }
+=======
+>>>>>>> e2c70232b6778d2e987d5d8b422c68f30bc347fa
         </style>
 
         <main style="margin-top:8%; margin-bottom:5%;">
@@ -157,10 +160,13 @@ if (isset($_GET['idProduit'])) {
                             <h1 class="product-title"><?php echo htmlspecialchars($prod['nomProduit']); ?></h1>
                             <p class="product-description"><?php echo htmlspecialchars($prod['descProduit']); ?></p>
                             <p class="product-price"><?php echo htmlspecialchars($prod['prixProduit']); ?> €</p>
+<<<<<<< HEAD
                             <div class="product-specs">
                                 <h3>Spécifications du produit :</h3>
                                 <p><?php echo htmlspecialchars($prod['specProduit']); ?></p>
                             </div>
+=======
+>>>>>>> e2c70232b6778d2e987d5d8b422c68f30bc347fa
                             <div class="quantity-selector">
                                 <label for="quantity">Sélectionner la quantité :</label>
                                 <select id="quantity" name="quantity" class="form-select">

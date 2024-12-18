@@ -88,6 +88,10 @@ if (!$client) {
                         <h2 class="card-title text-center">Mon compte</h2>
                         <p><strong>Nom :</strong> <?php echo htmlspecialchars($client['nomClient']); ?></p>
                         <p><strong>Prénom :</strong> <?php echo htmlspecialchars($client['prenomClient']); ?></p>
+<<<<<<< HEAD
+=======
+                        <p><strong>ID :</strong> <?php echo htmlspecialchars($client['idClient']); ?></p>
+>>>>>>> e2c70232b6778d2e987d5d8b422c68f30bc347fa
                         <p><strong>Email :</strong> <?php echo htmlspecialchars($client['emailClient']); ?></p>
                     </div>
                 </div>
