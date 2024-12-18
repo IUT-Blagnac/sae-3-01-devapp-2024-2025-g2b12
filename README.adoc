@@ -153,9 +153,9 @@ ODJ : les remarques semaine 48 n'ont pas été toutes prises en compte ! CR : Tr
 
 == Gestion de projet & Qualité
 
-Récapitulatif des informations mises à jour - Dernière MAJ : 14/12/24
+Récapitulatif des informations mises à jour - Dernière MAJ : 18/12/24
 
-✓ Version courante : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/releases[Release v0.4]
+✓ Version courante : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/releases[Release v0.5]
 
 ✓ Lien vers la documentation technique : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
 
