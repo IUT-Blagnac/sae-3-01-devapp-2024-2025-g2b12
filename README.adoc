@@ -200,3 +200,6 @@ Enlevez les consignes du readme ! Mettre les rôles de chacun. Issues/ US :  Pen
 
 Backlog produit : il manque les finalités (afin de) dans certaines tâches et la complexité. Backlog sprint ok. Tasks : certaines en cours ne sont pas assignées. Tests : cahier à faire ! manque nom client et projet. DOCS : idem revoir infos page de garde. Avancer les doc user et tech. Conception ok manque des commentaires. release : pas de release, pas de lien vers une version courante ni de date ...
 NOTE Appel Offre : 13,06/20
+
+=== retour semaine 50
+US cf retour  précédent. Je n'ai pas de backlog de sprint clair !  Le dernier date du sprint 1 !  Le cahier de recette est au point mort.  DOC user et tech à faire (pour le futur admin). Release OK.
