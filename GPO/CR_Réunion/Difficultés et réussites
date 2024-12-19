@@ -1,0 +1,19 @@
+Nos Difficultés
+
+Gestion du temps
+Le calendrier serré a été un défi majeur. Nous avons parfois eu du mal à estimer correctement le temps nécessaire pour certaines tâches comme la mise en place des fonctionnalités complexes.
+
+Problèmes liés à la base de données
+Création d’une table "variete" pour chaque produit et ses caractéristiques :
+Nous avons rencontré des difficultés pour structurer la base de données afin de gérer efficacement les variantes de chaque produit (par exemple, tailles, couleurs, ou autres spécificités).
+La normalisation des données a nécessité de revoir notre schéma initial pour éviter la redondance et garantir une gestion plus souple des relations entre les produits et leurs variétés.
+
+Nos Réussites
+
+Amélioration de nos compétences techniques
+La mise en œuvre du back-end (gestion des bases de données mySQL) nous a permis de consolider nos compétences en programmation.
+Le travail sur le front-end nous a donné une meilleure maîtrise des principes de design CSS, HTML, avec une interface utilisateur agréable et intuitive.
+
+Nous avons su nous adapter face aux imprévus, que ce soit pour corriger des bugs complexes ou pour modifier des fonctionnalités en fonction des retours et/ou des erreurs.
+La capacité de respecter les grandes échéances malgré ces défis a été une belle réussite.
+
