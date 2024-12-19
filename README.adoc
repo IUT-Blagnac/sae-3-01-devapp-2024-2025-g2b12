@@ -125,7 +125,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |iOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/888e23322b74dafb1fa4c30da103117bf12a0803/solution%20iot/docs/doc_tech.adoc[iOT Documentation Technique]
 .6+| 51 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/635602226336f2ec51c9caee5cd9242d2be626be/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2019.12%20_%20Semaine%2051.pdf[ODJ Reunion 19.12.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/635602226336f2ec51c9caee5cd9242d2be626be/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2019.12%20_%20Semaine%2051.pdf[CR Reunion 19.12.24]
-| |  [Analyse des difficultés et réussites]
+| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/a2c9e20efa50fea2648b7e1e15c72a2a978adf78/GPO/CR_R%C3%A9union/Difficult%C3%A9s%20et%20r%C3%A9ussites[Analyse des difficultés et réussites Semaine 51]
 | DROIT| [Fiche de conseils juridiques et de sécurité]
 | BD| [Procédures stockées]
 | Web| [Recettes]
@@ -184,7 +184,7 @@ Ci-dessous un récapitulatif des séances de travail effectuées en télétravai
 
 |===
 | *Etudiant*| *Dates*
-| Léo Guinvarc'h| ✓ 29/11 matin, 18/12 matin, 19/12 journée 
+| Léo Guinvarc'h| ✓ 29/11 matin, 18/12 matin, 19/12 matin 
 | Victor Jockin| ✓
 | Mucahit Lekesiz| ✓
 | Nolhan Biblocque| ✓
