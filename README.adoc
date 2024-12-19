@@ -126,7 +126,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 .6+| 51 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/635602226336f2ec51c9caee5cd9242d2be626be/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2019.12%20_%20Semaine%2051.pdf[ODJ Reunion 19.12.24]
 |  | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/635602226336f2ec51c9caee5cd9242d2be626be/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2019.12%20_%20Semaine%2051.pdf[CR Reunion 19.12.24]
 | |  [Analyse des difficultés et réussites]
-| Droit| [Fiche de conseils juridiques et de sécurité]
+| DROIT| [Fiche de conseils juridiques et de sécurité]
 | BD| [Procédures stockées]
 | Web| [Recettes]
 |===
