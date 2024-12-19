@@ -123,6 +123,10 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 |  |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/828e1d70eaabfe6e7aff430ce64aaa4e62b37a2a/GPO/CR_R%C3%A9union/CR%20R%C3%A9union%2013.12%20_%20Semaine%2050.pdf[CR Reunion 13.12.24]
 |SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Système]
 |iOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/888e23322b74dafb1fa4c30da103117bf12a0803/solution%20iot/docs/doc_tech.adoc[iOT Documentation Technique]
+.4+| 51 | GPO| [ODJ Reunion 19.12.24]
+|  | [CR Reunion 19.12.24]
+| BD| [Procédures stockées]
+| Web| [Recettes]
 |===
 
 === Documentations
