@@ -1,12 +1,12 @@
-= Cahier De Recette - DailyBankApp
+= Cahier De Recette - WoohpResell
 :toc:
 :toc-title: Sommaire
 
 [cols="2*"]
 |===
-| Projet | Développement de l'application JAVA-Oracle pour la gestion des comptes clients
+| Projet | Développement d'un site e-commerce
 
-| Client | Whoop Resell
+| Client | Woohp Resell
 
 | Date | Décembre 2024
 
