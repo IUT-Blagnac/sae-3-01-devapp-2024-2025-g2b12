@@ -6,11 +6,11 @@
 |===
 | Projet | Développement de l'application JAVA-Oracle pour la gestion des comptes clients
 
-| Client | WhoopResell
+| Client | Whoop Resell
 
-| Date | Juin 2024
+| Date | Décembre 2024
 
-| Version | 2
+| Version | 0
 |===
 
 |===
