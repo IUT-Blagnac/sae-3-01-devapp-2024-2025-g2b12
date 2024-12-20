@@ -180,16 +180,20 @@ Récapitulatif des informations mises à jour - Dernière MAJ : 18/12/24
 ✓ Liens vers dossier Réunions (ODJ/CR) :  https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/GPO[Dossier GPO]
 
 === Planning Télétravail 
-Ci-dessous un récapitulatif des séances de travail effectuées en télétravail par les membres de l'équipe :
+Ci-dessous un récapitulatif des séances de travail effectuées en télétravail pour chaque membre de l'équipe :
 
 |===
-| *Etudiant*| *Dates*
-| Léo Guinvarc'h| ✓ 29/11 matin, 18/12 matin, 19/12 matin 
-| Victor Jockin| ✓
-| Mucahit Lekesiz| ✓
-| Nolhan Biblocque| ✓
-| Mathys Laguilliez| ✓
+.2+| *MEMBRES*       4+| *SÉANCES*
+                      | 29/11 (matin) | 18/12 (matin) | 19/12 (matin) | 20/12 
+| Léo Guinvarc'h      | T | T | T | T
+| Victor Jockin       | P | P | P | T
+| Mucahit Lekesiz     | T | T | T | T
+| Nolhan Biblocque    | T | P | T | T
+| Mathys Laguilliez   | T | T | T | T
 |===
+
+*P :* En présentiel
+*T :* En télétravail
 
 
 === Evaluation bi-hebdomadaire
