@@ -192,7 +192,7 @@ Ci-dessous un récapitulatif des séances de travail effectuées en télétravai
 | Mathys Laguilliez   | T | T | T | T
 |===
 
-*P :* En présentiel
+*P :* En présentiel +
 *T :* En télétravail
 
 
