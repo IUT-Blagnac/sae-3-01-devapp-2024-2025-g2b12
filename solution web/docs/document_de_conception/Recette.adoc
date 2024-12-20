@@ -6,7 +6,7 @@
 |===
 | Projet | Développement de l'application JAVA-Oracle pour la gestion des comptes clients
 
-| Client | Banque DailyBank
+| Client | WhoopResell
 
 | Date | Juin 2024
 
