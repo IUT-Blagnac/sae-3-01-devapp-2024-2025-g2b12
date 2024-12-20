@@ -1,0 +1,385 @@
+= Cahier De Recette - DailyBankApp
+:toc:
+:toc-title: Sommaire
+
+[cols="2*"]
+|===
+| Projet | Développement de l'application JAVA-Oracle pour la gestion des comptes clients
+
+| Client | Banque DailyBank
+
+| Date | Juin 2024
+
+| Version | 2
+|===
+|===
+| Équipe |
+
+| Chef de Projet | Thomas AUSSENAC
+| Membres | Loïc PHRAKOUSONH, Jules GIARD--PELLAT, Mucahit LEKESIZ
+
+|===
+
+
+
+== I. Introduction
+=== 1. Objet :
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'une application bancaire pour la banque DailyBank, visant à spécifier les cas de test pour assurer la qualité de l'application.
+
+== II. Pre-Requis :
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Une base de données installée (référence document technique).
+* L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
+* Les fiches de tests. *À vérifier*
+
+
+=== 1. Éléments à tester :
+[.text-justify]
+Les éléments testés concernent les Use-Cases spécifiés dans la *documentation technique*.
+
+
+=== 2. Environnement de test :
+[.text-justify]
+Ordinateur sous Windows ou OS équivalent.
+
+
+
+== III. Cas de test :
+=== 1. Fonctionnalités des guichetiers :
+==== 1.1 Gestion des clients :
+
+|====
+
+>|Cas de test 4+|Test-01-01-01
+>|Titre 4+|Création d'un nouveau client
+>|Objectif 4+| Vérifier qu'il est possible de créer un nouveau client
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| aucune ^|OK
+^|All_G_C.2 ^|Compléter les champs spécifiés et valider. ^|Un nouveau client est créé. ^|aucune ^|OK
+
+
+5+|
+
+5+|Commentaire :
+Compléter et si on ne valide pas, ...
+|====
+
+
+|====
+
+>|Cas de test 4+|Test-01-01-02
+>|Titre 4+|Modification d'un client
+>|Objectif 4+| Vérifier qu'il est possible de modifier un client
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.3 ^|Cliquer sur le bouton "Modifier client". ^|La fenêtre de modification des données du clients s'ouvre. ^|Le client est sélectionné ^|OK
+^|All_G_C.4 ^|Modifier les champs souhaités et confirmer. ^|Retour sur les informations du client. Le client est modifié. ^|La fenêtre modifier client est active ^|OK
+^|All_G_C.5 ^|Modifier les champs souhaités et annuler. ^|Retour sur les informations du client. Le client est inchangé. ^|La fenêtre modifier client est active ^|OK
+
+|====
+
+
+==== 1.2 Gestion des comptes bancaires :
+|====
+
+>|Cas de test 4+|Test-01-02-01
+>|Titre 4+|Création d'un Compte
+>|Objectif 4+| Vérifier qu'il est possible de créer un compte pour un client
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CCP.1 ^|Cliquer sur le bouton"Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
+^|All_G_CCP.2 ^|Cliquer sur "Nouveau compte". ^|Le formulaire de création d'un nouveau compte s'affiche. ^|La liste des comptes du client s'affiche. ^|OK
+^|All_G_CCP.3 ^|Remplir les informations du nouveau compte (découvert autorisé, solde premier dépôt). ^|Les informations sont saisies dans les champs appropriés. ^|Le formulaire de création d'un nouveau compte est affiché. ^|OK
+^|All_G_CCP.4 ^|Cliquer sur "Ajouter". ^|Le nouveau compte est enregistré dans la base de données, et un message de confirmation s'affiche. ^|Les informations du nouveau compte sont correctement saisies. ^|OK
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-02-02
+>|Titre 4+|Clôturer un Compte
+>|Objectif 4+| Vérifier qu'il est possible de clôturer un compte client
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CCC.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
+^|All_G_CCC.2 ^|Sélectionner un compte. ^|Les détails du compte sélectionné s'affichent. ^|La liste des comptes du client s'affiche. ^|OK
+^|All_G_CCC.3 ^|Cliquer sur "Clôturer compte". ^|Une confirmation de clôture de compte est demandée. ^|Les détails du compte sélectionné s'affichent. ^|OK
+^|All_G_CCC.4 ^|Confirmer la clôture du compte. ^|Le compte est clôturé, et un message de confirmation s'affiche. ^|La confirmation de clôture de compte est affichée. ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-02-03
+>|Titre 4+|Consultation d'un compte
+>|Objectif 4+| Vérifier qu'il est possible de consulter un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
+^|All_G_CB.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+...
+
+|====
+
+
+==== 1.3 Gestion des opérations :
+
+|====
+
+>|Cas de test 4+|Test-01-03-01
+>|Titre 4+|Débiter un compte
+>|Objectif 4+| Vérifier qu'il est possible de débiter un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_COP.1 ^|Cliquer sur le bouton "Enregistrer Débit". ^|La page des débit du compte s’affiche. ^| Un compte actif est sélectionné ^|OK
+^|All_G_COP.2  ^|Rentrer un montant 50 dans le champ "Montant". ^|Le nouveau solde est +50euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros
+ ^|OK
+^|All_G_COP.3  ^|Rentrer un montant 150 dans le champ "Montant". ^|Le nouveau solde est -50 euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros, le découvert
+autorisé est de -100 euros.
+ ^|OK
+^|All_G_COP.4  ^|Rentrer un montant 250 dans le champ "Montant". ^|Blocage ! + pop-up ^| Le compte sélectionné a un solde de +100 euros, le découvert
+autorisé est de -100 euros.
+ ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-03-02
+>|Titre 4+|Créditer un compte
+>|Objectif 4+| Vérifier qu'il est possible de créditer un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_COP.1 ^|Cliquer sur le bouton "Enregistrer Crédit". ^|La page des crédits du compte s’affiche. ^| Un compte actif est sélectionné ^|OK
+^|All_G_COP.2  ^|Rentrer un montant 50 dans le champ "Montant". ^|Le nouveau solde est +150 euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros
+ ^|OK
+^|All_G_COP.3  ^|Rentrer un montant 200 dans le champ "Montant". ^|Le nouveau solde est +300 euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros
+ ^|OK
+^|All_G_COP.4  ^|Rentrer un montant 5000 dans le champ "Montant". ^|Le nouveau solde est +5100 euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros
+ ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-03-03
+>|Titre 4+|Effectuer un Virement
+>|Objectif 4+| Vérifier qu'il est possible d'effectuer un virement d'un compte client à un autre
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_VIR.1 ^|Cliquer sur le bouton "Effectuer Virement". ^|La page des virements s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_VIR.2  ^|Rentrer un montant 50 dans le champ "Montant" et sélectionner un compte bénéficiaire. ^|Le compte débité a un solde diminué de 50 euros et le compte crédité a un solde augmenté de 50 euros. Une nouvelle opération est créée dans la liste des opérations des deux comptes avec le bon montant et la bonne date. ^|Le compte débité a un solde de +100 euros et le compte crédité est actif. ^|OK
+^|All_G_VIR.3  ^|Rentrer un montant 150 dans le champ "Montant" et sélectionner un compte bénéficiaire. ^|Le compte débité a un solde diminué de 150 euros et le compte crédité a un solde augmenté de 150 euros. Une nouvelle opération est créée dans la liste des opérations des deux comptes avec le bon montant et la bonne date. ^|Le compte débité a un solde de +100 euros et le découvert autorisé est de -100 euros, le compte crédité est actif. ^|OK
+^|All_G_VIR.4  ^|Rentrer un montant 250 dans le champ "Montant" et sélectionner un compte bénéficiaire. ^|Blocage ! + pop-up ^|Le compte débité a un solde de +100 euros, le découvert autorisé est de -100 euros, le compte crédité est actif. ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-03-05
+>|Titre 4+|Générer un relevé PDF
+>|Objectif 4+| Vérifier qu'il est générer un relevé au format PDF
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_PDF.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
+^|All_G_PDF.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_PDF.3 ^|Cliquer sur le bouton "CGénérer le relevé en pdf". ^|Le relevé au format pdf s'affiche sur une autre page. ^|Un compte actif est sélectionné ^|OK
+
+|====
+
+==== 1.4 Gestion des prélèvements :
+
+|====
+>|Cas de test 4+|Test-01-04-01
+>|Titre 4+|Créer un prélèvement
+>|Objectif 4+|Vérifier qu'il est possible de créer un prélèvement
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_Pr.1 ^|Cliquer sur "Comptes Client". ^|La page des comptes clients s'affiche. ^|Un client est sélectionné. ^|OK
+^|All_G_Pr.2 ^|Sélectionner un compte. ^|Les détails du compte s'affichent. ^|Le compte est actif et affiché. ^|OK
+^|All_G_Pr.3 ^|Cliquer sur "Voir prélèvements". ^|La page des prélèvements du compte s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Pr.4 ^|Cliquer sur "Nouveau Prélèvement". ^|La page de création de prélèvement s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Pr.5 ^|Saisir le destinataire et le montant puis cliquer sur "Créer prélèvement". ^|Le nouveau prélèvement apparaît dans la liste des prélèvements avec les informations saisies. ^|La page de création de prélèvement est affichée. ^|OK
+^|All_G_Pr.6 ^|Cliquer sur "Annuler". ^|Retour à la page des prélèvements sans créer de prélèvement. ^|La page de création de prélèvement est affichée. ^|OK
+|====
+
+|====
+>|Cas de test 4+|Test-01-04-02
+>|Titre 4+|Modifier un prélèvement
+>|Objectif 4+|Vérifier qu'il est possible de modifier un prélèvement existant
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_Pr.7 ^|Cliquer sur "Comptes Client". ^|La page des comptes clients s'affiche. ^|Un client est sélectionné. ^|OK
+^|All_G_Pr.8 ^|Sélectionner un compte. ^|Les détails du compte s'affichent. ^|Le compte est actif et affiché. ^|OK
+^|All_G_Pr.9 ^|Cliquer sur "Voir prélèvements". ^|La page des prélèvements du compte s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Pr.10 ^|Sélectionner un prélèvement. ^|Le prélèvement est sélectionné dans la liste. ^|Un prélèvement existant est présent dans la liste. ^|OK
+^|All_G_Pr.11 ^|Cliquer sur "Modifier Prélèvement". ^|La page de modification de prélèvement s'affiche. ^|Un prélèvement est sélectionné. ^|OK
+^|All_G_Pr.12 ^|Modifier le destinataire et le montant puis cliquer sur "Modifier Prélèvement". ^|Le prélèvement est mis à jour dans la liste des prélèvements avec les nouvelles informations. ^|La page de modification de prélèvement est affichée. ^|OK
+^|All_G_Pr.13 ^|Cliquer sur "Annuler". ^|Retour à la page des prélèvements sans modification. ^|La page de modification de prélèvement est affichée. ^|OK
+|====
+
+|====
+>|Cas de test 4+|Test-01-04-03
+>|Titre 4+|Supprimer un prélèvement
+>|Objectif 4+|Vérifier qu'il est possible de supprimer un prélèvement existant
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_Pr.14 ^|Cliquer sur "Comptes Client". ^|La page des comptes clients s'affiche. ^|Un client est sélectionné. ^|OK
+^|All_G_Pr.15 ^|Sélectionner un compte. ^|Les détails du compte s'affichent. ^|Le compte est actif et affiché. ^|OK
+^|All_G_Pr.16 ^|Cliquer sur "Voir prélèvements". ^|La page des prélèvements du compte s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Pr.17 ^|Sélectionner un prélèvement. ^|Le prélèvement est sélectionné dans la liste. ^|Un prélèvement existant est présent dans la liste. ^|OK
+^|All_G_Pr.18 ^|Cliquer sur "Supprimer Prélèvement". ^|Une fenêtre de confirmation s'affiche. ^|Un prélèvement est sélectionné. ^|OK
+^|All_G_Pr.19 ^|Cliquer sur "Ok" dans la fenêtre de confirmation. ^|Le prélèvement est supprimé de la liste des prélèvements. ^|La fenêtre de confirmation est affichée. ^|OK
+^|All_G_Pr.20 ^|Cliquer sur "Annuler" dans la fenêtre de confirmation. ^|Retour à la page des prélèvements sans suppression. ^|La fenêtre de confirmation est affichée. ^|OK
+|====
+
+==== 1.5 Simulations 
+
+|====
+>|Cas de test 4+|Test-01-05-01
+>|Titre 4+|Simuler un emprunt
+>|Objectif 4+|Vérifier qu'il est possible de simuler un emprunt
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_Emp.1 ^|Cliquer sur "Comptes Client". ^|La page des comptes clients s'affiche. ^|Un client est sélectionné. ^|OK
+^|All_G_Emp.2 ^|Sélectionner un compte. ^|Les détails du compte s'affichent. ^|Le compte est actif et affiché. ^|OK
+^|All_G_Emp.3 ^|Cliquer sur "Voir Opérations". ^|La page de gestion des opérations du compte s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Emp.4 ^|Cliquer sur "Simulations". ^|La fenêtre de simulation d'emprunt s'affiche. ^|Un compte est sélectionné. ^|OK
+^|All_G_Emp.5 ^|Saisir les informations de la simulation tel que le montant, la date de début de l'emprunt, la durée de l'emprunt en mois et le taux annuel, puis cliquer sur "Valider". ^|La simulation est créée et les résultats sont affichés dans une autre page sous format pdf. ^|La page de simulation d'emprunt est affichée sous format pdf. ^|OK
+^|All_G_Emp.6 ^|Cliquer sur "Annuler". ^|Retour à la page de gestion des opérations sans créer de simulation. ^|La fenêtre de simulation d'emprunt est affichée. ^|OK
+|====
+
+
+=== 2. Fonctionnalités des chefs d'agence :
+[.text-justify]
+Les chefs d'agence ont accès aux mêmes fonctionnalités que les guichetiers, ainsi que d'autres qui leur sont réservées.
+
+==== 2.1 Gestion des clients :
+
+|====
+
+>|Cas de test 4+|Test-02-01-01
+>|Titre 4+|Rendre inactif un client
+>|Objectif 4+| Vérifier qu'il est possible de rendre un client inactif
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.
+|====
+
+|====
+>|Cas de test 4+|Test-02-01-02
+>|Titre 4+|Supprimer un client
+>|Objectif 4+|Vérifier qu'il est possible de supprimer un client
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_Sup.1 ^|Cliquer sur "Comptes Client". ^|La page des comptes clients s'affiche. ^|Etre connecter en tant que chef d'agence. ^|OK
+^|All_G_Sup.2 ^|Cliquer sur "Supprimer Client". ^|Une fenêtre de confirmation de suppression du client s'affiche. ^|Un client inactif est sélectionné. ^|OK
+^|All_G_Sup.3 ^|Cliquer sur "Ok" dans la fenêtre de confirmation. ^|Le client est supprimé de la base de données. ^|La fenêtre de confirmation de suppression est affichée. ^|OK
+^|All_G_Sup.4 ^|Cliquer sur "Annuler" dans la fenêtre de confirmation. ^|Retour à la page des comptes clients sans suppression. ^|La fenêtre de confirmation de suppression est affichée. ^|OK
+^|All_G_Sup.5 ^|Sélectionner un client actif et cliquer sur "Supprimer Client". ^|Blocage ^|Un client actif est sélectionné. ^|OK
+|====
+
+==== 2.2 Gestion des employés : 
+
+|====
+
+>|Cas de test 4+|Test-02-02-01
+>|Titre 4+| Création d'un Employé
+>|Objectif 4+| Vérifier qu'il est possible de créer un nouvel employé
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Sélectionner "Employés" dans le menu "Gestion" en haut à gauche ^|La fenêtre de gestion d'employés s’ouvre.  ^| Etre connecter en tant que chef d'agence ^| OK
+^|All_G_C.2 ^|Cliquer sur "Nouvel employé" ^|La fenêtre pour saisir les informations requises pour la création d'un nouvel employé s'ouvre ^|aucune ^|OK
+^|All_G_C.2 ^|Compléter les champs spécifiés et cliquer sur "Ajouter". ^|Un nouvel employé est créé et enregistré dans la base de données. ^|aucune ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-02
+>|Titre 4+|Modification d'un employé
+>|Objectif 4+| Vérifier qu'il est possible de modifier les informations d'un employé
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Sélectionner "Employés" dans le menu "Gestion" en haut à gauche ^|La fenêtre de gestion d'employés s’ouvre.  ^| Etre connecter en tant que chef d'agence ^| OK
+^|All_G_C.2 ^|Rechercher l'employé en entrant son numéro d'employé ou son nom ^|... ^|aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur "Modifier employé" ^|La fenêtre de modification des informations de l'employé s'ouvre ^|L'employé est sélectionné ^|OK
+^|All_G_C.4 ^|Modifier les champs souhaités et cliquer sur "Modifier" pour enregister les modifications. ^|Retour sur les informations de l'employé. L'employé est modifié. ^|La fenêtre modifier employé est active ^|OK
+^|All_G_C.5 ^|Modifier les champs souhaités et annuler. ^|Retour sur les informations de l'employé. L'employé' est inchangé. ^|La fenêtre modifier employé est active ^|OK
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-03
+>|Titre 4+|Suppression d'un employé
+>|Objectif 4+| Vérifier qu'il est possible de supprimer un employé
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_E.1    ^|Sélectionner "Employés" dans le menu "Gestion" en haut à gauche ^|La fenêtre de gestion d'employés s’ouvre.  ^| Etre connecter en tant que chef d'agence ^| OK
+^|C_G_E.2 ^|Rechercher l'employé en entrant son numéro d'employé ou son nom ^|... ^|aucune ^|OK
+^|C_G_E.3 ^|Cliquer sur "Supprimer employé" ^|La fenêtre de confirmation pour la suprression s'affiche ^|L'employé est sélectionné ^|OK
+^|C_G_E.4 ^|Cliquer sur "Confirmer" pour supprimer l'employé. ^|Retour sur les informations de l'employé. L'employé est supprimé. ^|La fenêtre supprimer employé est active ^|OK
+^|C_G_E.5 ^|Cliquer sur "annuler" pour annuler la suppression de l'employé. ^|Retour sur les informations de l'employé. L'employé' est inchangé. ^|La fenêtre supprimer employé est active ^|OK
+
+|====
+
+==== 2.3 Gestion des opérations :
+
+|====
+>|Cas de test 4+|Test-02-03-01
+>|Titre 4+| Effectuer un débit exceptionnel
+>|Objectif 4+|Vérifier qu'il est possible de débiter un compte de manière exceptionnelle lorsque le solde dépasse le découvert autorisé
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_DEx.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Etre connecter en tant que chef d'agence ^|OK
+^|All_G_DEx.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_DEx.3 ^|Cliquer sur le bouton "Enregistrer Débit". ^|La page de débit du compte s'affiche. ^|Un compte actif est sélectionné et être connecté en tant que chef d'agence ^|OK
+^|All_G_DEx.4 ^|Rentrer un montant 50 dans le champ "Montant". ^|Le nouveau solde est +50 euros. Une nouvelle opération est créée dans la liste des opérations avec le bon montant et la bonne date. ^|Le compte sélectionné a un solde de +100 euros ^|OK
+^|All_G_DEx.5 ^|Rentrer un montant 150 dans le champ "Montant". ^|Le nouveau solde est -50 euros. Une nouvelle opération est créée dans la liste des opérations avec le bon montant et la bonne date. ^|Le compte sélectionné a un solde de +100 euros, le découvert autorisé est de -100 euros ^|OK
+^|All_G_DEx.6 ^|Rentrer un montant 250 dans le champ "Montant". ^| Une  fenêtre pour confirmer le débit exceptionnel s'ouvre |Le compte sélectionné a un solde de +100 euros, le découvert autorisé est de -100 euros ^|OK
+^|All_G_DEx.7 ^| Cliquer sur "Confirmer Débit Exceptionnel". ^|Le nouveau solde est -150 euros. Une nouvelle opération est créée dans la liste des opérations avec le bon montant et la bonne date. ^|Le compte sélectionné a un solde de +100 euros, le découvert autorisé est de -100 euros, l'utilisateur est un chef d'agence ^|OK
+|====
