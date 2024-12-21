@@ -99,8 +99,8 @@ Compléter et si on ne valide pas, ...
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
-^|All_G_CB.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_CB.1 ^|Cliquer sur l'icône "rechercher" dans le menu. ^|La page de Recherche des produits s'ouvre. ^|Aucune ^|OK
+^|All_G_CB.2 ^|Remplir la barre de recherche avec le nom du produit souhaité . ^|Les produits recherché par l'utilisateur s'affichent ^|Aucune ^|OK
 ...
 
 |====
@@ -114,8 +114,7 @@ Compléter et si on ne valide pas, ...
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
-^|All_G_CB.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité, ... ^|La page d'affichagede tous les produits de la catégorie sélectionné s'affiche ^|Aucune ^|OK
 ...
 
 |====
@@ -129,8 +128,23 @@ Compléter et si on ne valide pas, ...
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné ^|OK
-^|All_G_CB.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné ^|OK
+^|All_G_CB.1 ^|Cliquer sur le produit rechercher. ^|La page permettant de consulter les détails du produit s'affiche. ^|Avoir rechercher des produits, soit par la page de recherche, soit par la page de recherche par catégorie depuis le menu. ^|OK
+
+...
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-02-03
+>|Titre 4+|Trie des produits 
+>|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent ^|Aucune ^|OK
+^|All_G_CB.2 ^|Sélectionner un des plusieurs trie possible et rechercher ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité ^|Aucune ^|OK
 ...
 
 |====
