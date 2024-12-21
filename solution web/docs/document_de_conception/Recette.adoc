@@ -63,7 +63,7 @@ Ordinateur sous Windows ou OS équivalent.
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page de connexion s'ouvre. ^| aucune ^|OK
 ^|All_G_C.2 ^|Cliquer sur "Créer un compte" en bas du formulaire de connexion. ^|Le formulaire de création de compte s'ouvre. ^| aucune ^|OK
-^|All_G_C.3 ^|Compléter les champs spécifiés et cliquer sur "Créer". ^|Un nouveau compte client est créé et l'utilisateur est redirigé vers la page d'accueil. ^|aucune ^|OK
+^|All_G_C.3 ^|Compléter les champs spécifiés et cliquer sur le bouton "Créer". ^|Un nouveau compte client est créé et l'utilisateur est redirigé vers la page d'accueil. ^| Remplir tous les champs requis pour créer un compte ^|OK
 
 5+|
 
@@ -82,7 +82,7 @@ Compléter et si on ne valide pas, ...
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.3 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page de connexion s'ouvre. ^| aucune ^|OK
-^|All_G_C.4 ^|Compléter les champs spécifiés et cliquer sur "Se connecter". ^|Connexion effectuée et l'utilisateur est redirigé vers la page d'accueil. ^|aucune ^|OK
+^|All_G_C.4 ^|Compléter les champs spécifiés et cliquer sur le bouton "Se connecter". ^|Connexion effectuée et l'utilisateur est redirigé vers la page d'accueil. ^|aucune ^|OK
 
 |====
 
@@ -188,8 +188,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
-
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
 5+|
 
 5+|Commentaire : REVOIR AVEC
@@ -206,7 +205,8 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| L'utilisateur doit être connecté ^|OK
 
 5+|
 
@@ -227,7 +227,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
 
 5+|
 
@@ -264,7 +264,9 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
+^|C_G_C.2    ^|Cliquer sur le bouton "Commander". ^|Le formulaire de commande s'ouvre. ^| Aucune ^|OK.
+^|C_G_C.2    ^|Choisir le mode de livraison et le mode de paiement puis compléter les champs spécifiés et cliquer sur le bouton "Valider la commande". ^| La page confirmation_commande.php s'ouvre pour afficher un message de confirmation de commande. ^|Remplir tous les champs requis pour valider la commande. ^|OK.
 
 5+|
 
