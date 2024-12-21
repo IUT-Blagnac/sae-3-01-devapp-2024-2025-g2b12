@@ -61,9 +61,9 @@ Ordinateur sous Windows ou OS équivalent.
 
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_C.1 ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| aucune ^|OK
-^|All_G_C.2 ^|Compléter les champs spécifiés et valider. ^|Un nouveau client est créé. ^|aucune ^|OK
-
+^|All_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page de connexion s'ouvre. ^| aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur "Créer un compte" en bas du formulaire de connexion. ^|Le formulaire de création de compte s'ouvre. ^| aucune ^|OK
+^|All_G_C.3 ^|Compléter les champs spécifiés et cliquer sur "Créer". ^|Un nouveau compte client est créé et l'utilisateur est redirigé vers la page d'accueil. ^|aucune ^|OK
 
 5+|
 
@@ -81,9 +81,8 @@ Compléter et si on ne valide pas, ...
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_C.3 ^|Cliquer sur le bouton "Modifier client". ^|La fenêtre de modification des données du clients s'ouvre. ^|Le client est sélectionné ^|OK
-^|All_G_C.4 ^|Modifier les champs souhaités et confirmer. ^|Retour sur les informations du client. Le client est modifié. ^|La fenêtre modifier client est active ^|OK
-^|All_G_C.5 ^|Modifier les champs souhaités et annuler. ^|Retour sur les informations du client. Le client est inchangé. ^|La fenêtre modifier client est active ^|OK
+^|All_G_C.3 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page de connexion s'ouvre. ^| aucune ^|OK
+^|All_G_C.4 ^|Compléter les champs spécifiés et cliquer sur "Se connecter". ^|Connexion effectuée et l'utilisateur est redirigé vers la page d'accueil. ^|aucune ^|OK
 
 |====
 
@@ -153,7 +152,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté ^|OK
 
 5+|
 
