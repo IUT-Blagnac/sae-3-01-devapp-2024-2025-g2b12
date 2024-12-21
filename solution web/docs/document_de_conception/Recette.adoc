@@ -280,7 +280,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
 ^|C_G_C.2    ^|Cliquer sur le bouton "Commander". ^|Le formulaire de commande s'ouvre. ^| Aucune ^|OK.
-^|C_G_C.2    ^|Choisir le mode de livraison et le mode de paiement puis compléter les champs spécifiés et cliquer sur le bouton "Valider la commande". ^| La page confirmation_commande.php s'ouvre pour afficher un message de confirmation de commande. ^|Remplir tous les champs requis pour valider la commande. ^|OK.
+^|C_G_C.3    ^|Choisir le mode de livraison et le mode de paiement puis compléter les champs spécifiés et cliquer sur le bouton "Valider la commande". ^| La page confirmation_commande.php s'ouvre pour afficher un message de confirmation de commande. ^|Remplir tous les champs requis pour valider la commande. ^|OK.
 
 5+|
 
@@ -290,5 +290,42 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 |====
 
 ==== 2.4 Gestion des avis :
+
+|====
+
+>|Cas de test 4+|Test-02-04-01
+>|Titre 4+|Visualiser un Avis
+>|Objectif 4+| Vérifier qu'il est possible de visualiser des avis
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Scroller vers le bas de la page ^|Apercevoir les avis déjà existants ^|La page de détail d'un produit doit être ouverte ^|OK
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-04-02
+>|Titre 4+|Rédiger un Avis
+>|Objectif 4+| Vérifier qu'il est possible d'écrire un avis
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1   ^|Scroller vers le bas de la page ^|Apercevoir le champs de rédaction d'un avis ^|La page de détail d'un produit doit être ouverte ^|OK
+^|C_G_C.2    ^|Cliquer sur le champs et rédiger un avis  ^|Ajoute un avis sous le produit ^| Les notes et le champs doivent être remplis ^|OK
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
 
 === 3. Fonctionnalités des administrateurs :
