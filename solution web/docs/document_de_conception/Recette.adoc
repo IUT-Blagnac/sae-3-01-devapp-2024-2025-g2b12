@@ -1,3 +1,19 @@
+// PAGE DE GARDE
+
+*Établissement
+IUT de Blagnac,
+Université Toulouse II – Jean Jaurès (31)*
+
+*SAE 3.01*
+
+_BUT2 Informatique - Année Universitaire 2024 / 2025_
+
+// images
+image::./img/logo_iut_blagnac.jpg[Logo IUT de Blagnac, 200]
+image::./img/logo_univ_jean_jaures.jpg[Logo Université Toulouse II - Jean Jaurès, 200]
+
+---
+
 = Cahier De Recette - Woohp Resell
 :toc:
 :toc-title: Sommaire
@@ -22,12 +38,20 @@ https://github.com/Hextaz[*Nolhan Biblocque*] | *Développeur* |
 https://github.com/Ezeloss[*Léo Guinvarc'h*] | *Développeur* |
 https://github.com/ImHereForWhat/[*Mathys Laguilliez*] | *Développeur* 
 |===
+*Enseignants* +
+Jean-Michel Bruel +
+Esther Pendarie
 
+---
 
 == I. Introduction
 === 1. Objet :
 [.text-justify]
-Ce document a été produit dans le cadre d'un projet d'élaboration d'une application bancaire pour la banque DailyBank, visant à spécifier les cas de test pour assurer la qualité du site.
+L’entreprise Woohp resell, PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité a pour objectif de développer une solution d'E-commerce. 
+
+En effet, l’entreprise fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a la volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. 
+
+Une démarche de digitalisation de l’offre via un site d'E-commerce a été initiée et s’inscrit dans cette dynamique. Ce document a été produit dans le cadre du projet d'élaboration du site Web pour l'entreprise Woohp resell, visant à spécifier les cas de test pour assurer la qualité du site.
 
 == II. Pre-Requis :
 [.text-justify]
