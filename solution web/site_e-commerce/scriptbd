@@ -1,0 +1,1415 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:3306
+-- Généré le : lun. 23 déc. 2024 à 15:25
+-- Version du serveur : 8.0.40-0ubuntu0.22.04.1
+-- Version de PHP : 8.1.2-1ubuntu2.19
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `R2024MYSAE3002`
+--
+
+DELIMITER $$
+--
+-- Procédures
+--
+CREATE DEFINER=`R2024MYSAE3002`@`%` PROCEDURE `CreerRegroupement` (IN `p_listProduit` VARCHAR(255), IN `p_idR` INT)  BEGIN
+  DECLARE v_idVariete INT ; 
+  DECLARE v_pos INT DEFAULT 1 ;
+  DECLARE v_nextPos INT ; 
+  DECLARE v_variete INT ; 
+  DECLARE v_count INT ; 
+  
+  SELECT COUNT(*) INTO v_count 
+  FROM REGROUPEMENT
+  WHERE idRegroupement = p_idR ; 
+  
+  IF v_count = 0 THEN 
+  	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT= 'Erreur : regroupement inconnu !' ; 
+  END IF ; 
+  
+ WHILE v_pos <= LENGTH(p_listProduit) DO 
+ 	SET v_nextPos = LOCATE(',', p_listProduit, v_pos) ; 
+ 
+ 	IF v_nextPos = 0 THEN 
+    	SET v_variete = SUBSTRING(p_listProduit, v_pos) ; 
+        SET v_pos = LENGTH(p_listProduit) + 1 ; 
+    ELSE 
+    	SET v_variete = SUBSTRING(p_listProduit, v_pos, v_nextPos - v_pos) ; 
+        SET v_pos = v_nextPos + 1 ; 
+    END IF ; 
+    
+    SET v_idVariete = CAST(v_variete AS UNSIGNED) ; 
+    
+    SELECT COUNT(*) INTO v_count
+    FROM VARIETE 
+    WHERE idVariete = v_idVariete ;
+    	 
+    IF v_count = 0 THEN 
+  		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT= 'Erreur : produit inconnu !' ; 
+  	END IF ; 
+    
+	INSERT INTO REGROUPER (idRegroupement, idVariete) VALUES (p_idR, v_idVariete) ;
+  
+  END WHILE ; 
+ COMMIT ;
+END$$
+
+CREATE DEFINER=`R2024MYSAE3002`@`%` PROCEDURE `passerCommande` (`pIdClient` INT, `pModeLivraison` VARCHAR(15), `pIdAdresseDeLivraison` INT, `pModePaiement` VARCHAR(10), `pNumCB` CHAR(16), `pNumPaypal` DECIMAL(10), `pNumVirement` DECIMAL(10))  BEGIN
+    -- déclaration des variables
+    -- -------------------------
+    -- variables relatives à la commande à créer
+    DECLARE varDateCommande DATE ;                  -- date de la commande
+    DECLARE varIdAdresse INT ;                      -- ID d'une adresse client
+    DECLARE varIdRelais INT ;                       -- ID d'un point relais
+    DECLARE varNumCB CHAR(16) ;                     -- numéro de carte bancaire
+    DECLARE varNumPaypal DECIMAL(10) ;              -- numéro de paimenent PayPal
+    DECLARE varNumVirement DECIMAL(10) ;            -- numéro de virement
+    DECLARE varMontant DECIMAL(22,2) ;              -- montant total de la commande
+    -- variables relatives aux produits commandés
+    DECLARE varIdCommande INT ;                     -- ID de la commande insérée
+    DECLARE varIdVProduit INT ;                     -- ID d'une variante de produit
+    DECLARE varPrixVProduit DECIMAL(22,0) ;         -- prix d'une variante de produit
+    DECLARE varQteEnregistree DECIMAL(10,0) ;       -- quantité enregistrée pour une variante de produit
+    DECLARE varQteStockVariete DECIMAL(10,0) ;      -- quantité en stock d'une variante de produit
+    DECLARE isFinCurseur BOOLEAN DEFAULT FALSE ;    -- indique si le curseur a été entièrement lu
+    -- compteur de lignes pour exceptions
+    DECLARE varCpt INT ;
+    -- curseur de récupération des variantes de produits commandés
+    DECLARE curseurVProduitsCommandees CURSOR FOR
+        SELECT E.idVariete, E.qteEnregistree, V.prixVariete
+        FROM ENREGISTRER E INNER JOIN VARIETE V
+            ON E.idVariete = V.idVariete
+        WHERE E.idClient = pIdClient ;
+    -- gestionnaire d'exception pour lecture du curseur
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET isFinCurseur = TRUE ;
+
+    -- initialisation des variables relatives à la commande
+    SET varDateCommande = CURDATE() ;
+    SET varIdAdresse    = NULL ;
+    SET varIdRelais     = NULL ;
+    SET varNumCB        = NULL ;
+    SET varNumPaypal    = NULL ;
+    SET varNumVirement  = NULL ;
+    SET varMontant      = 0 ;
+
+    -- traitement des exceptions
+    -- -------------------------
+    -- vérification de la validité de l'ID Client
+    IF pIdClient = NULL THEN
+        SIGNAL SQLSTATE '45010'
+        SET MESSAGE_TEXT = 'Erreur : Client non renseigné.' ;
+    END IF ;
+    SELECT COUNT(*) INTO varCpt FROM CLIENT WHERE idClient = pIdClient ;
+    IF varCpt != 1 THEN
+        SIGNAL SQLSTATE '45011'
+        SET MESSAGE_TEXT = 'Erreur : Client inconnu.' ;
+    END IF ;
+    -- traitement du mode de livraison
+    IF pModeLivraison = NULL THEN
+        SIGNAL SQLSTATE '45020'
+        SET MESSAGE_TEXT = 'Erreur : Mode de livraison non renseigné.' ;
+    END IF ;
+    IF pIdAdresseDeLivraison = NULL THEN
+        SIGNAL SQLSTATE '45030'
+        SET MESSAGE_TEXT = 'Erreur : Adresse de livraison non renseignée.' ;
+    END IF ;
+    CASE WHEN pModeLivraison = 'DOMICILE' THEN
+            SELECT COUNT(*) INTO varCpt FROM ADRESSE WHERE idAdresse = pIdAdresseDeLivraison ;
+            IF varCpt != 1 THEN
+                SIGNAL SQLSTATE '45031'
+                SET MESSAGE_TEXT = 'Erreur : Adresse ne correspondant à aucun domicile enregistré.' ;
+            END IF ;
+            SET varIdAdresse = pIdAdresseDeLivraison ;
+        WHEN pModeLivraison = 'RELAIS' THEN
+            SELECT COUNT(*) INTO varCpt FROM POINT_RELAIS WHERE idRelais = pIdAdresseDeLivraison ;
+            IF varCpt != 1 THEN
+                SIGNAL SQLSTATE '45032'
+                SET MESSAGE_TEXT = 'Erreur : Adresse ne correspondant à aucun point relais enregistré.' ;
+            END IF ;
+            SET varIdRelais = pIdAdresseDeLivraison ;
+        ELSE
+            SIGNAL SQLSTATE '45021'
+            SET MESSAGE_TEXT = 'Erreur : Mode de livraison invalide.' ;
+    END CASE ;
+    -- traitement du mode de paiement
+    IF pModePaiement = NULL THEN
+        SIGNAL SQLSTATE '45040'
+        SET MESSAGE_TEXT = 'Erreur : Mode de paiement non renseigné.' ;
+    END IF ;
+    CASE WHEN pModePaiement = 'CB' THEN
+            IF pNumCB = NULL THEN
+                SIGNAL SQLSTATE '45050'
+                SET MESSAGE_TEXT = 'Erreur : Carte bancaire non renseignée.' ;
+            END IF ;
+            SELECT COUNT(*) INTO varCpt FROM CARTE_BANCAIRE WHERE numCB = pNumCB ;
+            IF varCpt != 1 THEN
+                SIGNAL SQLSTATE '45051'
+                SET MESSAGE_TEXT = 'Erreur : Carte bancaire inconnue.' ;
+            END IF ;
+            SET varNumCB = pNumCB ;
+        WHEN pModePaiement = 'PAYPAL' THEN
+            IF pNumPaypal = NULL THEN
+                SIGNAL SQLSTATE '45060'
+                SET MESSAGE_TEXT = 'Erreur : Numéro PayPal non renseigné.' ;
+            END IF ;
+            SET varNumPaypal = pNumPaypal ;
+        WHEN pModePaiement = 'VIREMENT' THEN
+            IF pNumVirement = NULL THEN
+                SIGNAL SQLSTATE '45070'
+                SET MESSAGE_TEXT = 'Erreur : Numéro de virement non renseigné.' ;
+            END IF ;
+            SET varNumVirement = pNumVirement ;
+        ELSE
+            SIGNAL SQLSTATE '45041'
+            SET MESSAGE_TEXT = 'Erreur : Mode de paiement invalide.' ;
+    END CASE ;
+
+    -- traitement de la commande
+    -- -------------------------
+    -- insertion de la commande
+    INSERT INTO COMMANDE (idClient, dateCommande, modeLivraison, idAdresse, idRelais, modePaiement, numCB, numPaypal, numVirement)
+    VALUES (pIdClient, varDateCommande, pModeLivraison, varIdAdresse, varIdRelais, pModePaiement, varNumCB, varNumPaypal, varNumVirement) ;
+    -- récupération de l'ID de la commande
+    SET varIdCommande = LAST_INSERT_ID() ;
+    -- insertion des variantes de produits commandés
+    OPEN curseurVProduitsCommandees ;
+    BOUCLE: LOOP
+        FETCH curseurVProduitsCommandees INTO varIdVProduit, varQteEnregistree, varPrixVProduit ;
+        IF isFinCurseur THEN LEAVE BOUCLE ; END IF ;
+        -- vérification de la validité de la quantité enregistrée
+        SELECT qteStockVariete INTO varQteStockVariete FROM VARIETE WHERE idVariete = varIdVProduit ;
+        IF varQteEnregistree > varQteStockVariete THEN
+            SET varQteEnregistree = varQteStockVariete ;
+        END IF ;
+        -- ajout de la variante du produit à la commande
+        INSERT INTO COMMANDER (idCommande, idVariete, qteCommandee)
+        VALUES (varIdCommande, varIdVProduit, varQteEnregistree) ;
+        -- mise à jour du stock de la variante de produit
+        UPDATE VARIETE
+        SET qteStockVariete = qteStockVariete - varQteEnregistree
+        WHERE idVariete = varIdVProduit ;
+        -- calcul du montant de la commande
+        SET varMontant = varMontant + varQteEnregistree * varPrixVProduit ;
+    END LOOP ;
+    CLOSE curseurVProduitsCommandees ;
+    -- mise à jour du montant de la commande
+    UPDATE COMMANDE SET montantCommande = varMontant WHERE idCommande = varIdCommande ;
+    -- nettoyage du panier (suppression des produits commandés)
+    DELETE FROM ENREGISTRER WHERE idClient = pIdClient ;
+    -- validation des transactions
+    COMMIT ;
+END$$
+
+CREATE DEFINER=`R2024MYSAE3002`@`%` PROCEDURE `SupprimerRegroupement` (IN `p_idR` INT)  BEGIN
+  DECLARE v_count INT ; 
+  
+  SELECT COUNT(*) INTO v_count 
+  FROM REGROUPEMENT
+  WHERE idRegroupement = p_idR ; 
+  
+  IF v_count = 0 THEN 
+  	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT= 'Erreur : regroupement inconnu !' ; 
+  END IF ; 
+	DELETE FROM REGROUPER WHERE idRegroupement = p_idR ;
+ COMMIT ;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Admin`
+--
+
+CREATE TABLE `Admin` (
+  `idAdmin` int NOT NULL,
+  `loginAdmin` varchar(50) NOT NULL,
+  `mdpAdmin` varchar(200) NOT NULL,
+  `emailAdmin` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Admin`
+--
+
+INSERT INTO `Admin` (`idAdmin`, `loginAdmin`, `mdpAdmin`, `emailAdmin`) VALUES
+(1, 'marthe22', '$2y$10$aDrcf4ldM6Hq9j4PoQVf/OYww612wZvY/o0.l/odBQMTycwPEFJte', 'isaac.pages@live.com'),
+(3, 'vmoreno', '$2y$10$8tUg5W.w4WvDPbG7i9BM1.KJ.mOOOPweelOO82dZUwmSjB4qQHaoO', 'fournier.penelope@blanchard.fr');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ADRESSE`
+--
+
+CREATE TABLE `ADRESSE` (
+  `idAdresse` int NOT NULL,
+  `numRueAdresse` varchar(10) NOT NULL,
+  `rueAdresse` varchar(50) NOT NULL,
+  `cdPostalAdresse` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `villeAdresse` varchar(50) NOT NULL,
+  `paysAdresse` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `ADRESSE`
+--
+
+INSERT INTO `ADRESSE` (`idAdresse`, `numRueAdresse`, `rueAdresse`, `cdPostalAdresse`, `villeAdresse`, `paysAdresse`) VALUES
+(224, '6', ' avenue Delannoy', '35327', 'Descamps-sur-Chartier', 'France'),
+(225, '357', ' place de Jacques', '12585', 'Lecomte', 'France'),
+(226, '37', 'boulevard Hortense Bouchet', '29 738', 'Godard', 'France'),
+(227, '75', 'boulevard Voisin', '71736', 'Giraud', 'France'),
+(228, '79', ' rue de Clerc', '16901', 'Tessier', 'France'),
+(229, '510', ' place Benoit', '64848', 'Lemaire', 'France'),
+(230, '81', ' boulevard Rémy Peltier', '09 873', 'Rossiboeuf', 'France'),
+(231, '87', ' rue de Berger', '27 128', 'Cohen', 'France'),
+(232, '8', ' rue de Bertrand', '09 222', 'Marchand', 'France'),
+(233, '91', 'rue de Lebon', '45 585', 'Durand-sur-Chauvin', 'France'),
+(234, '2', ' boulevard Élisabeth Dupuy', '20 579', 'DufourBourg', 'France'),
+(235, '931', ' rue de Lopez', '84886', 'Tanguyboeuf', 'France'),
+(236, '84', ' rue De Sousa', '23 207', 'Lebon', 'France'),
+(237, '23', ' rue de Ledoux', '27 629', 'Leblanc', 'France'),
+(238, '4', ' impasse Nicole Neveu', '99 849', 'Brunet', 'France'),
+(239, '35', ' impasse de Herve', '78 451', 'Collinboeuf', 'France'),
+(240, '351', ' rue de Fischer', '12696', 'Pascal', 'France'),
+(241, '9', ' rue de Caron', '90 115', 'Guillot', 'France'),
+(242, '99', ' avenue Navarro', '23 094', 'Pottier-sur-Colin', 'France'),
+(243, '48', 'chemin Morvan', '88 787', 'Kleindan', 'France'),
+(244, '6', ' chemin de Blin', '20562', 'Simon', 'France'),
+(245, '93', ' boulevard Véronique Perrin', '67 094', 'Diallo', 'France'),
+(246, '47', ' avenue Samson', '31 413', 'Sanchez-les-Bains', 'France'),
+(247, '14', ' place de Mercier', '09 257', 'DupuyVille', 'France'),
+(248, '232', ' boulevard de Toussaint', '49761', 'Gomes', 'France'),
+(249, '61', 'boulevard de Colas', '05 951', 'Hoarau-sur-Boulanger', 'France'),
+(250, '66', ' chemin Wagner', '60676', 'Guillou', 'France'),
+(251, '766', ' avenue Lambert', '58848', 'Labbe', 'France'),
+(252, '217', ' impasse Pineau', '24 330', 'ThierryVille', 'France'),
+(253, '66', ' impasse Charles Fleury', '26088', 'Laurent', 'France'),
+(254, '56', ' impasse Faivre', '10 417', 'Lecomteboeuf', 'France'),
+(255, '2', 'place Morel', '23 639', 'ColletVille', 'France'),
+(256, '94', 'place Thérèse Rodrigues', '76537', 'Robert', 'France'),
+(257, '69', ' rue Patricia Louis', '94 319', 'CaronVille', 'France'),
+(258, '92', ' place de Aubert', '34825', 'Faivre', 'France'),
+(259, '11', ' place Claude Faivre', '80146', 'Francoisboeuf', 'France'),
+(260, '801', ' impasse de Marin', '00047', 'Godardboeuf', 'France'),
+(261, '45', ' rue Capucine Faure', '06934', 'Blondel', 'France'),
+(262, '70', ' avenue Lambert', '20830', 'Chretien', 'France'),
+(263, '85', ' impasse Parent', '29 206', 'Thomas-sur-Boutin', 'France'),
+(264, '827', ' rue Loiseau', '11 649', 'Chevallier', 'France'),
+(265, '8', ' impasse Allard', '97 709', 'Daniel', 'France'),
+(266, '688', ' avenue de Legendre', '39300', 'Leduc', 'France'),
+(267, '46', ' avenue de David', '63 455', 'Paris-sur-Brun', 'France'),
+(268, '66', ' avenue de Charpentier', '43977', 'Diaz-sur-Moreau', 'France'),
+(269, '34', ' avenue Delorme', '94 044', 'Benard-la-Forêt', 'France'),
+(270, '40', ' boulevard Caroline Daniel', '69 913', 'Bigot', 'France'),
+(271, '89', 'boulevard Hugues Lopez', '88 823', 'Pottier', 'France'),
+(272, '788', ' rue Stéphanie Marchal', '15 404', 'Robertboeuf', 'France'),
+(273, '76', ' impasse Colas', '80418', 'Jourdannec', 'France'),
+(274, '70', 'chemin Constance Petit', '55 453', 'Parent-sur-Coulon', 'France'),
+(275, '70', ' place de Gaudin', '46 071', 'Fournier-les-Bains', 'France'),
+(276, '57', 'rue Cécile Guillet', '40 186', 'Lebretonboeuf', 'France'),
+(277, '74', ' avenue Lombard', '68048', 'Bouvet-la-Forêt', 'France'),
+(278, '59', ' avenue Gillet', '52 531', 'Bernier-la-Forêt', 'France'),
+(280, '7', 'mlkjhgfd', '85765', '4', 'jku'),
+(281, '7', 'mlkjhgfd', '85765', '4', 'jku'),
+(282, '257', 'hgfdscfghjhkjhhgg', '31700', 'Blagnac', 'France'),
+(283, '257', 'hgfdscfghjhkjhhgg', '31700', 'Blagnac', 'France'),
+(284, '15', 'fdghhgfdsd', '31700', 'Blagnac', 'France'),
+(285, '15', 'fdghhgfdsd', '31700', 'Blagnac', 'France'),
+(286, '15', 'fdghhgfdsd', '31700', 'Blagnac', 'France'),
+(287, '45', 'avenue du général de Gaulle', '31700', 'Blagnac', 'France'),
+(288, '4', 'fxcgvhb', '45612', 'Blagnac', 'France'),
+(289, '4', 'fxcgvhb', '45612', 'Blagnac', 'France'),
+(290, '5', 'fgh', '12345', 'Blagnac', 'France'),
+(291, '7', 'dfgh', '78945', 'Blagnac', 'France'),
+(292, '5', 'dxfcgh', '64352', 'Blagnac', 'France'),
+(293, '5', 'dxfcgh', '64352', 'Blagnac', 'France'),
+(294, '4', 'dxfgdcgvhb,n;', '31700', 'Blagnac', 'France'),
+(295, '4', 'dxfgdcgvhb,n;', '31700', 'Blagnac', 'France'),
+(296, '4', 'dxfgdcgvhb,n;', '31700', 'Blagnac', 'France'),
+(297, '4', '4', '44444', '4', '4'),
+(298, '31', 'la tour d\'espagne', '41780', 'Toulouse', 'France'),
+(299, '10', 'Rue Louis Blériot', '31700', 'BLAGNAC', 'France'),
+(301, '78', 'kugezf ', '45691', 'Blagnac', 'France'),
+(302, '4', 'sdz', '42456', 'Blagnac', 'France'),
+(303, '53', 'rt(tfhgh', '74521', 'Blagnac', 'France');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `APPARENTER`
+--
+
+CREATE TABLE `APPARENTER` (
+  `idVariete1` int NOT NULL,
+  `idVariete2` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `APPARENTER`
+--
+
+INSERT INTO `APPARENTER` (`idVariete1`, `idVariete2`) VALUES
+(101, 201);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `AVIS`
+--
+
+CREATE TABLE `AVIS` (
+  `idClient` int NOT NULL,
+  `idProduit` int NOT NULL,
+  `noteAvis` decimal(1,0) NOT NULL,
+  `commentaireAvis` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `dateAvis` date NOT NULL,
+  `reponseAvis` varchar(250) DEFAULT NULL,
+  `dateReponseAvis` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `AVIS`
+--
+
+INSERT INTO `AVIS` (`idClient`, `idProduit`, `noteAvis`, `commentaireAvis`, `dateAvis`, `reponseAvis`, `dateReponseAvis`) VALUES
+(648, 30, '4', 'TEST', '2024-12-19', NULL, NULL),
+(670, 29, '5', 'Incroyable, service impeccable et produit de haute qualité.', '2024-07-04', 'Nous vous remercions pour ce retour !', '2024-11-15'),
+(675, 26, '1', 'Le produit ne correspond pas à la description, grosse déception.', '2024-12-23', 'Nous regrettons cette expérience. Pouvez-vous nous fournir plus de détails pour rectifier cela ?', '2024-12-25'),
+(687, 1, '1', 'Le produit ne me convient pas.', '2024-08-02', 'Veuillez contacter notre support pour un remplacement ou ou un remboursement.', '2024-08-03'),
+(696, 5, '4', 'Conforme à mes attentes, je suis satisfait de cet achat.', '2024-12-20', 'Merci pour votre avis positif !', '2024-12-21'),
+(702, 25, '0', 'Une masterclasse je conseil fortement ', '2024-12-19', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `CARTE_BANCAIRE`
+--
+
+CREATE TABLE `CARTE_BANCAIRE` (
+  `numCB` char(16) NOT NULL,
+  `dateExpCB` varchar(5) NOT NULL,
+  `titulaireCB` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `CARTE_BANCAIRE`
+--
+
+INSERT INTO `CARTE_BANCAIRE` (`numCB`, `dateExpCB`, `titulaireCB`) VALUES
+('0000000000000000', '01/01', 'fbxdvbxv'),
+('1111222233334444', '01/27', 'ANU-UJIN GANPUREV'),
+('1234565475687594', '12/99', 'zzee'),
+('1234567891012141', '02/26', 'fbxdvbxv'),
+('1234567891234565', '12/99', 'fbxdvbxv'),
+('1247598654752145', '12/99', 'ldniidsdse'),
+('3323432344444332', '05/11', 'Eude'),
+('3405550204564990', '02/27', NULL),
+('3461527986548512', '12/69', 'yanis'),
+('3489785137212070', '12/25', NULL),
+('3494345731659180', '10/26', NULL),
+('3738593303547520', '01/25', NULL),
+('3799340923328920', '07/26', NULL),
+('4024007110444000', '04/26', NULL),
+('4024007145614000', '11/26', NULL),
+('4024007146257000', '12/25', NULL),
+('4330592975756460', '06/26', NULL),
+('4485700009094000', '05/27', NULL),
+('4485806505803094', '02/25', NULL),
+('4533789412562012', '12/20', 'Martinez Quentin'),
+('4539257206835652', '08/27', NULL),
+('4556625092640055', '10/25', NULL),
+('4657846957682456', '12/99', 'dfghgrdf'),
+('4716590835192000', '04/25', NULL),
+('4916095536631000', '03/25', NULL),
+('4916423497000520', '03/27', NULL),
+('4929322331392652', '02/25', NULL),
+('4929844621929059', '07/26', NULL),
+('4990017852394813', '01/25', 'AM ESTIENNE'),
+('5133876097107934', '11/25', NULL),
+('5213685126172808', '04/26', NULL),
+('5242997091540066', '05/27', NULL),
+('5336390743409251', '06/25', NULL),
+('5394121107087642', '12/26', NULL),
+('5430583123929030', '11/27', NULL),
+('5513282168895509', '03/27', NULL),
+('5527784880375904', '04/26', NULL),
+('6011225698755359', '09/27', NULL),
+('6011710521228955', '10/26', NULL),
+('6011731637234224', '04/27', NULL),
+('6011763657028004', '03/25', NULL),
+('6011968977473455', '08/26', NULL),
+('6457812463751964', '04/58', 'jean'),
+('9765481234679582', '12/99', 'jean');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `CATEGORIE`
+--
+
+CREATE TABLE `CATEGORIE` (
+  `idCategorie` int NOT NULL,
+  `nomCategorie` varchar(50) NOT NULL,
+  `idParent` int DEFAULT NULL,
+  `descCategorie` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `CATEGORIE`
+--
+
+INSERT INTO `CATEGORIE` (`idCategorie`, `nomCategorie`, `idParent`, `descCategorie`) VALUES
+(10, 'Combat', NULL, 'Des gadgets offensifs et défensifs, adaptés pour le combat rapproché, à moyenne portée ou longue distance.'),
+(20, 'Mobilité', NULL, 'Regroupe des équipements high-tech permettant des déplacements rapides et discrets.'),
+(30, 'Infiltration', NULL, 'Des équipements de dissimulation, idéaux pour se fondre dans le décor ou changer d\'apparence en un instant.'),
+(40, 'Surveillance', NULL, 'Des dispositifs permettant de surveiller des zones, d\'enregistrer des activités et de collecter des données en temps réel.'),
+(50, 'Evasion', NULL, 'Des outils conçus pour faciliter la fuite, incluant des gadgets de diversion et des équipements pour franchir des obstacles et désorienter les poursuivants.'),
+(60, 'Médicale', NULL, 'Des équipements destinés aux soins d\'urgence, incluant des dispositifs de diagnostic et des outils de premiers secours.'),
+(70, 'Corps-à-corps', 10, NULL),
+(80, 'longue portée', 10, NULL),
+(90, 'Moyenne-distance', 10, NULL),
+(100, 'Longue-distance', 10, NULL),
+(110, 'Véhicules', 20, NULL),
+(120, 'Chaussures', 20, NULL),
+(130, 'Camouflage', 30, NULL),
+(140, 'Robots', 40, NULL),
+(150, 'Caméras', 40, NULL),
+(160, 'Micros', 40, NULL),
+(170, 'Accessoires', 50, NULL),
+(180, 'Premiers secours', 60, NULL),
+(190, 'Récupération Rapide', 60, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `CLIENT`
+--
+
+CREATE TABLE `CLIENT` (
+  `idClient` int NOT NULL,
+  `loginClient` varchar(50) NOT NULL,
+  `mdpClient` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nomClient` varchar(50) NOT NULL,
+  `prenomClient` varchar(50) NOT NULL,
+  `telephoneClient` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `emailClient` varchar(50) NOT NULL,
+  `nbPointsClient` decimal(10,0) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `CLIENT`
+--
+
+INSERT INTO `CLIENT` (`idClient`, `loginClient`, `mdpClient`, `nomClient`, `prenomClient`, `telephoneClient`, `emailClient`, `nbPointsClient`) VALUES
+(647, 'marthe22', '$2y$10$aDrcf4ldM6Hq9j4PoQVf/OYww612wZvY/o0.l/odBQMTycwPEFJte', 'André', 'Mary', '0789969462', 'isaac.pages@live.com', '0'),
+(648, 'vmoreno', '$2y$10$8tUg5W.w4WvDPbG7i9BM1.KJ.mOOOPweelOO82dZUwmSjB4qQHaoO', 'Jérôme', 'Seguin', '0743387102', 'fournier.penelope@blanchard.fr', '0'),
+(649, 'ribeiro.michele', '$2y$10$sH/iHmXKZ/h3s.myh/mJduI9FoPRB.eZ5oS5BJa5KlvayHMnEyuDO', 'Guy', 'Morel', '0782193141', 'edouard.georges@yahoo.fr', '0'),
+(650, 'rjoseph', '$2y$10$oSCqTKtRkir1oEdaXLWIpOwoJlrGDQcmyLYCK6.2WdE7D1iH3tzUW', 'Élodie', 'Goncalves', '0768140959', 'guillaume.couturier@yahoo.fr', '0'),
+(651, 'hmartin', '$2y$10$cCQO5GOBiubwxKvjM31bN.ziVmx7.cv9geNhQbl57i2pYKGbu6.Z6', 'Daniel', 'du Pasquier', '0737193886', 'cchauveau@free.fr', '0'),
+(652, 'agnes.alexandre', '$2y$10$crxU.lnaEeMdvF.43xOHlOpUOUdcan1y2NqtveMpi2LXSaqkiuiK6', 'Bertrand', 'Morel', '0730703520', 'laurent.gregoire@breton.fr', '0'),
+(653, 'anastasie.rousset', '$2y$10$sjJWvWgP1obIwlMoBIxUB.OFD6oddWc.93kFlpcV.UJcQztHSySJO', 'Marcelle', 'Laurent', '0771113722', 'xarnaud@picard.fr', '0'),
+(654, 'victoire.martineau', '$2y$10$hPyOxjMlZyMdFQ4qExWEhefPNtiLtmtvg0kb9FHInJVBM2bIDBIvi', 'Alix', 'Durand', '0757299383', 'vmorel@orange.fr', '0'),
+(655, 'jerome.martins', '$2y$10$g3tL4UFPEy3uxvbmgIFebucou5yckmhc/4E0900d7A2qbBK8zneIK', 'Alexandre', 'Bouchet', '0720909592', 'kgosselin@tiscali.fr', '0'),
+(656, 'hortense.imbert', '$2y$10$1209qORF1x.pCl.DRSfSFe9nE7Qv9Mx8/tX.vuP/SLGJ//GwSMbbK', 'Odette', 'Hardy', '0783895051', 'mrobin@noos.fr', '0'),
+(657, 'henriette.martinez', '$2y$10$/F3k7ufoEizh5.7b8OF2zurXNXUIG6hrKrxCkEEcCEEg722D1w5Tm', 'Dorothée', 'Seguin', '0795207705', 'amichel@masson.org', '0'),
+(658, 'tsauvage', '$2y$10$8rIOGQm71OjrLRCuZhHxdOyWAzyEWyihRzTiJ2SGp8C/w67J/A4WC', 'Honoré', 'Chartier', '0724833591', 'guyon.noel@tiscali.fr', '0'),
+(659, 'lucy15', '$2y$10$Ya8Pm8xMQg6bSmkWB0aTf.bWYdLOsm48zJDRg8HYn6WumsP3loTEi', 'Bernard', 'Godard-Ribeiro', '0783017758', 'agathe11@hotmail.fr', '0'),
+(660, 'gimenez.ines', '$2y$10$NxjqmAbXL2UH5fNSF/qsZOBTvmQW3fxQMWn/zLb8C4LB1ELgAnNGq', 'Michelle', 'Sanchez', '0791705656', 'friviere@bourdon.net', '0'),
+(661, 'mmahe', '$2y$10$m80yUyLnCwS.u9wkxWqeQu4fCK.T1VomKvqailmYBgwH./jvGwYMi', 'Franck', 'de Pineau', '0748571113', 'robin.aurore@guyot.fr', '0'),
+(662, 'dlemaire', '$2y$10$Q53sYTmGds1po3kKUl.V1ehtwt9V99FSYLIuTATX.5kJyGdvhtJKy', 'Pierre', 'Collin', '0719989215', 'eugene33@live.com', '0'),
+(663, 'lebon.patrick', '$2y$10$XoakY28mSOx3xmtEb876LO28ZFtppUyLirmGt4asQFLNnOtZ9.LuS', 'Marthe', 'Brunel', '0786026627', 'andre.gilles@tiscali.fr', '0'),
+(664, 'guichard.franck', '$2y$10$YQU4U3khVbaQnmI1yVqatexXR1xxKF8rs/nXPLGf4YVZlMtzik0Ui', 'Roger', 'Traore', '0791433309', 'isaac.robin@club-internet.fr', '0'),
+(665, 'claudine.barbier', '$2y$10$bjIWvuqVwx4wT5BzVNd3H.8pfN9Z9GpzoIbDbalGUB5k1v5H8CUyq', 'Marcel', 'Nicolas', '0751719563', 'nathalie13@dumont.fr', '0'),
+(666, 'ledoux.marcel', '$2y$10$QXqIAIkoWxpndGvxe/4Fl.bE8aeZh2Lmk5HQP6jrxv7uEFJa9ZI..', 'Arnaude-Colette', 'Lopez', '0742695020', 'pierre82@bouygtel.fr', '0'),
+(667, 'maurice.duval', '$2y$10$qgEvqZOFm0QXoAiBPMN5H.gWUztf0SqpSL/eV2q8NikzBWGpxKDua', 'Nath', 'Bonnin', '0728219926', 'fremy@noos.fr', '0'),
+(668, 'bertrand.maurice', '$2y$10$2GsRZXQYvQoiTgYYSD2xzub8N49PUoVaeNtTJ0FqSDmq3sE5sITxm', 'Paul', 'Le Pineau', '0712202051', 'philippine40@nicolas.fr', '0'),
+(669, 'carlier.leon', '$2y$10$dTJSCvCuEoisV2q4NOocCOSOlK/deMUQLbnsB18LE22vRhMLPRdei', 'Catherine', 'Neveu', '0702449908', 'adeoliveira@bertrand.com', '0'),
+(670, 'rcordier', '$2y$10$Cq3LLOM3b10EowX05cslketg1IgjetYjHQYOxatTHeD9Y1KRCQNTW', 'Laetitia', 'Verdier-Gregoire', '0790990327', 'rgros@free.fr', '0'),
+(671, 'jacques79', '$2y$10$FDpMZD20KtIhj/CnIxPF3.N3F59.27cysSFnhBlMn9vqtFjas9F0O', 'Manon', 'Lopes', '0762906799', 'martin75@bodin.com', '0'),
+(672, 'cmaillard', '$2y$10$.9vxOLGOtkx6ME/FAN364.M6hruYJ87y38VdGhwFbqKhzyPvgRi5e', 'Renée', 'du Richard', '0793076476', 'vbesson@voila.fr', '0'),
+(673, 'neveu.maurice', '$2y$10$IR4MOL2qhYGuCPwArdw8AOHwXUVpnlXmVqMP7knERrevlSk4XYw0a', 'Richard', 'Bernier', '0731783661', 'bertin.patrick@millet.net', '0'),
+(674, 'yperret', '$2y$10$Sluw1svKH/uv6Jquq8kqEedJ4jC329WwiM8706F5nz4oyJNROX8nO', 'Augustin', 'Gimenez', '0728715495', 'patrick.francois@hotmail.fr', '0'),
+(675, 'vleveque', '$2y$10$6irkwcaxwZfqL2eTkSkBmeavegl8yAoOO2J/32ZVTiu1V/YeRbbHi', 'Laure', 'Pascal', '0721984743', 'tcoste@hotmail.fr', '0'),
+(676, 'abrun', '$2y$10$6oG8r2NaVtkRcP13X7Ve9eNG2XIP5Hu4SUcx6Vvh4XgjnSuu8yzD.', 'Marc-Frédéric', 'Morvan', '0737078217', 'fbonnin@gmail.com', '0'),
+(677, 'sauvage.thomas', '$2y$10$gaJoQic6CReeyJRI3IDZn.56ShKFMkTQLAxSnNTjs44AAlXnG9aSa', 'Gérard', 'Delattre', '0746736775', 'emile45@loiseau.net', '0'),
+(678, 'josette.fleury', '$2y$10$twbpdeU5pEngbTZmk51Sbej5arTGZ8/mPNW1gV.hF/GDh3lIDD9Q2', 'Noël', 'Pelletier-Camus', '0726694741', 'etienne.picard@techer.net', '0'),
+(679, 'alix.leclercq', '$2y$10$7tqStvaOX0Ga9wJUoyD7D.c9qj2Wq2CSf8Rc6/Mr2HohUhP271YFS', 'Laurence', 'Benoit', '0776050150', 'hbourdon@jacques.fr', '0'),
+(680, 'gerard.hamel', '$2y$10$Q6tBt5JdxkfH0oCl.98ZTum2YVL/ZWHep.AY4geO3dXCenwk8aDGG', 'Robert-Thibault', 'Langlois', '0770962373', 'guillon.agnes@voila.fr', '0'),
+(681, 'andre29', '$2y$10$y9MxqpLs7U.4YkUJZRDIRu2mDvikGBb8RSYyNcECfgiAxNtX1/vg.', 'Capucine', 'Guillot', '0733485796', 'adescamps@raynaud.fr', '0'),
+(682, 'pierre36', '$2y$10$SvAxohHzAucszESwL1eIueBwRXg.h06CXfzUZX77ApTmTZNn5GAJa', 'Suzanne-Maryse', 'Besnard', '0782167350', 'cguillet@free.fr', '0'),
+(683, 'eric96', '$2y$10$sg/8hZKHez9rkasfPeraU.CVGmv9lPVvAq6JBP7zqRPy1PNgGxUw2', 'Claude-Joseph', 'Charles', '0784370262', 'thibaut12@tiscali.fr', '0'),
+(684, 'francois49', '$2y$10$OxCO7txMojtn2SXkj6DHB.nzuLvnBKUpYkjb5hAYOvJXZ0sn2zKge', 'Monique', 'Dupuis', '0708544707', 'ocourtois@live.com', '0'),
+(685, 'zacharie.gaillard', '$2y$10$6/FcllMNMdnjK6qAMFKf6ebiBXPkLf5fpebXdqT6x2zg0Wg4MSFDa', 'Marine', 'Dumont', '0761016480', 'ugirard@free.fr', '0'),
+(686, 'emile69', '$2y$10$.yg9WGWVdfRbE4UYM9LUJ.0jpQFT9I5a0gzi8v7NCQA49HxrwazZe', 'Éric', 'Chartier', '0766826527', 'duhamel.jacques@antoine.com', '0'),
+(687, 'zjulien', '$2y$10$kIU8lvMH3tPj6uQUVyfTE.0PYFMUL9clfohNj4l.l7OtwP9hvE9wm', 'Eugène', 'de Mace', '0741293049', 'texier.martin@marchand.fr', '0'),
+(688, 'laurent.dominique', '$2y$10$QOcoKbg1CZwu5kOokdw3guxKK1uWMNu3nUebKVHcx8tXw87IvmhNS', 'Andrée-Véronique', 'Garnier', '0797510952', 'perrot.roland@lagarde.fr', '0'),
+(689, 'hardy.patrick', '$2y$10$XwqBX4SkNUseBzCxhKA3C.ZXB0VBm3o1JBu.STRrJFnsYiBnD/Bt2', 'Jules', 'Guibert-Guyon', '0785108616', 'raymond.cordier@antoine.com', '0'),
+(690, 'stephane.lefebvre', '$2y$10$q2xK4UZAqwCztoF/eHKn4OK1mt0LBefuFrUFWHV6mVX79Whd8VbCq', 'Laure', 'du Hamon', '0758268171', 'arthur.sauvage@tessier.fr', '0'),
+(691, 'oceane.laroche', '$2y$10$EqZRoWK1MYE7FFYjOMKC6eMo0D8qQnohI959X/8T/W6ynkfKJQXdC', 'Guillaume-Paul', 'Guibert', '0702314002', 'thierry.martel@rey.com', '0'),
+(692, 'zgillet', '$2y$10$WsOfcrhhaPVFGQOQjYhq8OufaQcl8wE0UzuaslpfLkeJvtIO4FTs2', 'Brigitte-Diane', 'Hubert', '0720638517', 'etienne45@lacroix.com', '0'),
+(693, 'aime81', '$2y$10$he25w.c1QreeYetWgWeT6OHplh5bKIdAwLJkzCz1lc82umwpVO2vC', 'Aurélie', 'Mary', '0731991893', 'amelie38@orange.fr', '0'),
+(694, 'qmartins', '$2y$10$BeeCk/1F72loOuvF0xn84OybWxmrEx.RE12Mvkote8guONOq/4c.S', 'Virginie', 'Ruiz', '0785334506', 'vpottier@sfr.fr', '0'),
+(695, 'gerard.edouard', '$2y$10$5p.0Twrq2OkmydWLomMkLOmiK1sOdUflfOJDveGyo9bbFUAu95AZG', 'Sylvie', 'Hoareau-Lemonnier', '0762980320', 'adelaide14@sfr.fr', '0'),
+(696, 'mpayet', '$2y$10$w17xgC8OwDPcWkN12c0ywedTW72nOsGokI5AeUj2iyuignAmy3Iji', 'Antoinette', 'Henry', '0721225259', 'tmerle@club-internet.fr', '0'),
+(697, 'qmartinez', '$2y$10$m3NeXTM2tT/MEIS726LOSuS7QIWHuESuAtQD.X/wIuqpMgFcP.rrm', 'Martinez', 'Quentin', '0606060606', 'azuly@mail.com', '0'),
+(698, 'nigga', '$2y$10$z38BSknTKS30CfpeQijJbup3mUUoEq.isqMETyigKKSml6DPcPVaS', 'mamadou', 'nigga', '1111111111', 'nigga@mail.com', '0'),
+(699, 'GLagaffe', '$2y$10$NVe6yK4sz2W4qvhm6JXRku/LEdmMOgewbqLxxON3UJ4fmRhVS/RPG', 'Lagaffe', 'Gaston', '06 74 36 82 01', 'GastonLG@gmail.com', '0'),
+(700, 'biktop', '$2y$10$IDI7Chrgb62C7AUjHZD3kuVrC7/3ylIX3HglqPBMf8lsk71QP.Uu6', 'Jockin', 'Victor', '0777777777', 'persone@gmail.com', '0'),
+(701, 'hextaz', '$2y$10$kk.PEu4hk54jr9XGjLaqkujTAulZ/oTHViezeEqhw//Vqr5cgfGBa', 'Biblocque', 'Nolhan', '0102030405', 'biblocquenolhan@gmail.com', '0'),
+(702, 'JPX69BZ', '$2y$10$vn387VfXBQRiOrx.2OkX5.0HG.f5.s2hpeir8pYjeIFdKPgAeu/Va', 'saou', 'yanis', '06 22 98 04 53', 'yanis.saou82@gmail.com', '0'),
+(703, 'caruser', '$2y$10$PDR/H2fkpaFHUW2SqnhMLO8zUr1vRRh7fsf3lV6K6HkoUfIjfnUyC', 'User', 'Car', '07 56 81 67 41', 'caruser34@gmail.com', '0'),
+(747, 'missuji', '-', 'Ganpurev', 'Anu-Ujin', '0714141414', 'missuji@gmail.com', '0'),
+(748, 'johnpowell', '-', 'Powell', 'John', '(555) 555-1234', 'johnpowell@outlook.com', '0'),
+(749, 'azuly', '-', 'Azuly', 'Azuly', '0724252425', 'aazzuullyy@gmail.com', '0'),
+(750, 'morito415', '-', 'Chouvrey', 'Marie', '0715151515', 'morito@gmail.com', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `COMMANDE`
+--
+
+CREATE TABLE `COMMANDE` (
+  `idCommande` int NOT NULL,
+  `dateCommande` date NOT NULL,
+  `modeLivraison` varchar(15) NOT NULL,
+  `modePaiement` varchar(10) NOT NULL,
+  `numPaypal` decimal(10,0) DEFAULT NULL,
+  `numVirement` decimal(10,0) DEFAULT NULL,
+  `idClient` int NOT NULL,
+  `idAdresse` int DEFAULT NULL,
+  `idRelais` int DEFAULT NULL,
+  `numCB` char(16) DEFAULT NULL,
+  `montantCommande` decimal(22,2) DEFAULT '0.00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `COMMANDE`
+--
+
+INSERT INTO `COMMANDE` (`idCommande`, `dateCommande`, `modeLivraison`, `modePaiement`, `numPaypal`, `numVirement`, `idClient`, `idAdresse`, `idRelais`, `numCB`, `montantCommande`) VALUES
+(208, '2024-05-27', 'DOMICILE', 'PAYPAL', '4927561346', NULL, 687, 224, NULL, NULL, '0.00'),
+(209, '2024-02-16', 'DOMICILE', 'VIREMENT', NULL, '7341958349', 684, 225, NULL, NULL, '0.00'),
+(210, '2024-05-31', 'RELAIS', 'PAYPAL', '6442179015', NULL, 676, NULL, 133, NULL, '0.00'),
+(211, '2024-10-04', 'DOMICILE', 'PAYPAL', '2176596595', NULL, 671, 226, NULL, NULL, '0.00'),
+(212, '2024-03-31', 'DOMICILE', 'PAYPAL', '6838456759', NULL, 696, 227, NULL, NULL, '0.00'),
+(213, '2024-07-16', 'RELAIS', 'CB', NULL, NULL, 686, NULL, 134, '4485700009094000', '0.00'),
+(214, '2024-12-24', 'DOMICILE', 'CB', NULL, NULL, 662, 228, NULL, '5133876097107934', '0.00'),
+(215, '2024-05-18', 'RELAIS', 'VIREMENT', NULL, '5316584818', 654, NULL, 135, NULL, '0.00'),
+(216, '2024-05-29', 'DOMICILE', 'VIREMENT', NULL, '4394227913', 670, 229, NULL, NULL, '0.00'),
+(217, '2024-05-06', 'DOMICILE', 'VIREMENT', NULL, '4085147048', 687, 230, NULL, NULL, '0.00'),
+(218, '2024-01-16', 'RELAIS', 'PAYPAL', '3461477811', NULL, 663, NULL, 136, NULL, '0.00'),
+(219, '2024-07-18', 'DOMICILE', 'VIREMENT', NULL, '4773934318', 684, 231, NULL, NULL, '0.00'),
+(220, '2024-05-19', 'DOMICILE', 'CB', NULL, NULL, 674, 232, NULL, '5527784880375904', '0.00'),
+(221, '2024-01-12', 'DOMICILE', 'PAYPAL', '4197648723', NULL, 661, 233, NULL, NULL, '0.00'),
+(222, '2024-10-19', 'DOMICILE', 'PAYPAL', '6633207284', NULL, 682, 234, NULL, NULL, '0.00'),
+(223, '2024-10-07', 'RELAIS', 'CB', NULL, NULL, 675, NULL, 137, '3494345731659180', '0.00'),
+(224, '2024-12-17', 'DOMICILE', 'CB', NULL, NULL, 675, 235, NULL, '4485806505803094', '0.00'),
+(225, '2024-05-16', 'DOMICILE', 'PAYPAL', '2034592224', NULL, 648, 236, NULL, NULL, '0.00'),
+(226, '2024-01-18', 'RELAIS', 'VIREMENT', NULL, '8305409465', 670, NULL, 138, NULL, '0.00'),
+(227, '2024-04-28', 'DOMICILE', 'PAYPAL', '7479748817', NULL, 696, 237, NULL, NULL, '0.00'),
+(228, '2024-10-22', 'RELAIS', 'VIREMENT', NULL, '3036749865', 656, NULL, 139, NULL, '0.00'),
+(229, '2024-07-23', 'DOMICILE', 'VIREMENT', NULL, '6574002069', 665, 238, NULL, NULL, '0.00'),
+(230, '2024-10-03', 'DOMICILE', 'PAYPAL', '7994970337', NULL, 696, 239, NULL, NULL, '0.00'),
+(231, '2024-10-25', 'RELAIS', 'PAYPAL', '6472575154', NULL, 692, NULL, 140, NULL, '0.00'),
+(232, '2024-09-24', 'DOMICILE', 'PAYPAL', '4911425674', NULL, 655, 240, NULL, NULL, '0.00'),
+(233, '2024-11-20', 'RELAIS', 'PAYPAL', '9801258487', NULL, 651, NULL, 141, NULL, '0.00'),
+(234, '2024-07-06', 'RELAIS', 'VIREMENT', NULL, '7730314833', 681, NULL, 142, NULL, '0.00'),
+(235, '2024-07-06', 'DOMICILE', 'PAYPAL', '7292873177', NULL, 661, 241, NULL, NULL, '0.00'),
+(236, '2024-10-17', 'DOMICILE', 'VIREMENT', NULL, '8957988724', 672, 242, NULL, NULL, '0.00'),
+(237, '2024-06-03', 'RELAIS', 'VIREMENT', NULL, '3234368872', 685, NULL, 143, NULL, '0.00'),
+(238, '2024-07-17', 'DOMICILE', 'PAYPAL', '1034454126', NULL, 696, 243, NULL, NULL, '0.00'),
+(239, '2024-11-02', 'RELAIS', 'CB', NULL, NULL, 652, NULL, 144, '4330592975756460', '0.00'),
+(240, '2024-12-20', 'RELAIS', 'CB', NULL, NULL, 685, NULL, 145, '6011763657028004', '0.00'),
+(241, '2024-09-30', 'DOMICILE', 'CB', NULL, NULL, 677, 244, NULL, '3738593303547520', '0.00'),
+(242, '2024-05-04', 'RELAIS', 'CB', NULL, NULL, 681, NULL, 146, '4556625092640055', '0.00'),
+(243, '2024-03-06', 'RELAIS', 'VIREMENT', NULL, '2831739201', 664, NULL, 147, NULL, '0.00'),
+(244, '2024-06-09', 'DOMICILE', 'CB', NULL, NULL, 680, 245, NULL, '4916423497000520', '0.00'),
+(245, '2024-07-28', 'DOMICILE', 'PAYPAL', '5313568973', NULL, 669, 246, NULL, NULL, '0.00'),
+(246, '2024-09-09', 'DOMICILE', 'PAYPAL', '3654960191', NULL, 695, 247, NULL, NULL, '0.00'),
+(247, '2024-08-09', 'DOMICILE', 'CB', NULL, NULL, 695, 248, NULL, '4716590835192000', '0.00'),
+(248, '2024-02-24', 'RELAIS', 'PAYPAL', '9866647079', NULL, 688, NULL, 148, NULL, '0.00'),
+(249, '2024-01-21', 'DOMICILE', 'CB', NULL, NULL, 662, 249, NULL, '4024007145614000', '0.00'),
+(250, '2024-01-05', 'RELAIS', 'VIREMENT', NULL, '2351210543', 671, NULL, 149, NULL, '0.00'),
+(251, '2024-01-04', 'RELAIS', 'CB', NULL, NULL, 686, NULL, 150, '5394121107087642', '0.00'),
+(252, '2024-09-01', 'DOMICILE', 'PAYPAL', '8360285109', NULL, 688, 250, NULL, NULL, '0.00'),
+(253, '2024-05-10', 'DOMICILE', 'CB', NULL, NULL, 679, 251, NULL, '4539257206835652', '0.00'),
+(254, '2024-07-08', 'DOMICILE', 'CB', NULL, NULL, 672, 252, NULL, '5213685126172808', '0.00'),
+(255, '2024-09-13', 'DOMICILE', 'VIREMENT', NULL, '4073970231', 663, 253, NULL, NULL, '0.00'),
+(256, '2024-04-03', 'DOMICILE', 'VIREMENT', NULL, '4990303920', 656, 254, NULL, NULL, '0.00'),
+(257, '2024-01-19', 'RELAIS', 'VIREMENT', NULL, '5576254524', 658, NULL, 151, NULL, '0.00'),
+(258, '2024-05-01', 'RELAIS', 'VIREMENT', NULL, '3608712890', 655, NULL, 152, NULL, '0.00'),
+(259, '2024-06-15', 'DOMICILE', 'PAYPAL', '6961065941', NULL, 664, 255, NULL, NULL, '0.00'),
+(260, '2024-03-12', 'RELAIS', 'VIREMENT', NULL, '1070396890', 685, NULL, 153, NULL, '0.00'),
+(261, '2024-06-25', 'DOMICILE', 'PAYPAL', '6579469456', NULL, 653, 256, NULL, NULL, '0.00'),
+(262, '2024-11-10', 'DOMICILE', 'VIREMENT', NULL, '4034296151', 692, 257, NULL, NULL, '0.00'),
+(263, '2024-11-29', 'RELAIS', 'VIREMENT', NULL, '6337566460', 696, NULL, 154, NULL, '0.00'),
+(264, '2024-01-21', 'RELAIS', 'PAYPAL', '3976862450', NULL, 677, NULL, 155, NULL, '0.00'),
+(265, '2024-07-16', 'RELAIS', 'CB', NULL, NULL, 688, NULL, 156, '6011225698755359', '0.00'),
+(266, '2024-03-30', 'RELAIS', 'CB', NULL, NULL, 684, NULL, 157, '5430583123929030', '0.00'),
+(267, '2024-04-15', 'RELAIS', 'VIREMENT', NULL, '3226197908', 652, NULL, 158, NULL, '0.00'),
+(268, '2024-02-13', 'DOMICILE', 'VIREMENT', NULL, '4041654243', 682, 258, NULL, NULL, '0.00'),
+(269, '2024-05-07', 'RELAIS', 'PAYPAL', '7381902425', NULL, 668, NULL, 159, NULL, '0.00'),
+(270, '2024-10-24', 'DOMICILE', 'CB', NULL, NULL, 647, 259, NULL, '6011710521228955', '0.00'),
+(271, '2024-06-13', 'RELAIS', 'CB', NULL, NULL, 686, NULL, 160, '4024007146257000', '0.00'),
+(272, '2024-12-08', 'RELAIS', 'VIREMENT', NULL, '1911258541', 673, NULL, 161, NULL, '0.00'),
+(273, '2024-12-12', 'DOMICILE', 'CB', NULL, NULL, 684, 260, NULL, '6011968977473455', '0.00'),
+(274, '2024-09-16', 'DOMICILE', 'VIREMENT', NULL, '8667041050', 649, 261, NULL, NULL, '0.00'),
+(275, '2024-06-18', 'RELAIS', 'CB', NULL, NULL, 677, NULL, 162, '3405550204564990', '0.00'),
+(276, '2024-10-03', 'RELAIS', 'CB', NULL, NULL, 684, NULL, 163, '5513282168895509', '0.00'),
+(277, '2024-07-31', 'DOMICILE', 'PAYPAL', '3113022617', NULL, 695, 262, NULL, NULL, '0.00'),
+(278, '2024-11-08', 'DOMICILE', 'PAYPAL', '6200660336', NULL, 696, 263, NULL, NULL, '0.00'),
+(279, '2024-03-17', 'RELAIS', 'CB', NULL, NULL, 687, NULL, 164, '4916095536631000', '0.00'),
+(280, '2024-06-12', 'RELAIS', 'CB', NULL, NULL, 686, NULL, 165, '5242997091540066', '0.00'),
+(281, '2024-08-19', 'DOMICILE', 'PAYPAL', '4626678150', NULL, 666, 264, NULL, NULL, '0.00'),
+(282, '2024-07-03', 'DOMICILE', 'CB', NULL, NULL, 648, 265, NULL, '4024007110444000', '0.00'),
+(283, '2024-01-31', 'DOMICILE', 'CB', NULL, NULL, 667, 266, NULL, '3489785137212070', '0.00'),
+(284, '2024-11-11', 'DOMICILE', 'CB', NULL, NULL, 678, 267, NULL, '3799340923328920', '0.00'),
+(285, '2024-04-27', 'DOMICILE', 'CB', NULL, NULL, 686, 268, NULL, '4929322331392652', '0.00'),
+(286, '2024-07-25', 'RELAIS', 'PAYPAL', '1128340427', NULL, 696, NULL, 166, NULL, '0.00'),
+(287, '2024-09-22', 'DOMICILE', 'VIREMENT', NULL, '6403539619', 692, 269, NULL, NULL, '0.00'),
+(288, '2024-05-29', 'RELAIS', 'PAYPAL', '4758366386', NULL, 685, NULL, 167, NULL, '0.00'),
+(289, '2024-11-06', 'DOMICILE', 'PAYPAL', '6064643432', NULL, 648, 270, NULL, NULL, '0.00'),
+(290, '2024-04-25', 'DOMICILE', 'VIREMENT', NULL, '1463429875', 662, 271, NULL, NULL, '0.00'),
+(291, '2024-05-23', 'DOMICILE', 'VIREMENT', NULL, '8104260270', 692, 272, NULL, NULL, '0.00'),
+(292, '2024-06-28', 'RELAIS', 'CB', NULL, NULL, 687, NULL, 168, '5336390743409251', '0.00'),
+(293, '2024-08-01', 'DOMICILE', 'VIREMENT', NULL, '6359033994', 657, 273, NULL, NULL, '0.00'),
+(294, '2024-08-18', 'RELAIS', 'VIREMENT', NULL, '8340667592', 687, NULL, 169, NULL, '0.00'),
+(295, '2024-12-20', 'DOMICILE', 'VIREMENT', NULL, '7896143751', 690, 274, NULL, NULL, '0.00'),
+(296, '2024-07-24', 'DOMICILE', 'VIREMENT', NULL, '3766669305', 667, 275, NULL, NULL, '0.00'),
+(297, '2024-05-03', 'DOMICILE', 'VIREMENT', NULL, '6719247603', 691, 276, NULL, NULL, '0.00'),
+(298, '2024-03-10', 'RELAIS', 'PAYPAL', '1890782802', NULL, 654, NULL, 170, NULL, '0.00'),
+(299, '2024-12-21', 'RELAIS', 'VIREMENT', NULL, '3856150714', 679, NULL, 171, NULL, '0.00'),
+(300, '2024-08-04', 'RELAIS', 'PAYPAL', '1727410189', NULL, 648, NULL, 172, NULL, '0.00'),
+(301, '2024-11-21', 'RELAIS', 'PAYPAL', '3675212761', NULL, 665, NULL, 173, NULL, '0.00'),
+(302, '2024-01-27', 'DOMICILE', 'CB', NULL, NULL, 665, 277, NULL, '4929844621929059', '0.00'),
+(303, '2024-12-17', 'RELAIS', 'VIREMENT', NULL, '9531142108', 666, NULL, 174, NULL, '0.00'),
+(304, '2024-12-02', 'RELAIS', 'CB', NULL, NULL, 688, NULL, 175, '6011731637234224', '0.00'),
+(305, '2024-02-14', 'DOMICILE', 'VIREMENT', NULL, '3133858329', 664, 278, NULL, NULL, '0.00'),
+(306, '2024-01-03', 'RELAIS', 'VIREMENT', NULL, '8339270243', 647, NULL, 176, NULL, '0.00'),
+(307, '2024-10-29', 'RELAIS', 'PAYPAL', '5523888867', NULL, 681, NULL, 177, NULL, '0.00'),
+(308, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 284, NULL, NULL, '0.00'),
+(309, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 285, NULL, NULL, '0.00'),
+(310, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 286, NULL, NULL, '0.00'),
+(311, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 287, NULL, NULL, '0.00'),
+(312, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 288, NULL, NULL, '0.00'),
+(313, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 289, NULL, NULL, '0.00'),
+(314, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 290, NULL, NULL, '0.00'),
+(315, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 291, NULL, NULL, '0.00'),
+(316, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 292, NULL, NULL, '0.00'),
+(317, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 293, NULL, NULL, '0.00'),
+(318, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 294, NULL, NULL, '0.00'),
+(319, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 295, NULL, NULL, '0.00'),
+(320, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 296, NULL, NULL, '0.00'),
+(321, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 682, 297, NULL, NULL, '0.00'),
+(322, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 648, 298, NULL, NULL, '0.00'),
+(323, '2024-12-16', 'Domicile', 'CB', NULL, NULL, 685, 299, NULL, NULL, '0.00'),
+(327, '2024-12-16', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(332, '2024-12-17', 'Domicile', 'CB', NULL, NULL, 682, 301, NULL, NULL, '0.00'),
+(333, '2024-12-17', 'Domicile', 'Paypal', NULL, NULL, 682, 302, NULL, NULL, '0.00'),
+(334, '2024-12-18', 'Domicile', 'CB', NULL, NULL, 682, 303, NULL, NULL, '0.00'),
+(335, '2024-12-18', 'Relais', 'CB', NULL, NULL, 682, NULL, 166, '6457812463751964', '0.00'),
+(336, '2024-12-18', 'Relais', 'Paypal', '4657896432', NULL, 682, NULL, 175, NULL, '0.00'),
+(337, '2024-12-18', 'Relais', 'CB', NULL, NULL, 701, NULL, 141, NULL, '0.00'),
+(338, '2024-12-18', 'Relais', 'Paypal', '102030405', NULL, 701, NULL, 141, NULL, '0.00'),
+(340, '2024-12-19', 'Relais', 'CB', NULL, NULL, 702, NULL, 134, NULL, '0.00'),
+(341, '2024-12-19', 'Relais', 'CB', NULL, NULL, 702, NULL, 149, '3461527986548512', '0.00'),
+(353, '2024-12-20', 'Relais', 'Paypal', '1234567890', NULL, 703, NULL, 173, NULL, '0.00'),
+(375, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(376, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(377, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(378, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(379, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(380, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '0.00'),
+(381, '2024-12-20', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '116.00'),
+(382, '2024-12-21', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '116.00'),
+(383, '2024-12-21', 'Relais', 'CB', NULL, NULL, 671, NULL, 133, '0000000000000000', '136.00'),
+(384, '2024-12-21', 'Relais', 'CB', NULL, NULL, 697, NULL, 141, NULL, '0.00'),
+(385, '2024-12-21', 'Relais', 'Paypal', '102030405', NULL, 697, NULL, 141, NULL, '0.00'),
+(386, '2024-12-21', 'Relais', 'Paypal', '1234567890', NULL, 703, NULL, 142, NULL, '0.00'),
+(387, '2024-12-23', 'Relais', 'Paypal', '1546', NULL, 682, NULL, 170, NULL, '500.00'),
+(388, '2024-12-23', 'DOMICILE', 'CB', NULL, NULL, 747, 227, NULL, '1111222233334444', '228.00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `COMMANDER`
+--
+
+CREATE TABLE `COMMANDER` (
+  `idCommande` int NOT NULL,
+  `idVariete` int NOT NULL,
+  `qteCommandee` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `COMMANDER`
+--
+
+INSERT INTO `COMMANDER` (`idCommande`, `idVariete`, `qteCommandee`) VALUES
+(208, 101, '1'),
+(209, 302, '3'),
+(210, 603, '2'),
+(211, 703, '3'),
+(212, 401, '2'),
+(213, 201, '1'),
+(214, 1103, '2'),
+(215, 503, '2'),
+(216, 303, '2'),
+(218, 1901, '3'),
+(219, 2503, '1'),
+(220, 1202, '1'),
+(221, 1501, '3'),
+(222, 1601, '2'),
+(223, 1702, '1'),
+(224, 801, '3'),
+(225, 2703, '3'),
+(226, 2802, '2'),
+(227, 2602, '3'),
+(228, 2201, '3'),
+(229, 2006, '2'),
+(230, 3201, '1'),
+(231, 3301, '1'),
+(233, 3602, '3'),
+(234, 1908, '3'),
+(235, 3101, '1'),
+(236, 3001, '3'),
+(237, 1402, '1'),
+(238, 2903, '1'),
+(239, 2901, '3'),
+(240, 2701, '3'),
+(241, 601, '2'),
+(242, 1503, '2'),
+(243, 2206, '2'),
+(244, 1201, '2'),
+(245, 1401, '3'),
+(246, 2502, '3'),
+(247, 2601, '2'),
+(248, 1502, '1'),
+(249, 1602, '3'),
+(250, 1703, '3'),
+(251, 1802, '1'),
+(252, 3302, '3'),
+(253, 1001, '2'),
+(254, 1102, '1'),
+(255, 1202, '1'),
+(256, 2405, '3'),
+(257, 2404, '1'),
+(258, 2403, '1'),
+(259, 2402, '1'),
+(260, 2401, '1'),
+(261, 2501, '3'),
+(262, 2803, '2'),
+(263, 2008, '3'),
+(264, 2301, '1'),
+(265, 2109, '1'),
+(336, 601, '1'),
+(336, 1802, '7'),
+(338, 2903, '4'),
+(341, 2503, '1'),
+(353, 101, '1'),
+(375, 101, '1'),
+(375, 102, '1'),
+(375, 201, '2'),
+(375, 202, '1'),
+(376, 101, '1'),
+(376, 102, '1'),
+(376, 201, '2'),
+(376, 202, '1'),
+(377, 101, '1'),
+(377, 102, '1'),
+(377, 201, '2'),
+(377, 202, '1'),
+(381, 101, '1'),
+(381, 102, '1'),
+(381, 201, '2'),
+(381, 202, '1'),
+(382, 101, '1'),
+(382, 102, '1'),
+(382, 201, '2'),
+(382, 202, '1'),
+(383, 101, '1'),
+(383, 102, '1'),
+(383, 201, '2'),
+(383, 202, '1'),
+(385, 102, '5'),
+(385, 1103, '1'),
+(386, 1602, '1'),
+(387, 2501, '1'),
+(388, 102, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ENREGISTRER`
+--
+
+CREATE TABLE `ENREGISTRER` (
+  `idClient` int NOT NULL,
+  `idVariete` int NOT NULL,
+  `qteEnregistree` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `ENREGISTRER`
+--
+
+INSERT INTO `ENREGISTRER` (`idClient`, `idVariete`, `qteEnregistree`) VALUES
+(647, 101, '2'),
+(648, 3001, '1'),
+(648, 3401, '1'),
+(659, 302, '1'),
+(682, 1503, '1'),
+(699, 2902, '1'),
+(702, 201, '1'),
+(748, 101, '1'),
+(748, 202, '2'),
+(749, 301, '3'),
+(749, 401, '1'),
+(749, 502, '1'),
+(750, 1501, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `POINT_RELAIS`
+--
+
+CREATE TABLE `POINT_RELAIS` (
+  `idRelais` int NOT NULL,
+  `nomRelais` varchar(50) NOT NULL,
+  `numRueRelais` varchar(10) NOT NULL,
+  `rueRelais` varchar(50) NOT NULL,
+  `cdPostalRelais` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `villeRelais` varchar(50) NOT NULL,
+  `paysRelais` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `POINT_RELAIS`
+--
+
+INSERT INTO `POINT_RELAIS` (`idRelais`, `nomRelais`, `numRueRelais`, `rueRelais`, `cdPostalRelais`, `villeRelais`, `paysRelais`) VALUES
+(133, 'Point relais de Mary', '22', 'impasse Breton', '61535', 'Leclerc', 'France'),
+(134, 'Point relais de Valentin De Sousa S.A.S.', '91', ' place de Legros', '65392', 'Joly', 'France'),
+(135, 'Point relais de Breton', '4', ' place de Leger', '15626', 'Levequeboeuf', 'France'),
+(136, 'Point relais de Raynaud Picard et Fils', '503', ' rue Aimée Moreau', '81920', 'Renarddan', 'France'),
+(137, 'Point relais de Lebrun', '79', ' rue Clerc', '45 933', 'Royer-la-Forêt', 'France'),
+(138, 'Point relais de Germain SA', '89', ' place Dijoux', '36075', 'JacobVille', 'France'),
+(139, 'Point relais de Hebert Colas S.A.R.L.', '74', ' impasse de Dos Santos', '28651', 'Joubertdan', 'France'),
+(140, 'Point relais de Aubert Fernandes et Fils', '67', ' chemin Clerc', '96 763', 'Blanc', 'France'),
+(141, 'Point relais de Riviere Gosselin et Fils', '13', ' place Laurence Ledoux', '36624', 'Henry', 'France'),
+(142, 'Point relais de Clement Jacob S.A.R.L.', '21', ' boulevard Camus', '00 345', 'Simon-sur-Besson', 'France'),
+(143, 'Point relais de Delmas', '76', 'rue de Maury', '90 796', 'Bodindan', 'France'),
+(144, 'Point relais de Gaillard', '70', ' rue Hugues Duhamel', '09020', 'Jacob', 'France'),
+(145, 'Point relais de Traore Hubert S.A.', '78', ' rue Teixeira', '66 605', 'Valettenec', 'France'),
+(146, 'Point relais de Marin', '16', 'rue Mathilde Besnard', '80 288', 'Renard', 'France'),
+(147, 'Point relais de Gauthier', '37', ' boulevard de Olivier', '96 833', 'Boutin-les-Bains', 'France'),
+(148, 'Point relais de Legendre', '8', ' place Gérard Loiseau', '95 693', 'Jacquot', 'France'),
+(149, 'Point relais de Dubois Toussaint S.A.', '73', ' boulevard Moulin', '71 028', 'Laine-sur-Baron', 'France'),
+(150, 'Point relais de Antoine', '39', ' chemin Marthe Grondin', '43311', 'Blondelnec', 'France'),
+(151, 'Point relais de Garcia', '34', ' boulevard Benoît Hernandez', '01272', 'Garnierboeuf', 'France'),
+(152, 'Point relais de Prevost Gosselin SARL', '35', 'boulevard Berthelot', '79 510', 'Lenoir', 'France'),
+(153, 'Point relais de Andre SARL', '53', ' rue Joly', '47 977', 'Dupuy-sur-Munoz', 'France'),
+(154, 'Point relais de Michel Marion SA', '96', ' chemin Marcel Rodriguez', '15 687', 'Philippe', 'France'),
+(155, 'Point relais de Fleury Caron et Fils', '88', ' place Antoine Schmitt', '82953', 'Durand-la-Forêt', 'France'),
+(156, 'Point relais de Guillot Duhamel S.A.R.L.', '73', ' impasse Thibault Denis', '86 713', 'Pascal', 'France'),
+(157, 'Point relais de De Sousa S.A.S.', '69', ' chemin Maurice', '30 516', 'Toussaint-la-Forêt', 'France'),
+(158, 'Point relais de Weber et Fils', '54', 'rue Alexandria Fouquet', '70328', 'Mailletboeuf', 'France'),
+(159, 'Point relais de Gillet', '50', ' rue Lucas Pineau', '23354', 'Tanguy-sur-Mer', 'France'),
+(160, 'Point relais de Maillot Raynaud S.A.', '6', ' avenue Auguste Barbe', '02296', 'Guibert', 'France'),
+(161, 'Point relais de Charles', '94', ' chemin de Riou', '47227', 'Lebon', 'France'),
+(162, 'Point relais de Berthelot Descamps S.A.', '67', ' impasse Alexandre Antoine', '31 309', 'Brunel', 'France'),
+(163, 'Point relais de Moreno S.A.S.', '7', ' impasse de Boucher', '20445', 'LemoineBourg', 'France'),
+(164, 'Point relais de Guillou', '477', ' boulevard Rey', '42 483', 'Samsonboeuf', 'France'),
+(165, 'Point relais de Boyer Vallee S.A.R.L.', '786', ' chemin Faure', '85962', 'Vincent', 'France'),
+(166, 'Point relais de Riviere', '62', ' place Camus', '77 311', 'Lecomte', 'France'),
+(167, 'Point relais de Martin', '21', 'chemin de Albert', '52548', 'Colin-la-Forêt', 'France'),
+(168, 'Point relais de Gonzalez', '442', ' boulevard de Mendes', '28301', 'Malletboeuf', 'France'),
+(169, 'Point relais de Lenoir', '78', ' rue Foucher', '18 782', 'Teixeiranec', 'France'),
+(170, 'Point relais de Auger Vallet S.A.S.', '21', ' rue de Pruvost', '28 393', 'Alves-sur-Mer', 'France'),
+(171, 'Point relais de Guibert S.A.R.L.', '108', ' impasse Bonneau', '87 143', 'Martins', 'France'),
+(172, 'Point relais de Pires Delmas S.A.S.', '66', ' impasse Gros', '28 004', 'Valentin', 'France'),
+(173, 'Point relais de Perrin', '957', ' boulevard Louise Meunier', '33 349', 'Pereira', 'France'),
+(174, 'Point relais de Giraud', '43', 'boulevard Jacques Maillot', '52504', 'Renaud', 'France'),
+(175, 'Point relais de Gomez Briand et Fils', '89', ' avenue René Fernandes', '29 803', 'Dufour', 'France'),
+(176, 'Point relais de Roussel', '24', 'place Wagner', '59 227', 'Alves-sur-Lacombe', 'France'),
+(177, 'Point relais de Peltier SA', '315', ' impasse de Paul', '16 659', 'GimenezVille', 'France');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `PRODUIT`
+--
+
+CREATE TABLE `PRODUIT` (
+  `idProduit` int NOT NULL,
+  `nomProduit` varchar(50) NOT NULL,
+  `descProduit` varchar(500) NOT NULL,
+  `idCategorie` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `PRODUIT`
+--
+
+INSERT INTO `PRODUIT` (`idProduit`, `nomProduit`, `descProduit`, `idCategorie`) VALUES
+(1, 'Poudre paralysante', ' Une poudre pouvant paralyser la personne qui l’a respire.', 70),
+(2, 'Poudre somnolente', ' Une poudre pouvant endormir la personne qui l’a respire.', 70),
+(3, 'Rouge à lèvre Laser', 'Rouge à lèvre à activation manuelle, capable de dissoudre le métal.', 70),
+(4, 'Baton télescopique', 'Un bâton de combat rétractable pour le transporter discrètement.', 70),
+(5, 'Gants de Force Amplifiée', ' Des gants équipés de micro-amplificateurs qui décuplent la force des coups portés.', 70),
+(6, 'Chaussures à Choc Électrique', 'Des chaussures qui envoient une décharge électrique non létale à chaque coup de pied, paralysant temporairement les ennemis.', 70),
+(7, 'Bague Poing-Acier', ' Une bague qui se transforme en un petit poing américain lorsque nécessaire, renforçant les coups de poing pour des attaques discrètes mais puissantes.', 70),
+(8, 'Boomerang explosif banane', 'Ne revient pas si il touche sa cible, explosion destructrice', 80),
+(9, 'Shurikens', 'Shuriken classique , acier inoxydable', 80),
+(10, 'Catapulte Courbeuse de cils', 'courbe aussi bien les cils qu’elle propulse des pierres et autres projectiles', 80),
+(11, 'Fouet à Électrochocs', 'Un fouet souple qui délivre une décharge électrique en touchant l’adversaire, parfait pour immobiliser à moyenne portée.', 90),
+(12, 'Disques Paralysants', 'De petits disques qui se lancent à la main et émettent une onde paralysante lorsqu’ils touchent leur cible, neutralisant temporairement les ennemis.', 90),
+(13, 'Lanceur de Filets Tactiques', 'Un lanceur de poche qui projette un filet électrifié pour capturer et neutraliser des ennemis à longue distance.', 100),
+(14, 'Disques de Capture à Gravité', 'Des projectiles circulaires qui, une fois lancés, génèrent un champ de gravité autour de l’ennemi, l’immobilisant à distance.', 100),
+(15, 'HoverBoard', 'Une planche en lévitation au-dessus du sol, idéal pour les courses poursuites.', 110),
+(16, 'Drone Monoplace', 'Un drone pouvant transporter une personne, idéal pour suivre cible sans être dérangé par la circulation.', 110),
+(17, 'Moto', 'Une moto alliant confort et performance, offrant une tenue de route exceptionnelle et une vitesse impressionnante. Avec son espace dédié pour gadgets d’espionnage, elle est parfaite pour les aventuriers modernes.', 110),
+(18, 'Sous-Marin', 'Un sous-marin permettant de se déplacer jusqu’à une profondeur de 300m.', 110),
+(19, 'Chaussures-Collantes', 'Chaussures permettant de marcher sur les murs/plafonds.', 120),
+(20, 'Bottes à réaction', 'Bottes permettant de voler sur de courtes distances à l’aide de petits réacteurs situés sous la semelle.', 120),
+(21, 'Hydro-Patins', 'Patins permettant de glisser sur l’eau.', 120),
+(22, 'Combinaison Caméléon', 'Une combinaison capable de changer de couleur pour se fondre dans le déco.', 130),
+(23, 'Cape d’invisibilité', 'Une cape qui rend totalement invisible lorsqu’elle est activée, idéale pour se déplacer sans être vu.', 130),
+(24, 'Masque de métamorphose', 'Un masque permettant de changer le visage du porteur pour ne pas être reconnu', 130),
+(25, 'Nano-drones de repérage', 'De petits drones invisibles pour cartographier une zone, espionner des conversations.', 140),
+(26, 'Lunettes Espion', 'Des lunettes dotées de verres transparents qui intègrent une caméra HD discrète. Parfaites pour capturer des vidéos et des photos sans attirer l’attention.', 150),
+(27, 'Casquette HoloCapture', 'Une casquette capable de filmer en 360° autour de son porteur et de restituer les scènes sous forme d’ hologramme.', 150),
+(28, 'Pin’s enregistreur', 'Un pin’s qui ressemble à un accessoire de mode ordinaire, mais qui intègre un enregistreur audio haute qualité. Discret et stylé, il permet d’enregistrer des conversations sans être détecté, idéal pour des missions d’espionnage ou des interviews informelles.', 160),
+(29, 'Barrette Enregistreuse', 'Une barrette qui intègre un enregistreur audio discret. Elle permet d’enregistrer des conversations avec une qualité sonore optimale, tout en étant facilement portable.', 160),
+(30, 'Ceinture-grappin', 'Une ceinture équipée d’un grappin rétractable pour s’échapper rapidement des situations dangereuses.', 170),
+(31, 'Kit de crochetage', 'Le kit parfait pour crocheter n’importe quelle serrure.', 170),
+(32, 'Gomme Effaceuse de Clés', 'Un gadget en forme de gomme qui désactive les serrures électroniques ou les scanners d’empreintes digitales.', 170),
+(33, 'Trousse de soin ', 'Cette trousse compacte et étanche est spécialement conçue pour les agents en mission. Elle contient des pansements hémostatiques, des antiseptiques, des bandages compressifs et des outils d’extraction pour gérer les blessures légères à modérées en toute discrétion et efficacité.', 180),
+(34, 'Pansements de Régénération Ultra-Rapide', 'Ces pansements innovants utilisent des nanoparticules de régénération tissulaire pour accélérer la guérison des plaies en quelques heures. Ils sont conçus pour arrêter les saignements, limiter les infections et renforcer la réparation cellulaire. Idéal pour les missions longues où les soins médicaux ne sont pas accessibles.', 180),
+(35, 'Stimulant d’Énergie HyperBoost', 'Un concentré de nutriments et de stimulants naturels sous forme de comprimé ou liquide, le HyperBoost redonne un coup de fouet en quelques minutes. Idéal pour les moments critiques, il booste les réflexes, la concentration et l’endurance de l’utilisateur, tout en étant discret et facile à transporter.', 190),
+(36, 'Dispositif de Récupération Cellulaire Accéléré', 'Ce gadget portable utilise des micro-impulsions électromagnétiques pour réduire la fatigue musculaire et accélérer la récupération physique après un effort intense. En l’appliquant directement sur la zone à traiter, il diminue les douleurs et aide à prévenir les crampes, idéal pour les missions prolongées.', 190);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `REGROUPEMENT`
+--
+
+CREATE TABLE `REGROUPEMENT` (
+  `idRegroupement` int NOT NULL,
+  `nomRegroupement` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `REGROUPEMENT`
+--
+
+INSERT INTO `REGROUPEMENT` (`idRegroupement`, `nomRegroupement`) VALUES
+(1, 'Nouveautés'),
+(2, 'Soldes'),
+(3, 'Made in France'),
+(4, 'Meilleures Ventes'),
+(5, 'Offres Spéciales'),
+(6, 'Édition Limitée');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `REGROUPER`
+--
+
+CREATE TABLE `REGROUPER` (
+  `idRegroupement` int NOT NULL,
+  `idVariete` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `REGROUPER`
+--
+
+INSERT INTO `REGROUPER` (`idRegroupement`, `idVariete`) VALUES
+(2, 101),
+(2, 201),
+(2, 202);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `VARIETE`
+--
+
+CREATE TABLE `VARIETE` (
+  `idVariete` int NOT NULL,
+  `idProduit` int NOT NULL,
+  `specVariete` varchar(30) DEFAULT NULL,
+  `prixVariete` decimal(22,2) NOT NULL,
+  `qteStockVariete` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `VARIETE`
+--
+
+INSERT INTO `VARIETE` (`idVariete`, `idProduit`, `specVariete`, `prixVariete`, `qteStockVariete`) VALUES
+(101, 1, '10ML', '20.00', '49'),
+(102, 1, '20ML', '37.50', '48'),
+(201, 2, '10ML', '20.00', '43'),
+(202, 2, '20ML', '37.50', '49'),
+(301, 3, 'Rouge', '125.00', '40'),
+(302, 3, 'Bleu', '125.00', '40'),
+(303, 3, 'Rose', '125.00', '40'),
+(401, 4, '1M', '40.00', '25'),
+(402, 4, '1.5M', '60.00', '25'),
+(501, 5, 'Argent', '190.00', '9'),
+(502, 5, 'Noir', '190.00', '10'),
+(503, 5, 'Rouge', '190.00', '10'),
+(601, 6, '38', '215.00', '15'),
+(602, 6, '39', '215.00', '15'),
+(603, 6, '40', '215.00', '15'),
+(604, 6, '41', '215.00', '15'),
+(605, 6, '42', '215.00', '15'),
+(606, 6, '43', '215.00', '15'),
+(607, 6, '44', '215.00', '15'),
+(608, 6, '45', '215.00', '15'),
+(609, 6, '46', '215.00', '15'),
+(701, 7, 'Saphir', '160.00', '10'),
+(702, 7, 'Rubis', '160.00', '10'),
+(703, 7, 'Diamant Synthétique', '160.00', '10'),
+(801, 8, NULL, '55.00', '35'),
+(901, 9, 'Lot de 5', '15.00', '20'),
+(902, 9, 'Lot de 10', '25.00', '18'),
+(903, 9, 'Lot de 20', '45.00', '15'),
+(1001, 10, NULL, '60.00', '50'),
+(1101, 11, '1m50', '70.00', '20'),
+(1102, 11, '2m', '90.00', '15'),
+(1103, 11, '3m', '130.00', '15'),
+(1201, 12, 'Lot de 15', '50.00', '20'),
+(1202, 12, 'Lot de 20', '85.00', '20'),
+(1301, 13, NULL, '120.00', '30'),
+(1401, 14, 'Noir', '115.00', '30'),
+(1402, 14, 'Blanc', '115.00', '30'),
+(1501, 15, 'Bleu', '560.00', '10'),
+(1502, 15, 'Rouge', '560.00', '10'),
+(1503, 15, 'Vert', '560.00', '10'),
+(1504, 15, 'Jaune', '560.00', '10'),
+(1601, 16, 'Autonomie 20h', '400000.00', '15'),
+(1602, 16, 'Autonomie 50h', '1000000.00', '10'),
+(1603, 16, 'Autonomie 150h', '2800000.00', '3'),
+(1701, 17, '300cm3', '5000.00', '30'),
+(1702, 17, '600cm3', '10000.00', '25'),
+(1703, 17, '1100cm3', '15000.00', '15'),
+(1801, 18, '1 place', '120000.00', '15'),
+(1802, 18, '3 places', '250000.00', '10'),
+(1901, 19, '38', '150.00', '20'),
+(1902, 19, '39', '150.00', '20'),
+(1903, 19, '40', '150.00', '20'),
+(1904, 19, '41', '150.00', '20'),
+(1905, 19, '42', '150.00', '20'),
+(1906, 19, '43', '150.00', '20'),
+(1907, 19, '44', '150.00', '20'),
+(1908, 19, '45', '150.00', '20'),
+(1909, 19, '46', '150.00', '20'),
+(2001, 20, '38', '350.00', '20'),
+(2002, 20, '39', '350.00', '20'),
+(2003, 20, '40', '350.00', '20'),
+(2004, 20, '41', '350.00', '20'),
+(2005, 20, '42', '350.00', '20'),
+(2006, 20, '43', '350.00', '20'),
+(2007, 20, '44', '350.00', '20'),
+(2008, 20, '45', '350.00', '20'),
+(2009, 20, '46', '350.00', '20'),
+(2101, 21, '38', '160.00', '15'),
+(2102, 21, '39', '160.00', '15'),
+(2103, 21, '40', '160.00', '15'),
+(2104, 21, '41', '160.00', '15'),
+(2105, 21, '42', '160.00', '15'),
+(2106, 21, '43', '160.00', '15'),
+(2107, 21, '44', '160.00', '15'),
+(2108, 21, '45', '160.00', '15'),
+(2109, 21, '46', '160.00', '15'),
+(2201, 22, 'XS', '550.00', '10'),
+(2202, 22, 'S', '550.00', '10'),
+(2203, 22, 'M', '550.00', '10'),
+(2204, 22, 'L', '550.00', '10'),
+(2205, 22, 'XL', '550.00', '10'),
+(2206, 22, 'XXL', '550.00', '10'),
+(2301, 23, NULL, '890.00', '15'),
+(2401, 24, 'XS', '135.00', '10'),
+(2402, 24, 'S', '135.00', '10'),
+(2403, 24, 'M', '135.00', '10'),
+(2404, 24, 'L', '135.00', '10'),
+(2405, 24, 'XL', '135.00', '10'),
+(2501, 25, 'Lot de 3', '500.00', '19'),
+(2502, 25, 'Lot de 5', '800.00', '15'),
+(2503, 25, 'Lot de 10', '1500.00', '15'),
+(2601, 26, 'Verres polarisés', '180.00', '25'),
+(2602, 26, 'Verres non polarisés', '180.00', '25'),
+(2701, 27, 'Rouge', '350.00', '10'),
+(2702, 27, 'Noir', '350.00', '10'),
+(2703, 27, 'Gris', '350.00', '10'),
+(2801, 28, 'Design 1', '60.00', '50'),
+(2802, 28, 'Design 2', '60.00', '50'),
+(2803, 28, 'Design 3', '60.00', '50'),
+(2901, 29, 'Rouge', '45.00', '20'),
+(2902, 29, 'Bleu', '45.00', '20'),
+(2903, 29, 'Mauve', '45.00', '20'),
+(3001, 30, NULL, '220.00', '20'),
+(3101, 31, NULL, '35.00', '30'),
+(3201, 32, NULL, '75.00', '30'),
+(3301, 33, 'Standard', '50.00', '40'),
+(3302, 33, 'Avancée', '100.00', '25'),
+(3401, 34, 'Petit', '15.00', '40'),
+(3402, 34, 'Moyen', '25.00', '40'),
+(3403, 34, 'Grand', '35.00', '30'),
+(3501, 35, 'Comprimé (lot de 5)', '30.00', '20'),
+(3502, 35, 'Liquide (lot de 3)', '35.00', '25'),
+(3601, 36, 'Petit (pour zones ciblées)', '75.00', '35'),
+(3602, 36, 'Grand (pour tout le corps)', '120.00', '15');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `Admin`
+--
+ALTER TABLE `Admin`
+  ADD PRIMARY KEY (`idAdmin`),
+  ADD UNIQUE KEY `login_admin_unique` (`loginAdmin`),
+  ADD UNIQUE KEY `email_admin_unique` (`emailAdmin`);
+
+--
+-- Index pour la table `ADRESSE`
+--
+ALTER TABLE `ADRESSE`
+  ADD PRIMARY KEY (`idAdresse`);
+
+--
+-- Index pour la table `APPARENTER`
+--
+ALTER TABLE `APPARENTER`
+  ADD PRIMARY KEY (`idVariete1`,`idVariete2`),
+  ADD KEY `fk_idVariete2_apparenter_variete` (`idVariete2`);
+
+--
+-- Index pour la table `AVIS`
+--
+ALTER TABLE `AVIS`
+  ADD PRIMARY KEY (`idClient`,`idProduit`),
+  ADD KEY `fk_idProduit_avis_produit` (`idProduit`),
+  ADD KEY `fk_idClient_avis_client` (`idClient`);
+
+--
+-- Index pour la table `CARTE_BANCAIRE`
+--
+ALTER TABLE `CARTE_BANCAIRE`
+  ADD PRIMARY KEY (`numCB`);
+
+--
+-- Index pour la table `CATEGORIE`
+--
+ALTER TABLE `CATEGORIE`
+  ADD PRIMARY KEY (`idCategorie`),
+  ADD KEY `fk_idParent_categorie` (`idParent`);
+
+--
+-- Index pour la table `CLIENT`
+--
+ALTER TABLE `CLIENT`
+  ADD PRIMARY KEY (`idClient`),
+  ADD UNIQUE KEY `login_client_unique` (`loginClient`),
+  ADD UNIQUE KEY `email_client_unique` (`emailClient`);
+
+--
+-- Index pour la table `COMMANDE`
+--
+ALTER TABLE `COMMANDE`
+  ADD PRIMARY KEY (`idCommande`),
+  ADD KEY `fk_idClient_commande_client` (`idClient`),
+  ADD KEY `fk_idAdresse_commande_adresse` (`idAdresse`),
+  ADD KEY `fk_idRelais_commande_relais` (`idRelais`),
+  ADD KEY `fk_numCB_commande_carte_bancaire` (`numCB`);
+
+--
+-- Index pour la table `COMMANDER`
+--
+ALTER TABLE `COMMANDER`
+  ADD PRIMARY KEY (`idCommande`,`idVariete`),
+  ADD KEY `fk_idVariete_commander_variete` (`idVariete`);
+
+--
+-- Index pour la table `ENREGISTRER`
+--
+ALTER TABLE `ENREGISTRER`
+  ADD PRIMARY KEY (`idClient`,`idVariete`),
+  ADD KEY `fk_idVariete_enregistrer_variete` (`idVariete`),
+  ADD KEY `fk_idClient_enregistrer_client` (`idClient`) USING BTREE;
+
+--
+-- Index pour la table `POINT_RELAIS`
+--
+ALTER TABLE `POINT_RELAIS`
+  ADD PRIMARY KEY (`idRelais`);
+
+--
+-- Index pour la table `PRODUIT`
+--
+ALTER TABLE `PRODUIT`
+  ADD PRIMARY KEY (`idProduit`),
+  ADD KEY `fk_idCategorie_produit_categorie` (`idCategorie`);
+
+--
+-- Index pour la table `REGROUPEMENT`
+--
+ALTER TABLE `REGROUPEMENT`
+  ADD PRIMARY KEY (`idRegroupement`);
+
+--
+-- Index pour la table `REGROUPER`
+--
+ALTER TABLE `REGROUPER`
+  ADD PRIMARY KEY (`idRegroupement`,`idVariete`),
+  ADD KEY `fk_idRegroupement_regrouper_regroupement` (`idRegroupement`),
+  ADD KEY `fk_idVariete_regrouper_variete` (`idVariete`) USING BTREE;
+
+--
+-- Index pour la table `VARIETE`
+--
+ALTER TABLE `VARIETE`
+  ADD PRIMARY KEY (`idVariete`),
+  ADD KEY `fk_idProduit_variete_produit` (`idProduit`) USING BTREE;
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Admin`
+--
+ALTER TABLE `Admin`
+  MODIFY `idAdmin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `ADRESSE`
+--
+ALTER TABLE `ADRESSE`
+  MODIFY `idAdresse` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
+
+--
+-- AUTO_INCREMENT pour la table `CATEGORIE`
+--
+ALTER TABLE `CATEGORIE`
+  MODIFY `idCategorie` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+
+--
+-- AUTO_INCREMENT pour la table `CLIENT`
+--
+ALTER TABLE `CLIENT`
+  MODIFY `idClient` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=751;
+
+--
+-- AUTO_INCREMENT pour la table `COMMANDE`
+--
+ALTER TABLE `COMMANDE`
+  MODIFY `idCommande` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=389;
+
+--
+-- AUTO_INCREMENT pour la table `POINT_RELAIS`
+--
+ALTER TABLE `POINT_RELAIS`
+  MODIFY `idRelais` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+
+--
+-- AUTO_INCREMENT pour la table `REGROUPEMENT`
+--
+ALTER TABLE `REGROUPEMENT`
+  MODIFY `idRegroupement` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `APPARENTER`
+--
+ALTER TABLE `APPARENTER`
+  ADD CONSTRAINT `fk_idVariete1_apparenter_variete` FOREIGN KEY (`idVariete1`) REFERENCES `VARIETE` (`idVariete`),
+  ADD CONSTRAINT `fk_idVariete2_apparenter_variete` FOREIGN KEY (`idVariete2`) REFERENCES `VARIETE` (`idVariete`);
+
+--
+-- Contraintes pour la table `AVIS`
+--
+ALTER TABLE `AVIS`
+  ADD CONSTRAINT `fk_idClient_avis_client` FOREIGN KEY (`idClient`) REFERENCES `CLIENT` (`idClient`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_idProduit_avis_produit` FOREIGN KEY (`idProduit`) REFERENCES `PRODUIT` (`idProduit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `CATEGORIE`
+--
+ALTER TABLE `CATEGORIE`
+  ADD CONSTRAINT `fk_idParent_categorie` FOREIGN KEY (`idParent`) REFERENCES `CATEGORIE` (`idCategorie`);
+
+--
+-- Contraintes pour la table `COMMANDE`
+--
+ALTER TABLE `COMMANDE`
+  ADD CONSTRAINT `fk_idAdresse_commande_adresse` FOREIGN KEY (`idAdresse`) REFERENCES `ADRESSE` (`idAdresse`),
+  ADD CONSTRAINT `fk_idClient_commande_client` FOREIGN KEY (`idClient`) REFERENCES `CLIENT` (`idClient`),
+  ADD CONSTRAINT `fk_idRelais_commande_relais` FOREIGN KEY (`idRelais`) REFERENCES `POINT_RELAIS` (`idRelais`),
+  ADD CONSTRAINT `fk_numCB_commande_carte_bancaire` FOREIGN KEY (`numCB`) REFERENCES `CARTE_BANCAIRE` (`numCB`);
+
+--
+-- Contraintes pour la table `COMMANDER`
+--
+ALTER TABLE `COMMANDER`
+  ADD CONSTRAINT `fk_idCommande_commander_commande` FOREIGN KEY (`idCommande`) REFERENCES `COMMANDE` (`idCommande`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_idVariete_commander_variete` FOREIGN KEY (`idVariete`) REFERENCES `VARIETE` (`idVariete`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `ENREGISTRER`
+--
+ALTER TABLE `ENREGISTRER`
+  ADD CONSTRAINT `fk_idClient_enregistrer_client` FOREIGN KEY (`idClient`) REFERENCES `CLIENT` (`idClient`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_idVariete_enregistrer_variete` FOREIGN KEY (`idVariete`) REFERENCES `VARIETE` (`idVariete`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `PRODUIT`
+--
+ALTER TABLE `PRODUIT`
+  ADD CONSTRAINT `fk_idCategorie_produit_categorie` FOREIGN KEY (`idCategorie`) REFERENCES `CATEGORIE` (`idCategorie`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `REGROUPER`
+--
+ALTER TABLE `REGROUPER`
+  ADD CONSTRAINT `fk_idRegroupement_regrouper_regroupement` FOREIGN KEY (`idRegroupement`) REFERENCES `REGROUPEMENT` (`idRegroupement`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_idVariete_regrouper_variete` FOREIGN KEY (`idVariete`) REFERENCES `VARIETE` (`idVariete`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `VARIETE`
+--
+ALTER TABLE `VARIETE`
+  ADD CONSTRAINT `fk_idProduit_variete_produit` FOREIGN KEY (`idProduit`) REFERENCES `PRODUIT` (`idProduit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

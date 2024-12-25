@@ -7,31 +7,31 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-if (isset($_POST['idProduit']) && isset($_POST['quantity'])) {
-    $idProduit = $_POST['idProduit'];
+if (isset($_POST['idVariete']) && isset($_POST['quantity'])) {
+    $idVariete = $_POST['idVariete'];
     $quantity = $_POST['quantity'];
     $idClient = $_SESSION['user_id'];
 
     // Vérifiez si le produit est déjà dans le panier
-    $checkPanier = $conn->prepare("SELECT qteEnregistree FROM ENREGISTRER WHERE idClient = :idClient AND idProduit = :idProduit");
-    $checkPanier->execute(array('idClient' => $idClient, 'idProduit' => $idProduit));
+    $checkPanier = $conn->prepare("SELECT qteEnregistree FROM ENREGISTRER WHERE idClient = :idClient AND idVariete = :idVariete");
+    $checkPanier->execute(array('idClient' => $idClient, 'idVariete' => $idVariete));
     $result = $checkPanier->fetch(PDO::FETCH_ASSOC);
 
     if ($result !== false) {
         // Si le produit est déjà dans le panier, mettez à jour la quantité
         $newQuantity = $result['qteEnregistree'] + $quantity;
-        $updatePanier = $conn->prepare("UPDATE ENREGISTRER SET qteEnregistree = :qteEnregistree WHERE idClient = :idClient AND idProduit = :idProduit");
+        $updatePanier = $conn->prepare("UPDATE ENREGISTRER SET qteEnregistree = :qteEnregistree WHERE idClient = :idClient AND idVariete = :idVariete");
         $updatePanier->execute(array(
             'qteEnregistree' => $newQuantity,
             'idClient' => $idClient,
-            'idProduit' => $idProduit
+            'idVariete' => $idVariete
         ));
     } else {
         // Sinon, insérez le produit dans le panier
-        $ajoutPanier = $conn->prepare("INSERT INTO ENREGISTRER (idClient, idProduit, qteEnregistree) VALUES (:idClient, :idProduit, :qteEnregistree)");
+        $ajoutPanier = $conn->prepare("INSERT INTO ENREGISTRER (idClient, idVariete, qteEnregistree) VALUES (:idClient, :idVariete, :qteEnregistree)");
         $ajoutPanier->execute(array(
             'idClient' => $idClient,
-            'idProduit' => $idProduit,
+            'idVariete' => $idVariete,
             'qteEnregistree' => $quantity
         ));
     }

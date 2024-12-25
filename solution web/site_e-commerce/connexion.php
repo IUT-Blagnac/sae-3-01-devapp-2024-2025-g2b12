@@ -3,9 +3,7 @@
 
 <!-- partie body -->
 <?php require_once('./include/header.php'); ?>
-<!-- <?php require_once('./include/menu.php'); ?>-->
-
-<<<<<<< HEAD
+<?php require_once('./include/menu.php'); ?>
 
 <style>
 .form-container {
@@ -62,11 +60,20 @@
     text-decoration: underline;
 }
 
+/* Styles spécifiques pour les icônes de recherche, compte et panier */
+.user-items svg {
+    width: 18px;
+    height: 18px;
+}
+
+.user-items img.logo {
+    width: 20px;
+}
 </style>
 
 <div class="container-fluid flex-grow-1 d-flex justify-content-center align-items-center">
     <div class="row w-100">
-        <main class="container" style="margin-top:8%; margin-bottom:5%;">
+        <main class="container" style="margin-top:10%; margin-bottom:5%;">
             <div class="form-container">
                 <h2>Connexion</h2>
                 <form action='traitement_connexion.php' method='post'>
@@ -87,29 +94,3 @@
 </div>
 
 <?php include_once('include/footer.php'); ?>
-=======
-<?php
-
-  echo"<br>";
-  echo"<br>";
-  echo"<br>";
-  echo"<br>";
-  echo "<h2>Connexion</h2>";
-  
-  echo "<form action='traitement_connexion.php' method='post'>";
-      echo "<label for='login'>Login ou Email:</label>";
-      echo "<input type='text' id='login' name='login' required><br><br>";
-      echo "<label for='password'>Mot de passe:</label>";
-      echo "<input type='password' id='password' name='password' required><br><br>";
-      echo "<label for='remember'>Se souvenir de moi:</label>";
-      echo "<input type='checkbox' id='remember' name='remember'><br><br>";
-      echo "<input type='hidden' name='action' value='connexion'>";
-      echo "<input type='submit' value='Se connecter'>";
-  echo "</form>"; 
-
-  echo "<br>";
-  echo "<p>Vous n'avez pas de compte ? <a href='creer_compte.php'>Créer un compte</a></p>";
-
-  include_once('include/footer.php');
-?>
->>>>>>> e2c70232b6778d2e987d5d8b422c68f30bc347fa

@@ -1,12 +1,5 @@
-<?php
-session_start();
-include './include/Connect.inc.php'; // Fichier pour la connexion à la base de données
-
-// Partie HTML et HEAD
-require_once('./include/head.php');
-require_once('./include/header.php');
-require_once('./include/menu.php');
-?>
+<!-- Partie HTML et HEAD -->
+<?php require_once('./include/head.php'); ?>
 
 <style>
     .form-container {
@@ -72,16 +65,31 @@ require_once('./include/menu.php');
                 <h2>Commander</h2>
                 <form action='traitement_commande.php' method='post'>
                     <h3>Adresse de livraison</h3>
-                    <label for='numRueAdresse'>Numéro de rue:</label>
-                    <input type='text' id='numRueAdresse' name='numRueAdresse' pattern="\d+" title="Veuillez entrer un numéro de rue valide" required><br><br>
-                    <label for='rueAdresse'>Rue:</label>
-                    <input type='text' id='rueAdresse' name='rueAdresse' required><br><br>
-                    <label for='cdPostalAdresse'>Code postal:</label>
-                    <input type='text' id='cdPostalAdresse' name='cdPostalAdresse' pattern="\d{5}" title="Veuillez entrer un code postal valide à 5 chiffres" required><br><br>
-                    <label for='villeAdresse'>Ville:</label>
-                    <input type='text' id='villeAdresse' name='villeAdresse' required><br><br>
-                    <label for='paysAdresse'>Pays:</label>
-                    <input type='text' id='paysAdresse' name='paysAdresse' required><br><br>
+                    <label for='lieuLivraison'>Lieu de livraison:</label>
+                    <select id='lieuLivraison' name='lieuLivraison' required>
+                        <option value='Domicile'>Domicile</option>
+                        <option value='Relais'>Point Relais</option>
+                    </select><br><br>
+                    <div id="adresse-livraison">
+                        <label for='numRueAdresse'>Numéro de rue:</label>
+                        <input type='text' id='numRueAdresse' name='numRueAdresse' pattern="\d+" title="Veuillez entrer un numéro de rue valide" required><br><br>
+                        <label for='rueAdresse'>Rue:</label>
+                        <input type='text' id='rueAdresse' name='rueAdresse' required><br><br>
+                        <label for='cdPostalAdresse'>Code postal:</label>
+                        <input type='text' id='cdPostalAdresse' name='cdPostalAdresse' pattern="\d{5}" title="Veuillez entrer un code postal valide à 5 chiffres" required><br><br>
+                        <label for='villeAdresse'>Ville:</label>
+                        <input type='text' id='villeAdresse' name='villeAdresse' required><br><br>
+                        <label for='paysAdresse'>Pays:</label>
+                        <input type='text' id='paysAdresse' name='paysAdresse' required><br><br>
+                        <input type='hidden' id='idAdresse' name='idAdresse'>
+                    </div>
+                    <div id="relais-livraison" style="display: none;">
+                        <label for='searchRelais'>Rechercher un point relais (ville ou code postal):</label>
+                        <input type='text' id='searchRelais' name='searchRelais'><br><br>
+                        <label for='idRelais'>Sélectionnez un point relais:</label>
+                        <select id='idRelais' name='idRelais'>
+                        </select><br><br>
+                    </div>
 
                     <h3>Méthode de paiement</h3>
                     <label for='modePaiement'>Mode de paiement:</label>
@@ -91,7 +99,12 @@ require_once('./include/menu.php');
                         <option value='Virement'>Virement</option>
                     </select><br><br>
                     <div id="payment-details">
-                        <!-- Les détails de paiement seront affichés ici en fonction du mode de paiement sélectionné -->
+                        <label for='numCB'>Numéro de carte bancaire:</label>
+                        <input type='text' id='numCB' name='numCB' pattern="\d{16}" title="Veuillez entrer un numéro de carte valide à 16 chiffres" required><br><br>
+                        <label for='dateExpCB'>Date d'expiration (MM/AA):</label>
+                        <input type='text' id='dateExpCB' name='dateExpCB' pattern="\d{2}/\d{2}" title="Veuillez entrer une date d'expiration valide (MM/AA)" required><br><br>
+                        <label for='titulaireCB'>Titulaire de la carte:</label>
+                        <input type='text' id='titulaireCB' name='titulaireCB' required><br><br>
                     </div>
                     <input type='submit' value='Valider la commande'>
                 </form>
@@ -104,42 +117,78 @@ require_once('./include/menu.php');
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const lieuLivraisonSelect = document.getElementById('lieuLivraison');
+        const adresseLivraisonDiv = document.getElementById('adresse-livraison');
+        const relaisLivraisonDiv = document.getElementById('relais-livraison');
+        const searchRelaisInput = document.getElementById('searchRelais');
+        const idRelaisSelect = document.getElementById('idRelais');
         const modePaiementSelect = document.getElementById('modePaiement');
         const paymentDetailsDiv = document.getElementById('payment-details');
         const form = document.querySelector('form');
 
-        modePaiementSelect.addEventListener('change', function() {
-            const selectedPaymentMethod = this.value;
-            paymentDetailsDiv.innerHTML = ''; // Clear previous payment details
+        function initializeDateExpCBInput() {
+            const dateExpCBInput = document.getElementById('dateExpCB');
+            if (dateExpCBInput) {
+                dateExpCBInput.addEventListener('input', function(e) {
+                    let value = e.target.value;
 
+                    // Limit length to 5 characters
+                    if (value.length > 5) {
+                        value = value.slice(0, 5);
+                        e.target.value = value;
+                    }
+
+                    if (e.inputType === 'deleteContentBackward') {
+                        if (value.length === 3 && value.includes('/')) {
+                            e.target.value = value.slice(0, 2);
+                        } else if (value.length === 2 && value[1] === '/') {
+                            e.target.value = value[0];
+                        }
+                    } else {
+                        if (value.length === 2 && !value.includes('/')) {
+                            e.target.value = value + '/';
+                        }
+                    }
+
+                    // Validate month part
+                    const month = parseInt(value.slice(0, 2), 10);
+                    if (month < 1 || month > 12) {
+                        dateExpCBInput.setCustomValidity('Le mois doit être compris entre 01 et 12.');
+                    } else {
+                        dateExpCBInput.setCustomValidity('');
+                    }
+
+                    // Validate expiration date is not in the past
+                    if (value.length === 5) {
+                        const [inputMonth, inputYear] = value.split('/');
+                        const currentDate = new Date();
+                        const inputDate = new Date(`20${inputYear}`, inputMonth - 1);
+                        if (inputDate < currentDate) {
+                            dateExpCBInput.setCustomValidity('La date d\'expiration ne peut pas être antérieure à la date actuelle.');
+                        } else {
+                            dateExpCBInput.setCustomValidity('');
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializePaymentDetails() {
+            const selectedPaymentMethod = modePaiementSelect.value;
             if (selectedPaymentMethod === 'CB') {
                 paymentDetailsDiv.innerHTML = `
                     <label for='numCB'>Numéro de carte bancaire:</label>
                     <input type='text' id='numCB' name='numCB' pattern="\\d{16}" title="Veuillez entrer un numéro de carte valide à 16 chiffres" required><br><br>
-                    <label for='dateExpCB'>Date d'expiration (MM/YY):</label>
-                    <input type='text' id='dateExpCB' name='dateExpCB' pattern="(0[1-9]|1[0-2])\\/\\d{2}" title="Veuillez entrer une date d'expiration valide au format MM/YY" maxlength="5" required><br><br>
+                    <label for='dateExpCB'>Date d'expiration (MM/AA):</label>
+                    <input type='text' id='dateExpCB' name='dateExpCB' pattern="(0[1-9]|1[0-2])/\\d{2}" title="Veuillez entrer une date d'expiration valide (MM/AA)" required><br><br>
                     <label for='titulaireCB'>Titulaire de la carte:</label>
                     <input type='text' id='titulaireCB' name='titulaireCB' required><br><br>
                 `;
-
-                const dateExpCBInput = document.getElementById('dateExpCB');
-                dateExpCBInput.addEventListener('input', function(e) {
-                    let value = e.target.value;
-                    if (value.length === 2 && !value.includes('/')) {
-                        e.target.value = value + '/';
-                    }
-                });
-
-                dateExpCBInput.addEventListener('keydown', function(e) {
-                    let value = e.target.value;
-                    if (e.key === 'Backspace' && value.length === 3 && value.includes('/')) {
-                        e.target.value = value.slice(0, -1);
-                    }
-                });
+                initializeDateExpCBInput();
             } else if (selectedPaymentMethod === 'Paypal') {
                 paymentDetailsDiv.innerHTML = `
-                    <label for='numPaypal'>E-mail de votre compte Paypal:</label><br>
-                    <input type='email' id='numPaypal' name='numPaypal' required><br><br>
+                    <label for='numPaypal'>Numéro de votre compte Paypal : </label><br>
+                    <input type='text' id='numPaypal' name='numPaypal' pattern="\\d{1,10}" required><br><br>
                 `;
             } else if (selectedPaymentMethod === 'Virement') {
                 paymentDetailsDiv.innerHTML = `
@@ -147,24 +196,63 @@ require_once('./include/menu.php');
                     <input type='text' id='numVirement' name='numVirement' pattern="\\d+" title="Veuillez entrer un numéro de compte valide" required><br><br>
                 `;
             }
+        }
+
+        lieuLivraisonSelect.addEventListener('change', function() {
+            if (this.value === 'Domicile') {
+                adresseLivraisonDiv.style.display = 'block';
+                relaisLivraisonDiv.style.display = 'none';
+                idRelaisSelect.removeAttribute('required');
+                document.getElementById('numRueAdresse').setAttribute('required', 'required');
+                document.getElementById('rueAdresse').setAttribute('required', 'required');
+                document.getElementById('cdPostalAdresse').setAttribute('required', 'required');
+                document.getElementById('villeAdresse').setAttribute('required', 'required');
+                document.getElementById('paysAdresse').setAttribute('required', 'required');
+            } else if (this.value === 'Relais') {
+                adresseLivraisonDiv.style.display = 'none';
+                relaisLivraisonDiv.style.display = 'block';
+                idRelaisSelect.setAttribute('required', 'required');
+                document.getElementById('numRueAdresse').removeAttribute('required');
+                document.getElementById('rueAdresse').removeAttribute('required');
+                document.getElementById('cdPostalAdresse').removeAttribute('required');
+                document.getElementById('villeAdresse').removeAttribute('required');
+                document.getElementById('paysAdresse').removeAttribute('required');
+            }
         });
 
-        // Trigger change event to display the initial payment details
-        modePaiementSelect.dispatchEvent(new Event('change'));
+        searchRelaisInput.addEventListener('input', function() {
+            const searchValue = this.value.trim().toLowerCase();
+            if (searchValue.length > 0) {
+                fetch(`search_relais.php?query=${searchValue}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        idRelaisSelect.innerHTML = '';
+                        data.forEach(relais => {
+                            const option = document.createElement('option');
+                            option.value = relais.idRelais;
+                            option.textContent = `${relais.nomRelais} - ${relais.rueRelais}, ${relais.villeRelais}`;
+                            idRelaisSelect.appendChild(option);
+                        });
+                    });
+            } else {
+                idRelaisSelect.innerHTML = '';
+            }
+        });
 
-        // Show loading popup on form submit
+        modePaiementSelect.addEventListener('change', initializePaymentDetails);
+
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent the form from submitting immediately
 
-            // Validate PayPal email
+            // Validate PayPal account number
             const selectedPaymentMethod = modePaiementSelect.value;
             if (selectedPaymentMethod === 'Paypal') {
                 const numPaypal = document.getElementById('numPaypal').value;
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(numPaypal)) {
+                const numPaypalPattern = /^\d{1,10}$/;
+                if (!numPaypalPattern.test(numPaypal)) {
                     Swal.fire({
                         title: 'Erreur',
-                        text: 'Veuillez entrer une adresse email PayPal valide.',
+                        text: 'Veuillez entrer un numéro de compte PayPal valide (1 à 10 chiffres).',
                         icon: 'error',
                         confirmButtonText: 'OK'
                     });
@@ -185,6 +273,17 @@ require_once('./include/menu.php');
                     });
                     return;
                 }
+            }
+
+            // Validate Relais selection
+            if (lieuLivraisonSelect.value === 'Relais' && !idRelaisSelect.value) {
+                Swal.fire({
+                    title: 'Erreur',
+                    text: 'Veuillez sélectionner un point relais.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
             }
 
             Swal.fire({
@@ -211,14 +310,11 @@ require_once('./include/menu.php');
                 title: 'Erreur',
                 text: errorMessage,
                 icon: 'error',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                willClose: () => {
-                    window.location.href = 'index.php'; // Redirect to homepage after 3 seconds
-                }
+                confirmButtonText: 'OK'
             });
         }
+
+        // Initialize the payment details and dateExpCB input listener on page load
+        initializePaymentDetails();
     });
 </script>

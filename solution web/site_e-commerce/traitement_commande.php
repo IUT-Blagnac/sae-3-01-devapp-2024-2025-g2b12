@@ -12,76 +12,91 @@ $idClient = $_SESSION['user_id'];
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $numRueAdresse = $_POST['numRueAdresse'];
-        $rueAdresse = $_POST['rueAdresse'];
-        $cdPostalAdresse = $_POST['cdPostalAdresse'];
-        $villeAdresse = $_POST['villeAdresse'];
-        $paysAdresse = $_POST['paysAdresse'];
+        $lieuLivraison = $_POST['lieuLivraison'];
         $modePaiement = $_POST['modePaiement'];
+        $idAdresseDeLivraison = null;
+        $numCB = null;
+        $numPaypal = null;
+        $numVirement = null;
 
-        // Enregistrer l'adresse
-        $query = $conn->prepare("INSERT INTO ADRESSE (numRueAdresse, rueAdresse, cdPostalAdresse, villeAdresse, paysAdresse) VALUES (:numRueAdresse, :rueAdresse, :cdPostalAdresse, :villeAdresse, :paysAdresse)");
-        $query->execute([
-            'numRueAdresse' => $numRueAdresse,
-            'rueAdresse' => $rueAdresse,
-            'cdPostalAdresse' => $cdPostalAdresse,
-            'villeAdresse' => $villeAdresse,
-            'paysAdresse' => $paysAdresse
-        ]);
-        $idAdresse = $conn->lastInsertId();
+        if ($lieuLivraison === 'Domicile') {
+            $numRueAdresse = $_POST['numRueAdresse'];
+            $rueAdresse = $_POST['rueAdresse'];
+            $cdPostalAdresse = $_POST['cdPostalAdresse'];
+            $villeAdresse = $_POST['villeAdresse'];
+            $paysAdresse = $_POST['paysAdresse'];
 
-        // Enregistrer la commande
-        $query = $conn->prepare("INSERT INTO COMMANDE (dateCommande, modeLivraison, modePaiement, idClient, idAdresse) VALUES (NOW(), 'Domicile', :modePaiement, :idClient, :idAdresse)");
-        $query->execute([
-            'modePaiement' => $modePaiement,
-            'idClient' => $idClient,
-            'idAdresse' => $idAdresse
-        ]);
-        $idCommande = $conn->lastInsertId();
+            // Vérifiez si l'adresse existe déjà
+            $query = $conn->prepare("SELECT idAdresse FROM ADRESSE WHERE numRueAdresse = :numRueAdresse AND rueAdresse = :rueAdresse AND cdPostalAdresse = :cdPostalAdresse AND villeAdresse = :villeAdresse AND paysAdresse = :paysAdresse");
+            $query->execute([
+                'numRueAdresse' => $numRueAdresse,
+                'rueAdresse' => $rueAdresse,
+                'cdPostalAdresse' => $cdPostalAdresse,
+                'villeAdresse' => $villeAdresse,
+                'paysAdresse' => $paysAdresse
+            ]);
+            $adresse = $query->fetch();
 
-        // Enregistrer les détails de paiement
+            if ($adresse) {
+                // Adresse existante
+                $idAdresseDeLivraison = $adresse['idAdresse'];
+            } else {
+                // Insérer la nouvelle adresse
+                $query = $conn->prepare("INSERT INTO ADRESSE (numRueAdresse, rueAdresse, cdPostalAdresse, villeAdresse, paysAdresse) VALUES (:numRueAdresse, :rueAdresse, :cdPostalAdresse, :villeAdresse, :paysAdresse)");
+                $query->execute([
+                    'numRueAdresse' => $numRueAdresse,
+                    'rueAdresse' => $rueAdresse,
+                    'cdPostalAdresse' => $cdPostalAdresse,
+                    'villeAdresse' => $villeAdresse,
+                    'paysAdresse' => $paysAdresse
+                ]);
+                $idAdresseDeLivraison = $conn->lastInsertId();
+            }
+        } elseif ($lieuLivraison === 'Relais') {
+            $idAdresseDeLivraison = $_POST['idRelais'];
+        }
+
         if ($modePaiement === 'CB') {
             $numCB = $_POST['numCB'];
             $dateExpCB = $_POST['dateExpCB'];
             $titulaireCB = $_POST['titulaireCB'];
-            $query = $conn->prepare("INSERT INTO CARTE_BANCAIRE (numCB, dateExpCB, titulaireCB) VALUES (:numCB, :dateExpCB, :titulaireCB)");
-            $query->execute([
-                'numCB' => $numCB,
-                'dateExpCB' => $dateExpCB,
-                'titulaireCB' => $titulaireCB
-            ]);
+
+            // Vérifiez si la carte bancaire existe déjà
+            $query = $conn->prepare("SELECT numCB FROM CARTE_BANCAIRE WHERE numCB = :numCB");
+            $query->execute(['numCB' => $numCB]);
+            $carte = $query->fetch();
+
+            if (!$carte) {
+                // Insérer la nouvelle carte bancaire
+                $query = $conn->prepare("INSERT INTO CARTE_BANCAIRE (numCB, dateExpCB, titulaireCB) VALUES (:numCB, :dateExpCB, :titulaireCB)");
+                $query->execute([
+                    'numCB' => $numCB,
+                    'dateExpCB' => $dateExpCB,
+                    'titulaireCB' => $titulaireCB
+                ]);
+            }
         } elseif ($modePaiement === 'Paypal') {
             $numPaypal = $_POST['numPaypal'];
-            $query = $conn->prepare("UPDATE COMMANDE SET numPaypal = :numPaypal WHERE idCommande = :idCommande");
-            $query->execute([
-                'numPaypal' => $numPaypal,
-                'idCommande' => $idCommande
-            ]);
         } elseif ($modePaiement === 'Virement') {
             $numVirement = $_POST['numVirement'];
-            $query = $conn->prepare("UPDATE COMMANDE SET numVirement = :numVirement WHERE idCommande = :idCommande");
-            $query->execute([
-                'numVirement' => $numVirement,
-                'idCommande' => $idCommande
-            ]);
         }
 
-        // Enregistrer les produits commandés
-        $query = $conn->prepare("SELECT * FROM ENREGISTRER WHERE idClient = :idClient");
-        $query->execute(['idClient' => $idClient]);
-        $produits = $query->fetchAll();
-        foreach ($produits as $produit) {
-            $query = $conn->prepare("INSERT INTO COMMANDER (idCommande, idProduit, qteCommandee) VALUES (:idCommande, :idProduit, :qteCommandee)");
-            $query->execute([
-                'idCommande' => $idCommande,
-                'idProduit' => $produit['idProduit'],
-                'qteCommandee' => $produit['qteEnregistree']
-            ]);
+        // Vérifiez que l'adresse de livraison est définie
+        if (empty($idAdresseDeLivraison)) {
+            throw new Exception("L'adresse de livraison n'est pas définie.");
         }
 
-        // Vider le panier
-        $query = $conn->prepare("DELETE FROM ENREGISTRER WHERE idClient = :idClient");
-        $query->execute(['idClient' => $idClient]);
+        // Appel de la procédure stockée passerCommande
+        $query = $conn->prepare("CALL passerCommande(:pIdClient, :pModeLivraison, :pIdAdresseDeLivraison, :pModePaiement, :pNumCB, :pNumPaypal, :pNumVirement)");
+        $query->execute([
+            'pIdClient' => $idClient,
+            'pModeLivraison' => $lieuLivraison,
+            'pIdAdresseDeLivraison' => $idAdresseDeLivraison,
+            'pModePaiement' => $modePaiement,
+            'pNumCB' => $numCB,
+            'pNumPaypal' => $numPaypal,
+            'pNumVirement' => $numVirement
+        ]);
 
         // Rediriger vers une page de confirmation
         header('Location: confirmation_commande.php');
@@ -93,4 +108,3 @@ try {
     header("Location: commander.php?error=true&message=$errorMessage");
     exit();
 }
-?>

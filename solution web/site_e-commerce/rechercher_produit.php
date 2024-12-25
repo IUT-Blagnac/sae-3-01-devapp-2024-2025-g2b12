@@ -48,8 +48,8 @@
                                 echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\");background-color: #f0f0f0;background-size: cover; background-position: center;'></div>";
                                 echo "<div class='card-body'>";
                                 echo "<p>" . htmlspecialchars($produits['nomProduit']) . "<p>";
-                                echo "<p>" . htmlspecialchars($produits['prixProduit']) . "<p>";
-                                echo "<p>" . htmlspecialchars($produits['specProduit']) . "<p>";
+                                echo "<p>" . htmlspecialchars($produits['prixVariete']) . "<p>";
+                                echo "<p>" . htmlspecialchars($produits['specVariete']) . "<p>";
                                 echo "</div>";
                                 echo "</div>";
                                 echo "<a>";

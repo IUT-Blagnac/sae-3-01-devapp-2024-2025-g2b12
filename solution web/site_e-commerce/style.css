@@ -367,54 +367,54 @@ h3.cart-title {
 /* - Search Bar
 ------------------------------------------------------------- */
 .search-box {
-    background: var(--gray-color);
-    position: relative;
+  background: var(--gray-color);
+  position: relative;
 }
 .close-button {
-    position: absolute;
-    top: 20px;
-    right: 120px;
-    cursor: pointer;
-    z-index: 9;
+  position: absolute;
+  top: 20px;
+  right: 120px;
+  cursor: pointer;
+  z-index: 9;
 }
 .search-box input.search-input {
-    font-size: 1.3em;
-    width: 70%;
-    height: 30px;
-    padding: 25px;
-    border-radius: 80px;
-    border-color: rgb(0 0 0 / 25%);
-    background: transparent;
+  font-size: 1.3em;
+  width: 70%;
+  height: 30px;
+  padding: 25px;
+  border-radius: 80px;
+  border-color: rgb(0 0 0 / 25%);
+  background: transparent;
 }
 .search-box svg {
-    width: 22px;
-    height: 22px;
-    color: var(--primary-color);
+  width: 22px;
+  height: 22px;
+  color: var(--primary-color);
 }
 .search-box svg.search {
-    margin-left: -50px;
+  margin-left: -50px;
 }
 
 
 /** Search Form
 --------------------------------------------------------------*/
 .search-form input[type="search"].search-field {
-  border: none;
-  background: #f1f1f1;
-  width: 100%;
-  border-radius: 50px;
-  padding: 10px 40px;
+border: none;
+background: #f1f1f1;
+width: 100%;
+border-radius: 50px;
+padding: 10px 40px;
 }
 .search-form input[type="search"].search-field::focus {
-  border-color: #af9aaa;
+border-color: #af9aaa;
 }
 .search-form button {
-  position: absolute;
-  top: 6px;
-  right: 9px;
-  background: transparent;
-  border: none;
-}
+position: absolute;
+top: 6px;
+right: 9px;
+background: transparent;
+border: none;
+} 
 
 /** Search Popup
 --------------------------------------------------------------*/
@@ -432,7 +432,9 @@ h3.cart-title {
   -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   transition: opacity 0.3s 0s, visibility 0s 0.3s;
 }
+
 .search-popup.is-visible {
+  overflow-y: auto;
   opacity: 1;
   visibility: visible;
   cursor: -webkit-image-set(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23FFF' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E") 1x, url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E") 2x), pointer;
@@ -441,6 +443,7 @@ h3.cart-title {
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
   transition: opacity 0.3s 0s, visibility 0s 0s;
 }
+
 .search-popup-container {
   background-color: transparent;
   position: relative;
@@ -460,9 +463,12 @@ h3.cart-title {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
+
 .is-visible .search-popup-container {
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
+  overflow-y: auto;
+
 }
 .search-popup-form {
   position: relative;
