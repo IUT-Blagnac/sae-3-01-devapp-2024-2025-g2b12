@@ -129,7 +129,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 | DROIT| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/f6399edb212598f5924fc01d2d4b9ec4848aaa5e/Fiche%20de%20conseils%20juridiques%20et%20de%20s%C3%A9curit%C3%A9.pdf[Fiche de conseils juridiques et de sécurité]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/13487a84b5fe6788acb099f59f28bcbb29e5e2ff/Diagramme%20BPMN.png[Diagramme BPMN]
 | BD| [Procédures stockées]
-| Web| [Recettes]
+| Web|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Recettes]
 |===
 
 === Documentations
