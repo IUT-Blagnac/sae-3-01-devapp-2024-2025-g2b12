@@ -129,7 +129,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 | DROIT| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/f6399edb212598f5924fc01d2d4b9ec4848aaa5e/Fiche%20de%20conseils%20juridiques%20et%20de%20s%C3%A9curit%C3%A9.pdf[Fiche de conseils juridiques et de sécurité]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/13487a84b5fe6788acb099f59f28bcbb29e5e2ff/Diagramme%20BPMN.png[Diagramme BPMN]
 | BD| [Procédures stockées]
-| Web| [Recettes]
+| Web|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Recettes]
 |===
 
 === Documentations
@@ -141,7 +141,6 @@ Cette section regroupe les principales documentations du projet (de la conceptio
 |WEB| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/document_conception.adoc[Document de conception]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_utilisateur.adoc[Document Utilisateur]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Documentation_Technique.adoc[Document Technique]
-| | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
 | | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Cahier de Recette]
 |IOT|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20iot/docs/doc_tech.adoc[iOT Documentation Technique]
 |SYSTÈME|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/d88c4a50aaa1205e0d17c3258f764cd989741dc2/Documentation%20Partie%20Syst%C3%A8me%20V2%20-%20SAE%20S3-03%20DevApp%20Syst%C3%A8me.pdf[Documentation Partie Système]
@@ -175,7 +174,7 @@ Récapitulatif des informations mises à jour - Dernière MAJ : 18/12/24
 
 ✓ Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[US]
 
-✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
+✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Cahier de Tests]
 
 ✓ Indicateurs de qualité du code (dette technique) : 
 
