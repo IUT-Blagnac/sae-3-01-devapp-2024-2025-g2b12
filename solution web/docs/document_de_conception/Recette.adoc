@@ -252,6 +252,25 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 |====
 
+|====
+
+>|Cas de test 4+|Test-02-01-05
+>|Titre 4+|Consulter les commandes passées
+>|Objectif 4+| Vérifier qu'il est possible de consulter les commandes passées d'un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
+
 
 ==== 2.2 Gestion du panier :
 
