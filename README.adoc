@@ -174,7 +174,7 @@ Récapitulatif des informations mises à jour - Dernière MAJ : 18/12/24
 
 ✓ Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/issues[US]
 
-✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/docs/document_de_conception/Cahier_Tests.adoc[Cahier de Tests]
+✓ Tests unitaires et plans de test : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Cahier de Tests]
 
 ✓ Indicateurs de qualité du code (dette technique) : 
 
