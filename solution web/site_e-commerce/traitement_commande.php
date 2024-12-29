@@ -86,6 +86,8 @@ try {
             throw new Exception("L'adresse de livraison n'est pas définie.");
         }
 
+        
+
         // Appel de la procédure stockée passerCommande
         $query = $conn->prepare("CALL passerCommande(:pIdClient, :pModeLivraison, :pIdAdresseDeLivraison, :pModePaiement, :pNumCB, :pNumPaypal, :pNumVirement)");
         $query->execute([

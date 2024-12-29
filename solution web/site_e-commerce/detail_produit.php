@@ -68,74 +68,90 @@ if (isset($_GET['idProduit'])) {
                 </div>
             </div>
             <br>
-            <hr class="custom-hr"><br>
-            <center>
-                <div class="avis-container">
-                    <div class="avis-form">
-                        <h3>Écrire un avis</h3>
-                        <form method="POST" id="avisForm">
-                            <div class="star-rating">
-                                <span class="star" data-value="1">&#9733;</span>
-                                <span class="star" data-value="2">&#9733;</span>
-                                <span class="star" data-value="3">&#9733;</span>
-                                <span class="star" data-value="4">&#9733;</span>
-                                <span class="star" data-value="5">&#9733;</span>
-                            </div>
-                            <input type="hidden" id="noteAvis" name="noteAvis" value="0">
-                            <textarea id="contenuAvis" name="ContenuAvis" rows="4" placeholder="Votre avis ici..."
-                                class="avis-textarea"></textarea><br>
-                            <button type="submit" class="btn btn-custom" name="Soumettre">Soumettre l'avis</button>
-                        </form>
-                    </div>
-                </div>
-            </center>
+            <!-- Vérification si l'utilisateur connecté a commandé ce produit -->
+            <?php if (isset($_SESSION['user_id'])) {
+                $userId = $_SESSION['user_id'];
+                $queryCheck = $conn->prepare("
+                    SELECT * 
+                    FROM CLIENT C
+                    JOIN COMMANDE C1 ON C.idClient = C1.idClient
+                    JOIN COMMANDER C2 ON C1.idCommande = C2.idCommande
+                    JOIN VARIETE V ON C2.idVariete = V.idVariete
+                    WHERE V.idProduit = :pIdProduit AND C.idClient = :pIdClient
+                ");
+                $queryCheck->execute(['pIdProduit' => $idProduit, 'pIdClient' => $userId]);
+                $hasOrdered = $queryCheck->fetch();
 
-            <?php
-            if (isset($_POST["ContenuAvis"], $_POST["noteAvis"], $_POST["Soumettre"], $_SESSION["user_id"])) {
-                $userId = $_SESSION["user_id"];
-                $noteAvis = (int) $_POST["noteAvis"]; // Note soumise par l'utilisateur
-    
-                // Vérifier si une note valide a été donnée
-                if ($noteAvis < 1 || $noteAvis > 5) {
-                    echo "<p style='color: red;'>Veuillez donner une note entre 1 et 5 étoiles.</p>";
-                } else {
-                    $avisQuery = $conn->prepare("SELECT * FROM AVIS WHERE idClient = :idClient AND idProduit = :idProduit");
-                    $avisQuery->execute(['idClient' => $userId, 'idProduit' => $idProduit]);
-                    $existingAvis = $avisQuery->fetch();
+                if ($hasOrdered) { ?>
+                    <hr class="custom-hr"><br>
+                    <center>
+                        <div class="avis-form">
+                            <h3>Écrire un avis</h3>
+                            <form method="POST" id="avisForm">
+                                <div class="star-rating">
+                                    <span class="star" data-value="1">&#9733;</span>
+                                    <span class="star" data-value="2">&#9733;</span>
+                                    <span class="star" data-value="3">&#9733;</span>
+                                    <span class="star" data-value="4">&#9733;</span>
+                                    <span class="star" data-value="5">&#9733;</span>
+                                </div>
+                                <input type="hidden" id="noteAvis" name="noteAvis" value="0">
+                                <textarea id="contenuAvis" name="ContenuAvis" rows="6" placeholder="Écrivez votre avis ici..."
+                                    class="avis-textarea"></textarea><br>
+                                <button type="submit" class="btn btn-custom" name="Soumettre">Soumettre l'avis</button>
+                            </form>
+                        </div>
+                    </center>
 
-                    if ($existingAvis) {
-                        echo "<p style='color: red;'>Vous avez déjà laissé un avis pour ce produit.</p>";
-                    } else {
-                        $req = $conn->prepare("INSERT INTO AVIS(idClient, idProduit, noteAvis, commentaireAvis, dateAvis, reponseAvis, dateReponseAvis) 
-                                   VALUES(:pIdClient, :pIdProduit, :pNoteAvis, :pCommentaireAvis, CURDATE(), :pReponseAvis, :pDateReponseAvis)");
-                        $req->execute([
-                            "pIdClient" => $userId,
-                            "pIdProduit" => $idProduit,
-                            "pNoteAvis" => $noteAvis,
-                            "pCommentaireAvis" => $_POST["ContenuAvis"],
-                            "pReponseAvis" => NULL,
-                            "pDateReponseAvis" => NULL
-                        ]);
-                        echo "<p style='color: green;'>Votre avis a été ajouté avec succès.</p>";
+                    <?php
+                    if (isset($_POST["ContenuAvis"], $_POST["noteAvis"], $_POST["Soumettre"])) {
+                        $noteAvis = (int) $_POST["noteAvis"];
+
+                        if ($noteAvis < 0 || $noteAvis > 5) {
+                            echo "<p style='color: red;'>Veuillez donner une note entre 0 et 5 étoiles.</p>";
+                        } else {
+                            $avisQuery = $conn->prepare("SELECT * FROM AVIS WHERE idClient = :idClient AND idProduit = :idProduit");
+                            $avisQuery->execute(['idClient' => $userId, 'idProduit' => $idProduit]);
+                            $existingAvis = $avisQuery->fetch();
+
+                            if ($existingAvis) {
+                                echo "<p style='color: red;'>Vous avez déjà laissé un avis pour ce produit.</p>";
+                            } else {
+                                $req = $conn->prepare("INSERT INTO AVIS(idClient, idProduit, noteAvis, commentaireAvis, dateAvis, reponseAvis, dateReponseAvis) 
+                                    VALUES(:pIdClient, :pIdProduit, :pNoteAvis, :pCommentaireAvis, CURDATE(), :pReponseAvis, :pDateReponseAvis)");
+                                $req->execute([
+                                    "pIdClient" => $userId,
+                                    "pIdProduit" => $idProduit,
+                                    "pNoteAvis" => $noteAvis,
+                                    "pCommentaireAvis" => $_POST["ContenuAvis"],
+                                    "pReponseAvis" => NULL,
+                                    "pDateReponseAvis" => NULL
+                                ]);
+                                echo "<p style='color: green;'>Votre avis a été ajouté avec succès.</p>";
+                            }
+                        }
                     }
                 }
-            }
-            ?>
+            } ?>
 
             <!-- Affichage des avis -->
             <div id="avisList">
                 <?php
-                $avisQuery = $conn->prepare("SELECT * FROM AVIS WHERE idProduit = :idProduit");
+                $avisQuery = $conn->prepare("SELECT * FROM AVIS A, CLIENT C WHERE C.idClient = A.idClient AND idProduit = :idProduit");
                 $avisQuery->execute(['idProduit' => $idProduit]);
                 $avisList = $avisQuery->fetchAll();
 
                 if (count($avisList) > 0) {
                     foreach ($avisList as $avis) {
                         echo "<div class='avis-item'>";
-                        echo "<p><strong>" . htmlspecialchars($avis['dateAvis']) . " / " 
-                        . htmlspecialchars($avis['idClient']) . " :</strong> " 
-                        . htmlspecialchars($avis['noteAvis'])
-                        . htmlspecialchars($avis['commentaireAvis']) . "</p>";
+                        echo "<div class='avis-header'>";
+                        echo "<span class='avis-note'>";
+                        echo "<span class='etoiles-pleines'>" . str_repeat("&#9733;", $avis['noteAvis']) . "</span>";
+                        echo "<span class='etoiles-vides'>" . str_repeat("&#9733;", 5 - $avis['noteAvis']) . "</span>";
+                        echo "</span>";
+                        echo "<span>" . htmlspecialchars($avis['loginClient']) . " - " . htmlspecialchars($avis['dateAvis']) . "</span>";
+                        echo "</div>";
+                        echo "<div class='avis-comment'>" . htmlspecialchars($avis['commentaireAvis']) . "</div>";
                         echo "</div>";
                     }
                 } else {
@@ -154,7 +170,99 @@ if (isset($_GET['idProduit'])) {
 }
 ?>
 
+
 <style>
+    .avis-textarea {
+        display: block;
+        /* Pour fonctionner avec margin auto */
+        width: 100%;
+        /* Le champ occupe tout l'espace disponible dans le conteneur */
+        max-width: 1200px;
+        /* Taille maximale horizontale fixe */
+        min-width: 800px;
+        /* Taille minimale pour garantir qu'il reste large */
+        padding: 15px;
+        font-size: 1.2em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+        /* Permet uniquement de redimensionner verticalement */
+        margin: 0 auto;
+        /* Centre horizontalement dans son conteneur */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Ajoute une ombre légère */
+        text-align: left;
+        /* Texte aligné à gauche */
+    }
+
+    /* Stylisation des avis existants */
+    .avis-item {
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .avis-item p {
+        margin: 0;
+        font-size: 1em;
+        color: #333;
+    }
+
+    .avis-item .avis-header {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+    }
+
+    .avis-item .avis-note {
+        margin-right: 10px;
+        font-size: 1.2em;
+    }
+
+    /* Étoiles remplies (jaunes) */
+    .etoiles-pleines {
+        color: #ffcc00;
+        /* Jaune pour les étoiles remplies */
+
+    }
+
+
+
+    .avis-item .avis-comment {
+        margin-top: 10px;
+        font-size: 1em;
+        color: #666;
+    }
+
+    /* Centrer le formulaire et ajuster pour la largeur du textarea */
+    .avis-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1300px;
+        /* Plus large pour contenir le champ agrandi */
+        margin: 0 auto;
+        /* Centrer horizontalement */
+    }
+
+    .avis-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin: 20px auto;
+        max-width: 700px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
     .star-rating {
         display: flex;
         justify-content: center;

@@ -122,6 +122,10 @@ require_once('./include/menu.php');
         echo "<p style='text-align: center;'>Aucun produit combinés pour l'instant :). </p>";
     }
 
-?>
+    ?>
+    </main>
+</div>
+</div>
+<hr style="border: 0; height: 2px; background: linear-gradient(to right, #ffffff, #000000, #ffffff); margin: 20px 0;"><br><br><br>
 
 <?php include_once('include/footer.php'); ?>

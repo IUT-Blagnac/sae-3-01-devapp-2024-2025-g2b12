@@ -41,8 +41,8 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
             <div class="product-detail-container">
                 <div class="product-detail">
                     <div class="product-image" id="product-image" style="display: flex; gap: 10px;">
-                        <div class="product-image" style="background-image: url('<?php echo $imagePath1; ?>'); witdh: 50%, background-size: cover; background-position: center; height: 300px;"></div> 
-                        <div class="product-image" style="background-image: url('<?php echo $imagePath2; ?>'); witdh: 50%, background-size: cover; background-position: center; height: 300px;"></div>
+                        <div class="product-image1" style="background-image: url('<?php echo $imagePath1; ?>'); width: 50%, background-size: cover; background-position: center; height: 300px;"></div> 
+                        <div class="product-image2" style="background-image: url('<?php echo $imagePath2; ?>'); width: 50%, background-size: cover; background-position: center; height: 300px;"></div>
                     </div>
 
                     <div class="product-info">
@@ -51,12 +51,12 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
                                 <h1 class="product-title"><?php echo htmlspecialchars($prod1['nomProduit']); ?></h1>
                                 <p class="product-description"><?php echo htmlspecialchars($prod1['descProduit']); ?></p>
                                  <!-- Affichage des variétés -->
-                                <div class="variete-buttons">
+                                <div class="variete-buttons1">
                                     <?php foreach ($varList1 as $variete) { ?>
                                         <?php if(!is_null($variete['specVariete'])): ?>
-                                            <button class="variete-button" 
+                                            <button class="variete-button1" 
                                             onclick="selectVariete(1, <?php echo htmlspecialchars($variete['idVariete']); ?>, '<?php echo htmlspecialchars($variete['prixVariete']); ?>', '<?php echo htmlspecialchars($variete['specVariete']); ?>')">
-                                            <?php echo htmlspecialchars($variete['specVariete']); ?> - <?php echo htmlspecialchars($variete['prixVariete']); ?> € 
+                                            <?php echo htmlspecialchars($variete['specVariete']); ?> 
                                             </button>
                                         <?php endif; ?>
                                     <?php } ?>
@@ -67,12 +67,12 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
                             <div>
                                 <h1 class="product-title"><?php echo htmlspecialchars($prod2['nomProduit']); ?></h1>
                                 <p class="product-description">Description: <?php echo htmlspecialchars($prod2['descProduit']); ?></p>                           
-                                <div class="variete-buttons">
+                                <div class="variete-buttons2">
                                     <?php foreach ($varList2 as $variete) { ?>
                                         <?php if(!is_null($variete['specVariete'])): ?>
-                                            <button class="variete-button" 
+                                            <button class="variete-button2" 
                                             onclick="selectVariete(2, <?php echo htmlspecialchars($variete['idVariete']); ?>, '<?php echo htmlspecialchars($variete['prixVariete']); ?>', '<?php echo htmlspecialchars($variete['specVariete']); ?>')">
-                                            <?php echo htmlspecialchars($variete['specVariete']); ?> - <?php echo htmlspecialchars($variete['prixVariete']); ?> €
+                                            <?php echo htmlspecialchars($variete['specVariete']); ?> 
                                             </button>
                                         <?php endif; ?>   
                                     <?php } ?>
@@ -241,6 +241,44 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
         /* Couleurs plus claires */
     }
 
+    .product-image1 {
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+        height: 500px;
+        position: relative;
+    }
+
+    .product-image1::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(200, 200, 200, 0.75), rgba(0, 0, 0, 0));
+        /* Couleurs plus claires */
+    }
+
+    .product-image2 {
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+        height: 500px;
+        position: relative;
+    }
+
+    .product-image2::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(200, 200, 200, 0.75), rgba(0, 0, 0, 0));
+        /* Couleurs plus claires */
+    }
+
     .product-info {
         flex: 1;
         padding: 20px;
@@ -313,13 +351,19 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
         gap: 10px;
     }
 
-    .variete-buttons {
+    .variete-buttons1 {
         margin-bottom: 20px;
         display: flex;
         gap: 10px;
     }
 
-    .variete-button {
+    .variete-buttons2 {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .variete-button1 {
         padding: 10px 20px;
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
@@ -329,13 +373,34 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
         font-size: 1em;
     }
 
-    .variete-button.active {
+    .variete-button2 {
+        padding: 10px 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        font-size: 1em;
+    }
+
+    .variete-button1.active {
         background-color: rgba(136, 172, 223);
         color: #fff;
         border-color: rgba(136, 172, 223);
     }
 
-    .variete-button:hover {
+    .variete-button2.active {
+        background-color: rgba(136, 172, 223);
+        color: #fff;
+        border-color: rgba(136, 172, 223);
+    }
+
+    .variete-button1:hover {
+        background-color: #e9ecef;
+        color: #007bff;
+    }
+
+    .variete-button2:hover {
         background-color: #e9ecef;
         color: #007bff;
     }
@@ -350,111 +415,116 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
 <script>
     let currentVarieteId1 = <?php echo htmlspecialchars($currentVariete1['idVariete']); ?>;
     let currentVarieteId2 = <?php echo htmlspecialchars($currentVariete2['idVariete']); ?>;
-    let currentPrix1 = <?php echo htmlspecialchars($currentVariete1['idVariete']); ?>;
-    let currentPrix2 = <?php echo htmlspecialchars($currentVariete2['idVariete']); ?>;
+    let currentPrix1 = parseFloat(<?php echo htmlspecialchars($currentVariete1['prixVariete']); ?>);
+    let currentPrix2 = parseFloat(<?php echo htmlspecialchars($currentVariete2['prixVariete']); ?>);
 
     function selectVariete(productNumber, idVariete, prixVariete, specVariete) {
-        if(productNumber === 1){
+       
+        if (productNumber === 1) {
             currentVarieteId1 = idVariete;
-            currentPrix1 = parseFloat(prixVariete); 
-            document.querySelector('.product-detail').style.backgroundImage ='url(image/produits/prod' + idVariete + '.png)';
-                  
-            //Mettre à jour les boutons de variété pour refléter la sélection actuelle
-            const buttons = document.querySelectorAll('.variete-button');
+            currentPrix1 = parseFloat(prixVariete);
+            document.querySelector('.product-image1').style.backgroundImage = 'url(image/produits/prod' + idVariete + '.png)';
+
+            // Mettre à jour les boutons pour le produit 1
+            const buttons = document.querySelectorAll('.variete-button1');
             buttons.forEach(button => {
-            button.classList.remove('active');
-                 if (button.innerText === specVariete) {
-                 button.classList.add('active');
-                 }
-             });
-     
+                button.classList.remove('active');
+                if (button.innerText === specVariete) {
+                    button.classList.add('active');
+                }
+            });
+        
         } else if (productNumber === 2) {
             currentVarieteId2 = idVariete;
             currentPrix2 = parseFloat(prixVariete);
-            document.querySelector('.product-detail').style.backgroundImage ='url(image/produits/prod' + idVariete + '.png)';
-        
-            //Mettre à jour les boutons de variété pour refléter la sélection actuelle
-            const buttons = document.querySelectorAll('.variete-button');
-            buttons.forEach(button => {
-            button.classList.remove('active');
-                 if (button.innerText === specVariete) {
-                 button.classList.add('active');
-                 }
-             });
-        
-        }
-        updateTotalPrice(); 
+            document.querySelector('.product-image2').style.backgroundImage = 'url(image/produits/prod' + idVariete + '.png)';
 
-        // document.getElementById('product-price').innerText = prixVariete + ' €';
-        // document.getElementById('product-image').style.backgroundImage = 'url(image/produits/prod' + idVariete + '.png)';
-        // document.getElementById('add-to-cart-button').setAttribute('onclick', 'ajouterAuPanier(' + idVariete + ')');
+            // Mettre à jour les boutons pour le produit 2
+            const buttons = document.querySelectorAll('.variete-button2');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                if (button.innerText === specVariete) {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        updateTotalPrice();
     }
 
-    function updateTotalPrice(){
+    function updateTotalPrice() {
         const totalPrice = (currentPrix1 + currentPrix2).toFixed(2);
         document.getElementById('total-price').innerText = totalPrice;
-        document.getElementById('add-to-cart-button').setAttribute('onclick', 'ajouterAuPanier(' + currentVarieteId1 + ',' + currentVarieteId2 +')');
+        document.getElementById('add-to-cart-button').setAttribute('onclick', `ajouterAuPanier(${currentVarieteId1}, ${currentVarieteId2})`);
     }
 
     function ajouterAuPanier(idVariete1, idVariete2) {
-        //const quantity = document.getElementById('quantity').value;
         fetch('ajouter_au_panier.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            //body: `idVariete=${idVariete}&quantity=${quantity}`
             body: `idVariete1=${idVariete1}&idVariete2=${idVariete2}`
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouté au panier',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Produit ajouté au panier',
-                        showConfirmButton: false,
-                        timer: 1500
+                        icon: 'warning',
+                        title: 'Non connecté',
+                        text: data.message,
+                        showCancelButton: true,
+                        confirmButtonText: 'Se connecter',
+                        cancelButtonText: 'Annuler'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'connexion.php';
+                        }
                     });
                 } else {
-                    if (data.message === 'Vous devez être connecté pour ajouter un produit au panier.') {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Non connecté',
-                            text: data.message,
-                            showCancelButton: true,
-                            confirmButtonText: 'Se connecter',
-                            cancelButtonText: 'Annuler'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'connexion.php';
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Erreur',
-                            text: data.message,
-                        });
-                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: data.message,
+                    });
                 }
-            });
+            }
+        });
     }
 
-    // Initialiser le premier bouton de variété comme actif
-     document.addEventListener('DOMContentLoaded', () => {
-        const firstButton = document.querySelector('.variete-button');
-        if (firstButton) {
-            firstButton.classList.add('active');
+    // Initialiser les boutons de variété comme actifs
+    document.addEventListener('DOMContentLoaded', () => {
+        // Produit 1
+        const buttons1 = document.querySelector('.variete-button1');
+        if (buttons1) {
+            buttons1.classList.add('active');
         }
-     });
 
+        // Produit 2
+        const buttons2 = document.querySelector('.variete-button2');
+        if (buttons2) {
+            buttons2.classList.add('active');
+        }
+
+        // Mettre à jour le prix total au chargement initial
+        updateTotalPrice();
+    });
 </script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const stars = document.querySelectorAll('.star');
         const noteAvisInput = document.getElementById('noteAvis');
-        
+
         stars.forEach(star => {
             star.addEventListener('click', () => {
                 const rating = star.getAttribute('data-value');

@@ -1,143 +1,210 @@
-<!-- partie html & head -->
+<?php require_once('./include/Connect.inc.php'); ?>
 <?php require_once('./include/head.php'); ?>
 
-<!-- partie body -->
-<?php require_once('./include/header.php'); ?>
+<!-- Barre de recherche fixe -->
+<div class="search-box">
+    <form role="search" id="search-form" method="post" class="search-form">
+        <input name="s" type="search" id="search-input" placeholder="Rechercher un produit..."
+            value="<?= isset($_POST['s']) ? htmlentities($_POST['s']) : '' ?>" class="search-field">
+        <select name="sort" id="sort-dropdown" class="sort-dropdown">
+            <option value="">Trier par</option>
+            <option value="asc" <?= (isset($_POST['sort']) && $_POST['sort'] === 'asc') ? 'selected' : '' ?>>Prix croissant</option>
+            <option value="desc" <?= (isset($_POST['sort']) && $_POST['sort'] === 'desc') ? 'selected' : '' ?>>Prix décroissant</option>
+        </select>
+        <button type="submit" class="btn-search">Rechercher</button>
+        <a href="index.php" class="back-button">Retour</a>
+    </form>
+</div>
 
-<?php require_once('./include/Connect.inc.php'); ?>
-
-<!-- Conteneur principal -->
 <div class="container-fluid flex-grow-1">
     <div class="row">
-        <!-- partie contenu principal -->
-        <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4" style="max-width: 800px; margin: 0 auto;">
-            <div class="search-popup is-visible" style="margin-top: 20px;">
-                <!-- Bouton Retour -->
-                <a href="index.php" class="btn btn-secondary retour-btn">Retour</a>
+        <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4" style="max-width: 1200px; margin: 0 auto;">
 
-                <!-- Formulaire de recherche -->
-                <div class="search-popup-container">
-                    <form role="search" method="post" class="search-form">
-                        <input type="search" id="search-form" class="search-field" placeholder="Type and press enter"
-                            value="<?= isset($_POST['s']) ? htmlentities($_POST['s']) : '' ?>" name="s">
-                    </form>
+            <div class="search-popup-container">
+                <center>
+                    <h5 class="categories-title">Parcourir les catégories</h5>
+                </center>
+                <ul class="categories-list">
+                    <li><a href="consulter_categorie.php?pIdCateg=10">Combat</a></li>
+                    <li><a href="consulter_categorie.php?pIdCateg=20">Mobilité</a></li>
+                    <li><a href="consulter_categorie.php?pIdCateg=30">Infiltration</a></li>
+                    <li><a href="consulter_categorie.php?pIdCateg=40">Surveillance</a></li>
+                    <li><a href="consulter_categorie.php?pIdCateg=50">Évasion</a></li>
+                    <li><a href="consulter_categorie.php?pIdCateg=60">Technologie Médicale</a></li>
+                </ul>
 
-                    <!-- Liste des catégories -->
-                    <h5 class="cat-list-title">Browse Categories</h5>
-                    <ul class="cat-list">
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=10">Combat</a></li>
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=20">Mobilité</a></li>
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=30">Infiltration</a></li>
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=40">Surveillance et enregistrement</a></li>
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=50">Evasion</a></li>
-                        <li class="cat-list-item"><a href="consulter_categorie.php?pIdCateg=60">Technologie Médicale</a></li>
-                    </ul>
+                <div class="results">
+                    <?php
+                    if (isset($_POST["s"])) {
+                        $sortOrder = (isset($_POST['sort']) && $_POST['sort'] === 'desc') ? 'DESC' : 'ASC';
+                        $req = $conn->prepare("
+                            SELECT * 
+                            FROM PRODUIT P
+                            , VARIETE V WHERE P.idProduit = V.idProduit
+                            AND nomProduit LIKE :nomP
+                            ORDER BY V.prixVariete $sortOrder
+                        ");
+                        $req->execute([':nomP' => '%' . htmlspecialchars($_POST['s']) . '%']);
 
-                    <!-- Résultats de la recherche -->
-                    <div class="results">
-                        <?php
-                        if (isset($_POST["s"])) {
-                            $pdostat = $conn->prepare("SELECT * FROM PRODUIT WHERE nomProduit LIKE :nomP");
-                            $pdostat->execute([':nomP' => '%' . htmlentities($_POST['s']) . '%']);
+                        $produits = $req->fetchAll(PDO::FETCH_ASSOC);
+                        if ($produits) {
                             echo "<div class='row'>";
-                            while ($produits = $pdostat->fetch(PDO::FETCH_ASSOC)) {
-                                $imagePath = "image/produits/prod" . htmlspecialchars($produits["idProduit"]) . ".png";
+                            foreach ($produits as $produit) {
+                                $imagePath = "image/produits/prod" . htmlspecialchars($produit["idVariete"]) . ".png";
                                 echo "<div class='col-md-4'>";
-                                echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produits['idProduit']) . "'>";
-                                echo "<div class='card mb-4 shadow-sm'>";
-                                echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\");background-color: #f0f0f0;background-size: cover; background-position: center;'></div>";
+                                echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produit['idProduit']) . "'>";
+                                echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "'>";
+                                echo "<div class='card-img-top' style='height: 200px; background-image: url(\"$imagePath\"); background-size: cover; background-position: center;'></div>";
                                 echo "<div class='card-body'>";
-                                echo "<p>" . htmlspecialchars($produits['nomProduit']) . "<p>";
-                                echo "<p>" . htmlspecialchars($produits['prixVariete']) . "<p>";
-                                echo "<p>" . htmlspecialchars($produits['specVariete']) . "<p>";
+                                echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
+                                echo "<p class='card-text'>" . htmlspecialchars($produit['prixVariete']) . " €</p>";
                                 echo "</div>";
                                 echo "</div>";
-                                echo "<a>";
+                                echo "</a>";
                                 echo "</div>";
                             }
                             echo "</div>";
+                        } else {
+                            echo "<center><p class='no-results'>Aucun produit ne correspond à votre recherche.</p></center>";
                         }
-                        ?>
-                    </div>
+                    }
+                    ?>
                 </div>
             </div>
         </main>
     </div>
 </div>
-
 <style>
-    /* Positionnement du bouton Retour */
-    .retour-btn {
-        position: fixed;
-        top: 10px;
-        right: 20px;
-        z-index: 1000;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
 
-    .custom-swal-popup {
-        border-radius: 10px;
-        /* Arrondi des bords */
-        padding: 20px;
-        /* Assure une taille uniforme */
-        margin: 0 !important;
-    }
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-    /* Supprime tout padding ou marge sur le body */
-    body,
-    html {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        /* Empêche les défilements horizontaux */
-    }
+.search-form {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+}
 
-    /* Empêche la barre grise de s'afficher */
-    .swal2-container {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+.search-field {
+    flex: 1;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+.sort-dropdown {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-    /* Conteneur principal de la barre de recherche */
-    .search-popup {
-        margin-top: 50px;
-        /* Barre légèrement remontée */
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-    }
+.btn-search {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #0077b6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    /* Formulaire de recherche */
-    .search-form {
-        display: flex;
-        gap: 10px;
-    }
+.btn-search:hover {
+    background-color: #005f8d;
+}
 
-    .search-field {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
 
+.categories-list li {
+    margin: 5px;
+}
 
+.categories-list a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #0077b6;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
 
-    /* Résultats produits */
-    .results {
-        margin-top: 20px;
-        max-height: 400px;
-        /* Limite la hauteur du conteneur pour un défilement */
-        overflow-y: auto;
-        /* Active le défilement vertical */
-        border-top: 1px solid #ddd;
-        padding-top: 20px;
-    }
+.categories-list a:hover {
+    background-color: #005f8d;
+}
 
-    .product {
-        margin-bottom: 10px;
-        padding: 10px;
-        background: #f9f9f9;
-        border: 1px solid #e5e5e5;
-        border-radius: 5px;
-    }
+.results {
+    margin-top: 20px;
+}
+
+.no-results {
+    color: #999;
+    font-size: 1.2em;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    width: calc(33% - 20px);
+    min-width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1em;
+    color: #666;
+}
 </style>

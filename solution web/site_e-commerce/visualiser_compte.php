@@ -77,6 +77,9 @@ if (!$client) {
                             <a class="nav-link active" href="#">Détail compte</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" href="visualiser_commande.php">Mes commandes</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link logout" href="deconnexion.php">Déconnexion</a>
                         </li>
                     </ul>
