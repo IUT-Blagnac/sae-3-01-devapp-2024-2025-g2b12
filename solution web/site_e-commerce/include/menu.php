@@ -12,10 +12,14 @@ $regroupements = $conn->query("SELECT idRegroupement, nomRegroupement FROM REGRO
       <a class="navbar-brand" href="index.php">
         <img src="image/WOOHP.png" class="logo" width="100px" alt="Logo">
       </a>
-      <ul class="navbar-nav text-uppercase d-flex flex-wrap">
-      <a class="nav-link me-4 link-dark" href="consulter_produit_combine.php" role="button">Combinez pour économiser</a>
-      <a class="nav-link me-4 link-dark" href="consulter_produit_soldes.php" role="button">Soldes</a>
-      </ul>
+      <?php
+      echo"<a class='nav-link me-4 link-dark' href='consulter_produit_combine.php' role='button'>COMBINEZ</a>";
+      foreach($regroupements as $regroupement){
+      echo"<ul class='navbar-nav text-uppercase d-flex flex-wrap'>";
+      echo"<a class='nav-link me-4 link-dark' href='consulter_categorie.php?idRegroupement=".$regroupement["idRegroupement"]."' role='button'>".$regroupement["nomRegroupement"]."</a>";
+      echo"</ul>";
+      }
+      ?>
     </div>
   </nav>
 

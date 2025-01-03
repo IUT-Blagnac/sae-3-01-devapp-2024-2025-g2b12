@@ -18,76 +18,55 @@ if (!$client) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <?php require_once('./include/head.php'); ?>
     <style>
-        .sidebar {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-right: 1px solid #dee2e6;
-            height: 100vh; /* Prendre toute la hauteur de la vue */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 200px; /* Réduire la largeur de la barre latérale */
-            position: fixed; /* Fixer la barre latérale */
-        }
-        .sidebar a {
-            display: block;
-            padding: 10px;
-            color: #333;
-            text-decoration: none;
-            text-align: center;
-        }
-        .sidebar a:hover {
-            background-color: #e9ecef;
-            color: #007bff;
-        }
-        .sidebar .logout {
-            color: #fff;
-            background-color: #dc3545; /* Rouge Bootstrap */
-        }
-        .sidebar .logout:hover {
-            background-color: #c82333; /* Rouge plus foncé pour le hover */
-        }
         .content {
             padding: 20px;
             margin-top: 20px;
-            margin-left: 220px; /* Ajuster la marge gauche pour éviter le chevauchement */
+            margin-left: 220px;
+            /* Ajuster la marge gauche pour éviter le chevauchement */
             display: flex;
-            justify-content: center; /* Centrer le contenu horizontalement */
-            align-items: center; /* Centrer le contenu verticalement */
-            height: calc(100vh - 40px); /* Ajuster la hauteur pour inclure le padding */
+            justify-content: center;
+            /* Centrer le contenu horizontalement */
+            align-items: center;
+            /* Centrer le contenu verticalement */
+            height: calc(100vh - 40px);
+            /* Ajuster la hauteur pour inclure le padding */
         }
+
         .card {
             margin-top: 20px;
-            width: 100%; /* Prendre toute la largeur disponible */
-            max-width: 600px; /* Limiter la largeur maximale */
+            width: 100%;
+            /* Prendre toute la largeur disponible */
+            max-width: 600px;
+            /* Limiter la largeur maximale */
+            position: relative;
+            /* Nécessaire pour positionner l'image avec `absolute` */
+        }
+
+        .card img {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: auto;
         }
     </style>
 </head>
+
 <body>
     <?php require_once('./include/header.php'); ?>
     <div class="container-fluid">
         <div class="row">
-            <nav class="sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Détail compte</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="visualiser_commande.php">Mes commandes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link logout" href="deconnexion.php">Déconnexion</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <?php require_once('./include/sidebar_compte.php'); ?>
             <main class="content">
                 <div class="card">
                     <div class="card-body">
+                        <a href="modifier_compte.php">
+                            <img src="image/ModificationCompte.png" class="card-image-top" alt="Modification Compte">
+                        </a>
                         <h2 class="card-title text-center">Mon compte</h2>
                         <p><strong>Nom :</strong> <?php echo htmlspecialchars($client['nomClient']); ?></p>
                         <p><strong>Prénom :</strong> <?php echo htmlspecialchars($client['prenomClient']); ?></p>
@@ -99,4 +78,5 @@ if (!$client) {
     </div>
     <?php require_once('./include/footer.php'); ?>
 </body>
+
 </html>

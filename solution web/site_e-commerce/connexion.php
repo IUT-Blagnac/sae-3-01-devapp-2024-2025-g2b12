@@ -69,6 +69,16 @@
 .user-items img.logo {
     width: 20px;
 }
+
+/* Styles pour le champ de mot de passe en erreur */
+.input-error {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
 </style>
 
 <div class="container-fluid flex-grow-1 d-flex justify-content-center align-items-center">
@@ -76,16 +86,23 @@
         <main class="container" style="margin-top:10%; margin-bottom:5%;">
             <div class="form-container">
                 <h2>Connexion</h2>
+                <?php
+                $login = isset($_GET['login']) ? htmlspecialchars($_GET['login']) : '';
+                $error = isset($_GET['erreur']) ? htmlspecialchars($_GET['erreur']) : '';
+                ?>
                 <form action='traitement_connexion.php' method='post'>
                     <label for='login'>Login ou Email:</label>
-                    <input type='text' id='login' name='login' required><br><br>
+                    <input type='text' id='login' name='login' value='<?php echo $login; ?>' required><br><br>
                     <label for='password'>Mot de passe:</label>
-                    <input type='password' id='password' name='password' required><br><br>
+                    <input type='password' id='password' name='password' class='<?php echo $error ? "input-error" : ""; ?>' required><br><br>
                     <label for='remember'>Se souvenir de moi:</label>
                     <input type='checkbox' id='remember' name='remember'><br><br>
                     <input type='hidden' name='action' value='connexion'>
                     <input type='submit' value='Se connecter'>
                 </form>
+                <?php if ($error): ?>
+                    <p class="error-message">Login ou mot de passe incorrect</p>
+                <?php endif; ?>
                 <br>
                 <p>Vous n'avez pas de compte ? <a href='creer_compte.php'>Créer un compte</a></p>
             </div>

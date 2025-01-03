@@ -621,6 +621,21 @@ border: none;
   display: block;
 }
 
+/* Désactiver le hover en mode responsive */
+@media (max-width: 768px) {
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: none; /* Désactiver l'affichage du menu déroulant au survol */
+  }
+
+  .navbar-nav .nav-item.dropdown .dropdown-menu {
+    display: none; /* Toujours masquer le menu déroulant */
+  }
+
+  .navbar-nav .nav-item.dropdown.show .dropdown-menu {
+    display: block; /* Afficher le menu déroulant uniquement lorsque le dropdown est activé */
+  }
+}
+
 /*------------ Offcanvas -------------- */
 #header-nav .navbar-toggler:focus {
     box-shadow: none;

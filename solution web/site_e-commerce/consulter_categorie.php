@@ -7,6 +7,7 @@ require_once("./include/Connect.inc.php");
 
 require_once('./include/header.php');
 require_once('./include/menu.php');
+
 ?>
 
 <div class="container-fluid flex-grow-1">
@@ -123,6 +124,7 @@ require_once('./include/menu.php');
                             JOIN VARIETE V ON P.idProduit = V.idProduit
                             JOIN REGROUPER R ON V.idVariete = R.idVariete
                             WHERE R.idRegroupement = :idRegroupement
+                            AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
                         ");
                         $produitsRegroupement->execute(['idRegroupement' => $idRegroupement]);
                         $tousProduits = $produitsRegroupement->fetchAll();

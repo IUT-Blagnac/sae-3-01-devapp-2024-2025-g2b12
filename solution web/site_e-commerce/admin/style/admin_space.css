@@ -1,0 +1,368 @@
+/*
+Feuille de style des pages du back-office.
+
+Date de dernière modification :
+- Mercredi 1er janvier 2025 -
+
+Auteur : Victor Jockin
+- Équipe 2B12 -
+*/
+
+/* fonts */
+/* ----- */
+
+/* font regular */
+@font-face {
+    font-family: 'OpenSans Regular';
+    src: url('../font/OpenSans/OpenSans-Regular.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* font regular italic */
+@font-face {
+    font-family: 'OpenSans Regular Italic';
+    src: url('../font/OpenSans/OpenSans-Italic.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* font bold */
+@font-face {
+    font-family: 'OpenSans Bold';
+    src: url('../font/OpenSans/OpenSans-Bold.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* font bold italic */
+@font-face {
+    font-family: 'OpenSans Bold Italic';
+    src: url('../font/OpenSans/OpenSans-BoldItalic.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* déclaration des variables désignant les fonts */
+:root {
+    --regular-font:         'OpenSans Regular', sans-serif;
+    --regular-italic-font:  'OpenSans Regular Italic', sans-serif;
+    --bold-font:            'OpenSans Bold', sans-serif;
+    --bold-italic-font:     'OpenSans Bold Italic', sans-serif;
+}
+
+/* ======================================== */
+
+/* général */
+/* ------- */
+
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+    gap: 0px;
+    background-color: #fff;
+    font-family: var(--regular-font);
+}
+
+h1 {
+    font-family: var(--regular-font);
+    font-size: 26px;
+}
+
+/* ======================================== */
+
+/* menu latéral */
+/* ------------ */
+
+.side-menu-container {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 100vh;
+    background-color: #1d2c3a;
+}
+
+.side-menu-content {
+    width: 100%;
+    height: 100%;
+    padding: 20px 10px 20px 10px;
+    box-sizing: border-box;
+}
+
+.side-menu-button {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    padding: 0px 20px 0px 20px;
+    box-sizing: border-box;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.side-menu-button:hover {
+    background-color: #1d2cff;
+}
+.side-menu-button.active {
+    background-color: #000;
+}
+
+.side-menu-button-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-menu-button-icon {
+    width: 32px;
+    height: auto;
+}
+
+.side-menu-button-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-menu-button-name {
+    color: #fff;
+    font-family: var(--regular-font);
+    font-size: 15px;
+}
+
+/* ======================================== */
+
+/* contenu de la page */
+/* ------------------ */
+
+.page-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: #f5f6fa;
+}
+
+header {
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+footer {
+    position: relative;
+	bottom: 0;
+    width: 100%;
+}
+
+/* ======================================== */
+
+/* conteneurs */
+/* ---------- */
+
+.container {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ======================================== */
+
+/* tables */
+/* ------ */
+
+table {
+    width: 100%;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border: 1.5px solid #dedfe3;
+}
+
+tr {
+    height: 50px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+tr.header-row {
+    background-color: #fff;
+}
+tr.even-row {
+    background-color: #f2f2f2;
+}
+tr.odd-row {
+    background-color: #fff;
+}
+tr.content:hover {
+    background-color: #dedfe3;
+}
+
+th, td {
+    height: 100%;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border: 1.5px solid #dedfe3;
+    font-size: 15px;
+}
+th {
+    padding: 0px 20px 0px 20px;
+    font-family: var(--bold-font);
+}
+td {
+    position: relative;
+    padding: 0px 10px 0px 10px;
+    font-family: var(--regular-font);
+}
+
+.options-container {
+    display: flex;
+    height: 100%;
+    gap: 5px;
+    flex-direction: row;
+}
+
+/* table des produits */
+th.product-id-column        { width: 6%; }
+th.product-name-column      { width: 42%; }
+th.product-category-column  { width: 38%; }
+th.product-variants-column  { width: 12%; }
+@media screen and (max-width: 768px) { }
+
+/* table des variantes de produit */
+.variants-table-container {
+    display: none;
+}
+td.variants-table-cell {
+    padding: 0px;
+}
+.variants-table {
+    width: 100%;
+    border: none;
+}
+.variants-table.even-table { background-color: #f2f2f2; }
+.variants-table.odd-table { background-color: #fff; }
+.variants-table tr {
+    border-bottom: 1.5px solid #dedfe3;
+    vertical-align: top;
+}
+.variants-table tr:last-child { border-bottom: none; }
+.variants-table td {
+    border: none;
+    padding: 3px 10px 3px 10px;
+    font-family: var(--regular-italic-font);
+}
+.variants-table td div {
+    box-sizing: border-box;
+}
+.variants-table td div .header {
+    display: flex;
+    min-height: 21px;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: var(--bold-italic-font);
+}
+.variants-table td div .content {
+    display: flex;
+    min-height: 21px;
+    gap: 5px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.variants-table td div .content.variant-groups-container {
+    padding-top: 3px;
+}
+.variant-id-column      { width: 20%; }
+.variant-feature-column { width: 20%; }
+.variant-price-column   { width: 20%; }
+.variant-groups-column  { width: 20%; }
+.variant-stock-column   { width: 20%; }
+
+/* ======================================== */
+
+/* liens */
+/* ----- */
+
+a.link {
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: var(--regular-font);
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+}
+a.link.category {
+    padding: 5px 10px 5px 10px;
+    font-size: 12px;
+}
+a.link.group {
+    height: 15px;
+    line-height: 15px;
+    padding: 0px 4px 0px 4px;
+    font-size: 10px;
+}
+
+/* ======================================== */
+
+/* icônes */
+/* ------ */
+
+a.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* "Voir plus" / "Voir moins" */
+.show-more-icon {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: auto;
+}
+.show-more-icon:hover {
+    cursor: pointer;
+}
+
+/* icônes cliquables */
+.clickable-icon-container {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #15529b;
+    justify-content: center;
+    align-items: center;
+}
+.clickable-icon-container:hover {
+    cursor: pointer;
+}
+
+.edit-icon {
+    max-width: 20px;
+    max-height: 20px;
+}
+.delete-icon {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+/* ======================================== */
+
+/* attributs */
+/* --------- */
+
+.ns {
+    user-select: none;
+    pointer-events: none;
+}
+
+.centred-text { text-align: center; }

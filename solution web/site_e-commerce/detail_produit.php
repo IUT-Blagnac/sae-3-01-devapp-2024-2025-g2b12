@@ -40,6 +40,9 @@ if (isset($_GET['idProduit'])) {
                             <p class="product-price" id="product-price">
                                 <?php echo htmlspecialchars($currentVariete['prixVariete']); ?> €
                             </p>
+                            <p class="product-stock" id="product-stock">
+                                Stock: <?php echo htmlspecialchars($currentVariete['qteStockVariete']); ?>
+                            </p>
                             <div class="quantity-selector">
                                 <label for="quantity">Sélectionner la quantité :</label>
                                 <select id="quantity" name="quantity" class="form-select">
@@ -68,6 +71,77 @@ if (isset($_GET['idProduit'])) {
                 </div>
             </div>
             <br>
+            <!-- Section des produits de la même catégorie -->
+            <?php
+            $produitsMemeCategorie = $conn->prepare("
+                SELECT DISTINCT P.*, V.idVariete, V.prixVariete 
+                FROM PRODUIT P
+                JOIN VARIETE V ON P.idProduit = V.idProduit
+                WHERE P.idCategorie = :idCategorie
+                AND P.idProduit != :idProduit
+                AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
+                LIMIT 4
+            ");
+            $produitsMemeCategorie->execute(['idCategorie' => $prod['idCategorie'], 'idProduit' => $idProduit]);
+            $produitsCategorie = $produitsMemeCategorie->fetchAll();
+
+            if (!empty($produitsCategorie)) {
+                echo "<h2>Produits de la même catégorie</h2>";
+                echo "<div class='row'>";
+                foreach ($produitsCategorie as $produit) {
+                    $imagePath = "image/produits/prod" . htmlspecialchars($produit['idVariete']) . ".png";
+                    echo "<div class='col-md-3'>";
+                    echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produit['idProduit']) . "'>";
+                    echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "' style='height: 300px; width: 300px;'>";
+                    echo "<div class='card-img-top' style='height: 200px; width: 100%; background-image: url(\"$imagePath\"); background-size: contain; background-repeat: no-repeat; background-position: center;'></div>";
+                    echo "<div class='card-body' style='height: 100px;'>";
+                    echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
+                    echo "<p class='card-text'>" . htmlspecialchars($produit['prixVariete']) . " €</p>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</a>";
+                    echo "</div>";
+                }
+                echo "</div>";
+            }
+            ?>
+
+            <!-- Section des produits associés -->
+            <?php
+            $produitsAssocies = $conn->prepare("
+                SELECT DISTINCT P.*, V.idVariete, V.prixVariete
+                FROM PRODUIT P
+                JOIN VARIETE V ON P.idProduit = V.idProduit
+                JOIN APPARENTER A ON (P.idProduit = A.idProduit2 OR P.idProduit = A.idProduit1)
+                WHERE (A.idProduit1 = :idProduit OR A.idProduit2 = :idProduit)
+                AND P.idProduit != :idProduit
+                AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
+                LIMIT 4
+            ");
+            $produitsAssocies->execute(['idProduit' => $idProduit]);
+            $produitsAssociesList = $produitsAssocies->fetchAll();
+
+            if (!empty($produitsAssociesList)) {
+                echo "<h2>Produits associés</h2>";
+                echo "<div class='row'>";
+                foreach ($produitsAssociesList as $produit) {
+                    $imagePath = "image/produits/prod" . htmlspecialchars($produit['idVariete']) . ".png";
+                    echo "<div class='col-md-3'>";
+                    echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produit['idProduit']) . "'>";
+                    echo "<div class='card mb-4 shadow-sm' id='product-" . htmlspecialchars($produit['idProduit']) . "' style='height: 300px; width: 300px;'>";
+                    echo "<div class='card-img-top' style='height: 200px; width: 100%; background-image: url(\"$imagePath\"); background-size: contain; background-repeat: no-repeat; background-position: center;'></div>";
+                    echo "<div class='card-body' style='height: 100px;'>";
+                    echo "<h5 class='card-title'>" . htmlspecialchars($produit['nomProduit']) . "</h5>";
+                    echo "<p class='card-text'>" . htmlspecialchars($produit['prixVariete']) . " €</p>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</a>";
+                    echo "</div>";
+                }
+                echo "</div>";
+            }
+            ?>
+
             <!-- Vérification si l'utilisateur connecté a commandé ce produit -->
             <?php if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];

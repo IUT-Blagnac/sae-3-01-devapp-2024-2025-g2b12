@@ -3,7 +3,6 @@ session_start();
 include './include/Connect.inc.php'; // Fichier pour la connexion à la base de données
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    var_dump($_POST); // Ajoutez cette ligne pour déboguer
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
 
@@ -110,12 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         setcookie('admin_login', $row['loginAdmin'], time() + 3600, "/");
                     }
 
-                    header("Location: admin/espace_administrateur.php");
+                    header("Location: admin/index.php");
                 } else {
-                    header("Location: connexion_admin.php?erreur=Mot de passe incorrect&login=$login");
+                    header("Location: admin/connexion.php?erreur=Mot de passe incorrect&login=$login");
                 }
             } else {
-                header("Location: connexion_admin.php?erreur=Utilisateur non trouvé&login=$login");
+                header("Location: admin/connexion.php?erreur=Utilisateur non trouvé&login=$login");
             }
         }
     } else {

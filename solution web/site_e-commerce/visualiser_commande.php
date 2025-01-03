@@ -3,6 +3,7 @@ require_once('./include/session.php');
 require_once('./include/Connect.inc.php');
 require_once('./include/header.php');
 require_once('./include/menu.php');
+require_once('./include/sidebar_compte.php');
 ?>
 
 <div class="container-fluid flex-grow-1">
@@ -113,9 +114,9 @@ $commandes = $commande->fetchAll();
             <div>ID produit</div>
             <div>Montant total</div>
         </div>
-        <?php foreach ($commandes as $commande): ?>
+        <?php foreach ($commandes as $commande): ?> 
             <div class="order-row">
-                <div><?php echo htmlspecialchars($commande['idCommande']); ?></div>
+                <div><?php echo "<a href='detail_commande.php?pIdCommande=" . $commande['idCommande'] . "'>" . htmlspecialchars($commande['idCommande']) . "</a>"; ?></div>
                 <div><?php echo htmlspecialchars($commande['dateCommande']); ?></div>
                 <div><?php echo htmlspecialchars($commande['idVariete']); ?></div>
                 <div><?php echo htmlspecialchars($commande['montantCommande']); ?> €</div>
