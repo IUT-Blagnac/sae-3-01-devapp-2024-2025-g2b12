@@ -70,13 +70,7 @@ L’entreprise *Woohp Resell*, fondée initialement par l’organisation WOOHP (
 
 == II. Présentation générale
 [.text-justify]
-Le site e-commerce de l'entreprise *Woohp Resell* 
-
-Ses principales fonctionnalités
-
-Son utilité pour les utilisateurs
-
-
+Le site e-commerce de l'entreprise *Woohp Resell* propose une interface intuitive permettant aux utilisateurs d’explorer une large gamme de produits, de les ajouter à leur panier, et de passer des commandes en toute sécurité.
 
 
 == III. Installation et utilisation
