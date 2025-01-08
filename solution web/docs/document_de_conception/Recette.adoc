@@ -190,7 +190,7 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Remplir les champs "Prix Min" et/ou "Prix Max" dans la barre de recherche. ^|Les produits recherchés par l'utilisateur s'affichent, filtrés selon les prix indiqués par l'utilisateur dans les champs ^|L'utilisateur doit se trouver sur la page de recherche. ^|OK
+^|All_G_CB.1 ^|Remplir les champs "Prix Min" et/ou "Prix Max" dans la barre de recherche. ^|Les produits recherchés par l'utilisateur s'affichent, filtrés selon les prix indiqués par l'utilisateur dans les champs. ^|L'utilisateur doit se trouver sur la page de recherche. ^|OK
 
 |====
 
