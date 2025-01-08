@@ -90,9 +90,6 @@ Ordinateur sous Windows ou OS équivalent.
 ^|All_G_C.3 ^|Compléter les champs spécifiés et cliquer sur le bouton "Créer". ^|Un nouveau compte client est créé et l'utilisateur est redirigé vers la page d'accueil. ^| Remplir tous les champs requis pour créer un compte ^|OK
 
 5+|
-
-5+|Commentaire :
-Compléter et si on ne valide pas, ...
 |====
 
 
