@@ -235,7 +235,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton paramètre (L'îcone avec un stylo et une feuille) ^|Redirige vers la page de modification du compte de l'utilisateur ^|L'utilisateur doit se trouver sur la page de visualisation de son compte et être connecté ... ^|OK
+^|C_G_C.1    ^|Sélectionner le bouton paramètre (L'îcone avec un stylo et une feuille) ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur ^|L'utilisateur doit se trouver sur la page de visualisation de son compte et être connecté ... ^|OK
 ^|C_G_C.2    ^|Remplir les champs dont on souhaite modifier les informations (Nom, Prénom, Email) et Enregistrer ^|Mise à jours des informations de l'utilisateur dans la base de données ^|Aucune ... ^| OK
 
 5+|
