@@ -16,7 +16,7 @@
       <div class="col-md-6">
         <div class="banner-content">
           <h1 class="display-2 text-uppercase text-dark pb-5">Bienvenue au WOOHP</h1>
-          <a href="#categories" class="btn btn-medium btn-dark text-uppercase btn-rounded-none shop-product-btn">Shop Product</a>
+          <a href="#categories" class="btn btn-medium btn-dark text-uppercase btn-rounded-none shop-product-btn">VOIR VITRINE</a>
         </div>
       </div>
       <div class="col-md-6">

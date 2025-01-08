@@ -3,6 +3,7 @@
 
 <!-- Partie récupération dans la bd -->
 <?php
+ob_start();
 session_start();
 include './include/Connect.inc.php'; // Fichier pour la connexion à la base de données
 
@@ -25,13 +26,11 @@ $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Calculer le prix total
 $total = 0;
 foreach ($produits as $prod) {
     $total += $prod['prixVariete'] * $prod['qteEnregistree'];
 }
 ?>
-
 <!-- Partie BODY -->
 <?php require_once('./include/header.php'); ?>
 <?php require_once("./include/menu.php"); ?>
@@ -73,9 +72,36 @@ foreach ($produits as $prod) {
                     echo "</div>";
                     echo "<hr>";
                 }
+                if (isset($_POST['NbPts'])) {
+                    $NbPts = trim($_POST['NbPts']);
+            
+                    if (is_numeric($NbPts) && $NbPts > 0) {
+                        $req = $conn->prepare("SELECT * FROM CLIENT WHERE idClient = :pIdClient");
+                        $req->execute(["pIdClient" => htmlentities($user_id)]);
+                        $NbPointsF = $req->fetch(PDO::FETCH_ASSOC);
+
+                        if ($NbPointsF) {
+                            if ($NbPts > $NbPointsF["nbPointsClient"]) {
+                                header("Location: visualiser_compte.php?Pts=oui&error=insufficient_points");
+                                exit();
+                            } else {
+                                $total = $total - ($NbPts / 10);
+                                if($total < 0){
+                                    $total = 0;
+                                }
+                            }
+                        }
+                    } else {
+                        header("Location: visualiser_compte.php?Pts=oui&error=invalid_points");
+                        exit();
+                    }
+                }
                 echo "<div class='text-right'><strong>Prix Total: " . htmlspecialchars($total) . " €</strong></div>";
+                echo "<a href='visualiser_compte.php?Pts=oui'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-gift' viewBox='0 0 16 16'>
+                <path d='M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A3 3 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43zM9 3h2.932l.023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zM1 4v2h6V4zm8 0v2h6V4zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5z'/>
+                </svg></a>";
                 echo "<div class='text-center mt-3'>";
-                echo "<a href='commander.php' class='btn btn-custom'>Commander</a>";
+                echo "<a href='commander.php?Total=" . $total . "' class='btn btn-custom'>Commander</a>";
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
@@ -188,25 +214,25 @@ foreach ($produits as $prod) {
 
 <script>
     document.querySelectorAll('.increase').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             updateQuantity(this.dataset.id, 'increase');
         });
     });
 
     document.querySelectorAll('.decrease').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             updateQuantity(this.dataset.id, 'decrease');
         });
     });
 
     function updateQuantity(variete_id, action) {
         fetch('update_quantity.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `variete_id=${variete_id}&action=${action}`
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `variete_id=${variete_id}&action=${action}`
+        })
             .then(response => response.text())
             .then(data => {
                 location.reload();
@@ -214,7 +240,7 @@ foreach ($produits as $prod) {
     }
 
     document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const variete_id = this.getAttribute('data-variete-id');
             Swal.fire({
                 title: 'Êtes-vous sûr?',
@@ -227,12 +253,12 @@ foreach ($produits as $prod) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch('delete_article.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: `variete_id=${variete_id}`
-                        })
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `variete_id=${variete_id}`
+                    })
                         .then(response => response.text())
                         .then(data => {
                             Swal.fire(

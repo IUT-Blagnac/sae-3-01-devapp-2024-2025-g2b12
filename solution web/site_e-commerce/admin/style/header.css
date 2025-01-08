@@ -1,0 +1,147 @@
+/*
+Feuille de style du header (back-office).
+
+Date de dernière modification :
+- Lundi 6 janvier 2025 -
+
+Auteur : Victor Jockin
+- Équipe 2B12 -
+*/
+
+/* fonts */
+/* ----- */
+
+/* font regular */
+@font-face {
+    font-family: 'OpenSans Regular';
+    src: url('../font/OpenSans/OpenSans-Regular.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* font bold */
+@font-face {
+    font-family: 'OpenSans Bold';
+    src: url('../font/OpenSans/OpenSans-Bold.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* déclaration des variables désignant les fonts */
+:root {
+    --regular-font: 'OpenSans Regular', sans-serif;
+    --bold-font:    'OpenSans Bold', sans-serif;
+}
+
+/* ======================================== */
+
+/* général */
+/* ------- */
+
+header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding: 0px 20px;
+    min-height: 60px;
+    height: 70px;
+    box-sizing: border-box;
+    flex-direction: row;
+    color: #000;
+    background-color: #00b8ec;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    align-items: center;
+    z-index: 999;
+}
+
+/* ======================================== */
+
+/* profile administrateur */
+/* ---------------------- */
+
+.admin-profile {
+    display: flex;
+    width: 50%;
+    height: fit-content;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-profile-icon-container {
+    display: flex;
+    width: 46px;
+    max-width: 46px;
+    height: 46px;
+    max-height: 46px;
+    box-sizing: border-box;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+.admin-profile-icon {
+    height: 30px;
+    width: auto;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.admin-name-or-login {
+    font-family: var(--bold-font);
+}
+
+/* ======================================== */
+
+/* menu du header */
+/* -------------- */
+
+.header-menu {
+    display: flex;
+    width: 50%;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: right;
+    align-items: center;
+}
+
+.header-menu-button {
+    display: flex;
+    min-width: fit-content;
+    min-height: 44px;
+    height: 44px;
+    max-height: 44px;
+    padding: 0px 15px;
+    flex-direction: row;
+    gap: 8px;
+    box-sizing: border-box;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #004594;
+    justify-content: center;
+    align-items: center;
+}
+.header-menu-button:hover {
+    background-color: #002d77;
+    cursor: pointer;
+}
+
+.header-menu-button-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-menu-button-icon {
+    height: 22px;
+    width: auto;
+    margin: -3px;
+}
+
+@media screen and (max-width: 700px) {
+    .header-menu-button-name-container {
+        display: none;
+    }
+}

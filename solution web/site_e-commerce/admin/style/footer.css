@@ -1,0 +1,64 @@
+/*
+Feuille de style du footer (back-office).
+
+Date de dernière modification :
+- Lundi 6 janvier 2025 -
+
+Auteur : Victor Jockin
+- Équipe 2B12 -
+*/
+
+/* fonts */
+/* ----- */
+
+/* font regular */
+@font-face {
+    font-family: 'OpenSans Regular';
+    src: url('../font/OpenSans/OpenSans-Regular.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* déclaration des variables désignant les fonts */
+:root {
+    --regular-font: 'OpenSans Regular', sans-serif;
+}
+
+/* ======================================== */
+
+/* général */
+/* ------- */
+
+footer {
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1.5px solid #dedfe3;
+}
+
+.footer-content {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-element {
+    flex: 1;
+    text-align: center;
+    font-family: var(--regular-font);
+    font-size: 15px;
+}
+
+.copyright {
+    text-align: left;
+}
+
+.rights {
+    text-align: center;
+}
+
+.developed-by {
+    text-align: right;
+}

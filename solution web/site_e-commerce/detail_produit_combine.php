@@ -47,8 +47,8 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
 
                     <div class="product-info">
                             <!-- Produit 1  -->
-                            <div>
-                                <h1 class="product-title"><?php echo htmlspecialchars($prod1['nomProduit']); ?></h1>
+                            <div> 
+                                <h1 class="product-title"><?php echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($prod1['idProduit']) . "'>" . htmlspecialchars($prod1['nomProduit']) . "</a>"; ?></h1>
                                 <p class="product-description"><?php echo htmlspecialchars($prod1['descProduit']); ?></p>
                                  <!-- Affichage des variétés -->
                                 <div class="variete-buttons1">
@@ -65,8 +65,8 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
 
                             <!-- Produit 2 -->
                             <div>
-                                <h1 class="product-title"><?php echo htmlspecialchars($prod2['nomProduit']); ?></h1>
-                                <p class="product-description">Description: <?php echo htmlspecialchars($prod2['descProduit']); ?></p>                           
+                                <h1 class="product-title"><?php echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($prod2['idProduit']) . "'>" . htmlspecialchars($prod2['nomProduit']) . "</a>"; ?></h1>
+                                <p class="product-description"><?php echo htmlspecialchars($prod2['descProduit']); ?></p>                           
                                 <div class="variete-buttons2">
                                     <?php foreach ($varList2 as $variete) { ?>
                                         <?php if(!is_null($variete['specVariete'])): ?>
@@ -94,83 +94,7 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
                 </div>
             </div>
             <br>
-            <hr class="custom-hr">
-            <center>
-                <div class="avis-container">
-                    <div class="avis-form">
-                        <h3>Écrire un avis</h3>
-                        <form method="POST" id="avisForm">
-                            <div class="star-rating">
-                                <span class="star" data-value="1">&#9733;</span>
-                                <span class="star" data-value="2">&#9733;</span>
-                                <span class="star" data-value="3">&#9733;</span>
-                                <span class="star" data-value="4">&#9733;</span>
-                                <span class="star" data-value="5">&#9733;</span>
-                            </div>
-                            <input type="hidden" id="noteAvis" name="noteAvis" value="0">
-                            <textarea id="contenuAvis" name="ContenuAvis" rows="4" placeholder="Votre avis ici..."
-                                class="avis-textarea"></textarea><br>
-                            <button type="submit" class="btn btn-custom" name="Soumettre">Soumettre l'avis</button>
-                        </form>
-                    </div>
-                </div>
-            </center>
-
-            <?php
-            if (isset($_POST["ContenuAvis"], $_POST["noteAvis"], $_POST["Soumettre"], $_SESSION["user_id"])) {
-                $userId = $_SESSION["user_id"];
-                $noteAvis = (int) $_POST["noteAvis"]; // Note soumise par l'utilisateur
-    
-                // Vérifier si une note valide a été donnée
-                if ($noteAvis < 1 || $noteAvis > 5) {
-                    echo "<p style='color: red;'>Veuillez donner une note entre 1 et 5 étoiles.</p>";
-                } else {
-                    $avisQuery = $conn->prepare("SELECT * FROM AVIS WHERE idClient = :idClient AND idProduit = :idProduit");
-                    $avisQuery->execute(['idClient' => $userId, 'idProduit' => $idProduit]);
-                    $existingAvis = $avisQuery->fetch();
-
-                    if ($existingAvis) {
-                        echo "<p style='color: red;'>Vous avez déjà laissé un avis pour ce produit.</p>";
-                    } else {
-                        $req = $conn->prepare("INSERT INTO AVIS(idClient, idProduit, noteAvis, commentaireAvis, dateAvis, reponseAvis, dateReponseAvis) 
-                                   VALUES(:pIdClient, :pIdProduit, :pNoteAvis, :pCommentaireAvis, CURDATE(), :pReponseAvis, :pDateReponseAvis)");
-                        $req->execute([
-                            "pIdClient" => $userId,
-                            "pIdProduit" => $idProduit,
-                            "pNoteAvis" => $noteAvis,
-                            "pCommentaireAvis" => $_POST["ContenuAvis"],
-                            "pReponseAvis" => NULL,
-                            "pDateReponseAvis" => NULL
-                        ]);
-                        echo "<p style='color: green;'>Votre avis a été ajouté avec succès.</p>";
-                    }
-                }
-            }
-            ?>
-
-            <!-- Affichage des avis -->
-            <div id="avisList">
-                <?php
-                $avisQuery = $conn->prepare("SELECT * FROM AVIS WHERE idProduit = :idProduit");
-                $avisQuery->execute(['idProduit' => $idProduit]);
-                $avisList = $avisQuery->fetchAll();
-
-                if (count($avisList) > 0) {
-                    foreach ($avisList as $avis) {
-                        echo "<div class='avis-item'>";
-                        echo "<p><strong>" . htmlspecialchars($avis['dateAvis']) . " / " 
-                        . htmlspecialchars($avis['idClient']) . " :</strong> " 
-                        . htmlspecialchars($avis['noteAvis'])
-                        . htmlspecialchars($avis['commentaireAvis']) . "</p>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "<p>Aucun avis pour ce produit.</p>";
-                }
-                ?>
-            </div>
-        </main>
-
+            <hr class="custom-hr"> 
         <?php
     } else {
         echo "<h1 style='text-align: center;'>Produit non trouvé.</h1>";
@@ -181,29 +105,6 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
 ?>
 
 <style>
-    .star-rating {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 15px;
-        cursor: pointer;
-    }
-
-    .star {
-        font-size: 2em;
-        color: #ddd;
-        /* Couleur des étoiles non sélectionnées */
-        transition: color 0.3s ease;
-    }
-
-    .star.selected {
-        color: #ffcc00;
-        /* Couleur des étoiles sélectionnées */
-    }
-
-    .star:hover {
-        color: #ffcc00;
-    }
-
     .product-detail-container {
         margin-top: 20px;
         display: flex;
@@ -520,49 +421,5 @@ if (isset($_GET['idProduit1'], $_GET['idProduit2'])) {
 </script>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const stars = document.querySelectorAll('.star');
-        const noteAvisInput = document.getElementById('noteAvis');
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                const rating = star.getAttribute('data-value');
-                noteAvisInput.value = rating;
-
-                // Mettre à jour les étoiles sélectionnées
-                updateStars(rating);
-            });
-
-            star.addEventListener('mouseover', () => {
-                const rating = star.getAttribute('data-value');
-                highlightStars(rating); // Montre temporairement la sélection
-            });
-
-            star.addEventListener('mouseout', () => {
-                // Revenir à la sélection réelle après survol
-                updateStars(noteAvisInput.value);
-            });
-        });
-
-        function updateStars(rating) {
-            stars.forEach(star => {
-                star.classList.remove('selected');
-                if (parseInt(star.getAttribute('data-value')) <= parseInt(rating)) {
-                    star.classList.add('selected');
-                }
-            });
-        }
-
-        function highlightStars(rating) {
-            stars.forEach(star => {
-                star.classList.remove('selected');
-                if (parseInt(star.getAttribute('data-value')) <= parseInt(rating)) {
-                    star.classList.add('selected');
-                }
-            });
-        }
-    });
-</script>
 
 <?php include_once('include/footer.php'); ?>

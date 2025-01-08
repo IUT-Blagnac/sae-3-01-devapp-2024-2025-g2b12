@@ -2,7 +2,7 @@
 Feuille de style des pages du back-office.
 
 Date de dernière modification :
-- Mercredi 1er janvier 2025 -
+- Lundi 6 janvier 2025 -
 
 Auteur : Victor Jockin
 - Équipe 2B12 -
@@ -25,6 +25,13 @@ Auteur : Victor Jockin
     font-style: normal;
 }
 
+/* font semi-bold */
+@font-face {
+    font-family: 'OpenSans Semi-Bold';
+    src: url('../font/OpenSans/OpenSans-SemiBold.ttf') format('truetype') ;
+    font-style: normal;
+}
+
 /* font bold */
 @font-face {
     font-family: 'OpenSans Bold';
@@ -43,6 +50,7 @@ Auteur : Victor Jockin
 :root {
     --regular-font:         'OpenSans Regular', sans-serif;
     --regular-italic-font:  'OpenSans Regular Italic', sans-serif;
+    --semibold-font:        'OpenSans Semi-Bold', sans-serif;
     --bold-font:            'OpenSans Bold', sans-serif;
     --bold-italic-font:     'OpenSans Bold Italic', sans-serif;
 }
@@ -65,8 +73,45 @@ body {
 }
 
 h1 {
+    margin: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
     font-family: var(--regular-font);
     font-size: 26px;
+}
+
+/* ======================================== */
+
+/* séparateurs */
+/* ----------- */
+
+hr {
+    width: 100%;
+    height: 1.5px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: #dedfe3;
+}
+hr.between-content {
+    margin-top: 30px;
+}
+hr.adjusted-lower-margin {
+    margin-bottom: 10px;
+}
+
+/* ======================================== */
+
+/* espaces libres */
+/* -------------- */
+
+.free-container {
+    display: flex;
+    height: 100%;
+    background-color: #fff;
 }
 
 /* ======================================== */
@@ -76,10 +121,46 @@ h1 {
 
 .side-menu-container {
     display: flex;
-    flex-direction: column;
+    position: relative;
     width: 240px;
     height: 100vh;
+    flex-direction: column;
     background-color: #1d2c3a;
+    box-shadow: 5px 90px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.side-menu-header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    min-height: 70px;
+    height: 70px;
+    padding: 0px 10px;
+    flex-direction: row;
+    gap: 0px;
+    box-sizing: border-box;
+    background-color: #263545;
+    z-index: 999;
+    align-items: center;
+}
+.woohp-logo-container {
+    display: flex;
+    width: 72px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+.woohp-logo {
+    margin-top: 0px;
+    width: 50px;
+    height: auto;
+    box-sizing: border-box;
+}
+.woohp-resell {
+    color: #fff;
+    font-family: var(--semibold-font);
+    font-size: 18px;
 }
 
 .side-menu-content {
@@ -100,19 +181,14 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
-.side-menu-button:hover {
-    background-color: #1d2cff;
-}
-.side-menu-button.active {
-    background-color: #000;
-}
+.side-menu-button:hover { background-color: #263545; }
+.side-menu-button.active { background-color: #017aff; }
 
 .side-menu-button-icon-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .side-menu-button-icon {
     width: 32px;
     height: auto;
@@ -123,11 +199,39 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-
 .side-menu-button-name {
     color: #fff;
     font-family: var(--regular-font);
     font-size: 15px;
+}
+.side-menu-button.active .side-menu-button-name { color: #fff; }
+
+@media screen and (max-width: 920px) {
+    .side-menu-header {
+        justify-content: center;
+    }
+
+    .woohp-resell {
+        display: none;
+    }
+
+    .side-menu-container {
+        min-width: 70px;
+        width: 70px;
+    }
+
+    .side-menu-button {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .side-menu-button-name-container {
+        display: none;
+    }
+
+    .side-menu-button-icon-container {
+        position: relative;
+    }
 }
 
 /* ======================================== */
@@ -138,27 +242,27 @@ h1 {
 .page-container {
     display: flex;
     flex: 1;
+    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
-    background-color: #f5f6fa;
-}
-
-header {
-    position: relative;
-    top: 0;
-    width: 100%;
+    background-color: #f5f7f9;
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
     flex: 1;
-    padding: 20px;
+    height: 100vh;
     box-sizing: border-box;
     overflow-y: auto;
 }
 
-footer {
-    position: relative;
-	bottom: 0;
-    width: 100%;
+.content {
+    margin-top: auto;
+    padding: 20px;
+    flex: 1;
+    box-sizing: border-box;
 }
 
 /* ======================================== */
@@ -167,12 +271,91 @@ footer {
 /* ---------- */
 
 .container {
+    display: flex;
     padding: 20px;
     box-sizing: border-box;
     border: 1.5px solid #dedfe3;
     border-radius: 5px;
+    gap: 20px;
+    flex-direction: column;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-menu {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-menu-button {
+    display: flex;
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    flex-direction: row;
+    gap: 5px;
+    color: #fff;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    background-color: #007bfd;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+.container-menu-button:hover {
+    background-color: #006beb;
+}
+.container-menu-button.no-frame {
+    height: 25px;
+    padding: 0px;
+    color: #000;
+    background-color: #fff;
+}
+.container-menu-button.no-frame * {
+    color: inherit;
+}
+.container-menu-button.no-frame.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.container-menu-button-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-menu-button-icon {
+    width: 15px;
+    height: auto;
+}
+
+.container-menu-button-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-menu-button-name {
+    color: #fff;
+    font-family: var(--regular-font);
+    font-size: 15px;
+}
+
+/* ======================================== */
+
+/* boutons */
+/* ------- */
+
+.cancel-button {
+    background-color: #1d2c3a;
+}
+.cancel-button:hover {
+    background-color: #152432;
 }
 
 /* ======================================== */
@@ -222,6 +405,11 @@ td {
     font-family: var(--regular-font);
 }
 
+td.no-result {
+    color: #888;
+    text-align: center;
+}
+
 .options-container {
     display: flex;
     height: 100%;
@@ -234,7 +422,6 @@ th.product-id-column        { width: 6%; }
 th.product-name-column      { width: 42%; }
 th.product-category-column  { width: 38%; }
 th.product-variants-column  { width: 12%; }
-@media screen and (max-width: 768px) { }
 
 /* table des variantes de produit */
 .variants-table-container {
@@ -272,6 +459,7 @@ td.variants-table-cell {
 .variants-table td div .content {
     display: flex;
     min-height: 21px;
+    padding: 0px;
     gap: 5px;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -300,7 +488,14 @@ a.link {
     white-space: nowrap;
 }
 a.link.category {
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+a.link.parentCategory {
+    padding: 3.5px 10px;
+    border: 1.5px solid #000;
+    color: #000;
+    background-color: #fff;
     font-size: 12px;
 }
 a.link.group {
@@ -338,11 +533,12 @@ a.icon-container {
     width: 30px;
     height: 30px;
     border-radius: 5px;
-    background-color: #15529b;
+    background-color: #007bfd;
     justify-content: center;
     align-items: center;
 }
 .clickable-icon-container:hover {
+    background-color: #006beb;
     cursor: pointer;
 }
 
@@ -366,3 +562,19 @@ a.icon-container {
 }
 
 .centred-text { text-align: center; }
+
+.h-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.right-aligned-content {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* élément caché */
+.hidden {
+    display: none;
+}

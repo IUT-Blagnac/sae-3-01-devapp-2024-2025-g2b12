@@ -50,10 +50,53 @@ require_once('./include/menu.php');
                 .card-body:hover {
                     background-color: rgba(136, 172, 223, 0.2);
                 }
+
+                .subcategory-button {
+                    display: inline-block;
+                    margin: 5px;
+                    padding: 10px 15px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: rgba(136, 172, 223);
+                    border: none;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .subcategory-button:hover {
+                    background-color: rgb(67, 83, 107);
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                }
+
+                .sort-dropdown {
+                    padding: 10px 15px;
+                    font-size: 1em;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    margin-top: 20px;
+                    /* Ajout d'un espace au-dessus du bouton de tri */
+                }
+
+                .title-and-sort {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+
+                .sort-container {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 20px; /* Ajout d'un espace en dessous du bouton de tri */
+                }
             </style>
 
             <?php
             if (isset($_GET['pIdCateg']) || isset($_GET['idRegroupement'])) {
+                $order = isset($_GET['order']) ? $_GET['order'] : '';
+
                 if (isset($_GET['pIdCateg'])) {
                     $idCateg = $_GET['pIdCateg'];
 
@@ -63,7 +106,9 @@ require_once('./include/menu.php');
                     $categ = $categorie->fetch();
 
                     if ($categ) {
-                        echo "<h1 style='text-align: center;'>Produits de la catégorie : " . htmlspecialchars($categ['nomCategorie']) . "</h1><br><br>";
+                        echo "<div class='title-and-sort'>";
+                        echo "<h1>Produits de la catégorie : " . htmlspecialchars($categ['nomCategorie']) . "</h1>";
+                        echo "</div>";
 
                         // Afficher les sous-catégories
                         $sousCategorie = $conn->prepare("SELECT idCategorie, nomCategorie FROM CATEGORIE WHERE idParent = :idCategorie");
@@ -71,33 +116,42 @@ require_once('./include/menu.php');
                         $SC = $sousCategorie->fetchAll();
 
                         if (!empty($SC)) {
-                            echo "<ul>";
+                            echo "<p style='text-align: center;'>Sous-catégorie</p>";
+                            echo "<div style='text-align: center; margin-bottom: 20px;'>";
                             foreach ($SC as $sc) {
-                                echo "<li><a href='consulter_categorie.php?pIdCateg=" . $sc['idCategorie'] . "'>" . htmlspecialchars($sc['nomCategorie']) . "</a></li>";
+                                echo "<a class='subcategory-button' href='consulter_categorie.php?pIdCateg=" . htmlspecialchars($sc['idCategorie']) . "'>" . htmlspecialchars($sc['nomCategorie']) . "</a>";
                             }
-                            echo "</ul>";
+                            echo "</div>";
                         }
 
                         // Récupérer les produits de la catégorie principale
-                        $produitsPrincipaux = $conn->prepare("
+                        $produitsPrincipauxQuery = "
                             SELECT P.*, V.idVariete, V.prixVariete 
                             FROM PRODUIT P
                             JOIN VARIETE V ON P.idProduit = V.idProduit
                             WHERE P.idCategorie = :idCategorie
                             AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
-                        ");
+                        ";
+                        if ($order && $order !== 'none') {
+                            $produitsPrincipauxQuery .= " ORDER BY V.prixVariete $order";
+                        }
+                        $produitsPrincipaux = $conn->prepare($produitsPrincipauxQuery);
                         $produitsPrincipaux->execute(['idCategorie' => $idCateg]);
                         $prodPrincipaux = $produitsPrincipaux->fetchAll();
 
                         // Récupérer les produits des sous-catégories
-                        $produitsSousCateg = $conn->prepare("
+                        $produitsSousCategQuery = "
                             SELECT P.*, V.idVariete, V.prixVariete 
                             FROM PRODUIT P
                             JOIN CATEGORIE C ON P.idCategorie = C.idCategorie
                             JOIN VARIETE V ON P.idProduit = V.idProduit
                             WHERE C.idParent = :idCategorie
                             AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
-                        ");
+                        ";
+                        if ($order && $order !== 'none') {
+                            $produitsSousCategQuery .= " ORDER BY V.prixVariete $order";
+                        }
+                        $produitsSousCateg = $conn->prepare($produitsSousCategQuery);
                         $produitsSousCateg->execute(['idCategorie' => $idCateg]);
                         $prodSousCateg = $produitsSousCateg->fetchAll();
 
@@ -115,23 +169,45 @@ require_once('./include/menu.php');
                     $regroup = $regroupement->fetch();
 
                     if ($regroup) {
-                        echo "<h1 style='text-align: center;'>Produits du regroupement : " . htmlspecialchars($regroup['nomRegroupement']) . "</h1><br><br>";
+                        echo "<div class='title-and-sort'>";
+                        echo "<h1>Produits du regroupement : " . htmlspecialchars($regroup['nomRegroupement']) . "</h1>";
+                        echo "</div>";
 
                         // Récupérer les produits du regroupement
-                        $produitsRegroupement = $conn->prepare("
+                        $produitsRegroupementQuery = "
                             SELECT P.*, V.idVariete, V.prixVariete 
                             FROM PRODUIT P
                             JOIN VARIETE V ON P.idProduit = V.idProduit
                             JOIN REGROUPER R ON V.idVariete = R.idVariete
                             WHERE R.idRegroupement = :idRegroupement
                             AND V.idVariete = (SELECT MIN(V2.idVariete) FROM VARIETE V2 WHERE V2.idProduit = P.idProduit)
-                        ");
+                        ";
+                        if ($order && $order !== 'none') {
+                            $produitsRegroupementQuery .= " ORDER BY V.prixVariete $order";
+                        }
+                        $produitsRegroupement = $conn->prepare($produitsRegroupementQuery);
                         $produitsRegroupement->execute(['idRegroupement' => $idRegroupement]);
                         $tousProduits = $produitsRegroupement->fetchAll();
                     } else {
                         echo "<h1 style='text-align: center;'>Regroupement non trouvé.</h1>";
                     }
                 }
+
+                echo "<div class='sort-container'>";
+                echo "<form method='GET'>";
+                if (isset($_GET['pIdCateg'])) {
+                    echo "<input type='hidden' name='pIdCateg' value='" . htmlspecialchars($_GET['pIdCateg']) . "'>";
+                } elseif (isset($_GET['idRegroupement'])) {
+                    echo "<input type='hidden' name='idRegroupement' value='" . htmlspecialchars($_GET['idRegroupement']) . "'>";
+                }
+                echo "<select name='order' id='order' class='sort-dropdown' onchange='this.form.submit()'>";
+                echo "<option value='' disabled" . ($order == '' ? ' selected' : '') . ">Trier par :</option>";
+                echo "<option value='none'" . ($order == 'none' ? ' selected' : '') . ">Aucun</option>";
+                echo "<option value='ASC'" . ($order == 'ASC' ? ' selected' : '') . ">Prix croissant</option>";
+                echo "<option value='DESC'" . ($order == 'DESC' ? ' selected' : '') . ">Prix décroissant</option>";
+                echo "</select>";
+                echo "</form>";
+                echo "</div>";
 
                 if (!empty($tousProduits)) {
                     echo "<div class='row'>";

@@ -193,19 +193,21 @@ if (isset($_GET['pIdCommande'])) {
 <main>
     <div class="section">
     <h1>Informations de commande</h1>
-        <?php foreach ($cmd as $commande): ?>
+        <?php if (!empty($cmd)) : ?>
+                <?php $commande = $cmd[0];?>
                 <div class="info-row"><?php echo "<b>Numéro de commande </b>" . htmlspecialchars($idCommande); ?></div>
                 <div class="info-row"><?php echo "<b>Date de la commande </b>" . htmlspecialchars($commande['dateCommande']); ?></div>
                 <div class="info-row"><?php echo "<b>Nom du client </b>" . htmlspecialchars($commande['prenomClient']) . " " . htmlspecialchars($commande['nomClient']) ; ?></div>
                 <div class="info-row"><?php echo "<b>Email </b>" . htmlspecialchars($commande['emailClient']); ?></div>
                 <div class="info-row"><?php echo "<b>Numéro de téléphone </b>" . htmlspecialchars($commande['telephoneClient']); ?></div>
                 <div class="info-row"><?php echo "<b>Montant total </b>" . htmlspecialchars($commande['montantCommande']); ?> €</div>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div class="section">
     <h1>Informations sur la livraison</h1>
-        <?php foreach ($cmd as $commande): ?>
+        <?php if (!empty($cmd)) : ?>
+                <?php $commande = $cmd[0];?>
                 <div class="info-row"><?php
                 if ($commande['idAdresse'] == null) {
                     $pointRelais = $conn->prepare("SELECT * FROM COMMANDE C, POINT_RELAIS PR WHERE C.idRelais = PR.idRelais AND C.idCommande = :idCommande");
@@ -224,14 +226,15 @@ if (isset($_GET['pIdCommande'])) {
                 }
                 ?></div>
                 <div class="info-row"><?php echo "<b>Mode de livraison </b>" . htmlspecialchars($commande['modeLivraison']); ?></div>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div class="section">
     <h1>Informations de paiement</h1>
-        <?php foreach ($cmd as $commande): ?>
+        <?php if (!empty($cmd)) : ?>
+            <?php $commande = $cmd[0];?>
                 <div class="info-row"><?php echo "<b>Mode de paiement </b>" . htmlspecialchars($commande['modePaiement']); ?></div>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div class="section">
@@ -249,9 +252,9 @@ if (isset($_GET['pIdCommande'])) {
                     <?php $imagePath = "image/produits/prod" . htmlspecialchars($produit['idVariete']) . ".png"; ?>
                     <img src="<?php echo $imagePath; ?>" alt="Produit">
                 </div>
-                <div><?php echo htmlspecialchars($produit['nomProduit']); ?></div>
+                <div><?php echo "<a href='detail_produit.php?idProduit=" . htmlspecialchars($produit['idProduit']) . "'>" . htmlspecialchars($produit['nomProduit']) . "</a>"; ?></div>
                 <div><?php echo htmlspecialchars($produit['qteCommandee']); ?></div>
-                <div><?php echo htmlspecialchars($produit['montantCommande']); ?> €</div>
+                <div><?php echo htmlspecialchars($produit['prixVariete']); ?> €</div>
             </div>
         <?php endforeach; ?>
     </div>

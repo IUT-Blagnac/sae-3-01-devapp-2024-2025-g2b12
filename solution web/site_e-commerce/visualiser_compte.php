@@ -11,7 +11,8 @@ $query->execute(['idClient' => $idClient]);
 $client = $query->fetch(PDO::FETCH_ASSOC);
 
 if (!$client) {
-    echo "Erreur : Informations du compte non trouvées.";
+    //echo "Erreur : Informations du compte non trouvées.";
+    header("location: ./connexion.php");
     exit();
 }
 ?>
@@ -71,6 +72,19 @@ if (!$client) {
                         <p><strong>Nom :</strong> <?php echo htmlspecialchars($client['nomClient']); ?></p>
                         <p><strong>Prénom :</strong> <?php echo htmlspecialchars($client['prenomClient']); ?></p>
                         <p><strong>Email :</strong> <?php echo htmlspecialchars($client['emailClient']); ?></p>
+                        <p><strong>Points Fidélités :</strong>
+                            <?php echo htmlspecialchars($client['nbPointsClient']); ?></p>
+                        <?php
+                        if (isset($_GET['Pts']) && htmlentities($_GET['Pts']) == "oui") {
+                            if (isset($_GET['error']) && $_GET['error'] === "insufficient_points") {
+                                echo "<p class='error text-center'>Erreur : Vous avez sélectionné plus de points que ceux disponibles.</p>";
+                            }
+                            echo "<form method='post' action='visualiser_panier.php'>";
+                            echo "<input type='number' name='NbPts' placeholder='Montant Réduction'>";
+                            echo "<button class='btn btn-sm btn-sobre' type='submit'>Confirmez</button>";
+                            echo "</form>";
+                        }
+                        ?>
                     </div>
                 </div>
             </main>
@@ -78,5 +92,39 @@ if (!$client) {
     </div>
     <?php require_once('./include/footer.php'); ?>
 </body>
+
+<style>
+    .btn-sobre {
+        background-color: #000;
+        /* Couleur de fond noir */
+        color: #fff;
+        /* Couleur du texte blanc */
+        border: none;
+        /* Pas de bordure */
+        padding: 5px 15px;
+        /* Réduction de la taille du bouton */
+        font-size: 14px;
+        /* Police plus petite */
+        border-radius: 5px;
+        /* Coins arrondis */
+        margin: 0 10px;
+        /* Espacement latéral */
+        cursor: pointer;
+        /* Curseur en pointeur */
+        transition: background-color 0.3s ease;
+        /* Animation au survol */
+    }
+
+    .btn-sobre:hover {
+        background-color: #333;
+        /* Couleur plus claire au survol */
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+</style>
 
 </html>

@@ -1,0 +1,394 @@
+/*
+Feuille de style des formulaires (back-office).
+
+Date de dernière modification :
+- Dimanche 5 janvier 2025 -
+
+Auteur : Victor Jockin
+- Équipe 2B12 -
+*/
+
+/* fonts */
+/* ----- */
+
+/* font regular */
+@font-face {
+    font-family: 'OpenSans Regular';
+    src: url('../font/OpenSans/OpenSans-Regular.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* font bold */
+@font-face {
+    font-family: 'OpenSans Bold';
+    src: url('../font/OpenSans/OpenSans-Bold.ttf') format('truetype') ;
+    font-style: normal;
+}
+
+/* déclaration des variables désignant les fonts */
+:root {
+    --regular-font: 'OpenSans Regular', sans-serif;
+    --bold-font:    'OpenSans Bold', sans-serif;
+}
+
+/* ======================================== */
+
+/* général */
+/* ------- */
+
+form {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-container {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    flex-direction: row;
+    align-items: stretch;
+}
+.form-content {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (max-width: 800px) {
+    .form-content {
+        width: 100%;
+    }
+    .form-container {
+        flex-direction: column;
+    }
+}
+
+.left-form, .right-form {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+/* ======================================== */
+
+/* titres */
+/* ------ */
+
+.form-header h1 {
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 10px;
+    font-family: var(--bold-font);
+    font-size: 18px;
+}
+
+/* ======================================== */
+
+/* définition des dimensions des formulaires */
+/* ----------------------------------------- */
+
+#product-description-form {
+    flex-grow: 1;
+    width: auto;
+}
+#product-image-form {
+    width: 350px;
+}
+@media screen and (max-width: 800px) {
+    #product-description-form, #product-image-form {
+        width: 100%;
+    }
+}
+
+/* ======================================== */
+
+.input-field-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+label {
+    width: 25%;
+    min-width: 110px;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    white-space: nowrap;
+}
+.adjusted-vertical-alignment {
+    align-self: flex-start;
+    height: 43.5px;
+    line-height: 43.5px;
+}
+
+input {
+    display: flex;
+    font-family: var(--regular-font);
+    font-size: 15px;
+}
+input[type="text"] {
+    flex-grow: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type="text"]:focus {
+    outline-width: 2px;
+    outline-color: #007bfd;
+} 
+input[readonly] {
+    background-color: rgba(0, 0, 0, 0.075);
+    color: #555;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+input.free {
+    min-width: 50px;
+    width: 100%;
+}
+
+textarea {
+    display: flex;
+    flex-grow: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    resize: none;
+}
+textarea:focus {
+    outline-width: 2px;
+    outline-color: #007bfd;
+}
+
+small {
+    padding-left: 10px;
+    min-width: 60px;
+    width: 60px;
+    box-sizing: border-box;
+    color: #000;
+    font-family: var(--regular-font);
+    font-size: 12px;
+    text-align: left;
+}
+
+/* ======================================== */
+
+/* aperçu d'image */
+/* -------------- */
+
+.image-preview-container {
+    display: flex;
+    width: 350px;
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-preview {
+    display: flex;
+    width: 350px;
+    flex: 1;
+    aspect-ratio: 1;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #888;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (max-width: 800px) {
+    .image-preview {
+        height: 400px;
+    }
+}
+
+.image-preview-menu {
+    display: flex;
+    width: 350px;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* ======================================== */
+
+/* formulaire d'ajout des variantes de produits */
+/* -------------------------------------------- */
+
+.product-variant-addition-form-row {
+    background-color: #fff;
+}
+
+.product-variants-form th.variant-id-column { width: 15% ; }
+.product-variants-form th.variant-characteristic-column { width: 40% ; }
+.product-variants-form th.variant-price-column { width: 15% ; }
+.product-variants-form th.variant-groups-column { width: 30% ; }
+
+.product-variants-form table.product-variants-table td {
+    padding: 0px 15px;
+}
+
+.product-variants-form table.product-variants-table input {
+    height: 35px;
+    padding: 5px;
+}
+
+.td-content {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    align-items: center;
+}
+
+/* ======================================== */
+
+/* boutons */
+/* ------- */
+
+.form-menu-button {
+    width: 100px;
+}
+
+.form-button {
+    display: flex;
+    flex-grow: 1;
+    min-width: 200px;
+    min-height: 43.5px;
+    height: auto;
+    padding: 7px 10px;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #000;
+    background-color: #fff;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 5px;
+}
+.form-button:hover {
+    background-color: #dedfe3;
+    cursor: pointer;
+}
+.form-button.centred-content {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.form-button.flexible {
+    min-width: 0px;
+    width: 100%;
+}
+.form-button.disabled {
+    color: #888;
+    pointer-events: none;
+}
+
+.form-button.icon-container {
+    min-width: 35px;
+    width: 35px;
+    max-width: 35px;
+    min-height: 35px;
+    height: 35px;
+    max-height: 35px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+}
+.form-button.icon-container img {
+    height: 20px;
+    width: auto;
+}
+
+#variant-image-label {
+    min-height: 35px;
+    height: 35px;
+    max-height: 35px;
+    padding: 5px;
+}
+
+#add-variant-button {
+    width: 100%;
+    min-height: 35px;
+    height: 35px;
+    max-height: 35px;
+    padding: 0px 15px;
+    box-sizing: border-box;
+}
+
+/* ======================================== */
+
+/* boîte d'info */
+/* ------------ */
+
+.info-container {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-bottom: 10px;
+}
+.info-box {
+    max-height: fit-content;
+    min-width: none;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1.5px solid #dedfe3;
+    border-radius: 5px;
+    color: #000;
+    background-color: #f5f5dc;
+    font-family: var(--regular-font);
+    font-size: 15px;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.info-box.input-errors {
+    color: #fff;
+    background-color: #bc4141;
+}
+
+ul {
+    display: flex;
+    width: fit-content;
+    margin: 0px;
+    padding: 0px 20px;
+    flex-direction: column;
+    gap: 5px;
+    list-style-type: disc;
+}
+li {
+    width: fit-content;
+}
+
+/* ======================================== */
+
+/* attributs */
+/* --------- */
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}

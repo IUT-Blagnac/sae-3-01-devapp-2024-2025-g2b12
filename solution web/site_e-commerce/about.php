@@ -17,7 +17,7 @@
                 <h2 class="mb-3">Notre histoire</h2>
                 <p class="fs-5 text-justify">
                     Fondée en 2024, <strong>WOOHP Resell</strong> est une PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité.
-                    Héritant de l’organisation secrète mondiale <em>World Organization Of Human Protection</em> (WOOHP) fondée en 1960 par Jerry Lewis, 
+                    Héritant de l’organisation secrète mondiale <em>World Organization Of Human Protection</em> (WOOHP) fondée en 1960 par Jerry Lewis,
                     notre entreprise perpétue cet héritage unique. Après la dissolution de l’organisation en 1990, WOOHP Resell a vu le jour pour redonner vie aux célèbres gadgets d'espionnage.
                 </p>
             </section>
@@ -73,11 +73,11 @@
                 </p>
             </section>
 
-              <!-- Équipe et dirigeants -->
-              <section id="equipe" class="mb-5">
+            <!-- Équipe et dirigeants -->
+            <section id="equipe" class="mb-5">
                 <h2 class="mb-3">L'équipe de développement</h2>
                 <p class="mt-4">
-                Ce site a été développé par l'équipe passionnée de <strong> Woohp-Resell</strong>, dédiée à vous offrir une expérience d'achat en ligne exceptionnelle.                
+                    Ce site a été développé par l'équipe passionnée de <strong> Woohp-Resell</strong>, dédiée à vous offrir une expérience d'achat en ligne exceptionnelle.
                 </p>
                 <div class="row">
                     <div class="col-md-6 col-lg-3 mb-3">
@@ -123,19 +123,116 @@
                 </div>
             </section>
 
-
             <!-- Culture d’entreprise -->
             <section id="culture" class="mb-5">
                 <h2 class="mb-3">Notre culture d’entreprise</h2>
                 <p class="fs-5 text-justify">
-                Chez WOOHP Resell, nous mettons un point d'honneur à incarner des valeurs fondamentales telles que l'innovation, qui nous pousse à toujours rechercher de nouvelles solutions, la prévention, essentielle pour anticiper vos besoins, la sécurité, d'une une protection fiable et durable, et la créativité, qui nourrit notre capacité à repousser les limites de la technologie toujours plus haut.                </p>
+                    Chez WOOHP Resell, nous mettons un point d'honneur à incarner des valeurs fondamentales telles que l'innovation, qui nous pousse à toujours rechercher de nouvelles solutions, la prévention, essentielle pour anticiper vos besoins, la sécurité, d'une une protection fiable et durable, et la créativité, qui nourrit notre capacité à repousser les limites de la technologie toujours plus haut. </p>
+            </section>
 
+            <!-- Formulaire "Contactez-nous" -->
+            <section id="contact" class="mb-5">
+                <h2 class="mb-3 text-center">Contactez-nous</h2>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="form-container">
+                                <form id="contactForm">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email:</label>
+                                        <input type="email" id="email" name="email" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="subject" class="form-label">Objet:</label>
+                                        <input type="text" id="subject" name="subject" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Message:</label>
+                                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </section>
 </main>
 
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire
 
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
 
+        if (email && subject && message) {
+            // Affichage d'une alerte de succès si le formulaire est rempli correctement
+            Swal.fire({
+                icon: 'success',
+                title: 'Message envoyé',
+                text: 'Votre message a bien été envoyé.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } else {
+            // Affichage d'une alerte d'erreur si un champ est manquant
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Veuillez remplir tous les champs.',
+            });
+        }
+    });
+</script>
+
+<style>
+    .form-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: rgba(136, 172, 223);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .form-container button:hover {
+        background-color: #005f8d;
+    }
+</style>
 
 <?php include_once('include/footer.php'); ?>

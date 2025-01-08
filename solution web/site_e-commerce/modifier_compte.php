@@ -101,12 +101,27 @@ if (!$client) {
                 <div class="card">
                     <div class="card-body">
                         <form method="POST">
-                            <input type='text' name='nom' placeholder='Nom'
-                                value='<?php echo htmlspecialchars($client['nomClient']); ?>' required>
-                            <input type='text' name='prenom' placeholder='Prénom'
-                                value='<?php echo htmlspecialchars($client['prenomClient']); ?>' required>
-                            <input type='email' name='email' placeholder='Email'
-                                value='<?php echo htmlspecialchars($client['emailClient']); ?>' required>
+                        <div class="form-group row">
+                            <label for="nom" class="col-sm-2 col-form-label text-right">Nom :</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="nom" name="nom" class="form-control"
+                                    value="<?php echo htmlspecialchars($client['nomClient']); ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prenom" class="col-sm-2 col-form-label text-right">Prénom :</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="prenom" name="prenom" class="form-control"
+                                    value="<?php echo htmlspecialchars($client['prenomClient']); ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label text-right">Email :</label>
+                            <div class="col-sm-9">
+                                <input type="email" id="email" name="email" class="form-control"
+                                    value="<?php echo htmlspecialchars($client['emailClient']); ?>" required>
+                            </div>
+                        </div>
                             <input type='submit' name='envoyer' value='Enregistrer'>
                         </form>
                     </div>

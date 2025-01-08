@@ -12,19 +12,19 @@ $idClient = $_SESSION['user_id'];
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $lieuLivraison = $_POST['lieuLivraison'];
-        $modePaiement = $_POST['modePaiement'];
+        $lieuLivraison = htmlentities($_POST['lieuLivraison']);
+        $modePaiement = htmlentities($_POST['modePaiement']);
         $idAdresseDeLivraison = null;
         $numCB = null;
         $numPaypal = null;
         $numVirement = null;
 
         if ($lieuLivraison === 'Domicile') {
-            $numRueAdresse = $_POST['numRueAdresse'];
-            $rueAdresse = $_POST['rueAdresse'];
-            $cdPostalAdresse = $_POST['cdPostalAdresse'];
-            $villeAdresse = $_POST['villeAdresse'];
-            $paysAdresse = $_POST['paysAdresse'];
+            $numRueAdresse = htmlentities($_POST['numRueAdresse']);
+            $rueAdresse = htmlentities($_POST['rueAdresse']);
+            $cdPostalAdresse = htmlentities($_POST['cdPostalAdresse']);
+            $villeAdresse = htmlentities($_POST['villeAdresse']);
+            $paysAdresse = htmlentities($_POST['paysAdresse']);
 
             // Vérifiez si l'adresse existe déjà
             $query = $conn->prepare("SELECT idAdresse FROM ADRESSE WHERE numRueAdresse = :numRueAdresse AND rueAdresse = :rueAdresse AND cdPostalAdresse = :cdPostalAdresse AND villeAdresse = :villeAdresse AND paysAdresse = :paysAdresse");
@@ -53,13 +53,13 @@ try {
                 $idAdresseDeLivraison = $conn->lastInsertId();
             }
         } elseif ($lieuLivraison === 'Relais') {
-            $idAdresseDeLivraison = $_POST['idRelais'];
+            $idAdresseDeLivraison = htmlentities($_POST['idRelais']);
         }
 
         if ($modePaiement === 'CB') {
-            $numCB = $_POST['numCB'];
-            $dateExpCB = $_POST['dateExpCB'];
-            $titulaireCB = $_POST['titulaireCB'];
+            $numCB = htmlentities($_POST['numCB']);
+            $dateExpCB = htmlentities($_POST['dateExpCB']);
+            $titulaireCB = htmlentities($_POST['titulaireCB']);
 
             // Vérifiez si la carte bancaire existe déjà
             $query = $conn->prepare("SELECT numCB FROM CARTE_BANCAIRE WHERE numCB = :numCB");
@@ -76,17 +76,15 @@ try {
                 ]);
             }
         } elseif ($modePaiement === 'Paypal') {
-            $numPaypal = $_POST['numPaypal'];
+            $numPaypal = htmlentities($_POST['numPaypal']);
         } elseif ($modePaiement === 'Virement') {
-            $numVirement = $_POST['numVirement'];
+            $numVirement = htmlentities($_POST['numVirement']);
         }
 
         // Vérifiez que l'adresse de livraison est définie
         if (empty($idAdresseDeLivraison)) {
             throw new Exception("L'adresse de livraison n'est pas définie.");
         }
-
-        
 
         // Appel de la procédure stockée passerCommande
         $query = $conn->prepare("CALL passerCommande(:pIdClient, :pModeLivraison, :pIdAdresseDeLivraison, :pModePaiement, :pNumCB, :pNumPaypal, :pNumVirement)");
@@ -100,6 +98,58 @@ try {
             'pNumVirement' => $numVirement
         ]);
 
+        $req = $conn->prepare("SELECT * FROM COMMANDE WHERE idClient = :pIdClient");
+        $req->execute(["pIdClient" => $idClient]);
+        $commandes = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $LastCommande = ["idCommande" => 0, "montantCommande" => 0];
+        $NbPointF = 0;
+
+        foreach ($commandes as $commande) {
+            if ($commande["idCommande"] > $LastCommande["idCommande"]) {
+                $LastCommande = $commande;
+            }
+        }
+
+
+        if ($LastCommande["idCommande"] > 0) {
+            $req = $conn->prepare("SELECT nbPointsClient FROM CLIENT WHERE idClient = :pIdClient");
+            $req->execute(["pIdClient" => $idClient]);
+            $client = $req->fetch(PDO::FETCH_ASSOC);
+
+            if ($client) {
+                if (isset($_POST['Total']) && is_numeric($_POST['Total'])) {
+                    $nouveauMontant = (float) $_POST['Total'];
+
+                    $pointsSoustraits = ($LastCommande['montantCommande'] - $nouveauMontant) * 10;
+
+                    $req = $conn->prepare("UPDATE CLIENT SET nbPointsClient = nbPointsClient - :pPointsSoustraits WHERE idClient = :pIdClient");
+                    $req->execute([
+                        "pPointsSoustraits" => $pointsSoustraits,
+                        "pIdClient" => $idClient
+                    ]);
+
+                    $req = $conn->prepare("UPDATE COMMANDE SET montantCommande = :pMontantCommande WHERE idCommande = :pIdCommande");
+                    $req->execute([
+                        "pMontantCommande" => $nouveauMontant,
+                        "pIdCommande" => $LastCommande["idCommande"]
+                    ]);
+
+                    $LastCommande["montantCommande"] = $nouveauMontant;
+                }
+
+                $newPoints = $client["nbPointsClient"] + $LastCommande["montantCommande"];
+
+                $req = $conn->prepare("UPDATE CLIENT SET nbPointsClient = :pNewPoints WHERE idClient = :pIdClient");
+                $req->execute([
+                    "pNewPoints" => $newPoints,
+                    "pIdClient" => $idClient
+                ]);
+            }
+        }
+
+
+
         // Rediriger vers une page de confirmation
         header('Location: confirmation_commande.php');
         exit();
@@ -110,3 +160,4 @@ try {
     header("Location: commander.php?error=true&message=$errorMessage");
     exit();
 }
+?>

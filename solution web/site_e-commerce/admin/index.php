@@ -33,10 +33,12 @@ Auteur : Victor Jockin
 
         <!-- contenu principal -->
         <main>
-            <p>- En cours de développement -</p>
-        </main>
+            <div class='content'>
+                <p>- En cours de développement -</p>
+            </div>
 
-        <!-- pied de page HTML -->
-        <?php require_once('./include/footer.php') ; ?>
+            <!-- pied de page HTML -->
+            <?php require_once('./include/footer.php') ; ?>
+        </main>
     </div>
 </body>
