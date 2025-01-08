@@ -171,7 +171,7 @@ Ordinateur sous Windows ou OS équivalent.
 |====
 
 >|Cas de test 4+|Test-01-02-05
->|Titre 4+|Trie des produits (Recherche)
+>|Titre 4+|Tri des produits (Recherche)
 >|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
 
 5+|
@@ -217,10 +217,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -232,36 +228,16 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton paramètre (L'îcone avec un stylo et une feuille) ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur ^|L'utilisateur doit se trouver sur la page de visualisation de son compte et être connecté ... ^|OK
-^|C_G_C.2    ^|Remplir les champs dont on souhaite modifier les informations (Nom, Prénom, Email) et Enregistrer ^|Mise à jours des informations de l'utilisateur dans la base de données ^|Aucune ... ^| OK
+^|C_G_C.1     ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté ^|OK
+^|C_G_C.1    ^|Sélectionner le bouton paramètre (L'îcone avec un stylo et une feuille) ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur ^|Aucune ^|OK
+^|C_G_C.2    ^|Remplir les champs dont on souhaite modifier les informations (Nom, Prénom, Email) et cliquer sur le bouton "Enregistrer" ^|Mise à jours des informations de l'utilisateur dans la base de données ^|Aucune ^| OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
 
 >|Cas de test 4+|Test-02-01-03
->|Titre 4+|Supprimer un compte
->|Objectif 4+| Vérifier qu'il est possible de supprimer un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
-|====
-
-|====
-
->|Cas de test 4+|Test-02-01-04
 >|Titre 4+|Se déconnecter d'un compte
 >|Objectif 4+| Vérifier qu'il est possible de se déconnecter d'un compte
 
@@ -269,18 +245,15 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| Aucune ^|OK
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
 
->|Cas de test 4+|Test-02-01-05
+>|Cas de test 4+|Test-02-01-04
 >|Titre 4+|Consulter les commandes passées
 >|Objectif 4+| Vérifier qu'il est possible de consulter les commandes passées d'un compte
 
@@ -291,9 +264,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -313,9 +283,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -331,9 +298,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|C_G_C.2    ^|Visualiser le nombre de points sur le compte de l'utilisateur ^|Vérification du nombre de points totals sur le compte de l'utilisateur ^| Aucune ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -354,9 +318,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -373,8 +334,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -394,27 +353,21 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
 
 >|Cas de test 4+|Test-02-03-02
 >|Titre 4+|Utiliser les points de fidélités
->|Objectif 4+| Utiliser les points de fidélités sur le compte
+>|Objectif 4+|Vérifier qu'il est possible d'utiliser les points de fidélités sur le compte
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
-^|C_G_C.2    ^|Cliquer sur l'îcone en forme de cadeau en dessous du total de la commande. ^|L'utilisateur est redirigé vers la page de visualisation du compte afin de pouvoir voir le nombre de points présents sur le compte et les utiliser. ^| Aucune ^|OK.
-^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et cliquer sur confirmer ^|L'utilisateur est redirigé vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateu^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif ^|OK.
+^|C_G_C.2    ^|Cliquer sur l'îcone "cadeau" en dessous du prix total de la commande. ^|L'utilisateur est redirigé vers la page de visualisation du compte afin de pouvoir voir le nombre de points présents sur le compte et les utiliser. ^| Aucune ^|OK.
+^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et cliquer sur le bouton "Confirmer". ^|L'utilisateur est redirigé vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateu^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif ^|OK.
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -433,9 +386,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -451,9 +401,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|C_G_A.2    ^|Cliquer sur le champs, rédiger un avis puis cliquer sur le bouton "Soumettre l'avis" ^|Un avis est ajouté sous le produit ^| Les notes et le champs doivent être remplis ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
