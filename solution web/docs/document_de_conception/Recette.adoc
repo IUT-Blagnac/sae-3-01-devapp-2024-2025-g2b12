@@ -110,7 +110,6 @@ Ordinateur sous Windows ou OS équivalent.
 
 ==== 1.2 Produits :
 
-
 |====
 
 >|Cas de test 4+|Test-01-02-01
@@ -121,8 +120,7 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_CB.1 ^|Cliquer sur l'icône "rechercher" dans le menu. ^|La page de Recherche des produits s'ouvre. ^|Aucune ^|OK
-^|All_G_CB.2 ^|Saisir dans la barre de recherche le nom du produit souhaité . ^|Les produits recherché par l'utilisateur s'affichent ^|Aucune ^|OK
-
+^|All_G_CB.2 ^|Saisir dans la barre de recherche le nom du produit souhaité. ^|Les produits recherché par l'utilisateur s'affichent. ^|Aucune ^|OK
 
 |====
 
