@@ -392,8 +392,8 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_A.1   ^|Cliquer sur le bouton "Donner un avis" ^|Le champs de rédaction d'un avis s'affiche.  ^|La page de détail d'un produit doit être ouverte et le client doit avoir commander le produit. ^|OK
-^|C_G_A.2    ^|Cliquer sur le champs, rédiger un avis puis cliquer sur le bouton "Soumettre l'avis". ^|Un avis est ajouté sous le produit ^| Les notes et le champs doivent être remplis. ^|OK
+^|C_G_A.1   ^|Cliquer sur le bouton "Donner un avis". ^|Le champs de rédaction d'un avis s'affiche.  ^|La page de détail d'un produit doit être ouverte et le client doit avoir commander le produit. ^|OK
+^|C_G_A.2    ^|Cliquer sur le champs, rédiger un avis puis cliquer sur le bouton "Soumettre l'avis". ^|Un avis est ajouté sous le produit. ^| Les notes et le champs doivent être remplis. ^|OK
 
 5+|
 
