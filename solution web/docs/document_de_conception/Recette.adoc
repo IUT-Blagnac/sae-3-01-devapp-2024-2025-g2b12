@@ -321,6 +321,25 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 |====
 
+|====
+
+>|Cas de test 4+|Test-02-01-06
+>|Titre 4+|Visualiser points de fidélités
+>|Objectif 4+| Permet de visualiser les points de fidélités sur le compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Visualiser le nombre de points sur le compte de l'utilisateur ^|Vérification du nombre de points totals sur le compte de l'utilisateur ^| Aucune ^|OK
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
+
 
 
 ==== 2.2 Gestion du panier :
@@ -385,7 +404,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 |====
 
->|Cas de test 4+|Test-02-03-01
+>|Cas de test 4+|Test-02-03-02
 >|Titre 4+|Utiliser les points de fidélités
 >|Objectif 4+| Utiliser les points de fidélités sur le compte
 5+|
