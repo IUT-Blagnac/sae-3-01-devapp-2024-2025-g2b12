@@ -160,14 +160,28 @@ Compléter et si on ne valide pas, ...
 |====
 
 >|Cas de test 4+|Test-01-02-03
+>|Titre 4+|Consultation des détails d'un produit combinés 
+>|Objectif 4+| Vérifier qu'il est possible de consulter les détails d'un produit combinés
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Cliquer sur un produit combiné. ^|La page detail_produit_combine.php pour consulter les détails du produit sélectionné s'affiche. ^|Avoir cliquer sur le regroupement "COMBINEZ" depuis le menu. ^|OK
+
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-02-03
 >|Titre 4+|Trie des produits(Recherche)
 >|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent ^|Aucune ^|OK
-^|All_G_CB.2 ^|Sélectionner un des plusieurs trie possible et rechercher ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité ^|L'utilisateur doit se trouver sur la page de recherche ^|OK
+^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité ^|L'utilisateur doit se trouver sur la page de recherche  ^|OK
+^|All_G_CB.2 ^|Sélectionner un des plusieurs trie possible et rechercher ^|Aucune ^|OK
 ...
 
 |====
@@ -276,7 +290,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
 
 5+|
 
@@ -284,6 +298,28 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
  *clôturés*.|
 
 |====
+
+
+|====
+
+>|Cas de test 4+|Test-02-01-05
+>|Titre 4+|Consulter les détails d'une commande passée
+>|Objectif 4+| Vérifier qu'il est possible de consulter les détails d'une commande passée d'un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+^|C_G_C.3    ^|Cliquer sur le "numéro de commande" d'une commande passée. ^|La page detail_commandes.php pour consulter les détails de la commande (commande, livraison, paiement, produit) sélectionné s'affiche. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
+
 
 
 ==== 2.2 Gestion du panier :
