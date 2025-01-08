@@ -133,7 +133,7 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité, ... ^|Tous les produits de la catégorie sélectionné s'affichent ^|Aucune ^|OK
+^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité, ... ^|Tous les produits de la catégorie sélectionné s'affichent. ^|Aucune ^|OK
 
 
 |====
@@ -175,7 +175,7 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent. ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité. ^|L'utilisateur doit se trouver sur la page de recherche.  ^|OK
+^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par". ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent. ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité. ^|L'utilisateur doit se trouver sur la page de recherche.  ^|OK
 ^|All_G_CB.2 ^|Sélectionner un des plusieurs tri possible et rechercher. ^|Aucune ^|OK
 ...
 
