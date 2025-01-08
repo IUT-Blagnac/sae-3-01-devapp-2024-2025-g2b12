@@ -90,9 +90,6 @@ Ordinateur sous Windows ou OS équivalent.
 ^|All_G_C.3 ^|Compléter les champs spécifiés et cliquer sur le bouton "Créer". ^|Un nouveau compte client est créé et l'utilisateur est redirigé vers la page d'accueil. ^| Remplir tous les champs requis pour créer un compte ^|OK
 
 5+|
-
-5+|Commentaire :
-Compléter et si on ne valide pas, ...
 |====
 
 
@@ -113,7 +110,6 @@ Compléter et si on ne valide pas, ...
 
 ==== 1.2 Produits :
 
-
 |====
 
 >|Cas de test 4+|Test-01-02-01
@@ -124,8 +120,7 @@ Compléter et si on ne valide pas, ...
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_CB.1 ^|Cliquer sur l'icône "rechercher" dans le menu. ^|La page de Recherche des produits s'ouvre. ^|Aucune ^|OK
-^|All_G_CB.2 ^|Saisir dans la barre de recherche le nom du produit souhaité . ^|Les produits recherché par l'utilisateur s'affichent ^|Aucune ^|OK
-
+^|All_G_CB.2 ^|Saisir dans la barre de recherche le nom du produit souhaité. ^|Les produits recherché par l'utilisateur s'affichent. ^|Aucune ^|OK
 
 |====
 
@@ -138,7 +133,7 @@ Compléter et si on ne valide pas, ...
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité, ... ^|Tous les produits de la catégorie sélectionné s'affichent ^|Aucune ^|OK
+^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité... ^|Tous les produits de la catégorie sélectionné s'affichent. ^|Aucune ^|OK
 
 
 |====
@@ -159,16 +154,43 @@ Compléter et si on ne valide pas, ...
 
 |====
 
->|Cas de test 4+|Test-01-02-03
->|Titre 4+|Trie des produits 
+>|Cas de test 4+|Test-01-02-04
+>|Titre 4+|Consultation des détails d'un produit combinés 
+>|Objectif 4+| Vérifier qu'il est possible de consulter les détails d'un produit combinés
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Cliquer sur un produit combiné. ^|La page detail_produit_combine.php pour consulter les détails du produit sélectionné s'affiche. ^|Avoir cliquer sur le regroupement "COMBINEZ" depuis le menu. ^|OK
+
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-02-05
+>|Titre 4+|Tri des produits (Recherche)
 >|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent ^|Aucune ^|OK
-^|All_G_CB.2 ^|Sélectionner un des plusieurs trie possible et rechercher ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité ^|Aucune ^|OK
-...
+^|All_G_CB.1  ^|Cliquer sur le bouton "Trier par". ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent. ^|L'utilisateur doit se trouver sur la page de recherche.  ^|OK
+^|All_G_CB.2  ^|Sélectionner un des plusieurs tri possible et rechercher. ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité. ^|Aucune ^|OK
+
+|====
+
+
+|====
+
+>|Cas de test 4+|Test-01-02-06
+>|Titre 4+|Filtrage des produits (Recherche)
+>|Objectif 4+|Filter les produits par prix (Minimum ou Maximum)
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Remplir les champs "Prix Min" et/ou "Prix Max" dans la barre de recherche. ^|Les produits recherchés par l'utilisateur s'affichent, filtrés selon les prix indiqués par l'utilisateur dans les champs. ^|L'utilisateur doit se trouver sur la page de recherche. ^|OK
 
 |====
 
@@ -189,13 +211,9 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté ^|OK
+^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté. ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -207,54 +225,32 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté. ^|OK
+^|C_G_C.1    ^|Sélectionner l'icône "paramètre" (stylo / feuille). ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur. ^|Aucune ^|OK
+^|C_G_C.2    ^|Remplir les champs dont on souhaite modifier les informations (Nom, Prénom, Email) et cliquer sur le bouton "Enregistrer". ^|Les informations de l'utilisateur sont mis à jour dans la base de données. ^|Aucune ^| OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
 
 >|Cas de test 4+|Test-02-01-03
->|Titre 4+|Supprimer un compte
->|Objectif 4+| Vérifier qu'il est possible de supprimer un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
-|====
-
-|====
-
->|Cas de test 4+|Test-02-01-04
 >|Titre 4+|Se déconnecter d'un compte
 >|Objectif 4+| Vérifier qu'il est possible de se déconnecter d'un compte
 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté. ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| Aucune ^|OK
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
 
->|Cas de test 4+|Test-02-01-05
+>|Cas de test 4+|Test-02-01-04
 >|Titre 4+|Consulter les commandes passées
 >|Objectif 4+| Vérifier qu'il est possible de consulter les commandes passées d'un compte
 
@@ -262,15 +258,45 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
+|====
+
 
 |====
 
+>|Cas de test 4+|Test-02-01-05
+>|Titre 4+|Consulter les détails d'une commande passée
+>|Objectif 4+| Vérifier qu'il est possible de consulter les détails d'une commande passée d'un compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Mes commandes". ^|Toutes les commandes effectués par le client connecté s'affichent. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+^|C_G_C.3    ^|Cliquer sur le "numéro de commande" d'une commande passée. ^|La page detail_commandes.php pour consulter les détails de la commande (commande, livraison, paiement, produit) sélectionné s'affiche. ^| L'utilisateur doit avoir effectué au moins une commande ^|OK
+
+5+|
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-01-06
+>|Titre 4+|Visualiser points de fidélités
+>|Objectif 4+| Permet de visualiser les points de fidélités sur le compte
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté. ^|OK
+^|C_G_C.2    ^|Visualiser le nombre de points sur le compte de l'utilisateur. ^|Vérification du nombre de points totals sur le compte de l'utilisateur. ^| Aucune ^|OK
+
+5+|
+
+|====
 
 ==== 2.2 Gestion du panier :
 
@@ -287,9 +313,6 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
 
 |====
@@ -302,12 +325,10 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur un produit. ^|La page detail_produit.php pour consulter les détails du produit sélectionné s'affiche. ^|Avoir rechercher des produits, soit par la page de recherche, soit par la page de recherche par catégorie depuis le menu. ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Ajouter au panier" ^|Le produit sélectionné est ajouté au panier ^|Sélectionner la quanité et la spécification. Exemple : taille, pointure, couleur ^| OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Ajouter au panier". ^|Le produit sélectionné est ajouté au panier. ^|Sélectionner la quanité et la spécification. Exemple : taille, pointure, couleur ^| OK
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -327,8 +348,21 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-03-02
+>|Titre 4+|Utiliser les points de fidélités
+>|Objectif 4+|Vérifier qu'il est possible d'utiliser les points de fidélités sur le compte
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
+^|C_G_C.2    ^|Cliquer sur l'icône "cadeau" en dessous du prix total de la commande. ^|L'utilisateur est redirigé vers la page de visualisation du compte afin de pouvoir consulter le nombre de points présents sur le compte et les utiliser. ^| Aucune ^|OK.
+^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et cliquer sur le bouton "Confirmer". ^|L'utilisateur est redirigé vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateur. ^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif. ^|OK.
+
+5+|
 
 |====
 
@@ -343,12 +377,9 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_A.1    ^|Scroller vers le bas de la page ^|Apercevoir les avis déjà existants ^|La page de détail d'un produit doit être ouverte ^|OK
+^|C_G_A.1    ^|Scroller vers la bas. ^|Apercevoir les avis déjà existants. ^|La page de détail d'un produit doit être ouverte. ^|OK
 
 5+|
-
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
 
 |====
 
@@ -361,14 +392,9 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_A.1   ^|Scroller vers le bas de la page ^|Apercevoir le champs de rédaction d'un avis ^|La page de détail d'un produit doit être ouverte et le client doit avoir commander le produit ^|OK
-^|C_G_A.2    ^|Cliquer sur le champs, rédiger un avis puis cliquer sur le bouton "Soumettre l'avis" ^|Un avis est ajouté sous le produit ^| Les notes et le champs doivent être remplis ^|OK
+^|C_G_A.1   ^|Cliquer sur le bouton "Donner un avis". ^|Le champs de rédaction d'un avis s'affiche.  ^|La page de détail d'un produit doit être ouverte et le client doit avoir commander le produit. ^|OK
+^|C_G_A.2    ^|Cliquer sur le champs, rédiger un avis puis cliquer sur le bouton "Soumettre l'avis". ^|Un avis est ajouté sous le produit. ^| Les notes et le champs doivent être remplis. ^|OK
 
 5+|
 
-5+|Commentaire : REVOIR AVEC
- *clôturés*.|
-
 |====
-
-=== 3. Fonctionnalités des administrateurs :
