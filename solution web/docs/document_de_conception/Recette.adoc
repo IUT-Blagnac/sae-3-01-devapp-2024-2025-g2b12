@@ -377,7 +377,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_A.1    ^|Scroller vers la bas ^|Apercevoir les avis déjà existants. ^|La page de détail d'un produit doit être ouverte. ^|OK
+^|C_G_A.1    ^|Scroller vers la bas. ^|Apercevoir les avis déjà existants. ^|La page de détail d'un produit doit être ouverte. ^|OK
 
 5+|
 
