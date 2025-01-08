@@ -325,7 +325,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur un produit. ^|La page detail_produit.php pour consulter les détails du produit sélectionné s'affiche. ^|Avoir rechercher des produits, soit par la page de recherche, soit par la page de recherche par catégorie depuis le menu. ^|OK
-^|C_G_C.2    ^|Cliquer sur le bouton "Ajouter au panier" ^|Le produit sélectionné est ajouté au panier ^|Sélectionner la quanité et la spécification. Exemple : taille, pointure, couleur ^| OK
+^|C_G_C.2    ^|Cliquer sur le bouton "Ajouter au panier". ^|Le produit sélectionné est ajouté au panier. ^|Sélectionner la quanité et la spécification. Exemple : taille, pointure, couleur ^| OK
 
 5+|
 
