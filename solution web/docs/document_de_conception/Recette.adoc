@@ -383,6 +383,25 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 |====
 
+|====
+
+>|Cas de test 4+|Test-02-03-01
+>|Titre 4+|Utiliser les points de fidélités
+>|Objectif 4+| Utiliser les points de fidélités sur le compte
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
+^|C_G_C.2    ^|Cliquer sur l'îcone en forme de cadeau en dessous du total de la commande. ^|Redirige vers la page de visualisation du compte afin de pouvoir voir le nombre de points présents sur le compte et les utiliser. ^| Aucune ^|OK.
+^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et confirmer ^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif  ^|Redirige vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateur ^|OK.
+
+5+|
+
+5+|Commentaire : REVOIR AVEC
+ *clôturés*.|
+
+|====
+
 ==== 2.4 Gestion des avis :
 
 |====
