@@ -159,7 +159,7 @@ Compléter et si on ne valide pas, ...
 
 |====
 
->|Cas de test 4+|Test-01-02-03
+>|Cas de test 4+|Test-01-02-04
 >|Titre 4+|Consultation des détails d'un produit combinés 
 >|Objectif 4+| Vérifier qu'il est possible de consulter les détails d'un produit combinés
 
@@ -173,8 +173,8 @@ Compléter et si on ne valide pas, ...
 
 |====
 
->|Cas de test 4+|Test-01-02-03
->|Titre 4+|Trie des produits(Recherche)
+>|Cas de test 4+|Test-01-02-05
+>|Titre 4+|Trie des produits (Recherche)
 >|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
 
 5+|
@@ -189,8 +189,8 @@ Compléter et si on ne valide pas, ...
 
 |====
 
->|Cas de test 4+|Test-01-02-04
->|Titre 4+|Filtrage des produits(Recherche)
+>|Cas de test 4+|Test-01-02-06
+>|Titre 4+|Filtrage des produits (Recherche)
 >|Objectif 4+|Filter les produits par prix (Minimum ou Maximum)
 
 5+|
