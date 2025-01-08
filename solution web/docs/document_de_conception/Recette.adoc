@@ -214,7 +214,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté ^|OK
+^|C_G_C.1 ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté. ^|OK
 
 5+|
 |====
@@ -229,7 +229,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur est connecté. ^|OK
-^|C_G_C.1    ^|Sélectionner le bouton paramètre (L'îcone avec un stylo et une feuille) ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur. ^|Aucune ^|OK
+^|C_G_C.1    ^|Sélectionner l'icône "paramètre" (stylo / feuille). ^|L'utilisateur est redirigé vers la page de modification du compte de l'utilisateur. ^|Aucune ^|OK
 ^|C_G_C.2    ^|Remplir les champs dont on souhaite modifier les informations (Nom, Prénom, Email) et cliquer sur le bouton "Enregistrer". ^|Les informations de l'utilisateur sont mis à jour dans la base de données. ^|Aucune ^| OK
 
 5+|
@@ -244,7 +244,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté. ^|OK
 ^|C_G_C.2    ^|Cliquer sur le bouton "Déconnexion". ^|L'utilisateur est redirigé vers la page d'accueil. ^| Aucune ^|OK
 
 5+|
