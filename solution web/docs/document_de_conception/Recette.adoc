@@ -160,7 +160,7 @@ Compléter et si on ne valide pas, ...
 |====
 
 >|Cas de test 4+|Test-01-02-03
->|Titre 4+|Trie des produits 
+>|Titre 4+|Trie des produits(Recherche)
 >|Objectif 4+|Trier les produits par prix (Croissant ou Décroissant)
 
 5+|
@@ -169,6 +169,20 @@ Compléter et si on ne valide pas, ...
 ^|All_G_CB.1 ^|Cliquer sur le bouton "Trier par" ^|Les choix "Prix croissant" et "Prix décroissant" s'affichent ^|Aucune ^|OK
 ^|All_G_CB.2 ^|Sélectionner un des plusieurs trie possible et rechercher ^|Les produits recherché par l'utilisateur s'affichent par l'ordre de tri souhaité ^|Aucune ^|OK
 ...
+
+|====
+
+
+|====
+
+>|Cas de test 4+|Test-01-02-04
+>|Titre 4+|Filtrer des produits(Recherche)
+>|Objectif 4+|Filter les produits par prix (Minimum ou Maximum)
+
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_CB.1 ^|Remplir les champs "Prix Min" et/ou "Prix Max" dans la barre de recherche ^|Les produits recherchés par l'utilisateur s'affichent, filtrés selon les prix indiqués par l'utilisateur dans les champs ^|Aucune ^|OK
 
 |====
 
