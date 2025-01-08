@@ -133,7 +133,7 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité, ... ^|Tous les produits de la catégorie sélectionné s'affichent. ^|Aucune ^|OK
+^|All_G_CB.1 ^|Cliquer sur l'une des catégories dans le menu. Exemple: Combat, Mobilité... ^|Tous les produits de la catégorie sélectionné s'affichent. ^|Aucune ^|OK
 
 
 |====
