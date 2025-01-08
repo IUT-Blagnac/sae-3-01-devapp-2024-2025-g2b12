@@ -291,8 +291,8 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté ^|OK
-^|C_G_C.2    ^|Visualiser le nombre de points sur le compte de l'utilisateur ^|Vérification du nombre de points totals sur le compte de l'utilisateur ^| Aucune ^|OK
+^|C_G_C.1    ^|Cliquer sur l'icône "utilisateur" dans le menu. ^|La page visualiser_compte.php s'ouvre. ^| L'utilisateur doit être connecté. ^|OK
+^|C_G_C.2    ^|Visualiser le nombre de points sur le compte de l'utilisateur. ^|Vérification du nombre de points totals sur le compte de l'utilisateur. ^| Aucune ^|OK
 
 5+|
 
@@ -360,7 +360,7 @@ Les utilisateurs connectés (client) ont accès aux mêmes fonctionnalités que 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|C_G_C.1    ^|Cliquer sur l'icône "panier" dans le menu. ^|La page visualiser_panier.php s'ouvre. ^| L'utilisateur doit être connecté. Le panier doit comporter au moins un produit. ^|OK.
 ^|C_G_C.2    ^|Cliquer sur l'icône "cadeau" en dessous du prix total de la commande. ^|L'utilisateur est redirigé vers la page de visualisation du compte afin de pouvoir consulter le nombre de points présents sur le compte et les utiliser. ^| Aucune ^|OK.
-^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et cliquer sur le bouton "Confirmer". ^|L'utilisateur est redirigé vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateur. ^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif.^|OK.
+^|C_G_C.3    ^|Remplir le champs avec le nombre de points souhaitant être utilisés par l'utilisateur et cliquer sur le bouton "Confirmer". ^|L'utilisateur est redirigé vers la page de visualisation de la commande avec le total comportant une réduction grâçe au nombre de points choisis par l'utilisateur. ^| Le nombre de points choisis ne peut pas être supérieur aux nombre de points sur le compte, ni négatif. ^|OK.
 
 5+|
 
