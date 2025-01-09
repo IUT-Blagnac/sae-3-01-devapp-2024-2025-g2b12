@@ -131,7 +131,7 @@ Vous trouverez ci-dessous les travaux et livrables réalisés par l'équipe clas
 .2+| BD | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/bd/codes/passerCommande_gh.sql[Code SQL de la procédure `passerCommande`]
         | https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/master/solution%20web/bd/docs/%C3%89quipe_2B12_CR_BD_Semaine_50.pdf[Compte Rendu - BD : Procédures Stockées]
 | Web|https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/3c3f9b7a98f4950e4d29882acecae561e5f8d0e3/solution%20web/docs/document_de_conception/Recette.adoc[Recettes]
-.1+| 2 | GPO| [ODJ Reunion 16.01.25]
+.1+| 2 | GPO| https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/blob/b3a2d049948bdc2c939022b0e2c7ed50a747913c/GPO/CR_R%C3%A9union/Ordre%20du%20Jour%2009.01%20_%20Semaine%2002.pdf[ODJ Reunion 16.01.25]
 |===
 
 === Documentations
