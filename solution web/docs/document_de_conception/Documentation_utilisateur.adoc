@@ -63,28 +63,51 @@ Université Toulouse II – Jean Jaurès (31)
 
 ---
 
-== I. Introduction
+== Introduction
 [.text-justify]
 L’entreprise *Woohp Resell*, fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a entrepris une démarche de digitalisation. Le développement d’un site d’E-commerce pour cette PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité s'inscrit dans cette volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. .
 
 
-== II. Présentation générale
+== 1. Présentation générale
 [.text-justify]
 Le site e-commerce de l'entreprise *Woohp Resell* propose une interface intuitive permettant aux utilisateurs d’explorer une large gamme de produits, de les ajouter à leur panier, et de passer des commandes en toute sécurité.
 
 
-== III. Installation et utilisation
+== 2. Installation
 [.text-justify]
 Ci-dessous les instructions étape par étape pour installer et configurer le site, suivies des bases pour l'utiliser efficacement.
 
-== IV. Fonctionnement
-[.text-justify]
-Vous trouverez dans cette section les explications du fonctionnement interne, y compris les processus principaux tels que la navigation, l'ajout de produits au panier, et le paiement sécurisé.
 
-== V. Résultats produits
-[.text-justify]
+== 3. Guide d'utilisation administrateur
 
+=== 3.1 Accès au back-office
 
+|===
+>| *Identifiant (ID)*       5+| *F-03-01-01*
+>| *Fonctionnalité*         5+| Connexion au back-office
+>| *Description*            5+| Connexion à l'espace d'administration du site e-commerce.
+6+|
+>| *Tutoriel réalisé par*   5+| Victor Jockin (VJ)
+6+|
+6+^| *Prérequis*
+6+^| Aucun 
+6+| 
+6+^| *Étapes d'utilisation*
+6+a|
+*Étape 1 :* Accéder à la page de connexion client du site. Dans l'url, saisir la chaîne `admin/` avant la chaîne `connexion.php`. L'url devient alors http://193.54.227.208/~R2024SAE3002/admin/connexion.php.
 
+image::image/f-03-01-01-1.png[Connexion Administrateur]
 
+NOTE: Vous pouvez accéder dirèclement à l'espace administrateur via le lien suivant : http://193.54.227.208/~R2024SAE3002/admin/.
+|===
 
+|===
+>| *Identifiant (ID)*       5+| *F-03-01-02*
+>| *Fonctionnalité*         5+| Déconnexion du back-office
+>| *Description*            5+| Déconnexion de l'espace d'administration du site e-commerce.
+6+|
+>| *Tutoriel réalisé par*   5+| Victor Jockin (VJ)
+6+|
+6+^| *Prérequis*
+6+a| 
+|===

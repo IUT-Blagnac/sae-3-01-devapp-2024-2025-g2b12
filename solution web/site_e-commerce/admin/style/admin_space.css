@@ -102,6 +102,10 @@ hr.between-content {
 hr.adjusted-lower-margin {
     margin-bottom: 10px;
 }
+hr.side-menu-separator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 /* ======================================== */
 
@@ -344,6 +348,7 @@ main {
     color: #fff;
     font-family: var(--regular-font);
     font-size: 15px;
+    text-wrap: nowrap;
 }
 
 /* ======================================== */
@@ -398,6 +403,7 @@ th, td {
 th {
     padding: 0px 20px 0px 20px;
     font-family: var(--bold-font);
+    text-wrap: nowrap;
 }
 td {
     position: relative;
@@ -472,6 +478,12 @@ td.variants-table-cell {
 .variant-price-column   { width: 20%; }
 .variant-groups-column  { width: 20%; }
 .variant-stock-column   { width: 20%; }
+
+/* table des catégories */
+th.category-id-column               { width: 6% !important; }
+th.category-name-column             { width: 54% !important; }
+th.category-products-column         { width: 20% !important; }
+th.category-subcategories-column    { width: 20% !important; }
 
 /* ======================================== */
 
@@ -561,12 +573,17 @@ a.icon-container {
     pointer-events: none;
 }
 
+/* texte centré */
 .centred-text { text-align: center; }
+
+/* pas de retour à la ligne du texte */
+.no-wrap { text-wrap: nowrap; }
 
 .h-container {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
 }
 
 .right-aligned-content {

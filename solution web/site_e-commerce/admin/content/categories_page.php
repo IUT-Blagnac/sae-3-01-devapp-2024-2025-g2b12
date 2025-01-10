@@ -1,14 +1,14 @@
 <!--
-Page de visualisation des produits.
+Page de visualisation des catégories.
 
 Date de dernière modification :
-- Vendredi 3 janvier 2025 -
+- Jeudi 9 janvier 2025 -
 
 Auteur : Victor Jockin
 - Équipe 2B12 -
 -->
-<h1>Produits</h1>
-<!-- conteneur de la liste des produits -->
+<h1>Catégories</h1>
+<!-- conteneur de la liste des catégories -->
 <div class='container'>
     <!-- menu -->
     <div class='container-menu'>
@@ -41,30 +41,34 @@ Auteur : Victor Jockin
         <div class='h-container'>
             <div class='no-wrap'>
                 <?php
-                    $productCountQuery = $conn->prepare("SELECT COUNT(idProduit) AS PRODUCT_COUNT FROM PRODUIT") ;
-                    $productCountQuery->execute() ;
-                    $productCount = $productCountQuery->fetch()['PRODUCT_COUNT'] ;
-                    if      ($productCount == 0)    { print "Aucun produit enregistré" ; }
-                    elseif  ($productCount == 1)    { print $productCount." produit enregistré" ; }
-                    else                            { print $productCount." produits enregistrés" ; }
+                    $categoryCountQuery = $conn->prepare(
+                       "SELECT COUNT(idCategorie) AS CATEGORY_COUNT
+                        FROM CATEGORIE
+                        WHERE idParent IS NULL"
+                    ) ;
+                    $categoryCountQuery->execute() ;
+                    $categoryCount = $categoryCountQuery->fetch()['CATEGORY_COUNT'] ;
+                    if      ($categoryCount == 0)   { print "Aucune catégorie enregistrée" ; }
+                    elseif  ($categoryCount == 1)   { print $categoryCount." catégorie enregistrée" ; }
+                    else                            { print $categoryCount." catégories enregistrées" ; }
                 ?>
             </div>
             <div class='container-menu-button'
-                onclick="window.location.href='produits.php?mode=ajout';">
+                onclick="window.location.href='categories.php?mode=ajout';">
                 <div class='container-menu-button-icon-container'>
                     <img class='container-menu-button-icon ns'
                             src='image/icon/add-icon.png'
-                            alt='Ajouter un produit'>
+                            alt='Ajouter une catégorie'>
                 </div>
                 <div class='container-menu-button-name-container'>
                     <span class='container-menu-button-name ns'>
-                        Ajouter un produit
+                        Ajouter une catégorie
                     </span>
                 </div>
             </div>
         </div>
     </div>
     <hr/>
-    <!-- liste des produits -->
-    <?php include('./content/products_page/products_table.php') ; ?>
+    <!-- liste des catégories -->
+    <?php include('./content/categories_page/categories_table.php') ; ?>
 </div>
