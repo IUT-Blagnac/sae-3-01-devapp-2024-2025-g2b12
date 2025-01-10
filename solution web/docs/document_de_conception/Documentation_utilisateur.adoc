@@ -101,11 +101,11 @@ Ci-dessous les instructions étape par étape pour installer et configurer le si
 
 image::image/f030101-e1-1.png[Formulaire de connexion client]
 
-* Dans l'url, saisir la chaîne `admin/` avant la chaîne `connexion.php`. L'url devient alors http://193.54.227.208/~R2024SAE3002/admin/connexion.php.
+* Dans l'url, saisir la chaîne `admin/` avant la chaîne `connexion.php`. L'url devient donc http://193.54.227.208/~R2024SAE3002/admin/connexion.php.
 
 image::image/f030101-e1-2.png[Formulaire de connexion client]
 
-* Vous êtes alors redirigé vers le formulaire de connexion administrateur.
+* Est alors affiché le formulaire de connexion administrateur.
 
 image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
