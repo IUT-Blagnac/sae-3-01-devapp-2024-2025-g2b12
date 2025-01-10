@@ -170,7 +170,7 @@ TB. Pensez à m'envoyez l'ODJ pour la semaine prochaine.
 
 == Gestion de projet & Qualité
 
-Récapitulatif des informations mises à jour - Dernière MAJ : 18/12/24
+Récapitulatif des informations mises à jour - Dernière MAJ : 10/01/25
 
 ✓ Version courante : https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2b12/releases[Release v0.5]
 
