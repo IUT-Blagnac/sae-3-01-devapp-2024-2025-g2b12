@@ -96,7 +96,7 @@ Ci-dessous les instructions étape par étape pour installer et configurer le si
 6+a|
 *Étape 1 :* Accéder à la page de connexion client du site. Dans l'url, saisir la chaîne `admin/` avant la chaîne `connexion.php`. L'url devient alors http://193.54.227.208/~R2024SAE3002/admin/connexion.php.
 
-image::image/f-03-01-01-1.png[Connexion Administrateur]
+image::image/f-03-01-01-1.png[Connexion Administrateur, 600]
 
 NOTE: Vous pouvez accéder dirèclement à l'espace administrateur via le lien suivant : http://193.54.227.208/~R2024SAE3002/admin/.
 |===
