@@ -109,6 +109,7 @@ image::image/f030101-e1-2.png[Formulaire de connexion client]
 
 image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
+{blank}
 *_NOTE :_* _Il est possible d'accéder dirèclement à l'espace administrateur en utilisant le lien suivant : http://193.54.227.208/~R2024SAE3002/admin/_
 
 ---
