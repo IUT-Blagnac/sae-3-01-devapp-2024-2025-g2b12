@@ -117,14 +117,14 @@ image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
 *Étape 2 :* Saisir les identifiants de connexion demandés :
 
-* *Login* ou *adresse mail* (fournis par un administrateur)
-* *Mot de passe* (fourni par un administrateur)
-* Il est possible d'enregistrer ces identifiants
-pour une connexion plus rapide en cochant la case `Se souvenir de moi`.
+* *Login* ou *adresse mail*
+* *Mot de passe*
+* _Il est possible d'enregistrer ces identifiants
+pour une connexion plus rapide en cochant la case `Se souvenir de moi`._
 
 *IMPORTANT :* Ces identifiants ne peuvent être fournis que par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
 
-image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
+image::image/f030101-e2.png[Formulaire de connexion administrateur]
 
 |===
 
