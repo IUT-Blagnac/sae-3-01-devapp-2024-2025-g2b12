@@ -120,9 +120,9 @@ image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 * *Login* ou *adresse mail*
 * *Mot de passe*
 
-*_IMPORTANT_* Ces identifiants sont fournis par les administrateurs du site. Il est de ce fait impossible de créer un compte administrateur depuis l'extérieur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
+*IMPORTANT :* Ces identifiants sont fournis par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
 
-
+image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
 |===
 
