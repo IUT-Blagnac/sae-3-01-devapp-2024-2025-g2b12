@@ -119,6 +119,8 @@ image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
 * *Login* ou *adresse mail* (fournis par un administrateur)
 * *Mot de passe* (fourni par un administrateur)
+* Il est possible d'enregistrer ces identifiants
+pour une connexion plus rapide en cochant la case `Se souvenir de moi`.
 
 *IMPORTANT :* Ces identifiants ne peuvent être fournis que par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
 
