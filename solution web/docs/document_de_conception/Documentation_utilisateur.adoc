@@ -117,10 +117,10 @@ image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
 *Étape 2 :* Saisir les identifiants de connexion demandés :
 
-* *Login* ou *adresse mail*
-* *Mot de passe*
+* *Login* (fourni par un administrateur) ou *adresse mail*
+* *Mot de passe* (fourni par un administrateur)
 
-*IMPORTANT :* Ces identifiants sont fournis par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
+*IMPORTANT :* Ces identifiants ne peuvent être fournis que par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
 
 image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
