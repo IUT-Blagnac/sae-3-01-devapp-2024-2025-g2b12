@@ -130,7 +130,7 @@ image::image/f030101-e2.png[Formulaire de connexion administrateur]
 
 L'accès à l'espace administrateur est désormais autorisé.
 
-
+image::image/f030101-end.png[Tableau de bord]
 
 |===
 
