@@ -141,7 +141,7 @@ image::image/f030101-end.png[Tableau de bord]
 |===
 >| *Numéro*             5+| *F-03-01-01*
 >| *Fonctionnalité*     5+| Accès au site e-commerce depuis le back-office
->| *Description*        5+| Accès au site vitrine depuis l'espace administrateur
+>| *Description*        5+| Visualisation du site vitrine depuis l'espace administrateur.
 6+|
 >| *Auteur du tutoriel* 5+| Victor Jockin
 6+|
