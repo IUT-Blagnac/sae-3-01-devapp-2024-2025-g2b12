@@ -50,7 +50,7 @@ Université Toulouse II – Jean Jaurès (31)
 = DOCUMENTATION UTILISATEUR SITE E-COMMERCE *WOOHP RESELL*
 
 
-:Entreprise: Whoop Resell
+:Entreprise: Woohp Resell
 :Equipe: G2b12
 :docdate: {docdate}
 
@@ -65,7 +65,7 @@ Université Toulouse II – Jean Jaurès (31)
 
 == Introduction
 [.text-justify]
-L’entreprise *Woohp Resell*, fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a entrepris une démarche de digitalisation. Le développement d’un site d’E-commerce pour cette PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité s'inscrit dans cette volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage. .
+L’entreprise *Woohp Resell*, fondée initialement par l’organisation WOOHP (World Organization Of Human Protection) a entrepris une démarche de digitalisation. Le développement d’un site d’E-commerce pour cette PME spécialisée dans la vente de gadgets d’espionnage et de technologies de sécurité s'inscrit dans cette volonté d’élargir son marché en se faisant connaître auprès du grand public et ainsi assurer la continuité de son héritage.
 
 
 == 1. Présentation générale
@@ -107,13 +107,13 @@ image::image/f030101-e1-1.png[Formulaire de connexion client]
 
 image::image/f030101-e1-2.png[Formulaire de connexion client]
 
-* Est alors affiché le formulaire de connexion administrateur.
+* Le formulaire de connexion administrateur s'affiche.
 
 image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 
 {blank}
 
-*_NOTE :_* _Il est possible d'accéder dirèclement à l'espace administrateur en utilisant le lien suivant : http://193.54.227.208/~R2024SAE3002/admin/_
+*_NOTE :_* _Il est possible d'accéder directement à l'espace administrateur en utilisant le lien suivant : http://193.54.227.208/~R2024SAE3002/admin/_
 
 ---
 
@@ -124,7 +124,7 @@ image::image/f030101-e1-3.png[Formulaire de connexion administrateur]
 * _Il est possible d'enregistrer ces identifiants
 pour une connexion plus rapide en cochant la case `Se souvenir de moi`._
 
-*IMPORTANT :* Ces identifiants ne peuvent être fournis que par un administrateur. Pour recevoir des identifiants, contacter l'équipe d'administration du site.
+*IMPORTANT :* Ces identifiants ne peuvent être fournis que par un administrateur. Pour recevoir vos identifiants, contacter l'équipe d'administration du site : admin@WhoopResell.fr
 
 image::image/f030101-e2.png[Formulaire de connexion administrateur]
 
