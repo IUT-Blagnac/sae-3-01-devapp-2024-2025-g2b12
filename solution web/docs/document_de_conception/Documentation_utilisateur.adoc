@@ -80,7 +80,9 @@ Ci-dessous les instructions étape par étape pour installer et configurer le si
 
 == 3. Guide d'utilisation administrateur
 
-=== 3.1 Accès au back-office
+=== 3.1 Accès au back-office et navigation
+
+==== 3.1.1 Connexion au back-office
 
 |===
 >| *Numéro*             5+| *F-03-01-01*
@@ -134,6 +136,24 @@ image::image/f030101-end.png[Tableau de bord]
 
 |===
 
+==== 3.1.2 Accès au site e-commerce depuis le back-office
+
+|===
+>| *Numéro*             5+| *F-03-01-01*
+>| *Fonctionnalité*     5+| Accès au site e-commerce depuis le back-office
+>| *Description*        5+| Accès au site vitrine depuis l'espace administrateur
+6+|
+>| *Auteur du tutoriel* 5+| Victor Jockin
+6+|
+6+^| *Prérequis*
+6+^| Aucun 
+6+| 
+6+^| *Étapes d'utilisation*
+6+a|
+|===
+
+==== 3.1.3 Déconnexion du back-office
+
 |===
 >| *Numéro*             5+| *F-03-01-02*
 >| *Fonctionnalité*     5+| Déconnexion du back-office
@@ -142,5 +162,8 @@ image::image/f030101-end.png[Tableau de bord]
 >| *Auteur du tutoriel* 5+| Victor Jockin
 6+|
 6+^| *Prérequis*
-6+a| 
+6+^| Aucun 
+6+| 
+6+^| *Étapes d'utilisation*
+6+a|
 |===
