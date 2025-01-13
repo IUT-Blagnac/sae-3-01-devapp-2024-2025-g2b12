@@ -170,7 +170,7 @@ image::image/f030101-end.png[Tableau de bord]
 
 == 4. Gestion des processus
 
-Nous avons réalisé deux diagrammes de collaboration : 
+Nous avons réalisé les deux diagrammes de collaboration suivants : 
 
 === 4.1 Processus de création d'un produit
 image::image/f030101-e3-1.png[Processus de création d'un produit]
