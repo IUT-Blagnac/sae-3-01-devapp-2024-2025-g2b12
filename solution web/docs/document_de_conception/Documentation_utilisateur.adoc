@@ -167,3 +167,13 @@ image::image/f030101-end.png[Tableau de bord]
 6+^| *Étapes d'utilisation*
 6+a|
 |===
+
+== 4. Gestion des processus
+
+Nous avons réalisé deux diagrammes de collaboration : 
+
+=== 4.1 Processus de création d'un produit
+image::image/f030101-e3-1.png[Processus de création d'un produit]
+
+=== 4.2 Processus de suivi d'une commande 
+image::image/f030101-e3-2.png[Processus de suivi d'une commande ]
