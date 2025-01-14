@@ -227,5 +227,5 @@ US cf retour  précédent. Je n'ai pas de backlog de sprint clair !  Le dernier 
 
 === retour semaine 2
 Beaucoup de travail où seul Victor apparait ?? On discutera de l'individualisation des notes en TP et TD de com. TB d'avoir mis des Diag BPMN dans les docs.
-Note provisoir en GPO projet : 12,16/20
+Note provisoir en GPO projet : 13,6/20
 note documentation droit : 16/20 bien
