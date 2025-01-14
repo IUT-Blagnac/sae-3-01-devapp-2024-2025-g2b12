@@ -63,7 +63,6 @@ Université Toulouse II – Jean Jaurès (31)
 :docdate: {docdate}
 
 == Avant-propos
-
 [quote, Victor Jockin]
 ____
 Je n'ai pas été en mesure de rédiger l'ensemble du contenu qui m'avait été confié. J'ai pris du retard sur mes tâches en développement sur l'application IoT, puis sur le site e-commerce, ce qui ne m'a pas laissé suffisemment de temps pour compléter les documentations, notemment les aspects relatifs à l'espace d'administration du site.
