@@ -1,4 +1,18 @@
+= DOCUMENTATION UTILISATEUR SITE E-COMMERCE *WOOHP RESELL*
+:compat-mode!:
+:toc:
+:toc-title: Sommaire
+:toclevels: 4
+:icons: font
+:stem: latexmath
 
+// paramères relatif à GitHub
+ifdef::env-github[]
+:note-caption: :information_source:
+:stem: latexmath
+endif::[]
+
+---
 
 
 
@@ -43,12 +57,6 @@ IUT de Blagnac, +
 Université Toulouse II – Jean Jaurès (31)
 
 ---
-
-
-
-
-= DOCUMENTATION UTILISATEUR SITE E-COMMERCE *WOOHP RESELL*
-
 
 :Entreprise: Woohp Resell
 :Equipe: G2b12

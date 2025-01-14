@@ -1,7 +1,7 @@
 = Document de conception
 :compat-mode!:
 :toc:
-:toc-title: Table des matières
+:toc-title: Sommaire
 :toclevels: 4
 :icons: font
 :stem: latexmath
