@@ -62,12 +62,12 @@ Université Toulouse II – Jean Jaurès (31)
 :Equipe: G2b12
 :docdate: {docdate}
 
-== Sommaire
-- <<I._Introduction, I. Introduction>>
-- <<II._Présentation_générale, II. Présentation générale>>
-- <<III._Installation_utilisation, III. Installation et utilisation>>
-- <<IV._Fonctionnement, IV. Fonctionnement>>
-- <<V._Résultats_produits, V. Résultats produits>>
+== Avant-propos
+
+[quote, Victor Jockin]
+----
+Je n'ai pas été en mesure de rédiger l'ensemble du contenu qui m'avait été confié. J'ai pris du retard sur mes tâches en développement sur l'application IoT, puis sur le site e-commerce, ce qui ne m'a pas laissé suffisemment de temps pour compléter les documentations, notemment les aspects relatifs à l'espace d'administration du site.
+----
 
 ---
 
